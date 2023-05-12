@@ -1,10 +1,15 @@
-const MainPage = () => {
+import classes from './MainPage.module.scss'
 
-    const x: number = 242
+interface IMainPage {
 
-    return (
-        <h1>hehe</h1>
-    )
+}
+
+const MainPage = (props: IMainPage) => {
+  const {} = props
+
+  return (
+    <div className={classes.MainPage}></div>
+  )
 }
 
 export default MainPage
