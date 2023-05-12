@@ -1,26 +1,19 @@
 import { ErrorPage } from '@pages/ErrorPage'
 import { createBrowserRouter } from 'react-router-dom'
+import { Route, RouterPaths } from './schema'
 import App from '@app/App'
 
-enum Paths {
-  ERROR = '*',
-  ENG = '/eng',
-  RU = '/ru',
-}
-
-type Route = { path: Paths; element: any }
-
-const listOfRoutes: Route[] = [
+export const listOfRoutes: Route[] = [
   {
-    path: Paths.ERROR,
+    path: RouterPaths.ERROR,
     element: <ErrorPage />,
   },
   {
-    path: Paths.ENG,
+    path: RouterPaths.ENG,
     element: <App />,
   },
   {
-    path: Paths.RU,
+    path: RouterPaths.RU,
     element: <App />,
   },
 ]
