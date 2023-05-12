@@ -1,4 +1,3 @@
-import { Index } from '@pages/Another'
 import classes from './MainPage.module.scss'
 
 //interface IMainPage {}
@@ -6,12 +5,7 @@ import classes from './MainPage.module.scss'
 const MainPage = () => {
   //const {} = props
 
-  return (
-    <div className={classes.MainPage}>
-      hehe
-      <Index />
-    </div>
-  )
+  return <div className={classes.MainPage}>hehe</div>
 }
 
 export default MainPage

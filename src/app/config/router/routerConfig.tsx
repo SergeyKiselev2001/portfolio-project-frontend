@@ -1,7 +1,7 @@
 import { ErrorPage } from '@pages/ErrorPage'
 import { createBrowserRouter } from 'react-router-dom'
 import { Route, RouterPaths } from './schema'
-import App from '@app/App'
+import { About } from '@pages/About'
 
 export const listOfRoutes: Route[] = [
   {
@@ -9,12 +9,20 @@ export const listOfRoutes: Route[] = [
     element: <ErrorPage />,
   },
   {
+    path: RouterPaths.MAIN,
+    element: <About />,
+  },
+  {
     path: RouterPaths.ENG,
-    element: <App />,
+    element: <About />,
   },
   {
     path: RouterPaths.RU,
-    element: <App />,
+    element: <About />,
+  },
+  {
+    path: RouterPaths.ABOUT,
+    element: <About />,
   },
 ]
 
