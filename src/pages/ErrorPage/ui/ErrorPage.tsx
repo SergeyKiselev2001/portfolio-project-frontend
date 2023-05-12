@@ -1,10 +1,6 @@
 import classes from './ErrorPage.module.scss'
 
-interface IErrorPage {}
-
-const ErrorPage = (props: IErrorPage) => {
-  const {} = props
-
+const ErrorPage = () => {
   return (
     <div className={classes.ErrorPage}>
       <h1>Oops! dgdfgdfgdfg</h1>
