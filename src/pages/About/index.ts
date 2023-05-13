@@ -1,1 +1,1 @@
-export { default as About } from './ui/LazyAbout'
+export { default as About } from './ui/About'
