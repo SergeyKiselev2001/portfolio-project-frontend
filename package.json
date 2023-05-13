@@ -11,6 +11,7 @@
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.4",
     "craco": "^0.0.3",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.2.1",
     "i18n": "^0.15.1",
     "i18next-browser-languagedetector": "^7.0.1",

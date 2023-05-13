@@ -1,11 +1,8 @@
+import { withHeader } from '@shared/hocs/withHeader'
 import classes from './MainPage.module.scss'
 
-//interface IMainPage {}
-
 const MainPage = () => {
-  //const {} = props
-
-  return <div className={classes.MainPage}>hehe</div>
+  return <div className={classes.MainPage}>main page</div>
 }
 
-export default MainPage
+export default withHeader(MainPage)
