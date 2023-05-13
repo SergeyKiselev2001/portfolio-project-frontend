@@ -1,16 +1,20 @@
 @import '@shared/scss';
 
 .Header {
+  padding-top: 5px;
+  padding-bottom: 5px;
   width: 100%;
-  background-color: $olive-dark;
-  height: 50px;
-
+  background-color: rgb(19, 2, 2);
+  height: $header-height;
+  box-sizing: border-box;
   display: flex;
+  border-bottom: 1px solid rgb(102, 102, 102);
 }
 
 .OneLink {
-  font-family: $montserrat;
+  font-family: $rubik;
   margin: 0px 20px;
+  font-size: 11px;
   text-align: center;
   display: flex;
   justify-content: center;
@@ -18,6 +22,18 @@
 
   a {
     text-decoration: none;
-    color: $bone;
+    color: rgb(241, 241, 241);
+    transform: translateY(2px);
   }
+}
+
+.logo {
+  height: 36px;
+  width: 36px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-image: url('~@shared/images/logo/octopus.png');
+  transform: translateY(-2px);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(1%) saturate(7496%)
+    hue-rotate(56deg) brightness(102%) contrast(105%);
 }

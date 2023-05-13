@@ -1,9 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import classes from './LangSwitcher.module.scss'
-import { i18Keys } from '../types/i18Keys'
 
 const LangSwitcher = () => {
-  const { t, i18n } = useTranslation()
+  const { i18n } = useTranslation()
 
   const toggleLanguage = () => {
     i18n.changeLanguage(i18n.language == 'en' ? 'ru' : 'en')
@@ -11,7 +10,10 @@ const LangSwitcher = () => {
 
   return (
     <div className={classes.LangSwitcher}>
-      <button onClick={toggleLanguage}>{t(i18Keys.CHANGE_LANG)}</button>
+      <button
+        className={i18n.language == 'en' ? classes.ru : classes.en}
+        onClick={toggleLanguage}
+      />
     </div>
   )
 }
