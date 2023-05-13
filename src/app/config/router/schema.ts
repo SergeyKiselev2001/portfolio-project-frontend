@@ -1,7 +1,8 @@
 export enum RouterPaths {
   ERROR = '*',
-  ENG = '/eng',
-  RU = '/ru',
+  MAIN = '/',
+  ABOUT = '/about',
+  PROFILE = '/profile',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }

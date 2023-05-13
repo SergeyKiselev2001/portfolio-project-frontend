@@ -1,19 +1,14 @@
-import { MainPage } from '@pages/MainPage'
 import './App.css'
 import { Suspense } from 'react'
-import { useTranslation } from 'react-i18next'
-
-function MyComponent() {
-  const { t, i18n } = useTranslation()
-
-  return <h1>{t('Welcome to React')}</h1>
-}
+import { LangSwitcher } from '@widgets/LangSwitcher'
+import { RouterProvider } from 'react-router'
+import { router } from '@app/config/router'
 
 const App = () => {
   return (
     <Suspense fallback="">
-      <MyComponent />
-      <MainPage />
+      <RouterProvider router={router} />
+      <LangSwitcher />
     </Suspense>
   )
 }
