@@ -11,6 +11,7 @@
     "@types/react": "^18.2.5",
     "@types/react-dom": "^18.2.4",
     "craco": "^0.0.3",
+    "craco-sass-loader": "^1.0.2",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.2.1",
     "i18n": "^0.15.1",
@@ -24,12 +25,11 @@
     "react-router": "^6.11.1",
     "react-router-dom": "^6.11.1",
     "react-scripts": "5.0.1",
-    "sass-alias": "^2.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "craco start",
-    "build": "react-scripts build",
+    "build": "craco build",
     "test": "craco test --watchAll",
     "eject": "react-scripts eject"
   },

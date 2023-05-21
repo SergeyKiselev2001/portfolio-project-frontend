@@ -1,8 +1,15 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const path = require('path')
+const sassResourcesLoader = require('craco-sass-loader')
 
 module.exports = {
   plugins: [
+    {
+      plugin: sassResourcesLoader,
+      options: {
+        resources: './src/shared/scss/index.scss', // Глобальные стили
+      },
+    },
     {
       plugin: {
         overrideWebpackConfig: ({ webpackConfig }) => {
