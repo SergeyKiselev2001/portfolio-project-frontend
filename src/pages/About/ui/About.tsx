@@ -7,7 +7,12 @@ const About = observer(() => {
   return (
     <div className={classes.About} style={{ color: 'white' }}>
       about {counter.count}
-      <button onClick={() => counter.increment()} style={{ color: 'white' }}>PLUS</button>
+      <button onClick={() => counter.increment()} style={{ color: 'white' }}>
+        PLUS
+      </button>
+      <button onClick={() => counter.fetchData()} style={{ color: 'red' }}>
+        FETCH
+      </button>
     </div>
   )
 })
