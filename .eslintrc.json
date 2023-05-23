@@ -20,6 +20,7 @@
     "max-len": ["warn", { "code": 120 }],
     "react/react-in-jsx-scope": "off",
     "semi": ["warn", "never"],
+    "@typescript-eslint/no-extra-semi" : "off",
     "prettier/prettier": [
       "warn",
       {
