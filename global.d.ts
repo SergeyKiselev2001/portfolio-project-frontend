@@ -5,4 +5,6 @@ declare module '*.svg' {
 
 declare module '*.scss'
 
-declare module "*.png"
+declare module '*.png'
+
+declare const overlay: HTMLDivElement

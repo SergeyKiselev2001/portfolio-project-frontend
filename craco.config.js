@@ -39,7 +39,9 @@ const jest = {
         '^@pages/(.+)': '<rootDir>/src/pages/$1',
         '^@widgets/(.+)': '<rootDir>/src/widgets/$1',
         '^@shared/(.+)': '<rootDir>/src/shared/$1',
+        '^@public/(.+)': '<rootDir>/public/$1',
         '\\.(css|scss)$': 'identity-obj-proxy',
+        axios: 'axios/dist/node/axios.cjs',
       },
     }
   },
