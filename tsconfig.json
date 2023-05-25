@@ -23,6 +23,7 @@
       "@widgets/*": ["src/widgets/*"],
       "@shared/*": ["src/shared/*"],
       "@public/*": ["public/*"],
+      "@entities/*": ["src/entities/*"],
     },
   },
   "include": ["src", "global.d.ts"]

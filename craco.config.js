@@ -13,6 +13,7 @@ const overrideWebpack = {
           '@pages': path.resolve(__dirname, 'src/pages'),
           '@widgets': path.resolve(__dirname, 'src/widgets'),
           '@shared': path.resolve(__dirname, 'src/shared'),
+          '@entities': path.resolve(__dirname, 'src/entities'),
         },
       }
       return webpackConfig
@@ -39,6 +40,7 @@ const jest = {
         '^@pages/(.+)': '<rootDir>/src/pages/$1',
         '^@widgets/(.+)': '<rootDir>/src/widgets/$1',
         '^@shared/(.+)': '<rootDir>/src/shared/$1',
+        '^@entities/(.+)': '<rootDir>/src/entities/$1',
         '^@public/(.+)': '<rootDir>/public/$1',
         '\\.(css|scss)$': 'identity-obj-proxy',
         axios: 'axios/dist/node/axios.cjs',
