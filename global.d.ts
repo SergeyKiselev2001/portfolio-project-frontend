@@ -8,3 +8,6 @@ declare module '*.scss'
 declare module '*.png'
 
 declare const overlay: HTMLDivElement
+
+declare type InputChange = React.ChangeEvent<HTMLInputElement>
+declare type FormSubmit = React.FormEvent<HTMLButtonElement>

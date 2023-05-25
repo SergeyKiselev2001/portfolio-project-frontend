@@ -21,6 +21,7 @@
     "react/react-in-jsx-scope": "off",
     "semi": ["warn", "never"],
     "@typescript-eslint/no-extra-semi" : "off",
+    "no-debugger": "warn",
     "prettier/prettier": [
       "warn",
       {

@@ -23,7 +23,9 @@ const Modal = (props: IModal) => {
         className={classes.content_wrapper}
       >
         {children}
-        <button onClick={closeModal}>{t(i18Keys.CLOSE)}</button>
+        <button className={classes.close_button} onClick={closeModal}>
+          {t(i18Keys.CLOSE)}
+        </button>
       </div>
     </div>
   )
