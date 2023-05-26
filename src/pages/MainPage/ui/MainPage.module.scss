@@ -1,4 +1,9 @@
 .MainPage {
-    height: $content-height;
-    background-color: rgb(49, 49, 49);
+  min-height: $content-height;
+  background-color: rgb(49, 49, 49);
+  min-width: 540px;
+}
+
+.content_wrapper {
+  padding: 10px 40px;
 }

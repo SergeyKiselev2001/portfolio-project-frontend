@@ -2,5 +2,51 @@
   "users": [{ "id": 1, "login": "sergey", "password": "qwerty" }],
   "number": {
     "da": 99999
-  }
+  },
+  "posts": [
+    {
+      "id": 1,
+      "title": "HAHA",
+      "authorId": 21,
+      "authorName": "Vitya",
+      "text": "bla bla",
+      "image": {
+        "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+        "alt": ""
+      }
+    },
+    {
+      "id": 2,
+      "title": "Ну привет, это тестовый пост",
+      "authorId": 21,
+      "authorName": "Vitya",
+      "text": "bla bla",
+      "image": {
+        "src": "https://vsegda-pomnim.com/uploads/posts/2022-04/1651042927_13-vsegda-pomnim-com-p-krasivie-morya-i-okeani-foto-14.jpg",
+        "alt": ""
+      }
+    },
+    {
+      "id": 3,
+      "title": "мда уж",
+      "authorId": 221,
+      "authorName": "Vitya",
+      "text": "bla bla",
+      "image": {
+        "src": "https://sun9-4.userapi.com/impg/kRvKJJIMWNwyBlGdBGm9ijAgoYhPkyCCF9-Z8w/_wTK9vINRwk.jpg?size=1200x900&quality=95&sign=fd347bb2fc56b2e0c4f70ec1c094e0fe&c_uniq_tag=Z6b16ipGsF859GaKmjaey58PAjzZaw5o-KljlHkG5GI&type=album",
+        "alt": ""
+      }
+    },
+    {
+      "id": 4,
+      "title": "Екарный бабай, жми!",
+      "authorId": 21,
+      "authorName": "Vitya",
+      "text": "bla bla",
+      "image": {
+        "src": "https://vsegda-pomnim.com/uploads/posts/2022-04/1651042927_13-vsegda-pomnim-com-p-krasivie-morya-i-okeani-foto-14.jpg",
+        "alt": ""
+      }
+    }
+  ]
 }
