@@ -1,7 +1,9 @@
 .LangSwitcher {
-  position: absolute;
-  top: 9px;
-  right: 10px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-grow: 1;
+  padding-right: 10px;
 
   button {
     padding: 0;
