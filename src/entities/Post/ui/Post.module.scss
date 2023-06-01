@@ -1,26 +1,58 @@
 .Post {
-    background-color: #8b8b8b;
-    padding: 10px;
-    max-width: 650px;
-    margin: 0 auto;
+  background-color: #ffffff;
+  padding: 10px;
+  max-width: 650px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  min-width: 200px;
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    font-family: $montserrat;
+    font-weight: 700;
+    font-size: 20px;
     margin-bottom: 10px;
-    border-radius: 3px;
-    min-width: 200px;
+  }
 
-    a {
-        display: inline-block;
-        text-decoration: none;
-        color: white;
-        font-family: $montserrat;
-        font-weight: 700;
-        font-size: 20px;
-        margin-bottom: 10px;
-    }
-
-
-    img {
-        height: 300px;
-        object-fit: cover;
-        width: 100%;
-    }
+  img {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+  }
 }
+
+.PostHeader {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftHeader {
+  display: flex;
+  flex-direction: row;
+  .avatar {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    color: black;
+  }
+
+  time {
+    color: #070202;
+    background-color: #dddddd;
+    width: fit-content;
+    padding: 2px;
+    border-radius: 5px;
+  }
+}
+

@@ -3,6 +3,7 @@ export enum RouterPaths {
   MAIN = '/',
   ABOUT = '/about',
   PROFILE = '/profile',
+  TAGS = '/tags',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }

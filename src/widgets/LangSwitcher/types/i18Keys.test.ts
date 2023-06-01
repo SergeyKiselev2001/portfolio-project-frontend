@@ -2,7 +2,9 @@ import ru_translations from '@public/locales/ru/translation.json'
 import en_translations from '@public/locales/en/translation.json'
 import ru_header from '@public/locales/ru/header.json'
 import en_header from '@public/locales/en/header.json'
-import { i18Keys, i18KeysHeader } from './i18Keys'
+import ru_tags from '@public/locales/ru/tags.json'
+import en_tags from '@public/locales/en/tags.json'
+import { i18Keys, i18KeysHeader, i18Tags } from './i18Keys'
 
 describe('@widgets/LangSwitcher', () => {
   test('i18Keys', async () => {
@@ -25,6 +27,18 @@ describe('@widgets/LangSwitcher', () => {
 
       expect(Object.keys(en_header)).toContainEqual(
         i18KeysHeader[key as keyof typeof i18KeysHeader]
+      )
+    }
+  })
+
+  test('i18Tags', async () => {
+    for (const key of Object.keys(i18Tags)) {
+      expect(Object.keys(ru_tags)).toContainEqual(
+        i18Tags[key as keyof typeof i18Tags]
+      )
+
+      expect(Object.keys(en_tags)).toContainEqual(
+        i18Tags[key as keyof typeof i18Tags]
       )
     }
   })

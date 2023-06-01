@@ -5,15 +5,16 @@ import { RouterPaths } from '@app/config/router'
 interface IOneLink {
   link: RouterPaths
   text: string
-  children?: JSX.Element
+  isActive: boolean
 }
 
 const OneLink = (props: IOneLink) => {
-  const { link, text, children } = props
+  const { link, text, isActive } = props
 
   return (
-    <div className={classes.OneLink}>
-      <Link to={link}>{text || children}</Link>
+    <div className={`${classes.OneLink} ${isActive ? classes.activeLink : ''}`}>
+      <Link to={link}>{text}</Link>
+      {isActive && <div className={classes.active} />}
     </div>
   )
 }
