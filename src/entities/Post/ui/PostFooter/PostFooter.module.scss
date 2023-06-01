@@ -1,0 +1,133 @@
+.PostFooter {
+  .FooterTags {
+    display: flex;
+  }
+}
+
+@mixin control {
+  background-color: $light-gray;
+  font-family: $roboto;
+  color: rgb(32, 32, 32);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 10px;
+  margin: 0 10px 0 0;
+  line-height: 16px;
+  border-radius: 5px;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  .leftBlock {
+    .likes {
+      position: relative;
+
+      img {
+        position: absolute;
+        height: 18px;
+        width: auto;
+        top: 8px;
+      }
+
+      span {
+        margin-left: 20px;
+      }
+    }
+
+    .comments {
+      padding-right: 14px;
+      display: inline-block;
+      padding-top: 5px;
+
+      &::before {
+        transform: translateY(3px) scale(-1, 1);
+        display: inline-block;
+        content: '';
+        width: 18px;
+        height: 18px;
+
+        background-image: url('./images/comments.png');
+        background-size: 18px;
+        margin-right: 5px;
+      }
+    }
+
+    .save {
+      height: 100%;
+      position: relative;
+      display: inline-block;
+      padding-top: 5px;
+
+      &::after {
+        transform: translateY(3px);
+        display: inline-block;
+        content: '';
+        width: 18px;
+        height: 18px;
+
+        background-image: url('./images/save.png');
+        background-size: 18px;
+      }
+    }
+
+    .share {
+      height: 100%;
+      position: relative;
+      display: inline-block;
+      padding-top: 5px;
+
+      &::after {
+        transform: translateY(4px);
+        display: inline-block;
+        content: '';
+        width: 17px;
+        height: 17px;
+
+        background-image: url('./images/link.png');
+        background-size: 17px;
+      }
+    }
+
+    button {
+      @include control;
+      border: none;
+      cursor: pointer;
+    }
+
+    a {
+      @include control;
+    }
+  }
+}
+
+.rightBlock {
+  display: flex;
+  align-items: center;
+}
+
+.views {
+  padding-right: 5px;
+  font-family: $roboto;
+  font-weight: 500;
+  font-size: 14px;
+  color: #b6b6b6;
+
+  $icon-size: 16px;
+
+
+  &::after {
+    transform: translateY(3px);
+    display: inline-block;
+    content: '';
+    width: $icon-size;
+    height: $icon-size;
+    margin-left: 5px;
+
+    background-image: url('./images/views.png');
+    filter: brightness(0) saturate(100%) invert(75%) sepia(11%) saturate(14%)
+      hue-rotate(330deg) brightness(84%) contrast(88%);
+    background-size: $icon-size;
+    background-repeat: no-repeat;
+  }
+}

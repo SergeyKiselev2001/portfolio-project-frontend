@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx'
 import { IPosts } from './schema'
 import { api } from '@app/api'
-import { IPost } from '../ui/schema'
+import { INewPost } from '../ui/schema'
 
 class Post implements IPosts {
-  posts = [] as IPost[]
+  posts = [] as INewPost[]
 
   constructor() {
     makeAutoObservable(this)

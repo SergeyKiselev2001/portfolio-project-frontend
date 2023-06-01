@@ -1,7 +1,10 @@
 .MainPage {
   min-height: $content-height;
-  background-color: rgb(49, 49, 49);
+  background-color: #f5f5f5;
   min-width: 540px;
+
+  position: relative;
+  z-index: $z-index-content;
 }
 
 .content_wrapper {

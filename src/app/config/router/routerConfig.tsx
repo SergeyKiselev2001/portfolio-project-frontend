@@ -4,6 +4,7 @@ import { Route, RouterPaths } from './schema'
 import { MainPage } from '@pages/MainPage'
 import { Profile } from '@pages/Profile'
 import { About } from '@pages/About'
+import { Tags } from '@pages/Tags'
 
 export const listOfRoutes: Route[] = [
   {
@@ -21,6 +22,10 @@ export const listOfRoutes: Route[] = [
   {
     path: RouterPaths.PROFILE,
     element: <Profile />,
+  },
+  {
+    path: RouterPaths.TAGS,
+    element: <Tags />,
   },
 ]
 

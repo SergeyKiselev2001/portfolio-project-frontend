@@ -1,15 +1,28 @@
 import classes from './Post.module.scss'
-import { IPost } from './schema'
+import PostContent from './PostContent'
+import { PostFooter } from './PostFooter'
+import PostHeader from './PostHeader'
+import { INewPost } from './schema'
 
-const Post = (props: IPost) => {
-  const { id, title, authorId, authorName, text, image } = props
+const Post = (props: INewPost) => {
+  const {
+    id,
+    title,
+    author,
+    commentsAmount,
+    content,
+    likesAmount,
+    tags,
+    timestamp,
+    views,
+    poll,
+  } = props
 
   return (
     <div className={classes.Post}>
-      <a href={`/media/${id}`} rel="noreferrer" target="_blank">
-        {title}
-      </a>
-      <img {...image} />
+      <PostHeader {...{ id, author, timestamp, title }} />
+      <PostContent {...{ content, poll }} />
+      <PostFooter {...{ id, commentsAmount, likesAmount, tags, views }} />
     </div>
   )
 }

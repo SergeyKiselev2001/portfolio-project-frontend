@@ -1,5 +1,5 @@
-import { IPost } from '../ui/schema'
+import { INewPost } from '../ui/schema'
 
 export interface IPosts {
-  posts: IPost[]
+  posts: INewPost[]
 }

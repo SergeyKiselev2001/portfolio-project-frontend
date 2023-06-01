@@ -5,48 +5,84 @@
   },
   "posts": [
     {
-      "id": 1,
-      "title": "HAHA",
-      "authorId": 21,
-      "authorName": "Vitya",
-      "text": "bla bla",
-      "image": {
-        "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
-        "alt": ""
+      "id": 12,
+      "title": "Тестовый пост сложный",
+      "timestamp": 123213,
+      "author": {
+        "name": "Kiselev_Sergey",
+        "id": 123,
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 12,
+      "commentsAmount": 4,
+      "views": 324,
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "Обычный текст"
+        },
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+            "alt": ""
+          }
+        }
+      ],
+      "tags": ["HUMOR", "ANIMALS"],
+      "poll": {
+        "id": 34,
+        "name": "Опрос касательно чегото",
+        "options": [
+          {
+            "id": 0,
+            "text": "Путин",
+            "numberOfVotes": 99
+          },
+          {
+            "id": 1,
+            "text": "Медведев",
+            "numberOfVotes": 34
+          }
+        ]
       }
     },
     {
-      "id": 2,
-      "title": "Ну привет, это тестовый пост",
-      "authorId": 21,
-      "authorName": "Vitya",
-      "text": "bla bla",
-      "image": {
-        "src": "https://vsegda-pomnim.com/uploads/posts/2022-04/1651042927_13-vsegda-pomnim-com-p-krasivie-morya-i-okeani-foto-14.jpg",
-        "alt": ""
-      }
-    },
-    {
-      "id": 3,
-      "title": "мда уж",
-      "authorId": 221,
-      "authorName": "Vitya",
-      "text": "bla bla",
-      "image": {
-        "src": "https://sun9-4.userapi.com/impg/kRvKJJIMWNwyBlGdBGm9ijAgoYhPkyCCF9-Z8w/_wTK9vINRwk.jpg?size=1200x900&quality=95&sign=fd347bb2fc56b2e0c4f70ec1c094e0fe&c_uniq_tag=Z6b16ipGsF859GaKmjaey58PAjzZaw5o-KljlHkG5GI&type=album",
-        "alt": ""
-      }
-    },
-    {
-      "id": 4,
-      "title": "Екарный бабай, жми!",
-      "authorId": 21,
-      "authorName": "Vitya",
-      "text": "bla bla",
-      "image": {
-        "src": "https://vsegda-pomnim.com/uploads/posts/2022-04/1651042927_13-vsegda-pomnim-com-p-krasivie-morya-i-okeani-foto-14.jpg",
-        "alt": ""
-      }
+      "id": 14,
+      "title": "Еще блин один пост",
+      "timestamp": 123213,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 0,
+      "commentsAmount": 145,
+      "views": 45,
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "Обычный текст"
+        },
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://i.internetdaybook.com/images/027/image-78612-2.jpg",
+            "alt": ""
+          }
+        },
+        {
+          "type": "TEXT",
+          "text": "О нет это же еще обычный текст"
+        }
+      ],
+      "tags": ["TECHNOLOGIES", "ANIMALS"]
     }
   ]
 }
