@@ -1,6 +1,7 @@
+import { HOST } from '@shared/constants'
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'http://localhost:5432/',
+  baseURL: HOST,
   timeout: 1000,
 })

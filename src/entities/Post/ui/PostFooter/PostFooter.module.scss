@@ -1,4 +1,5 @@
 .PostFooter {
+  transform: translate(-6px, 6px);
   .FooterTags {
     display: flex;
   }
@@ -89,6 +90,14 @@
       }
     }
 
+    .copied {
+      background-color: #40e23a;
+      &::after {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+          saturate(7500%) hue-rotate(146deg) brightness(121%) contrast(121%);
+      }
+    }
+
     button {
       @include control;
       border: none;
@@ -114,7 +123,6 @@
   color: #b6b6b6;
 
   $icon-size: 16px;
-
 
   &::after {
     transform: translateY(3px);
