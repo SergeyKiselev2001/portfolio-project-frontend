@@ -1,6 +1,8 @@
 .Post {
   background-color: #ffffff;
-  padding: 10px;
+  border: 1px solid #f3f3f3;
+  box-sizing: border-box;
+  padding: 24px;
   max-width: 650px;
   margin: 0 auto;
   margin-bottom: 10px;
@@ -27,6 +29,7 @@
 .PostHeader {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8px;
 }
 
 .leftHeader {
@@ -45,6 +48,7 @@
 
   a {
     color: black;
+    font-size: 14px;
   }
 
   time {
@@ -56,3 +60,122 @@
   }
 }
 
+.PostContent {
+  font-family: $roboto;
+  font-size: 14px;
+
+  .title {
+    margin-bottom: 12px;
+
+    a {
+      font-family: $roboto;
+      color: #212121;
+      font-weight: 400;
+      font-size: 20px;
+      margin-bottom: 0px;
+    }
+  }
+
+  .text {
+    display: block;
+    line-height: 24px;
+    margin-bottom: 12px;
+  }
+
+  .quote {
+    display: block;
+    line-height: 24px;
+    margin-bottom: 12px;
+    padding: 10px;
+    background-color: #f9f9fb;
+    padding-left: 28px;
+    color: #4d4d4d;
+    border-radius: 2px;
+    position: relative;
+
+    &::before {
+      content: '';
+      width: 12px;
+      height: 12px;
+      display: block;
+      left: 12px;
+      top: 14px;
+      position: absolute;
+      background-image: url('./images//quotes.png');
+      filter: brightness(0) saturate(100%) invert(83%) sepia(0%) saturate(2409%)
+        hue-rotate(288deg) brightness(94%) contrast(87%);
+      background-size: 12px 12px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  img {
+    margin-bottom: 12px;
+    object-fit: cover;
+    height: auto;
+    width: calc(100% + 48px);
+    transform: translateX(-24px);
+  }
+}
+
+.rightHeader {
+  position: relative;
+
+  .dots {
+    cursor: pointer;
+    width: 16px;
+    height: auto;
+    user-select: none;
+    filter: brightness(0) saturate(100%) invert(74%) sepia(6%) saturate(346%)
+      hue-rotate(169deg) brightness(91%) contrast(98%);
+  }
+
+  .options {
+    position: absolute;
+
+    transform: translateX(-70%);
+    border-radius: 5px;
+    overflow: hidden;
+
+    span {
+      padding: 10px;
+      background-color: #e9e9e9;
+      font-family: $roboto;
+      font-size: 14px;
+      display: block;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #a7a7a7;
+      }
+    }
+  }
+}
+
+.slow_disappearing {
+  animation-name: disappear;
+  animation-duration: .3s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+  overflow: hidden;
+}
+
+@keyframes disappear {
+  0% {
+    height: 600px;
+    opacity: 1;
+  }
+  80% {
+    padding: 24px;
+    display: none;
+    margin-bottom: 0px;
+    border: 1px solid #f3f3f3
+  }
+  100%{
+    opacity: 0;
+    padding: 0px;
+    height: 0px;
+    margin-bottom: 0px;
+    border: none;
+  }
+}

@@ -2,6 +2,8 @@ import classes from './Post.module.scss'
 import { ContentType } from './schema'
 
 interface IPostContent {
+  title: string
+  id: number
   content: {
     type: ContentType
     text: string
@@ -22,23 +24,30 @@ interface IPostContent {
 }
 
 const PostContent = (props: IPostContent) => {
-  const { content, poll } = props
+  const { content, title, id, poll } = props
+
+  console.log(id, content)
 
   return (
     <div className={classes.PostContent}>
-      <br />
-      <br />
-      {content
-        .filter((el) => el.type == ContentType.TEXT)
-        .map((el) => (
-          <>
-            <span key={el.text}>{el.text}</span>
-            <br />
-          </>
-        ))}
-      <br />
-      <br />
-      <br />
+      <div className={classes.title}>
+        <a target="_blank" rel="noreferrer" href={`/media/${id}`}>
+          {title}
+        </a>
+      </div>
+      {content.map(({ text, type, image }) => (
+        <>
+          {type == ContentType.TEXT && (
+            <span className={classes.text}>{text}</span>
+          )}
+          {type == ContentType.IMAGE && (
+            <img src={image?.src} alt={image?.alt} />
+          )}
+          {type == ContentType.QUOTE && (
+            <span className={classes.quote}>{text}</span>
+          )}
+        </>
+      ))}
     </div>
   )
 }

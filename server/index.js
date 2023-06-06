@@ -48,6 +48,19 @@ server.post('/login', (req, res) => {
   }
 })
 
+// Эндпоинт для логина
+server.post('/report', (req, res) => {
+  try {
+    const { postId } = req.body
+
+    return res.json({
+      message: `Пост с id=${postId} отправлен на модерацию`,
+    })
+  } catch (e) {
+    return res.status(500).json({ message: e.message })
+  }
+})
+
 // проверяем, авторизован ли пользователь
 // eslint-disable-next-line
 // server.use((req, res, next) => {
