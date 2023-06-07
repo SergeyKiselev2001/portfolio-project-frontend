@@ -17,6 +17,7 @@ const Post = (props: INewPost) => {
     timestamp,
     views,
     poll,
+    isLiked,
   } = props
 
   const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
@@ -31,7 +32,9 @@ const Post = (props: INewPost) => {
     <div className={classes.Post} id={`post-${id}`}>
       <PostHeader {...{ author, id, timestamp }} />
       <PostContent {...{ content, id, poll, title }} />
-      <PostFooter {...{ id, commentsAmount, likesAmount, tags, views }} />
+      <PostFooter
+        {...{ id, isLiked, commentsAmount, likesAmount, tags, views }}
+      />
     </div>
   )
 }

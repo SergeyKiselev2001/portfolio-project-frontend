@@ -1,2 +1,2 @@
 export { router } from './routerConfig'
-export { RouterPaths } from './schema'
+export { RouterPaths, QueryParams } from './schema'

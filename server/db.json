@@ -1,5 +1,11 @@
 {
-  "users": [{ "id": 1, "login": "sergey", "password": "qwerty" }],
+  "users": [
+    {
+      "id": 1,
+      "login": "sergey",
+      "password": "qwerty"
+    }
+  ],
   "number": {
     "da": 99999
   },
@@ -40,7 +46,10 @@
           }
         }
       ],
-      "tags": ["HUMOR", "ANIMALS"],
+      "tags": [
+        "HUMOR",
+        "ANIMALS"
+      ],
       "poll": {
         "id": 34,
         "name": "Опрос касательно чегото",
@@ -56,7 +65,8 @@
             "numberOfVotes": 34
           }
         ]
-      }
+      },
+      "isLiked": true
     },
     {
       "id": 14,
@@ -70,7 +80,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 0,
+      "likesAmount": 1,
       "commentsAmount": 145,
       "views": 45,
       "content": [
@@ -90,7 +100,11 @@
           "text": "О нет это же еще обычный текст"
         }
       ],
-      "tags": ["TECHNOLOGIES", "ANIMALS"]
+      "tags": [
+        "TECHNOLOGIES",
+        "ANIMALS"
+      ],
+      "isLiked": true
     },
     {
       "id": 16,
@@ -104,7 +118,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 45,
+      "likesAmount": 46,
       "commentsAmount": 12,
       "views": 670,
       "content": [
@@ -116,7 +130,11 @@
           }
         }
       ],
-      "tags": ["TECHNOLOGIES", "HUMOR"]
+      "tags": [
+        "TECHNOLOGIES",
+        "HUMOR"
+      ],
+      "isLiked": true
     }
   ]
 }

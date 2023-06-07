@@ -1,4 +1,4 @@
-import { i18Tags } from "@widgets/LangSwitcher/types/i18Keys"
+import { i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
 
 export interface IPost {
   id: number
@@ -32,6 +32,7 @@ export interface INewPost {
     }
   }
   likesAmount: number
+  isLiked: false
   commentsAmount: number
   views: number
   content: {
