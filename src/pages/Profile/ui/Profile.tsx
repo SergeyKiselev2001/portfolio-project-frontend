@@ -22,6 +22,10 @@ const Profile = () => {
   const [showProfile, setShowProfile] = useState(false)
   const [spinner, setSpinner] = useState(true)
 
+  const onLogin = () => {
+    setShowProfile(true)
+  }
+
   return (
     <div className={classes.Profile}>
       {spinner ? (
@@ -29,7 +33,7 @@ const Profile = () => {
       ) : showProfile ? (
         <ProfileContent />
       ) : (
-        <Login setShowProfile={setShowProfile} />
+        <Login onLogin={onLogin} />
       )}
     </div>
   )

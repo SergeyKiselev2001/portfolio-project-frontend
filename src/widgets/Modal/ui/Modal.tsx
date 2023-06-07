@@ -1,20 +1,34 @@
 import { createPortal } from 'react-dom'
 import classes from './Modal.module.scss'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { i18Keys } from '@widgets/LangSwitcher'
 
 interface IModal {
   children: JSX.Element
+  onclose?: VoidFunction
 }
 
 const Modal = (props: IModal) => {
-  const { children } = props
+  const { children, onclose } = props
 
   const [active, setActive] = useState(true)
   const { t } = useTranslation()
 
-  const closeModal = () => setActive(false)
+  useEffect(() => {
+    changeBodyOverflow('hidden')
+  }, [])
+
+  const changeBodyOverflow = (overflow: string) => {
+    const body = document.getElementsByTagName('body')[0]
+    body.style.overflow = overflow
+  }
+
+  const closeModal = () => {
+    setActive(false)
+    changeBodyOverflow('auto')
+    onclose && onclose()
+  }
 
   const popup = (
     <div className={classes.Modal} onClick={closeModal}>

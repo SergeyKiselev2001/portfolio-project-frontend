@@ -4,10 +4,10 @@ import { useState } from 'react'
 import { auth } from '@entities/authorization'
 
 interface ILogin {
-  setShowProfile: (arg0: boolean) => void
+  onLogin: VoidFunction
 }
 
-const Login = observer(({ setShowProfile }: ILogin) => {
+const Login = observer(({ onLogin }: ILogin) => {
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [rememberMe, setRememberMe] = useState(false)
@@ -16,7 +16,7 @@ const Login = observer(({ setShowProfile }: ILogin) => {
     e.preventDefault()
     const result = await auth.fetchToken({ login, password, rememberMe })
     if (result) {
-      setShowProfile(true)
+      onLogin()
     }
   }
 

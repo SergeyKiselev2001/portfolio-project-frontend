@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx'
-import { IPosts } from './schema'
+import { IPosts, QueryParamsObj } from './schema'
 import { api } from '@app/api'
 import { INewPost } from '../ui/schema'
 import classes from './../ui/Post.module.scss'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
-import { tryRequest } from '@shared/utils'
+import { tryRequest, urlConverter } from '@shared/utils'
 import { toast } from 'react-toastify'
 
 class Post implements IPosts {
@@ -14,13 +14,11 @@ class Post implements IPosts {
     makeAutoObservable(this)
   }
 
-  async getPosts() {
-    try {
-      const { data } = await api.get('/posts')
+  async getPosts(query: QueryParamsObj[]) {
+    tryRequest(async () => {
+      const { data } = await api.get(urlConverter('/posts', query))
       this.posts = data
-    } catch (e) {
-      console.log(e)
-    }
+    })
   }
 
   hidePost(hideId: number) {
@@ -47,6 +45,18 @@ class Post implements IPosts {
     })
 
     this.hidePost(postId)
+  }
+
+  async likePost(postId: number, likesAmount: number) {
+    await tryRequest(async () => {
+      await api.patch(`/posts/${postId}`, { isLiked: true, likesAmount })
+    })
+  }
+
+  async removeLike(postId: number, likesAmount: number) {
+    await tryRequest(async () => {
+      await api.patch(`/posts/${postId}`, { isLiked: false, likesAmount })
+    })
   }
 }
 
