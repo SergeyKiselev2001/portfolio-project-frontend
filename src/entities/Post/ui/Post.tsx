@@ -1,4 +1,3 @@
-import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import classes from './Post.module.scss'
 import PostContent from './PostContent'
 import { PostFooter } from './PostFooter'
@@ -19,14 +18,6 @@ const Post = (props: INewPost) => {
     poll,
     isLiked,
   } = props
-
-  const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
-    id: number
-  }[]
-
-  if (hiddenPosts?.find((el) => el.id == id)) {
-    return null
-  }
 
   return (
     <div className={classes.Post} id={`post-${id}`}>
