@@ -9,3 +9,15 @@ export const getStorageItem = (key: StorageKeys) => {
 
   return session || local
 }
+
+export const clearLocalStorage = () => {
+  for (const key of Object.values(StorageKeys)) {
+    localStorage.removeItem(key)
+  }
+}
+
+export const clearSessionStorage = () => {
+  for (const key of Object.values(StorageKeys)) {
+    sessionStorage.removeItem(key)
+  }
+}

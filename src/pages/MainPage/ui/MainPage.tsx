@@ -5,13 +5,13 @@ import { Post, posts } from '@entities/Post'
 import { useEffect, useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { HeaderPage } from '@shared/hocs/withHeader'
-import { Spinner } from '@widgets/Spinner'
 import { QueryParams, RouterPaths } from '@app/config/router'
 import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
 import { mainPage } from '..'
 import { useSearchParams } from 'react-router-dom'
 import { Controller } from '@widgets/Controller'
+import { PostSkeleton } from '@entities/PostSkeleton'
 
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
@@ -23,7 +23,7 @@ const MainPage = observer(() => {
       await posts.getPosts([
         [QueryParams.TAGS, searchParams.get(QueryParams.TAGS)],
       ])
-      setTimeout(() => setSpinner(false), 1000)
+      setTimeout(() => setSpinner(false), 2500)
     })()
   }, [])
 
@@ -41,7 +41,13 @@ const MainPage = observer(() => {
     <div className={classes.MainPage}>
       <Controller />
       <div className={classes.content_wrapper}>
-        {spinner && <Spinner />}
+        {spinner && (
+          <>
+            <PostSkeleton />
+            <PostSkeleton />
+            <PostSkeleton />
+          </>
+        )}
         {!spinner &&
           (posts.posts.length ? (
             posts.posts.map((post) => <Post key={post.id} {...post} />)

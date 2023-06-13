@@ -1,0 +1,39 @@
+.PostSkeleton {
+  background-color: #e7e7e7;
+  border: 1px solid #f3f3f3;
+  box-sizing: border-box;
+  max-width: 650px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  min-width: 200px;
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+.light {
+  height: 100%;
+  width: 300px;
+  position: absolute;
+  animation-name: light;
+  animation-duration: .8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 0) 0%,
+    rgb(255, 255, 255) 50%,
+    rgba(0, 212, 255, 0) 100%
+  );
+}
+
+@keyframes light {
+  0% {
+    left: -300px;
+  }
+
+  100% {
+    left: 700px;
+  }
+}

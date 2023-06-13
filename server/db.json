@@ -19,7 +19,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 11,
+      "likesAmount": 85,
       "commentsAmount": 4,
       "views": 324,
       "content": [
@@ -63,7 +63,7 @@
           }
         ]
       },
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 14,
@@ -77,7 +77,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 1,
+      "likesAmount": 0,
       "commentsAmount": 145,
       "views": 45,
       "content": [
@@ -101,7 +101,7 @@
         "TECHNOLOGIES",
         "ANIMALS"
       ],
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 16,
@@ -134,7 +134,7 @@
       "isLiked": true
     },
     {
-      "id": 17,
+      "id": 34,
       "title": "Смешной кот",
       "timestamp": 1680062966913,
       "author": {
@@ -145,9 +145,9 @@
           "alt": ""
         }
       },
-      "likesAmount": 5,
+      "likesAmount": 6,
       "commentsAmount": 2,
-      "views": 90,
+      "views": 34900,
       "content": [
         {
           "type": "IMAGE",
@@ -160,7 +160,83 @@
       "tags": [
         "ANIMALS"
       ],
+      "isLiked": true
+    },
+    {
+      "id": 12,
+      "title": "«Какие дети?! Новый фреймворк вышел!»⁠⁠",
+      "timestamp": 1686862365913,
+      "author": {
+        "name": "Kiselev_Sergey",
+        "id": 123,
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 84,
+      "commentsAmount": 3,
+      "views": 2234,
+      "content": [
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://cs13.pikabu.ru/post_img/2023/05/26/4/168507954111362216.webp",
+            "alt": ""
+          }
+        }
+      ],
+      "tags": [
+        "TECHNOLOGIES"
+      ],
       "isLiked": false
+    },
+    {
+      "id": 1672,
+      "title": "При помощи нейросети от Photoshop, дорисовал популярные картины⁠",
+      "timestamp": 1646868365913,
+      "author": {
+        "name": "Kiselev_Sergey",
+        "id": 123,
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 5875,
+      "commentsAmount": 43,
+      "views": 28934,
+      "content": [
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://cs13.pikabu.ru/post_img/2023/06/07/9/1686150777122714744.webp",
+            "alt": ""
+          }
+        },
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://cs13.pikabu.ru/post_img/2023/06/07/9/168615076718829477.webp",
+            "alt": ""
+          }
+        },
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://cs13.pikabu.ru/post_img/2023/06/07/9/1686150787152517275.webp",
+            "alt": ""
+          }
+        },
+        {
+          "type": "QUOTE",
+          "text": "Любая достаточно развитая технология неотличима от магии."
+        }
+      ],
+      "tags": [
+        "TECHNOLOGIES"
+      ],
+      "isLiked": true
     }
   ]
 }

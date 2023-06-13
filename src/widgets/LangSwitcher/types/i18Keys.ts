@@ -1,5 +1,6 @@
 export enum i18Keys {
   CLOSE = 'CLOSE',
+  REFRESH_PAGE = 'REFRESH_PAGE',
 }
 
 export enum i18KeysHeader {
