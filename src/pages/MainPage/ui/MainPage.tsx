@@ -11,6 +11,7 @@ import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
 import { mainPage } from '..'
 import { useSearchParams } from 'react-router-dom'
+import { Controller } from '@widgets/Controller'
 
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
@@ -22,7 +23,7 @@ const MainPage = observer(() => {
       await posts.getPosts([
         [QueryParams.TAGS, searchParams.get(QueryParams.TAGS)],
       ])
-      setSpinner(false)
+      setTimeout(() => setSpinner(false), 1000)
     })()
   }, [])
 
@@ -38,12 +39,15 @@ const MainPage = observer(() => {
 
   return (
     <div className={classes.MainPage}>
+      <Controller />
       <div className={classes.content_wrapper}>
-        {spinner ? (
-          <Spinner />
-        ) : (
-          posts.posts.map((post) => <Post key={post.id} {...post} />)
-        )}
+        {spinner && <Spinner />}
+        {!spinner &&
+          (posts.posts.length ? (
+            posts.posts.map((post) => <Post key={post.id} {...post} />)
+          ) : (
+            <h1>Посты не найдены</h1>
+          ))}
       </div>
       {mainPage.showLoginModal && (
         <Modal onclose={closeModal}>

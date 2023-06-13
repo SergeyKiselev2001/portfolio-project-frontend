@@ -6,9 +6,6 @@
       "password": "qwerty"
     }
   ],
-  "number": {
-    "da": 99999
-  },
   "posts": [
     {
       "id": 12,
@@ -22,7 +19,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 12,
+      "likesAmount": 11,
       "commentsAmount": 4,
       "views": 324,
       "content": [
@@ -66,7 +63,7 @@
           }
         ]
       },
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 14,
@@ -135,6 +132,35 @@
         "HUMOR"
       ],
       "isLiked": true
+    },
+    {
+      "id": 17,
+      "title": "Смешной кот",
+      "timestamp": 1680062966913,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 5,
+      "commentsAmount": 2,
+      "views": 90,
+      "content": [
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://wp-s.ru/wallpapers/1/8/324155581474610/kot-s-belym-okrasom-lezhit.jpg",
+            "alt": ""
+          }
+        }
+      ],
+      "tags": [
+        "ANIMALS"
+      ],
+      "isLiked": false
     }
   ]
 }

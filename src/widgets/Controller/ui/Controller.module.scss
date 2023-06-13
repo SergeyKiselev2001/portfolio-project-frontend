@@ -1,0 +1,39 @@
+.Controller {
+  position: fixed;
+  bottom: 40px;
+  left: 40px;
+  padding: 10px;
+  background-color: $light-green;
+  z-index: $z-index-controller;
+
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  user-select: none;
+
+
+  img {
+    transition: .4s;
+    height: 34px;
+    width: 34px;
+  }
+
+  &:hover img {
+    transform: rotate(90deg);
+  }
+}
+
+
+.Options {
+  border-radius: 5px;
+  position: fixed;
+  bottom: 40px;
+  left: 100px;
+  padding: 10px;
+  background-color: rgb(211, 211, 211);
+  z-index: $z-index-controller;
+}

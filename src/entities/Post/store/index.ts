@@ -16,8 +16,19 @@ class Post implements IPosts {
 
   async getPosts(query: QueryParamsObj[]) {
     tryRequest(async () => {
-      const { data } = await api.get(urlConverter('/posts', query))
-      this.posts = data
+      const { data } = (await api.get(urlConverter('/posts', query))) as {
+        data: INewPost[]
+      }
+
+      const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
+        id: number
+      }[]
+
+      const newPosts = data.filter(
+        (post) => !hiddenPosts?.find((el) => el.id == post.id)
+      )
+
+      this.posts = newPosts
     })
   }
 
