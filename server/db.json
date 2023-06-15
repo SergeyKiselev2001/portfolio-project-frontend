@@ -115,7 +115,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 45,
+      "likesAmount": 46,
       "commentsAmount": 12,
       "views": 670,
       "content": [
@@ -131,7 +131,7 @@
         "TECHNOLOGIES",
         "HUMOR"
       ],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 34,
@@ -250,7 +250,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 85,
+      "likesAmount": 86,
       "commentsAmount": 76,
       "views": 9230,
       "content": [
@@ -269,7 +269,7 @@
       "tags": [
         "ANIMALS"
       ],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 180,

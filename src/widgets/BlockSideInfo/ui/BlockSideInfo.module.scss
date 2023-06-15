@@ -3,6 +3,7 @@
   position: sticky;
   width: fit-content;
   height: fit-content;
+  border-radius: 3px;
   top: 10px;
 
   box-sizing: border-box;
@@ -21,4 +22,41 @@
 
 .links {
   padding: 20px;
+}
+
+.BlockSideSkeleton {
+  background-color: #e7e7e7;
+  box-sizing: border-box;
+  border-radius: 3px;
+  width: 220px;
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+
+
+  .light {
+    height: 100%;
+    width: 300px;
+    position: absolute;
+    animation-name: light;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in;
+    background: linear-gradient(
+      90deg,
+      rgba(2, 0, 36, 0) 0%,
+      rgb(255, 255, 255) 50%,
+      rgba(0, 212, 255, 0) 100%
+    );
+  }
+}
+
+@keyframes light {
+  0% {
+    left: -300px;
+  }
+
+  100% {
+    left: 700px;
+  }
 }
