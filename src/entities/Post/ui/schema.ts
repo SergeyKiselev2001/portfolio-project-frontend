@@ -20,6 +20,8 @@ export enum ContentType {
 }
 
 export interface INewPost {
+  isLast: boolean
+  getNextPosts: VoidFunction
   id: number
   title: string
   timestamp: number

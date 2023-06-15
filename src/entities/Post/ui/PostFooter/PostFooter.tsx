@@ -4,7 +4,7 @@ import heartImage from './images/heart.png'
 import classes from './PostFooter.module.scss'
 import { CLIENT } from '@shared/constants'
 import { toast } from 'react-toastify'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { posts } from '@entities/Post'
 import { mainPage } from '@pages/MainPage'
@@ -24,6 +24,23 @@ const PostFooter = (props: IPostFooter) => {
   const [linkCopied, setLinkCopied] = useState(false)
   const [currentLikes, setCurrentLikes] = useState(likesAmount)
   const [currentIsLiked, setCurrentIsLiked] = useState(isLiked)
+  const [currentViews, setCurrentViews] = useState('')
+
+  const viewsConverter = (number: number) => {
+    const newViews = `${number}`.substring(0, `${number}`.length - 2)
+
+    return `${newViews.substring(0, `${newViews}`.length - 1)}.${newViews.at(
+      -1
+    )}K`
+  }
+
+  useEffect(() => {
+    if (views < 999) {
+      setCurrentViews(`${views}`)
+    } else {
+      setCurrentViews(viewsConverter(views))
+    }
+  }, [])
 
   const copyPath = () => {
     navigator.clipboard.writeText(`${CLIENT}/media/${id}`)
@@ -77,7 +94,7 @@ const PostFooter = (props: IPostFooter) => {
           />
         </div>
         <div className={classes.rightBlock}>
-          <span className={classes.views}>{views}</span>
+          <span className={classes.views}>{currentViews}</span>
         </div>
       </div>
     </div>

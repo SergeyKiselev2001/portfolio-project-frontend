@@ -15,9 +15,8 @@
   cursor: pointer;
   user-select: none;
 
-
   img {
-    transition: .4s;
+    transition: 0.4s;
     height: 34px;
     width: 34px;
   }
@@ -27,6 +26,16 @@
   }
 }
 
+.lang {
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+  padding: 10px;
+  background-color: rgb(211, 211, 211);
+  border-radius: 50%;
+  z-index: $z-index-controller-lang;
+}
 
 .Options {
   border-radius: 5px;
@@ -34,6 +43,27 @@
   bottom: 40px;
   left: 100px;
   padding: 10px;
+  display: flex;
+  flex-direction: column;
   background-color: rgb(211, 211, 211);
   z-index: $z-index-controller;
+
+  .cleared {
+    background-color: #1e520a;
+  }
+
+  > button {
+    outline: none;
+    border: none;
+    background-color: #35b316;
+    color: white;
+    padding: 5px 10px;
+
+    cursor: pointer;
+    z-index: $z-index-controller-btn;
+
+    &:not(:last-child) {
+      margin-bottom: 5px;
+    }
+  }
 }
