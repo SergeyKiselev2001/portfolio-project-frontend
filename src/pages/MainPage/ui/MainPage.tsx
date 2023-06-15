@@ -16,6 +16,7 @@ import { PostSkeleton } from '@entities/PostSkeleton'
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
   const [searchParams] = useSearchParams()
+  const [showNewSkeletons, setShowNewSkeletons] = useState(false)
 
   useEffect(() => {
     HeaderPage.setCurrentPage(RouterPaths.MAIN)
@@ -23,7 +24,7 @@ const MainPage = observer(() => {
       await posts.getPosts([
         [QueryParams.TAGS, searchParams.get(QueryParams.TAGS)],
       ])
-      setTimeout(() => setSpinner(false), 2500)
+      setSpinner(false)
     })()
   }, [])
 
@@ -35,6 +36,17 @@ const MainPage = observer(() => {
     mainPage.toggleLoginModal()
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'auto'
+  }
+
+  const getNextPosts = () => {
+    setShowNewSkeletons(true)
+    ;(async () => {
+      await posts.getNextPosts([
+        [QueryParams.TAGS, searchParams.get(QueryParams.TAGS)],
+      ])
+
+      setShowNewSkeletons(false)
+    })()
   }
 
   return (
@@ -50,10 +62,23 @@ const MainPage = observer(() => {
         )}
         {!spinner &&
           (posts.posts.length ? (
-            posts.posts.map((post) => <Post key={post.id} {...post} />)
+            posts.posts.map((post, index) => (
+              <Post
+                key={post.id}
+                {...post}
+                {...{ getNextPosts }}
+                isLast={index == posts.posts.length - 1}
+              />
+            ))
           ) : (
             <h1>Посты не найдены</h1>
           ))}
+        {showNewSkeletons && (
+          <>
+            <PostSkeleton />
+            <PostSkeleton />
+          </>
+        )}
       </div>
       {mainPage.showLoginModal && (
         <Modal onclose={closeModal}>

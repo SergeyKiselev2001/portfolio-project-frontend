@@ -6,29 +6,77 @@ import classes from './../ui/Post.module.scss'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { tryRequest, urlConverter } from '@shared/utils'
 import { toast } from 'react-toastify'
+import { QueryParams } from '@app/config/router'
 
 class Post implements IPosts {
   posts = [] as INewPost[]
+  currentPage = 1
+  amountOfPages = 1
+  limit = 2
 
   constructor() {
     makeAutoObservable(this)
   }
 
   async getPosts(query: QueryParamsObj[]) {
-    tryRequest(async () => {
-      const { data } = (await api.get(urlConverter('/posts', query))) as {
-        data: INewPost[]
-      }
-
+    await tryRequest(async () => {
       const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
         id: number
       }[]
+
+      query = [...query, [QueryParams.LIMIT, `${this.limit}`]]
+
+      hiddenPosts?.forEach(({ id }) => {
+        query.push([QueryParams.ID_NE, `${id}`])
+      })
+
+      const result = (await api.get(urlConverter('/posts', query))) as {
+        data: INewPost[]
+        headers: {
+          'x-total-count': number
+        }
+      }
+
+      this.amountOfPages = Math.ceil(
+        result.headers['x-total-count'] / this.limit
+      )
+
+      console.log(this.amountOfPages)
+
+      this.posts = result.data
+    })
+  }
+
+  async getNextPosts(query: QueryParamsObj[]) {
+    if (this.currentPage >= this.amountOfPages) {
+      return
+    }
+
+    this.currentPage += 1
+    await tryRequest(async () => {
+      const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
+        id: number
+      }[]
+
+      query = [
+        ...query,
+        [QueryParams.LIMIT, `${this.limit}`],
+        [QueryParams.PAGE, `${this.currentPage}`],
+      ]
+
+      hiddenPosts?.forEach(({ id }) => {
+        query.push([QueryParams.ID_NE, `${id}`])
+      })
+
+      const { data } = (await api.get(urlConverter('/posts', query))) as {
+        data: INewPost[]
+      }
 
       const newPosts = data.filter(
         (post) => !hiddenPosts?.find((el) => el.id == post.id)
       )
 
-      this.posts = newPosts
+      this.posts = [...this.posts, ...newPosts]
     })
   }
 

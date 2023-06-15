@@ -1,32 +1,10 @@
+import React from 'react'
 import classes from './Post.module.scss'
 import { ContentType } from './schema'
-
-interface IPostContent {
-  title: string
-  id: number
-  content: {
-    type: ContentType
-    text: string
-    image?: {
-      src: string
-      alt: string
-    }
-  }[]
-  poll?: {
-    id: number
-    name: string
-    options: {
-      id: number
-      text: string
-      numberOfVotes: number
-    }[]
-  }
-}
+import { IPostContent } from '../store/schema'
 
 const PostContent = (props: IPostContent) => {
-  const { content, title, id, poll } = props
-
-  console.log(id, content)
+  const { content, title, id } = props
 
   return (
     <div className={classes.PostContent}>
@@ -35,8 +13,8 @@ const PostContent = (props: IPostContent) => {
           {title}
         </a>
       </div>
-      {content.map(({ text, type, image }) => (
-        <>
+      {content.map(({ text, type, image }, id) => (
+        <React.Fragment key={id}>
           {type == ContentType.TEXT && (
             <span className={classes.text}>{text}</span>
           )}
@@ -46,7 +24,7 @@ const PostContent = (props: IPostContent) => {
           {type == ContentType.QUOTE && (
             <span className={classes.quote}>{text}</span>
           )}
-        </>
+        </React.Fragment>
       ))}
     </div>
   )

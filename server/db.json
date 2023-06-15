@@ -115,7 +115,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 46,
+      "likesAmount": 45,
       "commentsAmount": 12,
       "views": 670,
       "content": [
@@ -131,7 +131,7 @@
         "TECHNOLOGIES",
         "HUMOR"
       ],
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 34,
@@ -163,7 +163,7 @@
       "isLiked": true
     },
     {
-      "id": 12,
+      "id": 1562,
       "title": "«Какие дети?! Новый фреймворк вышел!»⁠⁠",
       "timestamp": 1686862365913,
       "author": {
@@ -174,7 +174,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 84,
+      "likesAmount": 85,
       "commentsAmount": 3,
       "views": 2234,
       "content": [
@@ -189,7 +189,7 @@
       "tags": [
         "TECHNOLOGIES"
       ],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 1672,
@@ -203,7 +203,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 5875,
+      "likesAmount": 5874,
       "commentsAmount": 43,
       "views": 28934,
       "content": [
@@ -235,6 +235,68 @@
       ],
       "tags": [
         "TECHNOLOGIES"
+      ],
+      "isLiked": false
+    },
+    {
+      "id": 1590,
+      "title": "Заголовок поста #2⁠⁠⁠⁠",
+      "timestamp": 1686862365913,
+      "author": {
+        "name": "Kiselev_Sergey",
+        "id": 123,
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 85,
+      "commentsAmount": 76,
+      "views": 9230,
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "Kočka žere žradlo"
+        },
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://cs14.pikabu.ru/post_img/2023/06/14/11/1686770544173839263.webp",
+            "alt": ""
+          }
+        }
+      ],
+      "tags": [
+        "ANIMALS"
+      ],
+      "isLiked": false
+    },
+    {
+      "id": 180,
+      "title": "Правила делового общения⁠⁠⁠⁠",
+      "timestamp": 1686862365913,
+      "author": {
+        "name": "Kiselev_Sergey",
+        "id": 123,
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 55,
+      "commentsAmount": 45,
+      "views": 26734,
+      "content": [
+        {
+          "type": "IMAGE",
+          "image": {
+            "src": "https://cs13.pikabu.ru/post_img/2023/06/15/7/168682720619336508.webp",
+            "alt": ""
+          }
+        }
+      ],
+      "tags": [
+        "ANIMALS"
       ],
       "isLiked": true
     }
