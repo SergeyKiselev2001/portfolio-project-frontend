@@ -12,6 +12,7 @@ import { mainPage } from '..'
 import { useSearchParams } from 'react-router-dom'
 import { Controller } from '@widgets/Controller'
 import { PostSkeleton } from '@entities/PostSkeleton'
+import { BlockSideInfo } from '@widgets/BlockSideInfo'
 
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
@@ -52,34 +53,39 @@ const MainPage = observer(() => {
   return (
     <div className={classes.MainPage}>
       <Controller />
+
       <div className={classes.content_wrapper}>
-        {spinner && (
-          <>
-            <PostSkeleton />
-            <PostSkeleton />
-            <PostSkeleton />
-          </>
-        )}
-        {!spinner &&
-          (posts.posts.length ? (
-            posts.posts.map((post, index) => (
-              <Post
-                key={post.id}
-                {...post}
-                {...{ getNextPosts }}
-                isLast={index == posts.posts.length - 1}
-              />
-            ))
-          ) : (
-            <h1>Посты не найдены</h1>
-          ))}
-        {showNewSkeletons && (
-          <>
-            <PostSkeleton />
-            <PostSkeleton />
-          </>
-        )}
+        <div className={classes.posts}>
+          {spinner && (
+            <>
+              <PostSkeleton />
+              <PostSkeleton />
+              <PostSkeleton />
+            </>
+          )}
+          {!spinner &&
+            (posts.posts.length ? (
+              posts.posts.map((post, index) => (
+                <Post
+                  key={post.id}
+                  {...post}
+                  {...{ getNextPosts }}
+                  isLast={index == posts.posts.length - 1}
+                />
+              ))
+            ) : (
+              <h1>Посты не найдены</h1>
+            ))}
+          {showNewSkeletons && (
+            <>
+              <PostSkeleton />
+              <PostSkeleton />
+            </>
+          )}
+        </div>
+        <BlockSideInfo />
       </div>
+
       {mainPage.showLoginModal && (
         <Modal onclose={closeModal}>
           <Login onLogin={onLogin} />
