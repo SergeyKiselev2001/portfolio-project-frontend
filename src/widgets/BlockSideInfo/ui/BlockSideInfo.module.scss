@@ -1,0 +1,24 @@
+.BlockSideInfo {
+  background-color: #fff;
+  position: sticky;
+  width: fit-content;
+  height: fit-content;
+  top: 10px;
+
+  box-sizing: border-box;
+  border: 1px solid rgba(197, 197, 197, 0.19);
+}
+
+.mainInfo {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 20px;
+}
+
+.subscribers {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 20px;
+}
+
+.links {
+  padding: 20px;
+}
