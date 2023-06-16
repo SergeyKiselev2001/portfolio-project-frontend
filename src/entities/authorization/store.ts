@@ -3,6 +3,7 @@ import { IAuthorizationState, IFetchTokenDto } from './schema'
 import { api } from '@app/api'
 import { toast } from 'react-toastify'
 import { StorageKeys } from '../clientStorage'
+import { user } from '@entities/user'
 
 class Authorization implements IAuthorizationState {
   auth = { token: '', refresh_token: '' }
@@ -27,6 +28,8 @@ class Authorization implements IAuthorizationState {
       )
 
       toast.success('Вход выполнен', { icon: '😎' })
+
+      user.setUserInfo({ ...data.userInfo, login })
 
       if (rememberMe) {
         localStorage.setItem(StorageKeys.AUTH, JSON.stringify(data))
