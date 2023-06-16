@@ -1,9 +1,38 @@
 {
+  "notifications": [
+    {
+      "id": 0,
+      "userId": 1,
+      "text": "О нет это же еще обычный текст"
+    }
+  ],
   "users": [
     {
       "id": 1,
       "login": "sergey",
-      "password": "qwerty"
+      "password": "qwerty",
+      "followers": [
+        123
+      ],
+      "subscriptions": {
+        "users": [
+          23
+        ],
+        "tags": [
+          "TECHNOLOGIES"
+        ]
+      },
+      "ignoreList": {
+        "tags": [
+          "HUMOR"
+        ]
+      },
+      "systemRole": "ADMIN",
+      "newNotifications": true,
+      "avatar": {
+        "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+        "alt": ""
+      }
     }
   ],
   "posts": [
@@ -115,7 +144,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 45,
+      "likesAmount": 46,
       "commentsAmount": 12,
       "views": 670,
       "content": [
@@ -131,7 +160,7 @@
         "TECHNOLOGIES",
         "HUMOR"
       ],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 34,
@@ -145,7 +174,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 6,
+      "likesAmount": 5,
       "commentsAmount": 2,
       "views": 34900,
       "content": [
@@ -160,7 +189,7 @@
       "tags": [
         "ANIMALS"
       ],
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 1562,
@@ -174,7 +203,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 85,
+      "likesAmount": 84,
       "commentsAmount": 3,
       "views": 2234,
       "content": [
@@ -189,7 +218,7 @@
       "tags": [
         "TECHNOLOGIES"
       ],
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 1672,
@@ -250,7 +279,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 85,
+      "likesAmount": 86,
       "commentsAmount": 76,
       "views": 9230,
       "content": [
@@ -269,7 +298,7 @@
       "tags": [
         "ANIMALS"
       ],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 180,
