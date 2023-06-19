@@ -48,7 +48,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 85,
+      "likesAmount": 84,
       "commentsAmount": 4,
       "views": 324,
       "content": [
@@ -92,7 +92,7 @@
           }
         ]
       },
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 14,
@@ -106,7 +106,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 0,
+      "likesAmount": 1,
       "commentsAmount": 145,
       "views": 45,
       "content": [
@@ -130,7 +130,7 @@
         "TECHNOLOGIES",
         "ANIMALS"
       ],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 16,

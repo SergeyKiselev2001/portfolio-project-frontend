@@ -47,6 +47,10 @@ class Post implements IPosts {
     })
   }
 
+  resetCurrentPage = () => {
+    this.currentPage = 1
+  }
+
   async getNextPosts(query: QueryParamsObj[]) {
     if (this.currentPage >= this.amountOfPages) {
       return
