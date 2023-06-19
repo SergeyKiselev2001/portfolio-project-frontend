@@ -20,6 +20,7 @@ const MainPage = observer(() => {
   const [showNewSkeletons, setShowNewSkeletons] = useState(false)
 
   useEffect(() => {
+    posts.resetCurrentPage()
     HeaderPage.setCurrentPage(RouterPaths.MAIN)
     ;(async () => {
       await posts.getPosts([

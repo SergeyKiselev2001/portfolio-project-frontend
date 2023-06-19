@@ -8,6 +8,11 @@
 
   box-sizing: border-box;
   border: 1px solid rgba(197, 197, 197, 0.19);
+
+  
+  @media (max-width: $screen-lg) {
+    display: none;
+  }
 }
 
 .mainInfo {
