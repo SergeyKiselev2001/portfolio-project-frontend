@@ -4,19 +4,19 @@ import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { BlockSideSkeleton } from './BlockSideSkeleton'
 import { AsideStatus } from '../types/schema'
 import { observer } from 'mobx-react-lite'
-import { user } from '@entities/user'
+import { me } from '@entities/me'
 
 const BlockSideInfo = observer(() => {
   const [isAuthorized, setIsAuthorized] = useState(AsideStatus.LOADING)
 
   useEffect(() => {
-    user.login && setIsAuthorized(AsideStatus.AUTHORIZED)
-  }, [user.login])
+    me.login && setIsAuthorized(AsideStatus.AUTHORIZED)
+  }, [me.login])
 
   useEffect(() => {
     if (getStorageItem(StorageKeys.AUTH)) {
       ;(async () => {
-        await user.getUserInfoByJWT()
+        await me.getUserInfoByJWT()
         setIsAuthorized(AsideStatus.AUTHORIZED)
       })()
     } else {
@@ -29,7 +29,7 @@ const BlockSideInfo = observer(() => {
       {isAuthorized == AsideStatus.LOADING && <BlockSideSkeleton />}
       {isAuthorized == AsideStatus.AUTHORIZED && (
         <>
-          <div className={classes.mainInfo}>{user.login}</div>
+          <div className={classes.mainInfo}>{me.login}</div>
           <div className={classes.subscribers}>10 Подписчиков</div>
           <div className={classes.links}>ссылки</div>
           <button>Добавить пост</button>

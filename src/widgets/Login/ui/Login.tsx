@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { auth } from '@entities/authorization'
 
 interface ILogin {
-  onLogin: VoidFunction
+  onLogin: (link: string) => void
 }
 
 const Login = observer(({ onLogin }: ILogin) => {
@@ -16,7 +16,7 @@ const Login = observer(({ onLogin }: ILogin) => {
     e.preventDefault()
     const result = await auth.fetchToken({ login, password, rememberMe })
     if (result) {
-      onLogin()
+      onLogin(`/@${login}`)
     }
   }
 
