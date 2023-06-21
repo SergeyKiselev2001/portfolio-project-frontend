@@ -5,6 +5,7 @@ import { RouterPaths } from '@app/config/router'
 import OneLink from './OneLink'
 import { observer } from 'mobx-react-lite'
 import { HeaderPage } from '@shared/hocs/withHeader'
+import { me } from '@entities/me'
 import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@shared/hooks'
 
@@ -15,6 +16,10 @@ const Header = observer(() => {
   const [showMenu, setShowMenu] = useState(false)
 
   const isMediaQuery = useMediaQuery(960)
+
+  useEffect(() => {
+    me.getUserInfoByJWT()
+  }, [])
 
   useEffect(() => {
     if (!isMediaQuery) {
@@ -50,11 +55,29 @@ const Header = observer(() => {
           link={RouterPaths.MAIN}
           text={t(i18KeysHeader.MAIN_PAGE)}
         />
-        <OneLink
-          isActive={currentPage == RouterPaths.PROFILE}
-          link={RouterPaths.PROFILE}
-          text={t(i18KeysHeader.PROFILE)}
-        />
+
+        {me.login ? (
+          <OneLink
+            isActive={currentPage == `@${me.login}`}
+            link={`/@${me.login}`}
+            text={t(i18KeysHeader.PROFILE)}
+          />
+        ) : (
+          <OneLink
+            isActive={currentPage == RouterPaths.LOGIN}
+            link={RouterPaths.LOGIN}
+            text={t(i18KeysHeader.PROFILE)}
+          />
+        )}
+
+        {me.login && (
+          <OneLink
+            isActive={currentPage == RouterPaths.SUBSCRIPTIONS}
+            link={RouterPaths.SUBSCRIPTIONS}
+            text={'SUBSCRIPTIONS'}
+          />
+        )}
+
         <OneLink
           isActive={currentPage == RouterPaths.TAGS}
           link={RouterPaths.TAGS}

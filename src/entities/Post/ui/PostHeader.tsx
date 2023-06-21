@@ -52,7 +52,7 @@ const PostHeader = (props: IPostHeader) => {
         </a>
 
         <div className={classes.info}>
-          <a rel="noreferrer" target="_blank" href={`/user/${name}`}>
+          <a rel="noreferrer" target="_blank" href={`/@${name}`}>
             {name}
           </a>
           <time dateTime="<дата и время>">

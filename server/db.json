@@ -48,7 +48,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 84,
+      "likesAmount": 85,
       "commentsAmount": 4,
       "views": 324,
       "content": [
@@ -92,7 +92,7 @@
           }
         ]
       },
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 14,

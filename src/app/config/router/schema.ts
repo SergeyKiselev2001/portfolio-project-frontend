@@ -2,8 +2,10 @@ export enum RouterPaths {
   ERROR = '*',
   MAIN = '/',
   ABOUT = '/about',
-  PROFILE = '/profile',
+  LOGIN = '/login',
   TAGS = '/tags',
+  USER = ':user',
+  SUBSCRIPTIONS = '/subscriptions',
 }
 
 export enum QueryParams {

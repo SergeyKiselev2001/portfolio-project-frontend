@@ -1,10 +1,12 @@
 import { makeAutoObservable } from 'mobx'
-import { IUserState, SystemRoles } from './schema'
+import { IMeState } from './schema'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { tryRequest } from '@shared/utils'
 import { api } from '@app/api'
+import { SystemRoles } from '@entities/user'
 
-export class User implements IUserState {
+class Me implements IMeState {
+  id = 0
   login = ''
   followers = []
   followersAmount = 0
@@ -12,7 +14,11 @@ export class User implements IUserState {
     users: [],
     tags: [],
   }
+  ignoreList = {
+    tags: [],
+  }
   systemRole = SystemRoles.USER
+  newNotifications = false
   avatar = {
     src: '',
     alt: '',
@@ -22,19 +28,25 @@ export class User implements IUserState {
     makeAutoObservable(this)
   }
 
-  getUserInfo = async (name: string) => {
+  getUserInfoByJWT = async () => {
+    const token = getStorageItem(StorageKeys.AUTH)
+
     await tryRequest(async () => {
-      const data = await api.get(`/user/${name}`)
+      const data = await api.get('/userInfo', {
+        headers: {
+          Authorization: `Bearer ${token.token}`,
+        },
+      })
 
       this.setUserInfo(data.data)
     })
   }
 
-  setUserInfo = (userInfo: IUserState) => {
+  setUserInfo = (userInfo: IMeState) => {
     for (const key in userInfo) {
-      this[key as keyof User] = userInfo[key as keyof IUserState] as never
+      this[key as keyof Me] = userInfo[key as keyof IMeState] as never
     }
   }
 }
 
-export default new User()
+export default new Me()

@@ -55,6 +55,33 @@ server.get('/userInfo', (req, res) => {
   }
 })
 
+server.get('/user/:name', (req, res) => {
+  try {
+    const { name } = req.params
+    const db = JSON.parse(
+      fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8')
+    )
+    const { users = [] } = db
+
+    const userFromBd = users.find((user) => user.login === name)
+
+    if (userFromBd) {
+      const { systemRole, avatar, followers } = userFromBd
+      return res.json({
+        userInfo: {
+          followers,
+          systemRole,
+          avatar,
+        },
+      })
+    } else {
+      return res.status(403).json({ message: 'User not found' })
+    }
+  } catch (e) {
+    return res.status(500).json({ message: e.message })
+  }
+})
+
 // Эндпоинт для логина
 server.post('/login', (req, res) => {
   try {
