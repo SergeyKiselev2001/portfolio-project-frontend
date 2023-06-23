@@ -4,6 +4,7 @@ import { clearLocalStorage, clearSessionStorage } from '@entities/clientStorage'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
 import { useTranslation } from 'react-i18next'
+import { ThemeSwitcher } from '@widgets/ThemeSwitcher'
 
 const Options = () => {
   const [lsCleared, setLsCleared] = useState(false)
@@ -31,7 +32,7 @@ const Options = () => {
       <div className={classes.lang}>
         <LangSwitcher />
       </div>
-
+      <ThemeSwitcher />
       <button
         className={lsCleared ? classes.cleared : ''}
         disabled={lsCleared}

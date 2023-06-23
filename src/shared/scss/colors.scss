@@ -11,3 +11,26 @@ $light-green: #AEF8A2;
 $light-blue: #b5f8ff;
 
 $light-gray: RGB(250, 250, 252);
+
+
+
+
+// component-property-mode
+// bgc - background-color
+// fc - font-color
+// bc - border-color
+
+$header-bgc-light: #fff;
+$header-bgc-dark: #363636;
+$header-fc-light: #000000;
+$header-fc-dark: #ffffff;
+$header-active-fc-light: #01a324;
+$header-active-fc-dark: #59ff7d;
+
+$main-bgc-light: #fafafc;
+$main-bgc-dark: #919191;
+
+$post-bgc-light: #fff;
+$post-bgc-dark: #686868;
+$post-bc-light: #f3f3f3;
+$post-bc-dark: #646464;

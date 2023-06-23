@@ -1,0 +1,75 @@
+.ProfileInfo {
+  background-color: #fff;
+  height: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.header {
+  padding: 20px;
+  display: flex;
+  background: rgb(17, 76, 134);
+  background: linear-gradient(
+    90deg,
+    rgba(17, 76, 134, 1) 0%,
+    rgba(135, 11, 143, 1) 100%
+  );
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #969696;
+  text-indent: -100px;
+  margin-right: 10px;
+  object-fit: cover;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  font-family: $roboto;
+}
+
+.name {
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.status {
+  font-size: 12px;
+}
+
+.content {
+  padding: 20px;
+  padding-bottom: 0px;
+}
+
+.stats {
+  span {
+    font-family: $roboto;
+    display: block;
+
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}
+
+.settings {
+  background-color: #9c9c9c;
+  border-radius: 5px;
+  padding: 10px;
+  span {
+    font-family: $roboto;
+    display: block;
+    font-size: 14px;
+
+    @include not-last-mb(10px);
+  }
+  margin-bottom: 10px;
+}

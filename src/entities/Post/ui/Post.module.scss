@@ -1,6 +1,6 @@
 .Post {
-  background-color: #ffffff;
-  border: 1px solid #f3f3f3;
+  background-color: var(--post-bgc);
+  border: 1px solid var(--post-bc);
   box-sizing: border-box;
   padding: 24px;
   max-width: 650px;

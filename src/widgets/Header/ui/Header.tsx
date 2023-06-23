@@ -6,14 +6,16 @@ import OneLink from './OneLink'
 import { observer } from 'mobx-react-lite'
 import { HeaderPage } from '@shared/hocs/withHeader'
 import { me } from '@entities/me'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { useMediaQuery } from '@shared/hooks'
+import { ThemeContext } from '@app/theme'
 
 const Header = observer(() => {
   const { t } = useTranslation('header')
   const currentPage = HeaderPage.currentPage
 
   const [showMenu, setShowMenu] = useState(false)
+  const theme = useContext(ThemeContext)
 
   const isMediaQuery = useMediaQuery(960)
 
@@ -58,6 +60,9 @@ const Header = observer(() => {
 
         {me.login ? (
           <OneLink
+            reloadDocument={
+              currentPage != `@${me.login}` && currentPage[0] == '@'
+            }
             isActive={currentPage == `@${me.login}`}
             link={`/@${me.login}`}
             text={t(i18KeysHeader.PROFILE)}
@@ -74,7 +79,7 @@ const Header = observer(() => {
           <OneLink
             isActive={currentPage == RouterPaths.SUBSCRIPTIONS}
             link={RouterPaths.SUBSCRIPTIONS}
-            text={'SUBSCRIPTIONS'}
+            text={t(i18KeysHeader.SUBSCRIPTIONS)}
           />
         )}
 

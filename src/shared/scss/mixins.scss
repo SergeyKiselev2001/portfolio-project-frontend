@@ -1,0 +1,5 @@
+@mixin not-last-mb($value) {
+  &:not(:last-child) {
+    margin-bottom: $value;
+  }
+}

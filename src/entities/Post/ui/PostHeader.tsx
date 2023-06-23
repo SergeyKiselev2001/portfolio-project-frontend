@@ -47,14 +47,12 @@ const PostHeader = (props: IPostHeader) => {
   return (
     <div className={classes.PostHeader}>
       <div className={classes.leftHeader}>
-        <a rel="noreferrer" target="_blank" href={`/user/${name}`}>
+        <a href={`@${name}`}>
           <img className={classes.avatar} {...avatar} />
         </a>
 
         <div className={classes.info}>
-          <a rel="noreferrer" target="_blank" href={`/@${name}`}>
-            {name}
-          </a>
+          <a href={`/@${name}`}>{name}</a>
           <time dateTime="<дата и время>">
             {timeConverter(timestamp, TimeFormat.FORMAT_1)}
           </time>

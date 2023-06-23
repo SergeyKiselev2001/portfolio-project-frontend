@@ -3,6 +3,7 @@ import { i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
 export interface IUserState {
   login?: string
   followers?: number[] | []
+  status?: string
   followersAmount?: number
   subscriptions?: {
     users: number[]
