@@ -32,6 +32,14 @@ server.use(async (req, res, next) => {
   next()
 })
 
+const getDB = () => {
+  const db = JSON.parse(
+    fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8')
+  )
+
+  return db
+}
+
 server.get('/userInfo', (req, res) => {
   if (!req.headers.authorization) {
     return res.status(403).json({ message: 'AUTH ERROR' })
@@ -42,10 +50,7 @@ server.get('/userInfo', (req, res) => {
   const userName = jwtPairs.find(({ tokens }) => tokens.token == token).user
 
   if (userName) {
-    const db = JSON.parse(
-      fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8')
-    )
-    const { users = [] } = db
+    const { users = [] } = getDB()
 
     const userFromBd = users.find((user) => user.login === userName)
     const { password, ...rest } = userFromBd
@@ -58,20 +63,18 @@ server.get('/userInfo', (req, res) => {
 server.get('/user/:name', (req, res) => {
   try {
     const { name } = req.params
-    const db = JSON.parse(
-      fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8')
-    )
-    const { users = [] } = db
+    const { users = [] } = getDB()
 
     const userFromBd = users.find((user) => user.login === name)
 
     if (userFromBd) {
-      const { systemRole, avatar, followers } = userFromBd
+      const { systemRole, avatar, followers, status } = userFromBd
       return res.json({
         userInfo: {
           followers,
           systemRole,
           avatar,
+          status,
         },
       })
     } else {
@@ -86,10 +89,7 @@ server.get('/user/:name', (req, res) => {
 server.post('/login', (req, res) => {
   try {
     const { login, password } = req.body
-    const db = JSON.parse(
-      fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8')
-    )
-    const { users = [] } = db
+    const { users = [] } = getDB()
 
     const userFromBd = users.find(
       (user) => user.login === login && user.password === password

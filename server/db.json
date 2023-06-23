@@ -11,6 +11,7 @@
       "id": 1,
       "login": "sergey",
       "password": "qwerty",
+      "status": "Мой крутой статус",
       "followers": [
         123
       ],
@@ -30,7 +31,63 @@
       "systemRole": "ADMIN",
       "newNotifications": true,
       "avatar": {
+        "src": "https://i.pinimg.com/originals/98/d3/b6/98d3b6fddfe08498d65b9939cb09e4fb.jpg",
+        "alt": ""
+      }
+    },
+    {
+      "id": 123,
+      "login": "Kiselev_Sergey",
+      "status": "Опаньки",
+      "password": "qwerty12312",
+      "followers": [
+        123
+      ],
+      "subscriptions": {
+        "users": [
+          23
+        ],
+        "tags": [
+          "TECHNOLOGIES"
+        ]
+      },
+      "ignoreList": {
+        "tags": [
+          "HUMOR"
+        ]
+      },
+      "systemRole": "USER",
+      "newNotifications": true,
+      "avatar": {
         "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+        "alt": ""
+      }
+    },
+    {
+      "id": 23,
+      "login": "Vera_xxx",
+      "status": "Опаньки",
+      "password": "qwerty12312",
+      "followers": [
+        123
+      ],
+      "subscriptions": {
+        "users": [
+          23
+        ],
+        "tags": [
+          "TECHNOLOGIES"
+        ]
+      },
+      "ignoreList": {
+        "tags": [
+          "HUMOR"
+        ]
+      },
+      "systemRole": "USER",
+      "newNotifications": true,
+      "avatar": {
+        "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
         "alt": ""
       }
     }

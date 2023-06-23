@@ -1,12 +1,12 @@
 import { makeAutoObservable } from 'mobx'
 import { IUserState, SystemRoles } from './schema'
-import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { tryRequest } from '@shared/utils'
 import { api } from '@app/api'
 
 export class User implements IUserState {
   login = ''
   followers = []
+  status = ''
   followersAmount = 0
   subscriptions = {
     users: [],
@@ -26,7 +26,8 @@ export class User implements IUserState {
     await tryRequest(async () => {
       const data = await api.get(`/user/${name}`)
 
-      this.setUserInfo(data.data)
+      this.setUserInfo(data.data.userInfo)
+      this.login = name
     })
   }
 

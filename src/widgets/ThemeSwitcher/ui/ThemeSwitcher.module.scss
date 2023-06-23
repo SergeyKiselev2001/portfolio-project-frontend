@@ -1,0 +1,40 @@
+.ThemeSwitcher {
+  button {
+    cursor: pointer;
+    height: 46px;
+    width: 46px;
+    position: relative;
+    border-radius: 50%;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+
+    &::before {
+      content: '';
+      border-radius: 50%;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      background-repeat: no-repeat;
+      background-position: center;
+      transform: translate(-50%, calc(-50%));
+    }
+  }
+}
+
+.LIGHT {
+  &::before {
+    background-color: #000000;
+    background-image: url('./images/moon.svg');
+    background-size: 30px;
+  }
+}
+
+.DARK {
+  &::before {
+    background-color: #ffffff;
+    background-image: url('./images/sun.png');
+    background-size: 40px;
+  }
+}

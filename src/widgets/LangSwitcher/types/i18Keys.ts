@@ -8,6 +8,7 @@ export enum i18KeysHeader {
   ABOUT_PROJECT = 'ABOUT_PROJECT',
   PROFILE = 'PROFILE',
   TAGS = 'TAGS',
+  SUBSCRIPTIONS = 'SUBSCRIPTIONS',
 }
 
 export enum i18Tags {

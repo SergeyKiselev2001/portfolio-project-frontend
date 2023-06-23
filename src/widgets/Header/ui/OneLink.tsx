@@ -6,16 +6,17 @@ interface IOneLink {
   link: RouterPaths | string
   text: string
   isActive: boolean
+  reloadDocument?: boolean
 }
 
 const OneLink = (props: IOneLink) => {
-  const { link, text, isActive } = props
-
-  console.log(link, 'linl')
+  const { link, text, isActive, reloadDocument } = props
 
   return (
     <div className={`${classes.OneLink} ${isActive ? classes.activeLink : ''}`}>
-      <Link to={link}>{text}</Link>
+      <Link reloadDocument={reloadDocument} to={link}>
+        {text}
+      </Link>
       {isActive && <div className={classes.active} />}
     </div>
   )

@@ -1,7 +1,7 @@
 .MainPage {
   min-height: $content-height;
-  background-color: $light-gray;
-  min-width: 540px;
+  background-color: var(--main-bgc);
+  min-width: 340px;
 
   position: relative;
   z-index: $z-index-content;

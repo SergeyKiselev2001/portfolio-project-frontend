@@ -5,6 +5,7 @@ import { HeaderPage, withHeader } from '@shared/hocs/withHeader'
 import { useEffect, useState } from 'react'
 import { user } from '@entities/user'
 import { Spinner } from '@widgets/Spinner'
+import { ProfileInfo } from '@widgets/ProfileInfo'
 
 const ProfilePage = () => {
   const params = useParams() as {
@@ -28,7 +29,16 @@ const ProfilePage = () => {
   return (
     <div className={classes.ProfilePage}>
       {spinner && <Spinner />}
-      {!spinner && <h1>profile</h1>}
+      {!spinner && user.login && (
+        <>
+          <div className={classes.profileInfoWrapper}>
+            <ProfileInfo user={user} />
+          </div>
+          <div className={classes.filters}></div>
+          <div className={classes.posts}></div>
+        </>
+      )}
+      {!spinner && !user.login && <h1>Пользователь не найден!</h1>}
     </div>
   )
 }

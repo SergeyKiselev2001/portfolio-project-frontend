@@ -1,0 +1,10 @@
+.LIGHT {
+    --header-bgc: #{$header-bgc-light};
+    --header-fc: #{$header-fc-light};
+    --header-active-fc: #{$header-active-fc-light};
+
+    --main-bgc: #{$main-bgc-light};
+
+    --post-bgc: #{$post-bgc-light};
+    --post-bc: #{$post-bc-light};
+}

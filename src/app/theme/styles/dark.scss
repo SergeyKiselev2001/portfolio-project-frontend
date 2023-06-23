@@ -1,0 +1,11 @@
+.DARK {
+    --header-bgc: #{$header-bgc-dark};
+    --header-fc: #{$header-fc-dark};
+    --header-active-fc: #{$header-active-fc-dark};
+
+
+    --main-bgc: #{$main-bgc-dark};
+
+    --post-bgc: #{$post-bgc-dark};
+    --post-bc: #{$post-bc-dark};
+}
