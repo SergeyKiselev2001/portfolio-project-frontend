@@ -3,6 +3,7 @@ import classes from './Post.module.scss'
 import dots from './images/dots.png'
 import { posts } from '..'
 import { TimeFormat, timeConverter } from '@shared/utils'
+import { Link } from 'react-router-dom'
 
 interface IPostHeader {
   id: number
@@ -47,12 +48,12 @@ const PostHeader = (props: IPostHeader) => {
   return (
     <div className={classes.PostHeader}>
       <div className={classes.leftHeader}>
-        <a href={`@${name}`}>
+        <Link to={`@${name}`}>
           <img className={classes.avatar} {...avatar} />
-        </a>
+        </Link>
 
         <div className={classes.info}>
-          <a href={`/@${name}`}>{name}</a>
+          <Link to={`/@${name}`}>{name}</Link>
           <time dateTime="<дата и время>">
             {timeConverter(timestamp, TimeFormat.FORMAT_1)}
           </time>

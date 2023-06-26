@@ -9,7 +9,7 @@ interface IProfileInfo {
 }
 
 const ProfileInfo = ({ user }: IProfileInfo) => {
-  const { login, status, avatar } = user
+  const { login, status, avatar, systemRole } = user
 
   const isMe = me.login == login
 
@@ -25,7 +25,7 @@ const ProfileInfo = ({ user }: IProfileInfo) => {
       <div className={classes.content}>
         <div className={classes.stats}>
           <span>Дата регистрации: 20.12.2023</span>
-          <span>Роль: Пользователь</span>
+          <span>Роль: {systemRole}</span>
         </div>
         {isMe && (
           <div className={classes.settings}>

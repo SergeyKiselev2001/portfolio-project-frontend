@@ -163,7 +163,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 1,
+      "likesAmount": 0,
       "commentsAmount": 145,
       "views": 45,
       "content": [
@@ -187,7 +187,7 @@
         "TECHNOLOGIES",
         "ANIMALS"
       ],
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 16,
@@ -201,7 +201,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 46,
+      "likesAmount": 45,
       "commentsAmount": 12,
       "views": 670,
       "content": [
@@ -217,7 +217,7 @@
         "TECHNOLOGIES",
         "HUMOR"
       ],
-      "isLiked": true
+      "isLiked": false
     },
     {
       "id": 34,
@@ -369,7 +369,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 55,
+      "likesAmount": 54,
       "commentsAmount": 45,
       "views": 26734,
       "content": [
@@ -384,7 +384,7 @@
       "tags": [
         "ANIMALS"
       ],
-      "isLiked": true
+      "isLiked": false
     }
   ]
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Theme, ThemeContext } from '../context'
+import { StorageKeys, getStorageItem, setStorageItem } from '@entities/clientStorage'
 
 interface IThemeProvider {
   children: JSX.Element
@@ -9,8 +10,14 @@ const ThemeProvider = ({ children }: IThemeProvider) => {
   const [theme, setTheme] = useState(Theme.DARK)
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev == Theme.DARK ? Theme.LIGHT : Theme.DARK))
+    const newTheme = theme == Theme.DARK ? Theme.LIGHT : Theme.DARK
+    setStorageItem(StorageKeys.THEME, newTheme)
+    setTheme(newTheme)
   }
+
+  useEffect(() => {
+    setTheme(getStorageItem(StorageKeys.THEME))
+  }, [])
 
   useEffect(() => {
     const root = document.getElementById('root')
