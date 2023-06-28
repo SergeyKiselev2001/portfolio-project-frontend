@@ -1,12 +1,13 @@
 import { i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
 
 export interface IUserState {
+  subscribed?: boolean
   login?: string
   followers?: number[] | []
   status?: string
   followersAmount?: number
   subscriptions?: {
-    users: number[]
+    users: string[]
     tags: i18Tags[]
   }
   systemRole?: SystemRoles

@@ -3,17 +3,22 @@ import { useEffect, FC } from 'react'
 import classes from './ErrorPage.module.scss'
 import { Header } from '@widgets/Header'
 
-const ErrorPage: FC = () => {
+interface IErrorPage {
+  showHeader?: boolean
+  message?: string
+}
+
+const ErrorPage: FC<IErrorPage> = ({ showHeader = false, message }) => {
   useEffect(() => {
     HeaderPage.setCurrentPage('')
   })
 
   return (
     <>
-      <Header />
+      {showHeader && <Header />}
+
       <div className={classes.ErrorPage}>
-        <h1>Oops! dgdfgdfgdfg</h1>
-        <p>Sorry, an unexpected error has occurred.</p>
+        <h1 className={classes.message}>{message || 'Страница не найдена'}</h1>
       </div>
     </>
   )

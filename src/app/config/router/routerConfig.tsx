@@ -6,6 +6,7 @@ import { LoginPage } from '@pages/LoginPage'
 import { About } from '@pages/About'
 import { Tags } from '@pages/Tags'
 import { ProfilePage } from '@pages/ProfilePage'
+import { AdminPage } from '@pages/AdminPage'
 import { SubscriptionsPage } from '@pages/SubscriptionsPage'
 
 export const listOfRoutes: Route[] = [
@@ -32,6 +33,10 @@ export const listOfRoutes: Route[] = [
   {
     path: RouterPaths.USER,
     element: <ProfilePage />,
+  },
+  {
+    path: RouterPaths.ADMIN,
+    element: <AdminPage />,
   },
   {
     path: RouterPaths.SUBSCRIPTIONS,

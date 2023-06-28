@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react'
 import { Theme, ThemeContext } from '../context'
-import { StorageKeys, getStorageItem, setStorageItem } from '@entities/clientStorage'
+import {
+  StorageKeys,
+  getStorageItem,
+  setStorageItem,
+} from '@entities/clientStorage'
 
 interface IThemeProvider {
   children: JSX.Element
@@ -16,7 +20,7 @@ const ThemeProvider = ({ children }: IThemeProvider) => {
   }
 
   useEffect(() => {
-    setTheme(getStorageItem(StorageKeys.THEME))
+    setTheme(getStorageItem(StorageKeys.THEME) || Theme.LIGHT)
   }, [])
 
   useEffect(() => {

@@ -1,5 +1,5 @@
 .ProfileInfo {
-  background-color: #fff;
+  background-color: var(--bgc-secondary);
   height: 100%;
   border-radius: 5px;
   overflow: hidden;
@@ -8,6 +8,8 @@
 .header {
   padding: 20px;
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   background: rgb(17, 76, 134);
   background: linear-gradient(
     90deg,
@@ -20,13 +22,12 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background-color: #969696;
   text-indent: -100px;
-  margin-right: 10px;
   object-fit: cover;
 }
 
 .texts {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,9 +44,11 @@
 
 .status {
   font-size: 12px;
+  line-height: 16px;
 }
 
 .content {
+  color: var(--fc);
   padding: 20px;
   padding-bottom: 0px;
 }
@@ -72,4 +75,27 @@
     @include not-last-mb(10px);
   }
   margin-bottom: 10px;
+}
+
+.subscribe {
+  display: flex;
+  align-items: center;
+
+  button {
+    background-color: #220202;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    padding: 10px 15px;
+    line-height: normal;
+    height: fit-content;
+    display: block;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+  }
+
+  .active {
+    background-color: rgb(255, 255, 255);
+    color: #220202;
+  }
 }

@@ -25,7 +25,12 @@ const BlockSideInfo = observer(() => {
   }, [])
 
   return (
-    <div className={classes.BlockSideInfo}>
+    <div
+      className={classes.BlockSideInfo}
+      {...(isAuthorized == AsideStatus.LOADING && {
+        style: { border: 'none' },
+      })}
+    >
       {isAuthorized == AsideStatus.LOADING && <BlockSideSkeleton />}
       {isAuthorized == AsideStatus.AUTHORIZED && (
         <>

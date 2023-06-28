@@ -4,6 +4,7 @@ export enum RouterPaths {
   ABOUT = '/about',
   LOGIN = '/login',
   TAGS = '/tags',
+  ADMIN = '/admin',
   USER = ':user',
   SUBSCRIPTIONS = '/subscriptions',
 }

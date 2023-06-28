@@ -1,4 +1,22 @@
 {
   "CLOSE": "Close",
-  "REFRESH_PAGE": "Refresh the page"
+  "REFRESH_PAGE": "Refresh the page",
+  "PAGE_NOT_FOUND": "Page not found",
+  "USER_NOT_FOUND": "User not found",
+  "ADMIN": "Administrator",
+  "USER": "User",
+  "WAIT": "Wait",
+  "SUBSCRIBE": "Subscribe",
+  "UNSUBSCRIBE": "Unsubscribe",
+
+  "TAGS": "Tags",
+  "SEARCH": "Search",
+  "FIND": "Find",
+  "MY_SUBSCRIPTIONS": "My subscriptions",
+  "BLACK_LIST": "Black list",
+  "ALL": "All",
+
+  "BLOCK": "Block",
+  "UNBLOCK": "Unblock",
+  "POSTS": "Posts"
 }

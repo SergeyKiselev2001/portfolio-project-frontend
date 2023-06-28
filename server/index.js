@@ -14,7 +14,7 @@ server.use(jsonServer.bodyParser)
 // Имитация выданных сервером токенов
 const jwtPairs = [
   {
-    user: 'sergey',
+    user: 'Sergey',
     tokens: {
       token:
         'eyJpdiI6InJUY2hXX050TDIzQm0tczUiLCJ0YWciOiJ5OVVfZUgxY1NnSjh3BJR0w4b0lRIiwidHlwIjoiSldUIiwiY3R5IjoiSldUIiwiYWxnIjoiQTI1NkdDTUtXIiwiZW5jIjoiQTI1NkdDTSIsImlzcyI6Imh0dHBzOi8vc3RhZ2UuYXBpLm15aXRjYXJlZXIuaW8vIiwiYXVkIjoiTXlJVGNhcmVlciIsImNyaXQiOlsiaXNzIiwiYXVkIiwiYWxnIiwiZW5jIl0sImtpZCI6IkNQTmlRZkZ5dC1YcWthTkVkeWZiOTVYYkNRaVFnTTVneEY1bldOTzdNOUkifQ.NkmQQq1P2JjcHcpumvGHzflejpOkaSpIXy6tWYpdEhg.SpFvK7A2sw50dAPv.FhHoAeeWxTejTkIONLQSjLSuQp1vMCljZJidyW68fdeOJCrVr3is1Gq66rQ28PSuZEJuMg401Lp8RWbHf_VMcSK2oWLeh2_b2-hFHgnv4ltfPGq5rbz4uYBFcIJu25uVprDYaoAV6gL60uCP_x7KgSV7v6ECKrcbpE6YT4rlxnJ2sNKFIT1F6tRTwymfZMaFp3Xy7TNSmFyVbQP_eGPmm4BJRDEqUV4VmUHujfDn_9AOb5UxM3RC-YGqFBV2FxiaXB5ydx7bqGlKQJf8H-Dxl6rcFU-KNKnWsrG_RokqS73NcKrOUhTrs165LJ1UOkIa_nw1Ilbg6xFmw-yeydhVtNI9qI9ozoyXRDjqtD3GCu97nUEH5l83sHamqAj0Kn6rk8uKQDKbYBnASektwwkZEQoie3ZNieEZtVdy9NatGkbdVvVDoAba04TG-CHBpq1oqDbTvcSD2KbG8fk15cuh724jcO7nGB91G1zhqIRjpAW7zYgOoUpxiKNXK0xQPFvY3HvD4yDCPC7aU-FhaHHs_qaocMdmkCyNSJEUTnz2gDBlqpXYHIvJ0jVtAffjAcXmzmKmk3weCUH2VrGoPgHWAIS0wHtqbYPbqOKbg8Uf_oEmmcgM4hoV4elM0sYZwl2T65-2bg_wT7oSBJYW06R-0TtNcImhZWXo3ZafNO4UCy9LuEep6vKTTxZwDzICjOGoje0T6STSWMg72xA-b_QB7KK1uBVOxj0LW8x7i0ATU4BmTWhLI5_9lOPE6nfs66J8_axtrgot.kQblgfZ18ikKBqdBUuSG1g',
@@ -30,8 +30,18 @@ const jwtPairs = [
       refresh_token:
         '542d36e03203eb93116a8cf6ea671eaa4fb35ca7b8f45fb55de1cdf989edec821fe5e36347957e7b711a7543495cb549f6d9a5bc396a0987be299cfb0a33ec5',
     },
-  }
+  },
 ]
+
+const checkAuth = (req, res) => {
+  if (!req.headers.authorization) {
+    return res.status(403).json({ message: 'AUTH ERROR' })
+  }
+}
+
+const clearToken = (req) => {
+  return req.headers.authorization.replace('Bearer ', '')
+}
 
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 server.use(async (req, res, next) => {
@@ -40,6 +50,15 @@ server.use(async (req, res, next) => {
   })
   next()
 })
+
+// server.use((req, res, next) => {
+//   console.log(req.url)
+//   if (req.method == 'POST' && req.url.includes('/users/')) {
+//     checkAuth(req, res)
+//   }
+
+//   next()
+// })
 
 const getDB = () => {
   const db = JSON.parse(
@@ -50,11 +69,8 @@ const getDB = () => {
 }
 
 server.get('/userInfo', (req, res) => {
-  if (!req.headers.authorization) {
-    return res.status(403).json({ message: 'AUTH ERROR' })
-  }
-
-  const token = req.headers.authorization.replace('Bearer ', '')
+  checkAuth(req, res)
+  const token = clearToken(req)
 
   const userName = jwtPairs.find(({ tokens }) => tokens.token == token).user
 
@@ -69,6 +85,71 @@ server.get('/userInfo', (req, res) => {
   }
 })
 
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body.subscribeOn) {
+    next()
+  }
+
+  const { users = [] } = getDB()
+
+  console.log(req.params, users)
+
+  const userFromBd = users.find((user) => user.id == req.params.id)
+
+  req.body = {
+    ...userFromBd,
+    subscriptions: {
+      ...userFromBd.subscriptions,
+      users: [...userFromBd.subscriptions.users, req.body.subscribeOn],
+    },
+  }
+
+  req.method = 'PUT'
+  next()
+})
+
+server.post('/user/:name/subscribe', (req, res, next) => {
+  try {
+    const { users = [] } = getDB()
+    const { name } = req.params
+
+    checkAuth(req, res)
+    const token = clearToken(req)
+
+    const userName = jwtPairs.find(({ tokens }) => tokens.token == token).user
+
+    const userFromBd = users.find((user) => user.login === userName)
+
+    if (userFromBd) {
+      //subscriptions.users.push(name)
+
+      const newData = {
+        ...getDB(),
+      }
+
+      console.log('DA ONCE', userName, name)
+
+      newData.users
+        .find((el) => el.login == userName)
+        .subscriptions.users.push(name)
+
+      //console.log('data', newData.users.find(el=> el.login == userName))
+
+      fs.writeFileSync(
+        path.resolve(__dirname, 'db.json'),
+        JSON.stringify(newData)
+      )
+
+      return res.status(200)
+    } else {
+      return res.status(403).json({ message: 'User not found' })
+    }
+  } catch (e) {
+    return res.status(500).json({ message: e.message })
+  }
+})
+
 server.get('/user/:name', (req, res) => {
   try {
     const { name } = req.params
@@ -77,13 +158,15 @@ server.get('/user/:name', (req, res) => {
     const userFromBd = users.find((user) => user.login === name)
 
     if (userFromBd) {
-      const { systemRole, avatar, followers, status } = userFromBd
+      const { systemRole, avatar, followers, status, subscriptions } =
+        userFromBd
       return res.json({
         userInfo: {
           followers,
           systemRole,
           avatar,
           status,
+          subscriptions,
         },
       })
     } else {
@@ -99,7 +182,6 @@ server.post('/login', (req, res) => {
   try {
     const { login, password } = req.body
     const { users = [] } = getDB()
-
     const userFromBd = users.find(
       (user) => user.login === login && user.password === password
     )

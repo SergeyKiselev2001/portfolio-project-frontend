@@ -9,6 +9,8 @@
   position: relative;
   z-index: $z-index-header;
   min-width: 340px;
+  border-bottom: var(--header-bb);
+  box-sizing: border-box;
 
   @media (max-width: $screen-lg) {
     position: sticky;
