@@ -6,16 +6,15 @@ import OneLink from './OneLink'
 import { observer } from 'mobx-react-lite'
 import { HeaderPage } from '@shared/hocs/withHeader'
 import { me } from '@entities/me'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@shared/hooks'
-import { ThemeContext } from '@app/theme'
+import { SystemRoles } from '@entities/user'
 
 const Header = observer(() => {
   const { t } = useTranslation('header')
   const currentPage = HeaderPage.currentPage
 
   const [showMenu, setShowMenu] = useState(false)
-  const theme = useContext(ThemeContext)
 
   const isMediaQuery = useMediaQuery(960)
 
@@ -93,6 +92,14 @@ const Header = observer(() => {
           link={RouterPaths.ABOUT}
           text={t(i18KeysHeader.ABOUT_PROJECT)}
         />
+
+        {me.systemRole == SystemRoles.ADMIN && (
+          <OneLink
+            isActive={currentPage == RouterPaths.ADMIN}
+            link={RouterPaths.ADMIN}
+            text={t(i18KeysHeader.ADMIN)}
+          />
+        )}
       </div>
     </header>
   )

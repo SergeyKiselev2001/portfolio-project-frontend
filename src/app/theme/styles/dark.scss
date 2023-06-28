@@ -1,11 +1,26 @@
 .DARK {
-    --header-bgc: #{$header-bgc-dark};
-    --header-fc: #{$header-fc-dark};
-    --header-active-fc: #{$header-active-fc-dark};
+  --header-bgc: #{$header-bgc-dark};
+  --header-fc: #{$header-fc-dark};
+  --header-active-fc: #{$header-active-fc-dark};
+  --header-bb: 1px solid rgb(182, 182, 182);
+
+  --main-bgc: #{$main-bgc-dark};
+
+  --post-bgc: #{$post-bgc-dark};
+  --post-bc: #{$post-bc-dark};
+  --post-fc: #{$post-fc-dark};
+
+  --tags-bgc: #{$tags-bgc-dark};
+  --tags-fc: #{$tags-fc-dark};
+
+  --fc: #{$fc-dark};
+
+  --bgc-main: #{$bgc-common-dark};
+
+  --bgc-secondary: #{$bgc-secondary-dark};
+
+  --bgc-skeletons : #{$bgc-skeletons-dark};
+  --bgc-skeletons-ray : #{$bgc-skeletons-ray-dark};
 
 
-    --main-bgc: #{$main-bgc-dark};
-
-    --post-bgc: #{$post-bgc-dark};
-    --post-bc: #{$post-bc-dark};
 }

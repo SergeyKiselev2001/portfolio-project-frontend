@@ -1,6 +1,29 @@
+export enum i18Chunks {
+  TRANSLATION = 'translation',
+  HEADER = 'header',
+  PROFILE = 'profile',
+  TAGS = 'tags',
+}
+
 export enum i18Keys {
   CLOSE = 'CLOSE',
   REFRESH_PAGE = 'REFRESH_PAGE',
+  PAGE_NOT_FOUND = 'PAGE_NOT_FOUND',
+  USER_NOT_FOUND = 'USER_NOT_FOUND',
+  ADMIN = 'ADMIN',
+  USER = 'USER',
+  WAIT = 'WAIT',
+  SUBSCRIBE = 'SUBSCRIBE',
+  UNSUBSCRIBE = 'UNSUBSCRIBE',
+  TAGS = 'TAGS',
+  SEARCH = 'SEARCH',
+  FIND = 'FIND',
+  MY_SUBSCRIPTIONS = 'MY_SUBSCRIPTIONS',
+  BLACK_LIST = 'BLACK_LIST',
+  ALL = 'ALL',
+  BLOCK = 'BLOCK',
+  UNBLOCK = 'UNBLOCK',
+  POSTS = 'POSTS',
 }
 
 export enum i18KeysHeader {
@@ -9,10 +32,16 @@ export enum i18KeysHeader {
   PROFILE = 'PROFILE',
   TAGS = 'TAGS',
   SUBSCRIPTIONS = 'SUBSCRIPTIONS',
+  ADMIN = 'ADMIN',
 }
 
 export enum i18Tags {
   ANIMALS = 'ANIMALS',
   HUMOR = 'HUMOR',
   TECHNOLOGIES = 'TECHNOLOGIES',
+}
+
+export enum i18KeysProfile {
+  REGISTRATION_DATE = 'REGISTRATION_DATE',
+  ROLE = 'ROLE',
 }

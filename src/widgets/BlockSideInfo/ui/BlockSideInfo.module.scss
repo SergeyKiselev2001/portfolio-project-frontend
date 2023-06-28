@@ -30,8 +30,8 @@
 }
 
 .BlockSideSkeleton {
-  background-color: #e7e7e7;
-  box-sizing: border-box;
+  background-color: var(--bgc-skeletons);
+  border: none;
   border-radius: 3px;
   width: 220px;
   height: 300px;
@@ -47,12 +47,7 @@
     animation-duration: 0.8s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in;
-    background: linear-gradient(
-      90deg,
-      rgba(2, 0, 36, 0) 0%,
-      rgb(255, 255, 255) 50%,
-      rgba(0, 212, 255, 0) 100%
-    );
+    background: var(--bgc-skeletons-ray);
   }
 }
 

@@ -1,17 +1,26 @@
 import { HeaderPage } from '@shared/hocs/withHeader'
-import { useEffect } from 'react'
+import { useEffect, FC } from 'react'
 import classes from './ErrorPage.module.scss'
+import { Header } from '@widgets/Header'
 
-const ErrorPage = () => {
+interface IErrorPage {
+  showHeader?: boolean
+  message?: string
+}
+
+const ErrorPage: FC<IErrorPage> = ({ showHeader = false, message }) => {
   useEffect(() => {
     HeaderPage.setCurrentPage('')
   })
 
   return (
-    <div className={classes.ErrorPage}>
-      <h1>Oops! dgdfgdfgdfg</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-    </div>
+    <>
+      {showHeader && <Header />}
+
+      <div className={classes.ErrorPage}>
+        <h1 className={classes.message}>{message || 'Страница не найдена'}</h1>
+      </div>
+    </>
   )
 }
 

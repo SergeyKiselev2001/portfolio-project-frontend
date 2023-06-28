@@ -1,6 +1,7 @@
 export enum StorageKeys {
   AUTH = 'AUTH',
   HIDDEN_POSTS = 'HIDDEN_POSTS',
+  THEME = 'THEME',
 }
 
 export const getStorageItem = (key: StorageKeys) => {
@@ -8,6 +9,24 @@ export const getStorageItem = (key: StorageKeys) => {
   const local = JSON.parse(`${localStorage.getItem(key)}`)
 
   return session || local
+}
+
+export const setStorageItem = (
+  key: StorageKeys,
+  value: unknown,
+  storage?: 'local' | 'session'
+) => {
+  const setLocal = () => localStorage.setItem(key, JSON.stringify(value))
+  const setSession = () => sessionStorage.setItem(key, JSON.stringify(value))
+
+  if (storage == 'local') {
+    setLocal()
+  } else if (storage == 'session') {
+    setSession()
+  } else {
+    setLocal()
+    setSession()
+  }
 }
 
 export const clearLocalStorage = () => {

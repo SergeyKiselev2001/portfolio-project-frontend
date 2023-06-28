@@ -1,5 +1,5 @@
 .Post {
-  background-color: var(--post-bgc);
+  background-color: var(--bgc-secondary);
   border: 1px solid var(--post-bc);
   box-sizing: border-box;
   padding: 24px;
@@ -8,6 +8,7 @@
   margin-bottom: 10px;
   border-radius: 3px;
   min-width: 200px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 
   a {
     display: inline-block;
@@ -47,7 +48,7 @@
   }
 
   a {
-    color: black;
+    color: var(--fc);
     font-size: 14px;
   }
 
@@ -69,7 +70,7 @@
 
     a {
       font-family: $roboto;
-      color: #212121;
+      color: var(--fc);
       font-weight: 400;
       font-size: 20px;
       margin-bottom: 0px;
@@ -80,6 +81,7 @@
     display: block;
     line-height: 24px;
     margin-bottom: 12px;
+    color: var(--fc);
   }
 
   .quote {
@@ -113,8 +115,8 @@
     margin-bottom: 12px;
     object-fit: cover;
     height: auto;
-    width: calc(100% + 48px);
-    transform: translateX(-24px);
+    width: calc(100% + 50px);
+    transform: translateX(-25px);
   }
 }
 
