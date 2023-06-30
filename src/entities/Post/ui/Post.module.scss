@@ -65,9 +65,11 @@
   font-family: $roboto;
   font-size: 14px;
 
-  .title {
-    margin-bottom: 12px;
+  * {
+    margin-bottom: 10px;
+  }
 
+  .title {
     a {
       font-family: $roboto;
       color: var(--fc);
@@ -80,14 +82,12 @@
   .text {
     display: block;
     line-height: 24px;
-    margin-bottom: 12px;
     color: var(--fc);
   }
 
   .quote {
     display: block;
     line-height: 24px;
-    margin-bottom: 12px;
     padding: 10px;
     background-color: #f9f9fb;
     padding-left: 28px;
@@ -112,7 +112,6 @@
   }
 
   img {
-    margin-bottom: 12px;
     object-fit: cover;
     height: auto;
     width: calc(100% + 50px);
@@ -156,7 +155,7 @@
 
 .slow_disappearing {
   animation-name: disappear;
-  animation-duration: .3s;
+  animation-duration: 0.3s;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
   overflow: hidden;
@@ -171,9 +170,9 @@
     padding: 24px;
     display: none;
     margin-bottom: 0px;
-    border: 1px solid #f3f3f3
+    border: 1px solid #f3f3f3;
   }
-  100%{
+  100% {
     opacity: 0;
     padding: 0px;
     height: 0px;

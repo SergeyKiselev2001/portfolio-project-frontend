@@ -24,6 +24,8 @@ export enum i18Keys {
   BLOCK = 'BLOCK',
   UNBLOCK = 'UNBLOCK',
   POSTS = 'POSTS',
+  LOG_IN = 'LOG_IN',
+  NOT_FOUND = 'NOT_FOUND',
 }
 
 export enum i18KeysHeader {

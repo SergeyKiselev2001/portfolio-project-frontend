@@ -5,28 +5,36 @@ import {
 } from '@widgets/LangSwitcher/types/i18Keys'
 import classes from './Tags.module.scss'
 import { useTranslation } from 'react-i18next'
-import { CLIENT } from '@shared/constants'
+import { CLIENT, DEFAULT_NS } from '@shared/constants'
 import linkImg from './images/link.png'
 import { useState } from 'react'
 import { wordForm } from '@shared/utils'
+import { me } from '@entities/me'
+import tagsPage from './../store/index'
+import { observer } from 'mobx-react-lite'
 
 interface IOneTag {
   postsAmount: number
+  isSubscribed: boolean
+  isBlocked: boolean
   type: i18Tags
 }
 
-const OneTag = (props: IOneTag) => {
+const OneTag = observer((props: IOneTag) => {
   const { postsAmount, type } = props
-  const { t, i18n } = useTranslation('tags')
-  const [isSubscribed, setIsSubscribed] = useState(false)
-  const [isBlocked, setIsBlocked] = useState(false)
+  const { t, i18n } = useTranslation(i18Chunks.TAGS)
+
+  const [isSubscribed, setIsSubscribed] = useState(props.isSubscribed)
+  const [isBlocked, setIsBlocked] = useState(props.isBlocked)
 
   const toggleSubscription = () => {
     setIsSubscribed((prev) => !prev)
+    tagsPage.toggleSubscription(type)
   }
 
   const toggleBlock = () => {
     setIsBlocked((prev) => !prev)
+    tagsPage.toggleBlock(type)
   }
 
   return (
@@ -38,7 +46,7 @@ const OneTag = (props: IOneTag) => {
             {postsAmount}{' '}
             {i18n.language == 'ru'
               ? wordForm('Пост', 'Поста', 'Постов', postsAmount)
-              : t(i18Keys.POSTS, { ns: i18Chunks.TRANSLATION })}
+              : t(i18Keys.POSTS, DEFAULT_NS)}
           </span>
         </div>
 
@@ -50,20 +58,28 @@ const OneTag = (props: IOneTag) => {
           <img src={linkImg} alt="link" />
         </a>
       </div>
-      <div className={classes.bottom}>
-        <button onClick={toggleSubscription}>
-          {isSubscribed
-            ? t(i18Keys.UNSUBSCRIBE, { ns: i18Chunks.TRANSLATION })
-            : t(i18Keys.SUBSCRIBE, { ns: i18Chunks.TRANSLATION })}
-        </button>
-        <button onClick={toggleBlock}>
-          {isBlocked
-            ? t(i18Keys.UNBLOCK, { ns: i18Chunks.TRANSLATION })
-            : t(i18Keys.BLOCK, { ns: i18Chunks.TRANSLATION })}
-        </button>
-      </div>
+      {me.login && (
+        <div className={classes.bottom}>
+          <button
+            onClick={toggleSubscription}
+            className={isSubscribed ? classes.active : ''}
+          >
+            {isSubscribed
+              ? t(i18Keys.UNSUBSCRIBE, DEFAULT_NS)
+              : t(i18Keys.SUBSCRIBE, DEFAULT_NS)}
+          </button>
+          <button
+            onClick={toggleBlock}
+            className={isBlocked ? classes.active : ''}
+          >
+            {isBlocked
+              ? t(i18Keys.UNBLOCK, DEFAULT_NS)
+              : t(i18Keys.BLOCK, DEFAULT_NS)}
+          </button>
+        </div>
+      )}
     </div>
   )
-}
+})
 
 export default OneTag

@@ -51,21 +51,17 @@ server.use(async (req, res, next) => {
   next()
 })
 
-// server.use((req, res, next) => {
-//   console.log(req.url)
-//   if (req.method == 'POST' && req.url.includes('/users/')) {
-//     checkAuth(req, res)
-//   }
-
-//   next()
-// })
-
 const getDB = () => {
   const db = JSON.parse(
     fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8')
   )
 
   return db
+}
+
+const getUserNameByHeaderJWT = (req) => {
+  const token = clearToken(req)
+  return jwtPairs.find((el) => el.tokens.token == token).user
 }
 
 server.get('/userInfo', (req, res) => {
@@ -85,15 +81,15 @@ server.get('/userInfo', (req, res) => {
   }
 })
 
+// PROFILE SUBSCRIPTION
 server.post('/users/:id', function (req, res, next) {
   checkAuth(req, res)
   if (!req.body.subscribeOn) {
     next()
+    return
   }
 
   const { users = [] } = getDB()
-
-  console.log(req.params, users)
 
   const userFromBd = users.find((user) => user.id == req.params.id)
 
@@ -106,6 +102,98 @@ server.post('/users/:id', function (req, res, next) {
   }
 
   req.method = 'PUT'
+  next()
+})
+
+// TAGS
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body.tagBlocks && !req.body.tagSubscription) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+
+  const userFromBd = users.find(
+    (user) => user.login == getUserNameByHeaderJWT(req)
+  )
+
+  if (!userFromBd) {
+    next()
+    return
+  }
+
+  if (req.body.tagSubscription) {
+    req.method = 'PUT'
+    if (req.body.tagSubscription.newValue) {
+      const newSubs = [
+        ...userFromBd.subscriptions.tags,
+        req.body.tagSubscription.type,
+      ]
+      const uniqSubs = [...new Set(newSubs)]
+      const newBody = {
+        ...userFromBd,
+        subscriptions: {
+          ...userFromBd.subscriptions,
+          tags: uniqSubs,
+        },
+      }
+
+      req.body = newBody
+    } else {
+      const newSubs = [
+        ...userFromBd.subscriptions.tags.filter(
+          (tag) => tag != req.body.tagSubscription.type
+        ),
+      ]
+
+      const newBody = {
+        ...userFromBd,
+        subscriptions: {
+          ...userFromBd.subscriptions,
+          tags: newSubs,
+        },
+      }
+
+      req.body = newBody
+    }
+  }
+
+  if (req.body.tagBlocks) {
+    req.method = 'PUT'
+    if (req.body.tagBlocks.newValue) {
+      const newTags = [...userFromBd.ignoreList.tags, req.body.tagBlocks.type]
+      const uniqTags = [...new Set(newTags)]
+
+      const newBody = {
+        ...userFromBd,
+
+        ignoreList: {
+          ...userFromBd.ignoreList,
+          tags: uniqTags,
+        },
+      }
+
+      req.body = newBody
+    } else {
+      const newTags = [
+        ...userFromBd.ignoreList.tags.filter(
+          (tag) => tag != req.body.tagBlocks.type
+        ),
+      ]
+
+      const newBody = {
+        ...userFromBd,
+        ignoreList: {
+          ...userFromBd.ignoreList,
+          tags: newTags,
+        },
+      }
+
+      req.body = newBody
+    }
+  }
   next()
 })
 
@@ -122,19 +210,13 @@ server.post('/user/:name/subscribe', (req, res, next) => {
     const userFromBd = users.find((user) => user.login === userName)
 
     if (userFromBd) {
-      //subscriptions.users.push(name)
-
       const newData = {
         ...getDB(),
       }
 
-      console.log('DA ONCE', userName, name)
-
       newData.users
         .find((el) => el.login == userName)
         .subscriptions.users.push(name)
-
-      //console.log('data', newData.users.find(el=> el.login == userName))
 
       fs.writeFileSync(
         path.resolve(__dirname, 'db.json'),
@@ -219,16 +301,6 @@ server.post('/report', (req, res) => {
     return res.status(500).json({ message: e.message })
   }
 })
-
-// проверяем, авторизован ли пользователь
-// eslint-disable-next-line
-// server.use((req, res, next) => {
-//   if (!req.headers.authorization) {
-//     return res.status(403).json({ message: 'AUTH ERROR' })
-//   }
-
-//   next()
-// })
 
 server.use(router)
 

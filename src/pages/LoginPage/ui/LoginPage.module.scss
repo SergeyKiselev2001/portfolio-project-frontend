@@ -1,5 +1,9 @@
 .LoginPage {
-    height: $content-height;
-    background-color: rgb(49, 49, 49);
-    color: white;
+  height: $content-height;
+  background-color: var(--bgc-main);
+  color: white;
+}
+
+.formWrapper {
+    box-shadow: 0px 0px 10px 10px black;
 }

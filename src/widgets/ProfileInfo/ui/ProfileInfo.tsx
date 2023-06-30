@@ -12,6 +12,7 @@ import {
   i18Keys,
   i18KeysProfile,
 } from '@widgets/LangSwitcher/types/i18Keys'
+import { DEFAULT_NS } from '@shared/constants'
 
 interface IProfileInfo {
   user: IUserState
@@ -49,8 +50,8 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
               onClick={toggleSubscribe}
             >
               {subscribed
-                ? t(i18Keys.UNSUBSCRIBE, { ns: i18Chunks.TRANSLATION })
-                : t(i18Keys.SUBSCRIBE, { ns: i18Chunks.TRANSLATION })}
+                ? t(i18Keys.UNSUBSCRIBE, DEFAULT_NS)
+                : t(i18Keys.SUBSCRIBE, DEFAULT_NS)}
             </button>
           </div>
         )}
@@ -60,9 +61,7 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
           <span>{t(i18KeysProfile.REGISTRATION_DATE)}: 20.12.2023</span>
           <span>
             {t(i18KeysProfile.ROLE)}:{' '}
-            {t(systemRole as keyof typeof i18Keys, {
-              ns: i18Chunks.TRANSLATION,
-            })}
+            {t(systemRole as keyof typeof i18Keys, DEFAULT_NS)}
           </span>
         </div>
         {isMe && (
@@ -71,9 +70,6 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
               <LangSwitcher />
               <ThemeSwitcher />
             </div>
-
-            <span>Дата регистрации: 20.12.2023</span>
-            <span>Роль: Пользователь</span>
           </div>
         )}
       </div>

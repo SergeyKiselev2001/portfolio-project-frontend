@@ -4,8 +4,7 @@ export const wordForm = (
   variant3: string,
   length: number
 ) => {
-  /// example
-  /// variant1 = объект, variant2 = объекта, variant3 = объектов
+  /// variant1 = "объект", variant2 = "объекта", variant3 = "объектов"
   /// length = 1000 -> объектов
   /// length = 142 -> объекта
   /// length = 311 -> объектов

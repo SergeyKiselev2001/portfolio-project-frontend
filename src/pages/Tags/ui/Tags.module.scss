@@ -10,7 +10,7 @@
   margin: 0 auto;
   max-width: 650px;
 }
- 
+
 .title {
   font-family: $roboto;
   font-size: 24px;
@@ -34,9 +34,12 @@
     cursor: pointer;
   }
 
+  & > * {
+    @include not-last-mb(10px);
+  }
+
   .search_form {
     display: flex;
-    margin-bottom: 10px;
 
     .loupe {
       position: relative;
@@ -94,7 +97,6 @@
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
 
   .ANIMALS {
     background: linear-gradient(98.13deg, #2e7a5a 20.2%, #63c418 101.49%);
@@ -159,6 +161,11 @@
     display: flex;
     justify-content: space-between;
 
+    .active {
+      background-color: #000000 !important;
+      color: white !important;
+    }
+
     button {
       font-family: $roboto;
       border: none;
@@ -174,4 +181,44 @@
       }
     }
   }
+}
+
+.logged {
+  height: 146px !important;
+}
+
+.OneTagSkeleton {
+  position: relative;
+  height: 90px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  background-color: var(--bgc-skeletons);
+}
+
+.light {
+  height: 100%;
+  width: 300px;
+  position: absolute;
+  animation-name: light;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  background: var(--bgc-skeletons-ray);
+}
+
+@keyframes light {
+  0% {
+    left: -300px;
+  }
+
+  100% {
+    left: 700px;
+  }
+}
+
+
+.notFound {
+  color: var(--fc);
+  font-family: $roboto;
 }

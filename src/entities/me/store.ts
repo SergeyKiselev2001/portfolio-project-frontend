@@ -1,7 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { IMeState } from './schema'
-import { StorageKeys, getStorageItem } from '@entities/clientStorage'
-import { tryRequest } from '@shared/utils'
+import { getApiHeader, tryRequest } from '@shared/utils'
 import { api } from '@app/api'
 import { SystemRoles } from '@entities/user'
 
@@ -29,14 +28,8 @@ class Me implements IMeState {
   }
 
   getUserInfoByJWT = async () => {
-    const token = getStorageItem(StorageKeys.AUTH)
-
     await tryRequest(async () => {
-      const data = await api.get('/userInfo', {
-        headers: {
-          Authorization: `Bearer ${token.token}`,
-        },
-      })
+      const data = await api.get('/userInfo', getApiHeader())
 
       this.setUserInfo(data.data)
     })

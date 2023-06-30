@@ -6,19 +6,44 @@
       "text": "О нет это же еще обычный текст"
     }
   ],
+  "tags": [
+    {
+      "type": "ANIMALS",
+      "amount": 62
+    },
+    {
+      "type": "TECHNOLOGIES",
+      "amount": 22
+    },
+    {
+      "type": "HUMOR",
+      "amount": 101
+    }
+  ],
   "users": [
     {
       "id": 1,
       "login": "Sergey",
       "password": "1234",
       "status": "Хаха",
-      "followers": [123],
+      "followers": [
+        123
+      ],
       "subscriptions": {
-        "users": [],
-        "tags": ["TECHNOLOGIES"]
+        "users": [
+          "Vera_xxx",
+          "Kiselev_Sergey"
+        ],
+        "tags": [
+          "TECHNOLOGIES",
+          "ANIMALS"
+        ]
       },
       "ignoreList": {
-        "tags": ["HUMOR"]
+        "tags": [
+          "TECHNOLOGIES",
+          "ANIMALS"
+        ]
       },
       "systemRole": "ADMIN",
       "newNotifications": true,
@@ -32,13 +57,21 @@
       "login": "Kiselev_Sergey",
       "status": "Опаньки",
       "password": "qwerty12312",
-      "followers": [123],
+      "followers": [
+        123
+      ],
       "subscriptions": {
-        "users": [23],
-        "tags": ["TECHNOLOGIES"]
+        "users": [
+          23
+        ],
+        "tags": [
+          "TECHNOLOGIES"
+        ]
       },
       "ignoreList": {
-        "tags": ["HUMOR"]
+        "tags": [
+          "HUMOR"
+        ]
       },
       "systemRole": "USER",
       "newNotifications": true,
@@ -52,13 +85,26 @@
       "login": "Vera_xxx",
       "status": "Опаньки",
       "password": "qwerty12312",
-      "followers": [123],
+      "followers": [
+        123
+      ],
       "subscriptions": {
-        "users": [2345, "Kiselev_Sergey"],
-        "tags": ["TECHNOLOGIES"]
+        "users": [
+          2345,
+          "Kiselev_Sergey"
+        ],
+        "tags": [
+          "TECHNOLOGIES",
+          "ANIMALS",
+          "HUMOR"
+        ]
       },
       "ignoreList": {
-        "tags": ["HUMOR"]
+        "tags": [
+          "TECHNOLOGIES",
+          "ANIMALS",
+          "HUMOR"
+        ]
       },
       "systemRole": "USER",
       "newNotifications": true,
@@ -81,7 +127,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 84,
+      "likesAmount": 85,
       "commentsAmount": 4,
       "views": 324,
       "content": [
@@ -105,7 +151,10 @@
           }
         }
       ],
-      "tags": ["HUMOR", "ANIMALS"],
+      "tags": [
+        "HUMOR",
+        "ANIMALS"
+      ],
       "poll": {
         "id": 34,
         "name": "Опрос касательно чегото",
@@ -122,7 +171,7 @@
           }
         ]
       },
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 14,
@@ -156,7 +205,10 @@
           "text": "О нет это же еще обычный текст"
         }
       ],
-      "tags": ["TECHNOLOGIES", "ANIMALS"],
+      "tags": [
+        "TECHNOLOGIES",
+        "ANIMALS"
+      ],
       "isLiked": false
     },
     {
@@ -171,7 +223,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 45,
+      "likesAmount": 46,
       "commentsAmount": 12,
       "views": 670,
       "content": [
@@ -183,8 +235,11 @@
           }
         }
       ],
-      "tags": ["TECHNOLOGIES", "HUMOR"],
-      "isLiked": false
+      "tags": [
+        "TECHNOLOGIES",
+        "HUMOR"
+      ],
+      "isLiked": true
     },
     {
       "id": 34,
@@ -210,7 +265,9 @@
           }
         }
       ],
-      "tags": ["ANIMALS"],
+      "tags": [
+        "ANIMALS"
+      ],
       "isLiked": false
     },
     {
@@ -225,7 +282,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 84,
+      "likesAmount": 85,
       "commentsAmount": 3,
       "views": 2234,
       "content": [
@@ -237,8 +294,10 @@
           }
         }
       ],
-      "tags": ["TECHNOLOGIES"],
-      "isLiked": false
+      "tags": [
+        "TECHNOLOGIES"
+      ],
+      "isLiked": true
     },
     {
       "id": 1672,
@@ -282,7 +341,9 @@
           "text": "Любая достаточно развитая технология неотличима от магии."
         }
       ],
-      "tags": ["TECHNOLOGIES"],
+      "tags": [
+        "TECHNOLOGIES"
+      ],
       "isLiked": false
     },
     {
@@ -313,7 +374,9 @@
           }
         }
       ],
-      "tags": ["ANIMALS"],
+      "tags": [
+        "ANIMALS"
+      ],
       "isLiked": true
     },
     {
@@ -340,7 +403,9 @@
           }
         }
       ],
-      "tags": ["ANIMALS"],
+      "tags": [
+        "ANIMALS"
+      ],
       "isLiked": true
     }
   ]

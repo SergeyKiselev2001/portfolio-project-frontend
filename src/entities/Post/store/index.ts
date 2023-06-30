@@ -41,8 +41,6 @@ class Post implements IPosts {
         result.headers['x-total-count'] / this.limit
       )
 
-      console.log(this.amountOfPages)
-
       this.posts = result.data
     })
   }
