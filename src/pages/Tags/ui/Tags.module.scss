@@ -161,6 +161,11 @@
     display: flex;
     justify-content: space-between;
 
+    .active {
+      background-color: #000000 !important;
+      color: white !important;
+    }
+
     button {
       font-family: $roboto;
       border: none;

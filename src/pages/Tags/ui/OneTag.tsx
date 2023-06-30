@@ -7,9 +7,11 @@ import classes from './Tags.module.scss'
 import { useTranslation } from 'react-i18next'
 import { CLIENT, DEFAULT_NS } from '@shared/constants'
 import linkImg from './images/link.png'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { wordForm } from '@shared/utils'
 import { me } from '@entities/me'
+import tagsPage from './../store/index'
+import { observer } from 'mobx-react-lite'
 
 interface IOneTag {
   postsAmount: number
@@ -18,11 +20,7 @@ interface IOneTag {
   type: i18Tags
 }
 
-const OneTag = (props: IOneTag) => {
-  // useEffect(() => {
-  //   setIsSubscribed()
-  //   setIsBlocked(props.isBlocked)
-  // }, [])
+const OneTag = observer((props: IOneTag) => {
   const { postsAmount, type } = props
   const { t, i18n } = useTranslation(i18Chunks.TAGS)
 
@@ -31,10 +29,12 @@ const OneTag = (props: IOneTag) => {
 
   const toggleSubscription = () => {
     setIsSubscribed((prev) => !prev)
+    tagsPage.toggleSubscription(type)
   }
 
   const toggleBlock = () => {
     setIsBlocked((prev) => !prev)
+    tagsPage.toggleBlock(type)
   }
 
   return (
@@ -60,12 +60,18 @@ const OneTag = (props: IOneTag) => {
       </div>
       {me.login && (
         <div className={classes.bottom}>
-          <button onClick={toggleSubscription}>
+          <button
+            onClick={toggleSubscription}
+            className={isSubscribed ? classes.active : ''}
+          >
             {isSubscribed
               ? t(i18Keys.UNSUBSCRIBE, DEFAULT_NS)
               : t(i18Keys.SUBSCRIBE, DEFAULT_NS)}
           </button>
-          <button onClick={toggleBlock}>
+          <button
+            onClick={toggleBlock}
+            className={isBlocked ? classes.active : ''}
+          >
             {isBlocked
               ? t(i18Keys.UNBLOCK, DEFAULT_NS)
               : t(i18Keys.BLOCK, DEFAULT_NS)}
@@ -74,6 +80,6 @@ const OneTag = (props: IOneTag) => {
       )}
     </div>
   )
-}
+})
 
 export default OneTag

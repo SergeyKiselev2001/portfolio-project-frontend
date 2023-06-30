@@ -1,8 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { IUserState, SystemRoles } from './schema'
-import { tryRequest } from '@shared/utils'
+import { getApiHeader, tryRequest } from '@shared/utils'
 import { api } from '@app/api'
-import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 
 export class User implements IUserState {
   login = ''
@@ -41,19 +40,11 @@ export class User implements IUserState {
 
   subscribeOnUser = async (myId: number) => {
     await tryRequest(async () => {
-      const token = getStorageItem(StorageKeys.AUTH)
-
       await tryRequest(async () => {
         await api.post(
           `/users/${myId}`,
-          {
-            subscribeOn: this.login,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token.token}`,
-            },
-          }
+          { subscribeOn: this.login },
+          getApiHeader()
         )
         this.subscribed = true
       })
