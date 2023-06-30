@@ -93,8 +93,6 @@ server.post('/users/:id', function (req, res, next) {
 
   const { users = [] } = getDB()
 
-  console.log(req.params, users)
-
   const userFromBd = users.find((user) => user.id == req.params.id)
 
   req.body = {
@@ -122,19 +120,13 @@ server.post('/user/:name/subscribe', (req, res, next) => {
     const userFromBd = users.find((user) => user.login === userName)
 
     if (userFromBd) {
-      //subscriptions.users.push(name)
-
       const newData = {
         ...getDB(),
       }
 
-      console.log('DA ONCE', userName, name)
-
       newData.users
         .find((el) => el.login == userName)
         .subscriptions.users.push(name)
-
-      //console.log('data', newData.users.find(el=> el.login == userName))
 
       fs.writeFileSync(
         path.resolve(__dirname, 'db.json'),

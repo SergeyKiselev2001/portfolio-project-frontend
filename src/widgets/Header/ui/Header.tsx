@@ -9,9 +9,10 @@ import { me } from '@entities/me'
 import { useState, useEffect } from 'react'
 import { useMediaQuery } from '@shared/hooks'
 import { SystemRoles } from '@entities/user'
+import { i18Chunks } from '@widgets/LangSwitcher/types/i18Keys'
 
 const Header = observer(() => {
-  const { t } = useTranslation('header')
+  const { t } = useTranslation(i18Chunks.HEADER)
   const currentPage = HeaderPage.currentPage
 
   const [showMenu, setShowMenu] = useState(false)
@@ -52,6 +53,7 @@ const Header = observer(() => {
         }`}
       >
         <OneLink
+          reloadDocument={currentPage == RouterPaths.MAIN}
           isActive={currentPage == RouterPaths.MAIN}
           link={RouterPaths.MAIN}
           text={t(i18KeysHeader.MAIN_PAGE)}

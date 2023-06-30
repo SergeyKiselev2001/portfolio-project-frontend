@@ -5,9 +5,13 @@ import { BlockSideSkeleton } from './BlockSideSkeleton'
 import { AsideStatus } from '../types/schema'
 import { observer } from 'mobx-react-lite'
 import { me } from '@entities/me'
+import { mainPage } from '@pages/MainPage'
+import { useTranslation } from 'react-i18next'
+import { i18Chunks, i18Keys } from '@widgets/LangSwitcher/types/i18Keys'
 
 const BlockSideInfo = observer(() => {
   const [isAuthorized, setIsAuthorized] = useState(AsideStatus.LOADING)
+  const { t } = useTranslation(i18Chunks.TRANSLATION)
 
   useEffect(() => {
     me.login && setIsAuthorized(AsideStatus.AUTHORIZED)
@@ -23,6 +27,10 @@ const BlockSideInfo = observer(() => {
       setIsAuthorized(AsideStatus.NOT_AUTHORIZED)
     }
   }, [])
+
+  const openModal = () => {
+    mainPage.toggleLoginModal()
+  }
 
   return (
     <div
@@ -40,7 +48,11 @@ const BlockSideInfo = observer(() => {
           <button>Добавить пост</button>
         </>
       )}
-      {isAuthorized == AsideStatus.NOT_AUTHORIZED && <span>heh</span>}
+      {isAuthorized == AsideStatus.NOT_AUTHORIZED && (
+        <div className={classes.unauthorized}>
+          <button onClick={openModal}>{t(i18Keys.LOG_IN)}</button>
+        </div>
+      )}
     </div>
   )
 })

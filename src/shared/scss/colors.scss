@@ -62,3 +62,10 @@ $bgc-skeletons-ray-dark: linear-gradient(
   rgba(206, 206, 206, 0.315) 50%,
   rgba(0, 212, 255, 0) 100%
 );
+
+$bgc-post-footer-btn-dark: #3a3a3a;
+$bgc-post-footer-btn-light: #dddddd;
+
+$filter-post-footer-image-dark: brightness(0) saturate(100%) invert(100%)
+  sepia(0%) saturate(7500%) hue-rotate(146deg) brightness(121%) contrast(121%);
+$filter-post-footer-image-light: none;

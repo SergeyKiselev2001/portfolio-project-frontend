@@ -6,6 +6,20 @@
       "text": "О нет это же еще обычный текст"
     }
   ],
+  "tags": [
+    {
+      "type": "ANIMALS",
+      "amount": 62
+    },
+    {
+      "type": "TECHNOLOGIES",
+      "amount": 22
+    },
+    {
+      "type": "HUMOR",
+      "amount": 101
+    }
+  ],
   "users": [
     {
       "id": 1,
@@ -14,7 +28,7 @@
       "status": "Хаха",
       "followers": [123],
       "subscriptions": {
-        "users": [],
+        "users": ["Vera_xxx", "Kiselev_Sergey"],
         "tags": ["TECHNOLOGIES"]
       },
       "ignoreList": {
@@ -81,7 +95,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 84,
+      "likesAmount": 85,
       "commentsAmount": 4,
       "views": 324,
       "content": [
@@ -122,7 +136,7 @@
           }
         ]
       },
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 14,
@@ -171,7 +185,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 45,
+      "likesAmount": 46,
       "commentsAmount": 12,
       "views": 670,
       "content": [
@@ -184,7 +198,7 @@
         }
       ],
       "tags": ["TECHNOLOGIES", "HUMOR"],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 34,
@@ -225,7 +239,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 84,
+      "likesAmount": 85,
       "commentsAmount": 3,
       "views": 2234,
       "content": [
@@ -238,7 +252,7 @@
         }
       ],
       "tags": ["TECHNOLOGIES"],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 1672,

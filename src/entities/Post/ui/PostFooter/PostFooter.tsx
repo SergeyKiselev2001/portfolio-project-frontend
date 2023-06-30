@@ -8,6 +8,7 @@ import { useState, useEffect } from 'react'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { posts } from '@entities/Post'
 import { mainPage } from '@pages/MainPage'
+import { Link } from 'react-router-dom'
 
 interface IPostFooter {
   id: number
@@ -43,7 +44,7 @@ const PostFooter = (props: IPostFooter) => {
   }, [])
 
   const copyPath = () => {
-    navigator.clipboard.writeText(`${CLIENT}/media/${id}`)
+    navigator.clipboard.writeText(`${CLIENT}media/${id}`)
     setLinkCopied(true)
     toast.success('Ссылка скопирована')
   }
@@ -84,9 +85,9 @@ const PostFooter = (props: IPostFooter) => {
             <img src={heartImage} alt="" />
             <span>{currentLikes}</span>
           </button>
-          <a href={`/media/${id}#comments`} className={classes.comments}>
+          <Link to={`/media/${id}#comments`} className={classes.comments}>
             {commentsAmount}
-          </a>
+          </Link>
           <button className={classes.save} />
           <button
             onClick={copyPath}

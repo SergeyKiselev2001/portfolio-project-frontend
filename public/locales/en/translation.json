@@ -18,5 +18,8 @@
 
   "BLOCK": "Block",
   "UNBLOCK": "Unblock",
-  "POSTS": "Posts"
+  "POSTS": "Posts",
+
+  "LOG_IN": "Log in",
+  "NOT_FOUND": "Not found"
 }

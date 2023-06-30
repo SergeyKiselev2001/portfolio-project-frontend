@@ -12,7 +12,7 @@ import { SubscriptionsPage } from '@pages/SubscriptionsPage'
 export const listOfRoutes: Route[] = [
   {
     path: RouterPaths.ERROR,
-    element: <ErrorPage />,
+    element: <ErrorPage showHeader />,
   },
   {
     path: RouterPaths.MAIN,
