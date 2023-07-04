@@ -27,14 +27,26 @@ const OneTag = observer((props: IOneTag) => {
   const [isSubscribed, setIsSubscribed] = useState(props.isSubscribed)
   const [isBlocked, setIsBlocked] = useState(props.isBlocked)
 
-  const toggleSubscription = () => {
+  const toggleSubscription = async () => {
     setIsSubscribed((prev) => !prev)
-    tagsPage.toggleSubscription(type)
+    if (isBlocked && !isSubscribed) {
+      setIsBlocked(false)
+      await tagsPage.toggleBlock(type)
+      await tagsPage.toggleSubscription(type)
+    } else {
+      tagsPage.toggleSubscription(type)
+    }
   }
 
-  const toggleBlock = () => {
+  const toggleBlock = async () => {
     setIsBlocked((prev) => !prev)
-    tagsPage.toggleBlock(type)
+    if (isSubscribed && !isBlocked) {
+      setIsSubscribed(false)
+      await tagsPage.toggleSubscription(type)
+      await tagsPage.toggleBlock(type)
+    } else {
+      tagsPage.toggleBlock(type)
+    }
   }
 
   return (
@@ -49,7 +61,6 @@ const OneTag = observer((props: IOneTag) => {
               : t(i18Keys.POSTS, DEFAULT_NS)}
           </span>
         </div>
-
         <a
           rel="noreferrer"
           target="_blank"

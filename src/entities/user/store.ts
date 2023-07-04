@@ -5,7 +5,6 @@ import { api } from '@app/api'
 
 export class User implements IUserState {
   login = ''
-  followers = []
   status = ''
   followersAmount = 0
   subscribed = false

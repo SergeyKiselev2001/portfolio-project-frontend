@@ -1,8 +1,19 @@
+import { clsx } from '@shared/utils'
 import classes from './PostSkeleton.module.scss'
 
-const PostSkeleton = () => {
+interface IPostSkeleton {
+  isProfilePage?: boolean
+}
+
+const PostSkeleton = (props: IPostSkeleton) => {
+  const { isProfilePage } = props
   return (
-    <div className={classes.PostSkeleton}>
+    <div
+      className={clsx(
+        { [classes.isProfilePage]: !!isProfilePage },
+        classes.PostSkeleton
+      )}
+    >
       <div className={classes.light} />
     </div>
   )

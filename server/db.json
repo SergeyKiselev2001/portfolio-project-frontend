@@ -26,9 +26,6 @@
       "login": "Sergey",
       "password": "1234",
       "status": "Хаха",
-      "followers": [
-        123
-      ],
       "subscriptions": {
         "users": [
           "Vera_xxx",
@@ -57,12 +54,9 @@
       "login": "Kiselev_Sergey",
       "status": "Опаньки",
       "password": "qwerty12312",
-      "followers": [
-        123
-      ],
       "subscriptions": {
         "users": [
-          23
+          "Vera_xxx"
         ],
         "tags": [
           "TECHNOLOGIES"
@@ -85,26 +79,17 @@
       "login": "Vera_xxx",
       "status": "Опаньки",
       "password": "qwerty12312",
-      "followers": [
-        123
-      ],
       "subscriptions": {
         "users": [
-          2345,
-          "Kiselev_Sergey"
+          "Kiselev_Sergey",
         ],
         "tags": [
-          "TECHNOLOGIES",
           "ANIMALS",
-          "HUMOR"
+          "TECHNOLOGIES"
         ]
       },
       "ignoreList": {
-        "tags": [
-          "TECHNOLOGIES",
-          "ANIMALS",
-          "HUMOR"
-        ]
+        "tags": []
       },
       "systemRole": "USER",
       "newNotifications": true,

@@ -7,7 +7,6 @@ import { SystemRoles } from '@entities/user'
 class Me implements IMeState {
   id = 0
   login = ''
-  followers = []
   followersAmount = 0
   subscriptions = {
     users: [],

@@ -14,6 +14,7 @@ export enum QueryParams {
   LIMIT = '_limit',
   PAGE = '_page',
   ID_NE = 'id_ne',
+  LOGIN = 'q',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }
