@@ -15,18 +15,8 @@ const Modal = (props: IModal) => {
   const [active, setActive] = useState(true)
   const { t } = useTranslation()
 
-  useEffect(() => {
-    changeBodyOverflow('hidden')
-  }, [])
-
-  const changeBodyOverflow = (overflow: string) => {
-    const body = document.getElementsByTagName('body')[0]
-    body.style.overflow = overflow
-  }
-
   const closeModal = () => {
     setActive(false)
-    changeBodyOverflow('auto')
     onclose && onclose()
   }
 

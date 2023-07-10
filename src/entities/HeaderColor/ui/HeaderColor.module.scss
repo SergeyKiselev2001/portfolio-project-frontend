@@ -1,0 +1,25 @@
+.HeaderColor {
+    width: auto;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.Default {
+  background: $profile-header-default;
+}
+.Gold {
+  background: $profile-header-gold;
+}
+.Aqua {
+  background: $profile-header-aqua;
+}
+.Green {
+  background: $profile-header-green;
+}
+.Dark_blue {
+  background: $profile-header-darkblue;
+}
+.Orange {
+  background: $profile-header-orange;
+}

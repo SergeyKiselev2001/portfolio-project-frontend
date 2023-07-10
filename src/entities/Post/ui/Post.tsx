@@ -5,9 +5,11 @@ import { PostFooter } from './PostFooter'
 import PostHeader from './PostHeader'
 import { INewPost } from './schema'
 import { useIntersection } from '@shared/hooks'
+import { clsx } from '@shared/utils'
 
 const Post = (props: INewPost) => {
   const {
+    isProfilePage,
     isLast,
     getNextPosts,
     id,
@@ -33,7 +35,16 @@ const Post = (props: INewPost) => {
   }, [isLast, inViewport])
 
   return (
-    <div ref={ref} className={classes.Post} id={`post-${id}`}>
+    <div
+      ref={ref}
+      className={clsx(
+        {
+          [classes.isProfilePage]: !!isProfilePage,
+        },
+        classes.Post
+      )}
+      id={`post-${id}`}
+    >
       <PostHeader {...{ author, id, timestamp }} />
       <PostContent {...{ content, id, poll, title }} />
       <PostFooter

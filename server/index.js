@@ -84,7 +84,7 @@ server.get('/userInfo', (req, res) => {
 // PROFILE SUBSCRIPTION
 server.post('/users/:id', function (req, res, next) {
   checkAuth(req, res)
-  if (!req.body.subscribeOn) {
+  if (!req.body['subscribeOn']) {
     next()
     return
   }
@@ -92,6 +92,8 @@ server.post('/users/:id', function (req, res, next) {
   const { users = [] } = getDB()
 
   const userFromBd = users.find((user) => user.id == req.params.id)
+
+  console.log('HERE')
 
   req.body = {
     ...userFromBd,
@@ -102,6 +104,58 @@ server.post('/users/:id', function (req, res, next) {
   }
 
   req.method = 'PUT'
+  next()
+})
+
+// UPDATE STATUS
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body['newStatus']) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+  const userFromBd = users.find((user) => user.id == req.params.id)
+
+  if (!userFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  req.body = {
+    ...userFromBd,
+    status: req.body.newStatus,
+  }
+
+  next()
+})
+
+// UPDATE HEADER THEME
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body['headerTheme']) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+  const userFromBd = users.find((user) => user.id == req.params.id)
+
+  if (!userFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  req.body = {
+    ...userFromBd,
+    headerTheme: req.body.headerTheme,
+  }
+
   next()
 })
 
@@ -240,11 +294,11 @@ server.get('/user/:name', (req, res) => {
     const userFromBd = users.find((user) => user.login === name)
 
     if (userFromBd) {
-      const { systemRole, avatar, followers, status, subscriptions } =
+      const { systemRole, avatar, status, subscriptions, headerTheme } =
         userFromBd
       return res.json({
         userInfo: {
-          followers,
+          headerTheme,
           systemRole,
           avatar,
           status,
@@ -268,14 +322,14 @@ server.post('/login', (req, res) => {
       (user) => user.login === login && user.password === password
     )
 
-    const { followers, systemRole, avatar, newNotifications } = userFromBd
+    const { systemRole, avatar, newNotifications, headerTheme } = userFromBd
 
     if (userFromBd) {
       return res.json({
         ...jwtPairs.find(({ user }) => user == login).tokens,
         userInfo: {
-          followers: followers.length,
           systemRole,
+          headerTheme,
           avatar,
           newNotifications,
         },

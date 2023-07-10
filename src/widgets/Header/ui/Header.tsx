@@ -26,6 +26,10 @@ const Header = observer(() => {
       return
     }
 
+    if (location.pathname == RouterPaths.CREATE_POST) {
+      return
+    }
+
     me.getUserInfoByJWT()
   }, [])
 

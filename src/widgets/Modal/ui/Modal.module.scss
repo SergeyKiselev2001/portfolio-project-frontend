@@ -2,11 +2,13 @@
   cursor: pointer;
   top: 0;
   position: fixed;
-  height: 100vh;
+  height: 100%;
   width: 100vw;
   background-color: #00000065;
   z-index: $z-index-modal;
   overflow: hidden;
+
+  min-width: 340px;
 
   
 }

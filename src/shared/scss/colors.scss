@@ -69,3 +69,32 @@ $bgc-post-footer-btn-light: #dddddd;
 $filter-post-footer-image-dark: brightness(0) saturate(100%) invert(100%)
   sepia(0%) saturate(7500%) hue-rotate(146deg) brightness(121%) contrast(121%);
 $filter-post-footer-image-light: none;
+
+
+
+$profile-header-default: #ababab;
+$profile-header-gold: linear-gradient(
+  90deg,
+  rgb(146, 124, 0) 0%,
+  rgb(250, 215, 102) 100%
+);
+$profile-header-aqua: linear-gradient(
+  90deg,
+  rgb(25 48 100) 0%,
+  rgb(55 218 255) 100%
+);
+$profile-header-green: linear-gradient(
+  90deg,
+  rgb(12, 49, 3) 0%,
+  rgb(14, 206, 174) 100%
+);
+$profile-header-darkblue: linear-gradient(
+  90deg,
+  rgba(17, 76, 134, 1) 0%,
+  rgba(135, 11, 143, 1) 100%
+);
+$profile-header-orange: linear-gradient(
+  90deg,
+  rgb(141, 80, 0) 0%,
+  #ffa743 100%
+);

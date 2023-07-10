@@ -7,6 +7,7 @@ export enum RouterPaths {
   ADMIN = '/admin',
   USER = ':user',
   SUBSCRIPTIONS = '/subscriptions',
+  CREATE_POST = '/create_post',
 }
 
 export enum QueryParams {
@@ -14,6 +15,7 @@ export enum QueryParams {
   LIMIT = '_limit',
   PAGE = '_page',
   ID_NE = 'id_ne',
+  LOGIN = 'q',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }

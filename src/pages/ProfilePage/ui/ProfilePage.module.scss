@@ -1,9 +1,9 @@
 .ProfilePage {
   min-width: 260px;
-  height: calc($content-height - 40px);
+  min-height: calc($content-height - 40px);
   margin: 0;
   padding: 20px 40px;
-
+  height: fit-content;
   background-color: var(--bgc-main);
 }
 
@@ -11,25 +11,51 @@
   max-width: 680px;
   margin: 0 auto;
   margin-bottom: 20px;
-  background-color: var(--bgc-secondary);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .filters {
   background-color: var(--bgc-secondary);
-  height: 80px;
-  max-width: 680px;
+  max-width: 650px;
   margin: 0 auto;
   border-radius: 5px;
   margin-bottom: 20px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  width: fit-content;
+
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+
+  @media (max-width: 508px) {
+    flex-direction: column;
+    width: calc(100% - 30px);
+  }
+
+
+  button {
+    display: inline-block;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+
+  .active_btn {
+    background-color: #000000;
+    color: white;
+  }
 }
 
 .posts {
   background-color: var(--bgc-secondary);
-  height: 200px;
+ 
   max-width: 680px;
   margin: 0 auto;
   border-radius: 5px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.hide_bgc {
+  background-color: transparent;
 }
