@@ -8,6 +8,7 @@ import { Tags } from '@pages/Tags'
 import { ProfilePage } from '@pages/ProfilePage'
 import { AdminPage } from '@pages/AdminPage'
 import { SubscriptionsPage } from '@pages/SubscriptionsPage'
+import { CreatePostPage } from '@pages/CreatePostPage'
 
 export const listOfRoutes: Route[] = [
   {
@@ -41,6 +42,10 @@ export const listOfRoutes: Route[] = [
   {
     path: RouterPaths.SUBSCRIPTIONS,
     element: <SubscriptionsPage />,
+  },
+  {
+    path: RouterPaths.CREATE_POST,
+    element: <CreatePostPage />,
   },
 ]
 

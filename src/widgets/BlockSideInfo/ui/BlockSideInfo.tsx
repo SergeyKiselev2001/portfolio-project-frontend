@@ -8,6 +8,8 @@ import { me } from '@entities/me'
 import { mainPage } from '@pages/MainPage'
 import { useTranslation } from 'react-i18next'
 import { i18Chunks, i18Keys } from '@widgets/LangSwitcher/types/i18Keys'
+import { Link } from 'react-router-dom'
+import { RouterPaths } from '@app/config/router'
 
 const BlockSideInfo = observer(() => {
   const [isAuthorized, setIsAuthorized] = useState(AsideStatus.LOADING)
@@ -45,7 +47,7 @@ const BlockSideInfo = observer(() => {
           <div className={classes.mainInfo}>{me.login}</div>
           <div className={classes.subscribers}>10 Подписчиков</div>
           <div className={classes.links}>ссылки</div>
-          <button>Добавить пост</button>
+          <Link to={RouterPaths.CREATE_POST}>Добавить пост</Link>
         </>
       )}
       {isAuthorized == AsideStatus.NOT_AUTHORIZED && (

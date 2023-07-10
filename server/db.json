@@ -26,6 +26,7 @@
       "login": "Sergey",
       "password": "1234",
       "status": "Хаха",
+      "headerTheme": "Default",
       "subscriptions": {
         "users": [
           "Vera_xxx",
@@ -54,6 +55,7 @@
       "login": "Kiselev_Sergey",
       "status": "Опаньки",
       "password": "qwerty12312",
+      "headerTheme": "Gold",
       "subscriptions": {
         "users": [
           "Vera_xxx"
@@ -77,11 +79,12 @@
     {
       "id": 23,
       "login": "Vera_xxx",
-      "status": "Опаньки",
+      "status": "Новый статусd gfds gdfs gdsf gdsf gdsf gdsfg",
       "password": "qwerty12312",
+      "headerTheme": "Aqua",
       "subscriptions": {
         "users": [
-          "Kiselev_Sergey",
+          "Kiselev_Sergey"
         ],
         "tags": [
           "ANIMALS",
@@ -170,7 +173,7 @@
           "alt": ""
         }
       },
-      "likesAmount": 0,
+      "likesAmount": 1,
       "commentsAmount": 145,
       "views": 45,
       "content": [
@@ -194,7 +197,7 @@
         "TECHNOLOGIES",
         "ANIMALS"
       ],
-      "isLiked": false
+      "isLiked": true
     },
     {
       "id": 16,

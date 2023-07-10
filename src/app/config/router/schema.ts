@@ -7,6 +7,7 @@ export enum RouterPaths {
   ADMIN = '/admin',
   USER = ':user',
   SUBSCRIPTIONS = '/subscriptions',
+  CREATE_POST = '/create_post',
 }
 
 export enum QueryParams {

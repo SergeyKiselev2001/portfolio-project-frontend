@@ -10,12 +10,57 @@
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  background: rgb(17, 76, 134);
-  background: linear-gradient(
-    90deg,
-    rgba(17, 76, 134, 1) 0%,
-    rgba(135, 11, 143, 1) 100%
-  );
+  position: relative;
+}
+
+.changeHeaderTheme {
+  cursor: pointer;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 100%;
+  width: 70%;
+  background: transparent;
+
+  border: none;
+
+  opacity: 0;
+  transition: 0.1s;
+
+  &:hover {
+    opacity: 1;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(248, 248, 248, 0.8) 100%
+    );
+  }
+}
+
+.Default {
+  background: $profile-header-default;
+}
+.Gold {
+  background: $profile-header-gold;
+}
+.Aqua {
+  background: $profile-header-aqua;
+}
+.Green {
+  background: $profile-header-green;
+}
+.Dark_blue {
+  background: $profile-header-darkblue;
+}
+.Orange {
+  background: $profile-header-orange;
+}
+
+.themes {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  margin-bottom: 20px;
 }
 
 .avatar {
@@ -64,9 +109,9 @@
 }
 
 .settings {
-  background-color: #9c9c9c;
-  border-radius: 5px;
-  padding: 10px;
+  width: fit-content;
+  display: flex;
+  gap: 10px;
   span {
     font-family: $roboto;
     display: block;
@@ -75,6 +120,32 @@
     @include not-last-mb(10px);
   }
   margin-bottom: 10px;
+
+  .widgets {
+    display: flex;
+    gap: 10px;
+    background-color: #9c9c9c;
+    border-radius: 5px;
+    padding: 10px;
+  }
+
+  .changes {
+    display: flex;
+    gap: 10px;
+    background-color: #9c9c9c;
+    border-radius: 5px;
+    padding: 10px;
+
+    align-items: center;
+
+    button {
+      height: fit-content;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
 
 .subscribe {

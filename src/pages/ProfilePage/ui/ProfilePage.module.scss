@@ -11,7 +11,6 @@
   max-width: 680px;
   margin: 0 auto;
   margin-bottom: 20px;
-  background-color: var(--bgc-secondary);
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -28,6 +27,12 @@
   display: flex;
   gap: 10px;
   justify-content: center;
+
+  @media (max-width: 508px) {
+    flex-direction: column;
+    width: calc(100% - 30px);
+  }
+
 
   button {
     display: inline-block;

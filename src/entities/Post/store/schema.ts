@@ -10,7 +10,6 @@ export interface IPosts {
 
 export type QueryParamsObj = [QueryParams, string | null]
 
-
 export interface IPostContent {
   title: string
   id: number
