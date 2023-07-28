@@ -1,2 +1,27 @@
 .CreatePostPage {
+  min-height: $content-height;
+  background-color: var(--bgc-main);
+  min-width: 340px;
+
+  position: relative;
+  z-index: $z-index-content;
+}
+
+.wrapper {
+  padding: 10px 40px;
+  display: flex;
+  justify-content: center;
+
+  .editor {
+    margin-right: 10px;
+    width: 650px;
+
+    .log_in {
+      margin-top: 10px;
+      font-family: $roboto;
+      font-weight: 600;
+      margin-bottom: 10px;
+      display: block;
+    }
+  }
 }

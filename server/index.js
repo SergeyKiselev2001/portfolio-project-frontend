@@ -81,6 +81,39 @@ server.get('/userInfo', (req, res) => {
   }
 })
 
+// PUBPLISH POST
+server.post('/posts', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body['createPost']) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+
+  const userFromBd = users.find(
+    (user) => user.login == getUserNameByHeaderJWT(req)
+  )
+
+  const { createPost, ...createPostDto } = req.body
+
+  req.body = {
+    ...createPostDto,
+    timestamp: Date.now(),
+    author: {
+      name: userFromBd.login,
+      id: userFromBd.id,
+      avatar: userFromBd.avatar,
+    },
+    likesAmount: 0,
+    commentsAmount: 0,
+    views: 0,
+    isLiked: false,
+  }
+
+  next()
+})
+
 // PROFILE SUBSCRIPTION
 server.post('/users/:id', function (req, res, next) {
   checkAuth(req, res)
@@ -92,8 +125,6 @@ server.post('/users/:id', function (req, res, next) {
   const { users = [] } = getDB()
 
   const userFromBd = users.find((user) => user.id == req.params.id)
-
-  console.log('HERE')
 
   req.body = {
     ...userFromBd,
