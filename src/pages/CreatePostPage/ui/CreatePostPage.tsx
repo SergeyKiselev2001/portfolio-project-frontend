@@ -5,9 +5,15 @@ import { RouterPaths } from '@app/config/router'
 import { me } from '@entities/me'
 import { observer } from 'mobx-react-lite'
 import { Spinner } from '@widgets/Spinner'
+import { Login } from '@widgets/Login'
+import { CreatePostDto, PostEditor } from '@widgets/PostEditor'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { posts } from '@entities/Post'
 
 const CreatePostPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
+  const navigate = useNavigate()
 
   useEffect(() => {
     HeaderPage.setCurrentPage(RouterPaths.CREATE_POST)
@@ -17,11 +23,39 @@ const CreatePostPage = observer(() => {
     })()
   }, [])
 
+  const onLogin = () => {
+    const body = document.getElementsByTagName('body')[0]
+    body.style.overflow = 'auto'
+  }
+
+  const publishPost = (post: CreatePostDto) => {
+    posts.publishPost(post, (id) => {
+      toast.success('Пост опубликован!')
+      navigate(`/post/${id}`)
+    })
+  }
+
   return (
     <div className={classes.CreatePostPage}>
-      {spinner && <Spinner />}
-      {!spinner && me.login && 'good'}
-      {!spinner && !me.login && 'bad'}
+      <div className={classes.wrapper}>
+        {!spinner && !me.login && (
+          <>
+            <span className={classes.log_in}>
+              Для добавления поста необходимо войти в профиль
+            </span>
+
+            <Login onLogin={onLogin} />
+          </>
+        )}
+
+        {spinner && <Spinner />}
+
+        {!spinner && me.login && (
+          <div className={classes.editor}>
+            <PostEditor publishPost={publishPost} />
+          </div>
+        )}
+      </div>
     </div>
   )
 })

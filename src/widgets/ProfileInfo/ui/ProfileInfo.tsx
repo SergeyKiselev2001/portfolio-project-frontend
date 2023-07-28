@@ -25,8 +25,6 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
 
   const isMe = me.login == login
 
-  console.log(headerTheme)
-
   const [subscribed, setSubscribed] = useState(false)
   //const [showStatusModal, setShowStatusModal] = useState(false)
   const [showHeaderModal, setShowHeaderModal] = useState(false)

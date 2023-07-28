@@ -79,7 +79,7 @@
     {
       "id": 23,
       "login": "Vera_xxx",
-      "status": "Новый статусd gfds gdfs gdsf gdsf gdsf gdsfg",
+      "status": "Новый статус",
       "password": "qwerty12312",
       "headerTheme": "Aqua",
       "subscriptions": {
@@ -395,6 +395,78 @@
         "ANIMALS"
       ],
       "isLiked": true
+    },
+    {
+      "title": "1111111111111111111",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "timestamp": 1690542857695,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 1,
+      "commentsAmount": 0,
+      "views": 0,
+      "isLiked": true,
+      "id": 1673
+    },
+    {
+      "title": "df safdas fdasfas",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "timestamp": 1690543100535,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 0,
+      "commentsAmount": 0,
+      "views": 0,
+      "isLiked": false,
+      "id": 1674
+    },
+    {
+      "title": "das fgw43543254325345 fdg dsf g",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "timestamp": 1690543110415,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 0,
+      "commentsAmount": 0,
+      "views": 0,
+      "isLiked": false,
+      "id": 1675
     }
   ]
 }

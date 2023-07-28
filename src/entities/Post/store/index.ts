@@ -4,9 +4,10 @@ import { api } from '@app/api'
 import { INewPost } from '../ui/schema'
 import classes from './../ui/Post.module.scss'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
-import { tryRequest, urlConverter } from '@shared/utils'
+import { getApiHeader, tryRequest, urlConverter } from '@shared/utils'
 import { toast } from 'react-toastify'
 import { QueryParams } from '@app/config/router'
+import { CreatePostDto } from '@widgets/PostEditor'
 
 class Post implements IPosts {
   posts = [] as INewPost[]
@@ -106,6 +107,18 @@ class Post implements IPosts {
     })
 
     this.hidePost(postId)
+  }
+
+  async publishPost(post: CreatePostDto, onCreate: (arg: string) => void) {
+    await tryRequest(async () => {
+      const { data } = await api.post(
+        `/posts`,
+        { ...post, createPost: true },
+        getApiHeader()
+      )
+
+      onCreate(data.id)
+    })
   }
 
   async likePost(postId: number, likesAmount: number) {
