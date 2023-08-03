@@ -8,11 +8,10 @@ import { HeaderPage } from '@shared/hocs/withHeader'
 import { QueryParams, RouterPaths } from '@app/config/router'
 import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
-import { mainPage } from '..'
 import { useSearchParams } from 'react-router-dom'
 import { Controller } from '@widgets/Controller'
 import { PostSkeleton } from '@entities/PostSkeleton'
-import { BlockSideInfo } from '@widgets/BlockSideInfo'
+import { BlockSideInfo, blockSideInfo } from '@widgets/BlockSideInfo'
 
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
@@ -31,11 +30,11 @@ const MainPage = observer(() => {
   }, [])
 
   const closeModal = () => {
-    mainPage.toggleLoginModal()
+    blockSideInfo.toggleLoginModal()
   }
 
   const onLogin = () => {
-    mainPage.toggleLoginModal()
+    blockSideInfo.toggleLoginModal()
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'auto'
   }
@@ -87,7 +86,7 @@ const MainPage = observer(() => {
         <BlockSideInfo />
       </div>
 
-      {mainPage.showLoginModal && (
+      {blockSideInfo.showLoginModal && (
         <Modal onclose={closeModal}>
           <Login onLogin={onLogin} />
         </Modal>

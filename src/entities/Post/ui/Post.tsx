@@ -9,6 +9,7 @@ import { clsx } from '@shared/utils'
 
 const Post = (props: INewPost) => {
   const {
+    isPostPage,
     isProfilePage,
     isLast,
     getNextPosts,
@@ -45,10 +46,18 @@ const Post = (props: INewPost) => {
       )}
       id={`post-${id}`}
     >
-      <PostHeader {...{ author, id, timestamp }} />
+      <PostHeader {...{ author, isPostPage, id, timestamp }} />
       <PostContent {...{ content, id, poll, title }} />
       <PostFooter
-        {...{ id, isLiked, commentsAmount, likesAmount, tags, views }}
+        {...{
+          id,
+          isLiked,
+          commentsAmount,
+          isPostPage,
+          likesAmount,
+          tags,
+          views,
+        }}
       />
     </div>
   )

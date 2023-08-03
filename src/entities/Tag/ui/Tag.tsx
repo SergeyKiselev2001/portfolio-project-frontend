@@ -12,7 +12,7 @@ const Tag = ({ tagName }: ITag) => {
   return (
     <div className={classes.Tag}>
       <a
-        href={`?${QueryParams.TAGS}=${tagName}`}
+        href={`/?${QueryParams.TAGS}=${tagName}`}
         target="_blank"
         rel="noreferrer"
         className={classes[tagName]}

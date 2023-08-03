@@ -81,6 +81,31 @@ server.get('/userInfo', (req, res) => {
   }
 })
 
+// ADD COMMENTS COUNTER
+server.post('/posts/:id', function (req, res, next) {
+  if (!req.body['incrementCommentsCounter']) {
+    next()
+    return
+  }
+
+  const { posts = [] } = getDB()
+  const postFromBd = posts.find((post) => post.id == req.params.id)
+
+  if (!postFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  req.body = {
+    ...postFromBd,
+    commentsAmount: postFromBd.commentsAmount + 1,
+  }
+
+  next()
+})
+
 // PUBPLISH POST
 server.post('/posts', function (req, res, next) {
   checkAuth(req, res)
@@ -135,6 +160,31 @@ server.post('/users/:id', function (req, res, next) {
   }
 
   req.method = 'PUT'
+  next()
+})
+
+// ADD VIEW COUNTER - POST
+server.post('/posts/:id', function (req, res, next) {
+  if (!req.body['addViewCounter']) {
+    next()
+    return
+  }
+
+  const { posts = [] } = getDB()
+  const postFromBd = posts.find((post) => post.id == req.params.id)
+
+  if (!postFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  req.body = {
+    ...postFromBd,
+    views: postFromBd.views + 1,
+  }
+
   next()
 })
 
