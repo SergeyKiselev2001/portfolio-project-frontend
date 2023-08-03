@@ -84,11 +84,13 @@
       "headerTheme": "Aqua",
       "subscriptions": {
         "users": [
-          "Kiselev_Sergey"
+          "Kiselev_Sergey",
+          "Sergey"
         ],
         "tags": [
+          "TECHNOLOGIES",
           "ANIMALS",
-          "TECHNOLOGIES"
+          "HUMOR"
         ]
       },
       "ignoreList": {
@@ -116,8 +118,8 @@
         }
       },
       "likesAmount": 85,
-      "commentsAmount": 4,
-      "views": 324,
+      "commentsAmount": 2,
+      "views": 338,
       "content": [
         {
           "type": "TEXT",
@@ -143,22 +145,6 @@
         "HUMOR",
         "ANIMALS"
       ],
-      "poll": {
-        "id": 34,
-        "name": "Опрос касательно чегото",
-        "options": [
-          {
-            "id": 0,
-            "text": "Путин",
-            "numberOfVotes": 99
-          },
-          {
-            "id": 1,
-            "text": "Медведев",
-            "numberOfVotes": 34
-          }
-        ]
-      },
       "isLiked": true
     },
     {
@@ -174,8 +160,8 @@
         }
       },
       "likesAmount": 1,
-      "commentsAmount": 145,
-      "views": 45,
+      "commentsAmount": 0,
+      "views": 46,
       "content": [
         {
           "type": "TEXT",
@@ -212,8 +198,8 @@
         }
       },
       "likesAmount": 46,
-      "commentsAmount": 12,
-      "views": 670,
+      "commentsAmount": 1,
+      "views": 673,
       "content": [
         {
           "type": "IMAGE",
@@ -242,8 +228,8 @@
         }
       },
       "likesAmount": 5,
-      "commentsAmount": 2,
-      "views": 34900,
+      "commentsAmount": 1,
+      "views": 34903,
       "content": [
         {
           "type": "IMAGE",
@@ -271,7 +257,7 @@
         }
       },
       "likesAmount": 85,
-      "commentsAmount": 3,
+      "commentsAmount": 0,
       "views": 2234,
       "content": [
         {
@@ -300,7 +286,7 @@
         }
       },
       "likesAmount": 5874,
-      "commentsAmount": 43,
+      "commentsAmount": 0,
       "views": 28934,
       "content": [
         {
@@ -347,7 +333,7 @@
         }
       },
       "likesAmount": 86,
-      "commentsAmount": 76,
+      "commentsAmount": 0,
       "views": 9230,
       "content": [
         {
@@ -380,7 +366,7 @@
         }
       },
       "likesAmount": 55,
-      "commentsAmount": 45,
+      "commentsAmount": 0,
       "views": 26734,
       "content": [
         {
@@ -416,7 +402,7 @@
       },
       "likesAmount": 1,
       "commentsAmount": 0,
-      "views": 0,
+      "views": 22,
       "isLiked": true,
       "id": 1673
     },
@@ -467,6 +453,140 @@
       "views": 0,
       "isLiked": false,
       "id": 1675
+    },
+    {
+      "title": "sadadasdad asdasda s",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "timestamp": 1690880102966,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 0,
+      "commentsAmount": 0,
+      "views": 0,
+      "isLiked": false,
+      "id": 1676
+    },
+    {
+      "title": "Еще один пост, теперь на русском",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "timestamp": 1690880137940,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 0,
+      "commentsAmount": 0,
+      "views": 0,
+      "isLiked": false,
+      "id": 1677
+    },
+    {
+      "title": "АХАХХАХАХАХАХХААХАХ",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "timestamp": 1691019271028,
+      "author": {
+        "name": "Vera_xxx",
+        "id": 23,
+        "avatar": {
+          "src": "https://i.pinimg.com/originals/85/70/2b/85702b6d8d71518b6feb0c636081f26d.jpg",
+          "alt": ""
+        }
+      },
+      "likesAmount": 1,
+      "commentsAmount": 0,
+      "views": 6,
+      "isLiked": true,
+      "id": 1678
+    }
+  ],
+  "comments": [
+    {
+      "text": " dfdsgfdf gdfs gd",
+      "post_id": 12,
+      "likes": 0,
+      "timestamp": 1691021839347,
+      "author": {
+        "name": "Sergey",
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        },
+        "id": 1
+      },
+      "id": 1
+    },
+    {
+      "text": "Еще один комментарий!",
+      "post_id": 12,
+      "likes": 0,
+      "timestamp": 1691021857506,
+      "author": {
+        "name": "Sergey",
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        },
+        "id": 1
+      },
+      "id": 2
+    },
+    {
+      "text": "Ура! котики",
+      "post_id": 34,
+      "likes": 0,
+      "timestamp": 1691021884082,
+      "author": {
+        "name": "Sergey",
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        },
+        "id": 1
+      },
+      "id": 3
+    },
+    {
+      "text": "мдэээ",
+      "post_id": 16,
+      "likes": 0,
+      "timestamp": 1691021922322,
+      "author": {
+        "name": "Sergey",
+        "avatar": {
+          "src": "https://www.clubvillamar.com/blog/wp-content/uploads/2018/01/mountain-hiking-1.jpg",
+          "alt": ""
+        },
+        "id": 1
+      },
+      "id": 4
     }
   ]
 }

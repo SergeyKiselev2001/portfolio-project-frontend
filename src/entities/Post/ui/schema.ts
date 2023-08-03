@@ -20,6 +20,7 @@ export enum ContentType {
 }
 
 export interface INewPost {
+  isPostPage?: boolean
   isProfilePage?: boolean
   isLast: boolean
   getNextPosts: VoidFunction

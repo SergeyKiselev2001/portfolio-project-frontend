@@ -9,7 +9,7 @@ const PostContent = (props: IPostContent) => {
   return (
     <div className={classes.PostContent}>
       <div className={classes.title}>
-        <a target="_blank" rel="noreferrer" href={`/media/${id}`}>
+        <a target="_blank" rel="noreferrer" href={`/post/${id}`}>
           {title}
         </a>
       </div>

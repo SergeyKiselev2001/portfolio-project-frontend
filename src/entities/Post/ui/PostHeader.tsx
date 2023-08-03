@@ -6,6 +6,7 @@ import { TimeFormat, timeConverter } from '@shared/utils'
 import { Link } from 'react-router-dom'
 
 interface IPostHeader {
+  isPostPage?: boolean
   id: number
   timestamp: number
   author: {
@@ -19,7 +20,7 @@ interface IPostHeader {
 }
 
 const PostHeader = (props: IPostHeader) => {
-  const { timestamp, author, id } = props
+  const { timestamp, author, id, isPostPage } = props
   const { avatar, name } = author
 
   const body = document.getElementsByTagName('body')[0]
@@ -48,7 +49,7 @@ const PostHeader = (props: IPostHeader) => {
   return (
     <div className={classes.PostHeader}>
       <div className={classes.leftHeader}>
-        <Link to={`@${name}`}>
+        <Link to={`/@${name}`}>
           <img className={classes.avatar} {...avatar} />
         </Link>
 
@@ -59,20 +60,22 @@ const PostHeader = (props: IPostHeader) => {
           </time>
         </div>
       </div>
-      <div className={classes.rightHeader}>
-        <img
-          onClick={toggleOptions}
-          className={classes.dots}
-          src={dots}
-          alt="dots"
-        />
-        {showOptions && (
-          <div className={classes.options}>
-            <span onClick={hidePost}>Скрыть</span>
-            <span onClick={reportPost}>Пожаловаться</span>
-          </div>
-        )}
-      </div>
+      {!isPostPage && (
+        <div className={classes.rightHeader}>
+          <img
+            onClick={toggleOptions}
+            className={classes.dots}
+            src={dots}
+            alt="dots"
+          />
+          {showOptions && (
+            <div className={classes.options}>
+              <span onClick={hidePost}>Скрыть</span>
+              <span onClick={reportPost}>Пожаловаться</span>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   )
 }

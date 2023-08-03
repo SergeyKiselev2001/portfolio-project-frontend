@@ -19,6 +19,16 @@ class Post implements IPosts {
     makeAutoObservable(this)
   }
 
+  async getPostById(id: string) {
+    await tryRequest(async () => {
+      const result = (await api.get(`/posts/${id}`)) as {
+        data: INewPost
+      }
+
+      this.posts = [result.data]
+    })
+  }
+
   async getPosts(query: QueryParamsObj[]) {
     await tryRequest(async () => {
       const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
@@ -118,6 +128,14 @@ class Post implements IPosts {
       )
 
       onCreate(data.id)
+    })
+  }
+
+  async addViewCounter(postId: string) {
+    await tryRequest(async () => {
+      await api.post(`/posts/${postId}`, {
+        addViewCounter: true,
+      })
     })
   }
 

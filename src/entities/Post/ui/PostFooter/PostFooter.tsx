@@ -7,10 +7,11 @@ import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { posts } from '@entities/Post'
-import { mainPage } from '@pages/MainPage'
 import { Link } from 'react-router-dom'
+import { blockSideInfo } from '@widgets/BlockSideInfo'
 
 interface IPostFooter {
+  isPostPage?: boolean
   id: number
   likesAmount: number
   commentsAmount: number
@@ -20,7 +21,8 @@ interface IPostFooter {
 }
 
 const PostFooter = (props: IPostFooter) => {
-  const { likesAmount, commentsAmount, tags, views, id, isLiked } = props
+  const { likesAmount, commentsAmount, isPostPage, tags, views, id, isLiked } =
+    props
 
   const [linkCopied, setLinkCopied] = useState(false)
   const [currentLikes, setCurrentLikes] = useState(likesAmount)
@@ -44,7 +46,7 @@ const PostFooter = (props: IPostFooter) => {
   }, [])
 
   const copyPath = () => {
-    navigator.clipboard.writeText(`${CLIENT}media/${id}`)
+    navigator.clipboard.writeText(`${CLIENT}post/${id}`)
     setLinkCopied(true)
     toast.success('Ссылка скопирована')
   }
@@ -63,7 +65,7 @@ const PostFooter = (props: IPostFooter) => {
 
   const likePost = () => {
     if (!getStorageItem(StorageKeys.AUTH)) {
-      mainPage.toggleLoginModal()
+      blockSideInfo.toggleLoginModal()
     } else {
       toggleLikes()
     }
@@ -85,9 +87,16 @@ const PostFooter = (props: IPostFooter) => {
             <img src={heartImage} alt="" />
             <span>{currentLikes}</span>
           </button>
-          <Link to={`/media/${id}#comments`} className={classes.comments}>
-            {commentsAmount}
-          </Link>
+          {!isPostPage && (
+            <Link
+              target="_blank"
+              to={`/post/${id}#comments`}
+              className={classes.comments}
+            >
+              {commentsAmount}
+            </Link>
+          )}
+
           <button className={classes.save} />
           <button
             onClick={copyPath}
