@@ -127,6 +127,7 @@ class Post implements IPosts {
         getApiHeader()
       )
 
+      this.posts = []
       onCreate(data.id)
     })
   }

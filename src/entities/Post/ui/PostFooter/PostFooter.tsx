@@ -9,6 +9,7 @@ import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 import { posts } from '@entities/Post'
 import { Link } from 'react-router-dom'
 import { blockSideInfo } from '@widgets/BlockSideInfo'
+import { me } from '@entities/me'
 
 interface IPostFooter {
   isPostPage?: boolean
@@ -79,9 +80,7 @@ const PostFooter = (props: IPostFooter) => {
           <button
             onClick={likePost}
             className={`${classes.likes} ${
-              currentIsLiked && getStorageItem(StorageKeys.AUTH)
-                ? classes.isLiked
-                : ''
+              currentIsLiked && me.login ? classes.isLiked : ''
             }`}
           >
             <img src={heartImage} alt="" />

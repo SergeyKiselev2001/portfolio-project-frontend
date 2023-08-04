@@ -15,6 +15,7 @@ import {
 import { DEFAULT_NS } from '@shared/constants'
 import { Modal } from '@widgets/Modal'
 import { HeaderColor } from '@entities/HeaderColor'
+import { StorageKeys } from '@entities/clientStorage'
 
 interface IProfileInfo {
   user: IUserState
@@ -26,7 +27,6 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
   const isMe = me.login == login
 
   const [subscribed, setSubscribed] = useState(false)
-  //const [showStatusModal, setShowStatusModal] = useState(false)
   const [showHeaderModal, setShowHeaderModal] = useState(false)
   const [newStatus, setNewStatus] = useState(status || '')
   const { t } = useTranslation(i18Chunks.PROFILE)
@@ -39,10 +39,6 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
     currentProfile.subscribeOnUser(me.id)
     setSubscribed((prev) => !prev)
   }
-
-  // const toggleStatusModalHandle = () => {
-  //   setShowStatusModal((prev) => !prev)
-  // }
 
   const newStatusHandle = (e: InputChange) => {
     setNewStatus(e.target.value)
@@ -60,6 +56,12 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
   const changeThemeHandle = async (color: HeaderTheme) => {
     await me.updateTheme(color)
     toggleHeaderModalHandle()
+  }
+
+  const logoutHandle = () => {
+    localStorage.removeItem(StorageKeys.AUTH)
+    sessionStorage.removeItem(StorageKeys.AUTH)
+    location.reload()
   }
 
   return (
@@ -103,21 +105,13 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
               <LangSwitcher />
               <ThemeSwitcher />
             </div>
-            {/* <div className={classes.changes}>
-              <button onClick={toggleStatusModalHandle}>Сменить статус</button>
-              <button>Сменить шапку профиля</button>
-            </div> */}
+
+            <button onClick={logoutHandle} className={classes.logout}>
+              Выйти из профиля
+            </button>
           </div>
         )}
       </div>
-      {/* {showStatusModal && (
-        <Modal onclose={toggleStatusModalHandle}>
-          <div>
-            <input type="text" value={newStatus} onChange={newStatusHandle} />
-            <button onClick={updateStatus}>Save</button>
-          </div>
-        </Modal>
-      )} */}
       {showHeaderModal && (
         <Modal onclose={toggleHeaderModalHandle}>
           <div className={classes.modal_wrapper}>

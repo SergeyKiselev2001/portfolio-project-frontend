@@ -13,8 +13,12 @@ import { clsx } from '@shared/utils'
 import { UserPosts } from './UserPosts'
 import { UserSaved } from './UserSaved'
 import { UserSubscriptions } from './UserSubscriptions'
+import { blockSideInfo } from '@widgets/BlockSideInfo'
+import { Modal } from '@widgets/Modal'
+import { Login } from '@widgets/Login'
+import { observer } from 'mobx-react-lite'
 
-const ProfilePage = () => {
+const ProfilePage = observer(() => {
   const params = useParams() as {
     user: string
   }
@@ -48,6 +52,16 @@ const ProfilePage = () => {
 
   const setActive = (page: ActivePage) => {
     setActivePage(page)
+  }
+
+  const closeModal = () => {
+    blockSideInfo.toggleLoginModal()
+  }
+
+  const onLogin = () => {
+    blockSideInfo.toggleLoginModal()
+    const body = document.getElementsByTagName('body')[0]
+    body.style.overflow = 'auto'
   }
 
   return (
@@ -106,8 +120,14 @@ const ProfilePage = () => {
       {!spinner && !user.login && (
         <ErrorPage message={`${t(i18Keys.USER_NOT_FOUND)}`} />
       )}
+
+      {blockSideInfo.showLoginModal && (
+        <Modal onclose={closeModal}>
+          <Login onLogin={onLogin} />
+        </Modal>
+      )}
     </div>
   )
-}
+})
 
 export default withHeader(ProfilePage)
