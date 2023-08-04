@@ -2,11 +2,6 @@ export interface ICommentsState {
   comments: IComment[]
 }
 
-export interface ICommentToSend {
-  post_id: number
-  text: string
-}
-
 export interface IComment {
   id: number
   post_id: number

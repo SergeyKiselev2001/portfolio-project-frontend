@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx'
-import { IComment, ICommentToSend, ICommentsState } from './schema'
+import { IComment, ICommentsState } from './schema'
 import { getApiHeader, tryRequest, urlConverter } from '@shared/utils'
 import { api } from '@app/api'
 import { QueryParamsObj } from '@entities/Post'
 import { QueryParams } from '@app/config/router'
-import { me } from '@entities/me'
+import { toast } from 'react-toastify'
 
 class Comments implements ICommentsState {
   limit = 5
@@ -26,40 +26,44 @@ class Comments implements ICommentsState {
         }
       }
 
-      this.amountOfComments = Math.ceil(
-        result.headers['x-total-count'] / this.limit
-      )
+      this.amountOfComments = result.headers['x-total-count']
 
       this.comments = result.data
     })
   }
 
-  sendComment = async (comment: ICommentToSend) => {
+  getRestComments = async (query: QueryParamsObj[]) => {
     await tryRequest(async () => {
-      const { avatar, id, login } = me
-      const author = {
-        name: login,
-        avatar,
-        id,
+      query = [
+        ...query,
+        [QueryParams.START, `${this.limit}`],
+        [QueryParams.END, `${this.amountOfComments}`],
+      ]
+
+      const result = (await api.get(urlConverter('/comments', query))) as {
+        data: IComment[]
       }
 
-      const myComment = {
-        text: comment.text,
-        post_id: comment.post_id,
-        likes: 0,
-        timestamp: +new Date(),
-        author,
-      } as Omit<IComment, 'id'>
-
-      await api.post('/comments', myComment, getApiHeader())
-      await api.post(
-        `/posts/${comment.post_id}`,
-        {
-          incrementCommentsCounter: true,
-        },
-        getApiHeader()
-      )
+      this.comments = [...this.comments, ...result.data]
     })
+  }
+
+  sendComment = async (comment: Omit<IComment, 'id'>) => {
+    await tryRequest(
+      async () => {
+        await api.post('/comments', comment, getApiHeader())
+        await api.post(
+          `/posts/${comment.post_id}`,
+          { incrementCommentsCounter: true },
+          getApiHeader()
+        )
+        this.amountOfComments = +this.amountOfComments + 1
+        toast.success('Комментарий добавлен')
+      },
+      () => {
+        toast.error('Произошла ошибка на сервере, попробуйте еще раз')
+      }
+    )
   }
 }
 

@@ -1,7 +1,7 @@
 import { withHeader } from '@shared/hocs/withHeader'
 import classes from './PostPage.module.scss'
 import { useParams } from 'react-router'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { Comments, comments } from '@entities/Comments'
 import { QueryParams } from '@app/config/router'
 import { Post, posts } from '@entities/Post'
@@ -10,11 +10,29 @@ import { PostSkeleton } from '@entities/PostSkeleton'
 import { BlockSideInfo, blockSideInfo } from '@widgets/BlockSideInfo'
 import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
+import { IComment } from '@entities/Comments/store/schema'
+import { me } from '@entities/me'
+import { clsx } from '@shared/utils'
+import { toast } from 'react-toastify'
 
 const PostPage = observer(() => {
   const params = useParams() as unknown as {
     id: string
   }
+
+  const [currentComments, setCurrentComments] = useState([] as IComment[])
+  const [showAllButton, setShowAllButton] = useState(false)
+  const [isCommentPending, setIsCommentPending] = useState(false)
+  const showRestRef = useRef(true)
+
+  useEffect(() => {
+    setCurrentComments(comments.comments)
+
+    if (showRestRef.current && comments.amountOfComments) {
+      setShowAllButton(comments.amountOfComments > comments.limit)
+      showRestRef.current = false
+    }
+  }, [comments.comments])
 
   const [myComment, setMyComment] = useState('')
 
@@ -22,12 +40,38 @@ const PostPage = observer(() => {
     setMyComment(e.target.value)
   }
 
-  const sendComment = (e: React.MouseEvent) => {
-    e.preventDefault()
-    comments.sendComment({
-      post_id: +params.id,
+  const sendComment = async () => {
+    if (!me.login) {
+      blockSideInfo.toggleLoginModal()
+      return
+    }
+
+    if (myComment.length < 3) {
+      toast.error('Комментарий должен содержать более 3х символов')
+      return
+    }
+
+    setIsCommentPending(true)
+
+    const { avatar, id, login } = me
+
+    const myNewComment = {
       text: myComment,
-    })
+      post_id: +params.id,
+      likes: 0,
+      timestamp: +new Date(),
+      author: { name: login, id, avatar },
+    } as Omit<IComment, 'id'>
+
+    await comments.sendComment(myNewComment)
+
+    setCurrentComments([
+      ...currentComments,
+      { ...myNewComment, id: Math.random() },
+    ])
+
+    setMyComment('')
+    setIsCommentPending(false)
   }
 
   useEffect(() => {
@@ -46,6 +90,11 @@ const PostPage = observer(() => {
     body.style.overflow = 'auto'
   }
 
+  const showAllComments = async () => {
+    await comments.getRestComments([[QueryParams.POST_ID, params.id]])
+    setShowAllButton(false)
+  }
+
   return (
     <div className={classes.PostPage}>
       <div className={classes.content_wrapper}>
@@ -55,10 +104,32 @@ const PostPage = observer(() => {
           ) : (
             <PostSkeleton />
           )}
-          <Comments comments={comments.comments} />
+          {currentComments.length > 0 && (
+            <Comments comments={currentComments} />
+          )}
+          {showAllButton && (
+            <button onClick={showAllComments} className={classes.show_all}>
+              {`Показать оставшиеся комментарии (${
+                comments.amountOfComments - comments.limit
+              })`}
+            </button>
+          )}
+
           <form className={classes.sendComment}>
-            <input value={myComment} onChange={changeComment} type="text" />
-            <button onClick={sendComment}>send comment</button>
+            <textarea
+              placeholder="Введите текст комментария..."
+              className={classes.textarea}
+              value={myComment}
+              onChange={changeComment}
+            />
+            <button
+              className={clsx({ [classes.pending]: isCommentPending })}
+              type="button"
+              disabled={isCommentPending}
+              onClick={sendComment}
+            >
+              Отправить
+            </button>
           </form>
         </div>
         <BlockSideInfo />
