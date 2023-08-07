@@ -27,7 +27,7 @@ export interface INewPost extends IPostContent {
   getNextPosts: VoidFunction
   timestamp: number
   author: {
-    name: string
+    login: string
     id: number
     avatar: {
       src: string

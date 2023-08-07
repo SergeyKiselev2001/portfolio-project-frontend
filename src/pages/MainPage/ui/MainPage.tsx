@@ -23,7 +23,7 @@ const MainPage = observer(() => {
     HeaderPage.setCurrentPage(RouterPaths.MAIN)
     ;(async () => {
       await posts.getPosts([
-        [QueryParams.TAGS, searchParams.get(QueryParams.TAGS)],
+        [QueryParams.TAG, searchParams.get(QueryParams.TAG)],
       ])
       setSpinner(false)
     })()
@@ -44,7 +44,7 @@ const MainPage = observer(() => {
     setShowNewSkeletons(true)
     ;(async () => {
       await posts.getNextPosts([
-        [QueryParams.TAGS, searchParams.get(QueryParams.TAGS)],
+        [QueryParams.TAG, searchParams.get(QueryParams.TAG)],
       ])
 
       setShowNewSkeletons(false)

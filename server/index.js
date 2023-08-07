@@ -2,7 +2,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const jsonServer = require('json-server')
-
 const { jwtPairs } = require('./src/jwtPairs')
 const {
   checkAuth,
@@ -10,19 +9,13 @@ const {
   getDB,
   getUserNameByHeaderJWT,
 } = require('./src/utils')
-
-const { userInfo_GET } = require('./src/userInfo')
-const { comments_POST } = require('./src/comments')
-const {
-  posts_GET,
-  post_like_POST,
-  post_dislike_DELETE,
-} = require('./src/posts')
+const Comments = require('./src/comments')
+const Posts = require('./src/posts')
+const Users = require('./src/users')
 
 const path = require('path')
 
 const server = jsonServer.create()
-
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'))
 
 server.use(jsonServer.defaults({}))
@@ -36,69 +29,14 @@ server.use(async (req, res, next) => {
   next()
 })
 
-server.get('/userInfo', userInfo_GET)
-server.post('/comments', comments_POST)
-server.get('/posts', posts_GET)
-server.post('/posts/:id/like', post_like_POST)
-server.delete('/posts/:id/dislike', post_dislike_DELETE)
-
-// ADD COMMENTS COUNTER
-// server.post('/posts/:id', function (req, res, next) {
-//   if (!req.body['incrementCommentsCounter']) {
-//     next()
-//     return
-//   }
-
-//   const { posts = [] } = getDB()
-//   const postFromBd = posts.find((post) => post.id == req.params.id)
-
-//   if (!postFromBd) {
-//     next()
-//     return
-//   }
-
-//   req.method = 'PUT'
-
-//   req.body = {
-//     ...postFromBd,
-//     commentsAmount: postFromBd.commentsAmount + 1,
-//   }
-
-//   next()
-// })
-
-// PUBPLISH POST
-server.post('/posts', function (req, res, next) {
-  checkAuth(req, res)
-  if (!req.body['createPost']) {
-    next()
-    return
-  }
-
-  const { users = [] } = getDB()
-
-  const userFromBd = users.find(
-    (user) => user.login == getUserNameByHeaderJWT(req)
-  )
-
-  const { createPost, ...createPostDto } = req.body
-
-  req.body = {
-    ...createPostDto,
-    timestamp: Date.now(),
-    author: {
-      name: userFromBd.login,
-      id: userFromBd.id,
-      avatar: userFromBd.avatar,
-    },
-    likesAmount: 0,
-    commentsAmount: 0,
-    views: 0,
-    isLiked: false,
-  }
-
-  next()
-})
+server.get('/users/me', Users.getMyPersonalInfo)
+server.get('/users/:name', Users.getUserInfoByName)
+//server.post('/comments', Comments.createComment)
+server.get('/posts', Posts.getPosts)
+server.get('/posts/:id', Posts.getPostById)
+server.post('/posts/create', Posts.createPost)
+server.post('/posts/:id/like', Posts.likePost)
+server.delete('/posts/:id/dislike', Posts.dislikePost)
 
 // PROFILE SUBSCRIPTION
 server.post('/users/:id', function (req, res, next) {
@@ -110,13 +48,13 @@ server.post('/users/:id', function (req, res, next) {
 
   const { users = [] } = getDB()
 
-  const userFromBd = users.find((user) => user.id == req.params.id)
+  const userFromDB = users.find((user) => user.id == req.params.id)
 
   req.body = {
-    ...userFromBd,
+    ...userFromDB,
     subscriptions: {
-      ...userFromBd.subscriptions,
-      users: [...userFromBd.subscriptions.users, req.body.subscribeOnUser],
+      ...userFromDB.subscriptions,
+      users: [...userFromDB.subscriptions.users, req.body.subscribeOnUser],
     },
   }
 
@@ -134,44 +72,19 @@ server.post('/users/:id', function (req, res, next) {
 
   const { users = [] } = getDB()
 
-  const userFromBd = users.find((user) => user.id == req.params.id)
+  const userFromDB = users.find((user) => user.id == req.params.id)
 
   req.body = {
-    ...userFromBd,
+    ...userFromDB,
     subscriptions: {
-      ...userFromBd.subscriptions,
-      users: userFromBd.subscriptions.users.filter(
+      ...userFromDB.subscriptions,
+      users: userFromDB.subscriptions.users.filter(
         (user) => user != req.body.unsubscribeFromUser
       ),
     },
   }
 
   req.method = 'PUT'
-  next()
-})
-
-// ADD VIEW COUNTER - POST
-server.post('/posts/:id', function (req, res, next) {
-  if (!req.body['addViewCounter']) {
-    next()
-    return
-  }
-
-  const { posts = [] } = getDB()
-  const postFromBd = posts.find((post) => post.id == req.params.id)
-
-  if (!postFromBd) {
-    next()
-    return
-  }
-
-  req.method = 'PUT'
-
-  req.body = {
-    ...postFromBd,
-    views: postFromBd.views + 1,
-  }
-
   next()
 })
 
@@ -184,9 +97,9 @@ server.post('/users/:id', function (req, res, next) {
   }
 
   const { users = [] } = getDB()
-  const userFromBd = users.find((user) => user.id == req.params.id)
+  const userFromDB = users.find((user) => user.id == req.params.id)
 
-  if (!userFromBd) {
+  if (!userFromDB) {
     next()
     return
   }
@@ -194,7 +107,7 @@ server.post('/users/:id', function (req, res, next) {
   req.method = 'PUT'
 
   req.body = {
-    ...userFromBd,
+    ...userFromDB,
     status: req.body.newStatus,
   }
 
@@ -210,9 +123,9 @@ server.post('/users/:id', function (req, res, next) {
   }
 
   const { users = [] } = getDB()
-  const userFromBd = users.find((user) => user.id == req.params.id)
+  const userFromDB = users.find((user) => user.id == req.params.id)
 
-  if (!userFromBd) {
+  if (!userFromDB) {
     next()
     return
   }
@@ -220,7 +133,7 @@ server.post('/users/:id', function (req, res, next) {
   req.method = 'PUT'
 
   req.body = {
-    ...userFromBd,
+    ...userFromDB,
     headerTheme: req.body.headerTheme,
   }
 
@@ -269,11 +182,11 @@ server.post('/users/:id', function (req, res, next) {
 
   const { users = [] } = getDB()
 
-  const userFromBd = users.find(
+  const userFromDB = users.find(
     (user) => user.login == getUserNameByHeaderJWT(req)
   )
 
-  if (!userFromBd) {
+  if (!userFromDB) {
     next()
     return
   }
@@ -282,14 +195,14 @@ server.post('/users/:id', function (req, res, next) {
     req.method = 'PUT'
     if (req.body.tagSubscription.newValue) {
       const newSubs = [
-        ...userFromBd.subscriptions.tags,
+        ...userFromDB.subscriptions.tags,
         req.body.tagSubscription.type,
       ]
       const uniqSubs = [...new Set(newSubs)]
       const newBody = {
-        ...userFromBd,
+        ...userFromDB,
         subscriptions: {
-          ...userFromBd.subscriptions,
+          ...userFromDB.subscriptions,
           tags: uniqSubs,
         },
       }
@@ -297,15 +210,15 @@ server.post('/users/:id', function (req, res, next) {
       req.body = newBody
     } else {
       const newSubs = [
-        ...userFromBd.subscriptions.tags.filter(
+        ...userFromDB.subscriptions.tags.filter(
           (tag) => tag != req.body.tagSubscription.type
         ),
       ]
 
       const newBody = {
-        ...userFromBd,
+        ...userFromDB,
         subscriptions: {
-          ...userFromBd.subscriptions,
+          ...userFromDB.subscriptions,
           tags: newSubs,
         },
       }
@@ -317,14 +230,14 @@ server.post('/users/:id', function (req, res, next) {
   if (req.body.tagBlocks) {
     req.method = 'PUT'
     if (req.body.tagBlocks.newValue) {
-      const newTags = [...userFromBd.ignoreList.tags, req.body.tagBlocks.type]
+      const newTags = [...userFromDB.ignoreList.tags, req.body.tagBlocks.type]
       const uniqTags = [...new Set(newTags)]
 
       const newBody = {
-        ...userFromBd,
+        ...userFromDB,
 
         ignoreList: {
-          ...userFromBd.ignoreList,
+          ...userFromDB.ignoreList,
           tags: uniqTags,
         },
       }
@@ -332,15 +245,15 @@ server.post('/users/:id', function (req, res, next) {
       req.body = newBody
     } else {
       const newTags = [
-        ...userFromBd.ignoreList.tags.filter(
+        ...userFromDB.ignoreList.tags.filter(
           (tag) => tag != req.body.tagBlocks.type
         ),
       ]
 
       const newBody = {
-        ...userFromBd,
+        ...userFromDB,
         ignoreList: {
-          ...userFromBd.ignoreList,
+          ...userFromDB.ignoreList,
           tags: newTags,
         },
       }
@@ -361,22 +274,22 @@ server.post('/users/:id', function (req, res, next) {
 
   const { users = [] } = getDB()
 
-  const userFromBd = users.find(
+  const userFromDB = users.find(
     (user) => user.login == getUserNameByHeaderJWT(req)
   )
 
-  if (!userFromBd) {
+  if (!userFromDB) {
     next()
     return
   }
 
   req.method = 'PUT'
 
-  const newSaved = [...userFromBd.savedPosts, req.body.savePost]
+  const newSaved = [...userFromDB.savedPosts, req.body.savePost]
   const uniqSaved = [...new Set(newSaved)]
 
   const newBody = {
-    ...userFromBd,
+    ...userFromDB,
     savedPosts: uniqSaved,
   }
 
@@ -394,93 +307,24 @@ server.post('/users/:id', function (req, res, next) {
 
   const { users = [] } = getDB()
 
-  const userFromBd = users.find(
+  const userFromDB = users.find(
     (user) => user.login == getUserNameByHeaderJWT(req)
   )
 
-  if (!userFromBd) {
+  if (!userFromDB) {
     next()
     return
   }
 
   req.method = 'PUT'
 
-  const newSaved = userFromBd.savedPosts.filter(
+  const newSaved = userFromDB.savedPosts.filter(
     (el) => el != req.body.removeFromSaved
   )
 
   const newBody = {
-    ...userFromBd,
+    ...userFromDB,
     savedPosts: newSaved,
-  }
-
-  req.body = newBody
-  next()
-})
-
-// LIKE POST NEEEEEEEEEW
-server.post('/users/:id', function (req, res, next) {
-  checkAuth(req, res)
-  if (!req.body.likePost) {
-    next()
-    return
-  }
-
-  const { users = [] } = getDB()
-
-  const userFromBd = users.find(
-    (user) => user.login == getUserNameByHeaderJWT(req)
-  )
-
-  if (!userFromBd) {
-    next()
-    return
-  }
-
-  req.method = 'PUT'
-
-  const newLiked = [...userFromBd.likedPosts, req.body.likePost]
-  const uniqLiked = [...new Set(newLiked)]
-
-  const newBody = {
-    ...userFromBd,
-    likedPosts: uniqLiked,
-  }
-
-  req.body = newBody
-  next()
-})
-
-// UNLIKE POST NEEEEEEEEEW
-server.post('/users/:id', function (req, res, next) {
-  checkAuth(req, res)
-  if (!req.body.removeLikeFromPost) {
-    next()
-    return
-  }
-
-  const { users = [] } = getDB()
-
-  const userFromBd = users.find(
-    (user) => user.login == getUserNameByHeaderJWT(req)
-  )
-
-  if (!userFromBd) {
-    next()
-    return
-  }
-
-  req.method = 'PUT'
-
-  const newLiked = userFromBd.likedPosts.filter(
-    (el) => el != req.body.removeLikeFromPost
-  )
-
-  const uniqLiked = [...new Set(newLiked)]
-
-  const newBody = {
-    ...userFromBd,
-    likedPosts: uniqLiked,
   }
 
   req.body = newBody
@@ -497,9 +341,9 @@ server.post('/user/:name/subscribe', (req, res, next) => {
 
     const userName = jwtPairs.find(({ tokens }) => tokens.token == token).user
 
-    const userFromBd = users.find((user) => user.login === userName)
+    const userFromDB = users.find((user) => user.login === userName)
 
-    if (userFromBd) {
+    if (userFromDB) {
       const newData = {
         ...getDB(),
       }
@@ -522,45 +366,18 @@ server.post('/user/:name/subscribe', (req, res, next) => {
   }
 })
 
-server.get('/user/:name', (req, res) => {
-  try {
-    const { name } = req.params
-    const { users = [] } = getDB()
-
-    const userFromBd = users.find((user) => user.login === name)
-
-    if (userFromBd) {
-      const { systemRole, avatar, status, subscriptions, headerTheme } =
-        userFromBd
-      return res.json({
-        userInfo: {
-          headerTheme,
-          systemRole,
-          avatar,
-          status,
-          subscriptions,
-        },
-      })
-    } else {
-      return res.status(403).json({ message: 'User not found' })
-    }
-  } catch (e) {
-    return res.status(500).json({ message: e.message })
-  }
-})
-
 // Эндпоинт для логина
 server.post('/login', (req, res) => {
   try {
     const { login, password } = req.body
     const { users = [] } = getDB()
-    const userFromBd = users.find(
+    const userFromDB = users.find(
       (user) => user.login === login && user.password === password
     )
 
-    const { systemRole, avatar, newNotifications, headerTheme } = userFromBd
+    const { systemRole, avatar, newNotifications, headerTheme } = userFromDB
 
-    if (userFromBd) {
+    if (userFromDB) {
       return res.json({
         ...jwtPairs.find(({ user }) => user == login).tokens,
         userInfo: {

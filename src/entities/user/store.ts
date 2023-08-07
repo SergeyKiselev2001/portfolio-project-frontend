@@ -8,7 +8,6 @@ export class User implements IUserState {
   id = 0
   login = ''
   status = ''
-  followersAmount = 0
   headerTheme = HeaderTheme.DEFAULT
   subscribed = false
   subscriptions = {
@@ -27,9 +26,9 @@ export class User implements IUserState {
 
   getUserInfo = async (name: string) => {
     await tryRequest(async () => {
-      const data = await api.get(`/user/${name}`)
+      const data = await api.get(`/users/${name}`)
 
-      this.setUserInfo(data.data.userInfo)
+      this.setUserInfo(data.data)
       this.login = name
     })
   }

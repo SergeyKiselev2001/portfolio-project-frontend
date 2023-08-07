@@ -3,27 +3,25 @@ import { IMeState } from './schema'
 import { getApiHeader, tryRequest } from '@shared/utils'
 import { api } from '@app/api'
 import { HeaderTheme, SystemRoles, user } from '@entities/user'
+import { StorageKeys } from '@entities/clientStorage'
 
 class Me implements IMeState {
   id = 0
   login = ''
-  followersAmount = 0
   headerTheme = HeaderTheme.DEFAULT
   subscriptions = {
     users: [],
     tags: [],
   }
+  followersAmount = 0
   ignoreList = {
     tags: [],
   }
   systemRole = SystemRoles.USER
-  newNotifications = false
   avatar = {
     src: '',
     alt: '',
   }
-  savedPosts = []
-  likedPosts = []
 
   constructor() {
     makeAutoObservable(this)
@@ -31,9 +29,14 @@ class Me implements IMeState {
 
   getUserInfoByJWT = async () => {
     await tryRequest(async () => {
-      const data = await api.get('/userInfo', getApiHeader())
+      if (
+        localStorage.getItem(StorageKeys.AUTH) ||
+        sessionStorage.getItem(StorageKeys.AUTH)
+      ) {
+        const data = await api.get('/users/me', getApiHeader())
 
-      this.setUserInfo(data.data)
+        this.setUserInfo(data.data)
+      }
     })
   }
 
@@ -74,22 +77,6 @@ class Me implements IMeState {
       )
     })
   }
-
-  // likePost = async (postId: number) => {
-  //   await tryRequest(async () => {
-  //     await api.post(`/users/${this.id}`, { likePost: postId }, getApiHeader())
-  //   })
-  // }
-
-  // removeLikeFromPost = async (postId: number) => {
-  //   await tryRequest(async () => {
-  //     await api.post(
-  //       `/users/${this.id}`,
-  //       { removeLikeFromPost: postId },
-  //       getApiHeader()
-  //     )
-  //   })
-  // }
 }
 
 export default new Me()

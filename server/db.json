@@ -29,16 +29,6 @@
       "headerTheme": "Default",
       "savedPosts": [],
       "likedPosts": [],
-      "subscriptions": {
-        "users": [
-          "Vera_xxx",
-          "Kiselev_Sergey"
-        ],
-        "tags": [
-          "TECHNOLOGIES",
-          "ANIMALS"
-        ]
-      },
       "ignoreList": {
         "tags": [
           "TECHNOLOGIES",
@@ -60,16 +50,6 @@
       "headerTheme": "Orange",
       "savedPosts": [],
       "likedPosts": [],
-      "subscriptions": {
-        "users": [
-          "Vera_xxx"
-        ],
-        "tags": [
-          "ANIMALS",
-          "TECHNOLOGIES",
-          "HUMOR"
-        ]
-      },
       "ignoreList": {
         "tags": []
       },
@@ -88,14 +68,6 @@
       "headerTheme": "Gold",
       "savedPosts": [],
       "likedPosts": [],
-      "subscriptions": {
-        "users": [
-          "Vera_xxx"
-        ],
-        "tags": [
-          "TECHNOLOGIES"
-        ]
-      },
       "ignoreList": {
         "tags": [
           "HUMOR"
@@ -116,17 +88,6 @@
       "headerTheme": "Aqua",
       "savedPosts": [],
       "likedPosts": [],
-      "subscriptions": {
-        "users": [
-          "Kiselev_Sergey",
-          "Volibear"
-        ],
-        "tags": [
-          "TECHNOLOGIES",
-          "ANIMALS",
-          "HUMOR"
-        ]
-      },
       "ignoreList": {
         "tags": []
       },
@@ -330,6 +291,90 @@
       "author_id": 99,
       "views": 37,
       "id": 1679
+    },
+    {
+      "title": "ujhknn,",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "author_id": 23,
+      "timestamp": 1691410046804,
+      "views": 0,
+      "id": 1680
+    },
+    {
+      "title": "ggggggggg",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "author_id": 23,
+      "timestamp": 1691410093952,
+      "views": 0,
+      "id": 1681
+    },
+    {
+      "title": "fffffffffff",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "author_id": 23,
+      "timestamp": 1691410149023,
+      "views": 0,
+      "id": 1682
+    },
+    {
+      "title": "хкхкхккхкх",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "author_id": 23,
+      "timestamp": 1691410209445,
+      "views": 0,
+      "id": 1683
+    },
+    {
+      "title": "dada",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "author_id": 23,
+      "timestamp": 1691410953206,
+      "views": 0,
+      "id": 1684
+    },
+    {
+      "title": "POST BY ADMIN",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "author_id": 1,
+      "timestamp": 1691424542623,
+      "views": 0,
+      "id": 1685
     }
   ],
   "comments": [
@@ -341,12 +386,74 @@
       "timestamp": 1646868365913
     }
   ],
-  "likes": [],
-  "saves": [
+  "likes": [
+    {
+      "post_id": 12,
+      "user_id": 99,
+      "id": 1
+    },
+    {
+      "post_id": 1679,
+      "user_id": 99,
+      "id": 2
+    },
+    {
+      "post_id": 180,
+      "user_id": 99,
+      "id": 3
+    },
+    {
+      "post_id": 1685,
+      "user_id": 1,
+      "id": 4
+    },
+    {
+      "post_id": 12,
+      "user_id": 1,
+      "id": 5
+    },
+    {
+      "post_id": 14,
+      "user_id": 1,
+      "id": 6
+    },
+    {
+      "post_id": 16,
+      "user_id": 1,
+      "id": 7
+    },
+    {
+      "post_id": 1685,
+      "user_id": 99,
+      "id": 8
+    },
+    {
+      "post_id": 14,
+      "user_id": 99,
+      "id": 9
+    },
+    {
+      "post_id": 12,
+      "user_id": 23,
+      "id": 10
+    },
+    {
+      "post_id": 14,
+      "user_id": 23,
+      "id": 11
+    }
+  ],
+  "usersSubscriptions": [
     {
       "id": 0,
-      "post_id": 12,
-      "user_id": 1
+      "subscribed_by": 99,
+      "subscribed_on": 123
+    },
+    {
+      "id": 1,
+      "subscribed_by": 123,
+      "subscribed_on": 99
     }
-  ]
+  ],
+  "saves": []
 }
