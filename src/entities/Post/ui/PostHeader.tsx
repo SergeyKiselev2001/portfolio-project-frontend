@@ -11,7 +11,7 @@ interface IPostHeader {
   id: number
   timestamp: number
   author: {
-    name: string
+    login: string
     id: number
     avatar: {
       src: string
@@ -22,7 +22,7 @@ interface IPostHeader {
 
 const PostHeader = (props: IPostHeader) => {
   const { timestamp, author, id, isPostPage } = props
-  const { avatar, name } = author
+  const { avatar, login } = author
 
   const body = document.getElementsByTagName('body')[0]
 
@@ -54,12 +54,12 @@ const PostHeader = (props: IPostHeader) => {
   return (
     <div className={classes.PostHeader}>
       <div className={classes.leftHeader}>
-        <Link to={`/@${name}`}>
+        <Link to={`/@${login}`}>
           <img className={classes.avatar} {...avatar} />
         </Link>
 
         <div className={classes.info}>
-          <Link to={`/@${name}`}>{name}</Link>
+          <Link to={`/@${login}`}>{login}</Link>
           <time dateTime="<дата и время>">
             {timeConverter(timestamp, TimeFormat.FORMAT_1)}
           </time>
@@ -77,7 +77,7 @@ const PostHeader = (props: IPostHeader) => {
             <div className={classes.options}>
               <span onClick={hidePost}>Скрыть</span>
               <span onClick={reportPost}>Пожаловаться</span>
-              {me.login == author.name && (
+              {me.login == author.login && (
                 <span onClick={deletePost}>Удалить</span>
               )}
             </div>

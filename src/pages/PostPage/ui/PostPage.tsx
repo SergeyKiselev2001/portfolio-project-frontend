@@ -74,7 +74,7 @@ const PostPage = observer(() => {
   }
 
   useEffect(() => {
-    comments.getComments([[QueryParams.POST_ID, params.id]])
+    // comments.getComments([[QueryParams.POST_ID, params.id]])
     posts.getPostById(params.id)
   }, [])
 

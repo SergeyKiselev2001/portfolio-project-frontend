@@ -6,20 +6,11 @@ const { jwtPairs } = require('./jwtPairs')
 module.exports = {
   checkAuth: (req) => {
     const token = module.exports.clearToken(req)
-    console.log(req.headers.authorization, 'TIT')
-
-    console.log('TRACK CHECK AUTH', token.slice(0, 10))
-
     const result = jwtPairs.find(
       (el) => el.tokens.token.slice(0, 10) == token.slice(0, 10)
     )
 
-    console.log('TRACK CHECK AUTH 2', result?.id)
-    console.log(jwtPairs.map((el) => el.tokens.token.slice(0, 10)))
-
-    if (!result) {
-      return false
-    } else return true
+    return Boolean(result)
   },
 
   clearToken: (req) => {
@@ -40,9 +31,7 @@ module.exports = {
 
   getUserIdByHeaderJWT: (req) => {
     const token = module.exports.clearToken(req)
-    const result = jwtPairs.find(
-      (el) => el.tokens.token.slice(0, 10) == token.slice(0, 10)
-    )
+    const result = jwtPairs.find((el) => el.tokens.token == token)
 
     return result?.id
   },
@@ -58,5 +47,21 @@ module.exports = {
         timer = null
       }, timeout)
     }
+  },
+
+  r401: (res) => {
+    return res.status(401).json({ message: 'Unauthorized Error' })
+  },
+  r404: (res, message) => {
+    return res.status(401).json({ message: message || 'Not found' })
+  },
+  r500: (res, message) => {
+    return res.status(500).json({ message: message || 'Server error' })
+  },
+  r200: (res, result) => {
+    return res
+      .status(200)
+      .setHeader('Access-Control-Expose-Headers', '*')
+      .json(result || { message: 'Ok' })
   },
 }

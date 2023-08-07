@@ -22,7 +22,7 @@ class Post implements IPosts {
 
   async getPostById(id: string) {
     await tryRequest(async () => {
-      const result = (await api.get(`/posts/${id}`)) as {
+      const result = (await api.get(`/posts/${id}`, getApiHeader())) as {
         data: INewPost
       }
 
@@ -65,7 +65,7 @@ class Post implements IPosts {
     this.posts = []
   }
 
-  async getNextPosts(query: QueryParamsObj[]) {
+  async getNextPosts(query: QueryParamsObj[]){
     if (this.currentPage >= this.amountOfPages) {
       return
     }
@@ -138,11 +138,7 @@ class Post implements IPosts {
 
   async publishPost(post: CreatePostDto, onCreate: (arg: string) => void) {
     await tryRequest(async () => {
-      const { data } = await api.post(
-        `/posts`,
-        { ...post, createPost: true },
-        getApiHeader()
-      )
+      const { data } = await api.post(`/posts/create`, post, getApiHeader())
 
       this.posts = []
       comments.comments = []

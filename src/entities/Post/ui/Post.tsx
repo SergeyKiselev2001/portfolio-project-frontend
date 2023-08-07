@@ -6,7 +6,6 @@ import PostHeader from './PostHeader'
 import { INewPost } from './schema'
 import { useIntersection } from '@shared/hooks'
 import { clsx } from '@shared/utils'
-import { me } from '@entities/me'
 
 const Post = (props: INewPost) => {
   const {

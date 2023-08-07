@@ -12,14 +12,14 @@ export enum RouterPaths {
 }
 
 export enum QueryParams {
-  TAGS = 'tags_like',
+  TAG = 'tag',
   POST_ID = 'post_id',
-  LIMIT = '_limit',
-  PAGE = '_page',
+  LIMIT = 'limit',
+  PAGE = 'page',
   ID_NE = 'id_ne',
-  LOGIN = 'author.name',
-  START = '_start',
-  END = '_end',
+  LOGIN = 'author',
+  START = 'start',
+  END = 'end',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }
