@@ -5,11 +5,11 @@ import classes from './PostFooter.module.scss'
 import { CLIENT } from '@shared/constants'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
-import { StorageKeys, getStorageItem } from '@entities/clientStorage'
-import { posts } from '@entities/Post'
 import { Link } from 'react-router-dom'
 import { blockSideInfo } from '@widgets/BlockSideInfo'
 import { me } from '@entities/me'
+import { clsx } from '@shared/utils'
+import { posts } from '@entities/Post'
 
 interface IPostFooter {
   isPostPage?: boolean
@@ -18,17 +18,27 @@ interface IPostFooter {
   commentsAmount: number
   views: number
   tags: i18Tags[]
-  isLiked: boolean
+  isLiked?: boolean
+  isSaved?: boolean
 }
 
 const PostFooter = (props: IPostFooter) => {
-  const { likesAmount, commentsAmount, isPostPage, tags, views, id, isLiked } =
-    props
+  const {
+    likesAmount,
+    commentsAmount,
+    isPostPage,
+    tags,
+    views,
+    id,
+    isLiked,
+    isSaved,
+  } = props
 
   const [linkCopied, setLinkCopied] = useState(false)
   const [currentLikes, setCurrentLikes] = useState(likesAmount)
-  const [currentIsLiked, setCurrentIsLiked] = useState(isLiked)
+  const [currentIsLiked, setCurrentIsLiked] = useState(Boolean(isLiked))
   const [currentViews, setCurrentViews] = useState('')
+  const [currentIsSaved, setCurrentIsSaved] = useState(Boolean(isSaved))
 
   const viewsConverter = (number: number) => {
     const newViews = `${number}`.substring(0, `${number}`.length - 2)
@@ -52,23 +62,35 @@ const PostFooter = (props: IPostFooter) => {
     toast.success('Ссылка скопирована')
   }
 
-  const toggleLikes = () => {
+  const likePost = () => {
+    if (!me.login) {
+      blockSideInfo.toggleLoginModal()
+      return
+    }
+
     if (currentIsLiked) {
-      setCurrentLikes((likes) => likes - 1)
+      posts.removeLike(id)
       setCurrentIsLiked(false)
-      posts.removeLike(id, currentLikes - 1)
+      setCurrentLikes(currentLikes - 1)
     } else {
-      setCurrentLikes((likes) => likes + 1)
+      posts.likePost(id)
       setCurrentIsLiked(true)
-      posts.likePost(id, currentLikes + 1)
+      setCurrentLikes(currentLikes + 1)
     }
   }
 
-  const likePost = () => {
-    if (!getStorageItem(StorageKeys.AUTH)) {
+  const savePostHandle = () => {
+    if (!me.login) {
       blockSideInfo.toggleLoginModal()
+      return
+    }
+
+    if (currentIsSaved) {
+      me.removeFromSaved(id)
+      setCurrentIsSaved(false)
     } else {
-      toggleLikes()
+      me.savePost(id)
+      setCurrentIsSaved(true)
     }
   }
 
@@ -79,9 +101,10 @@ const PostFooter = (props: IPostFooter) => {
         <div className={classes.leftBlock}>
           <button
             onClick={likePost}
-            className={`${classes.likes} ${
-              currentIsLiked && me.login ? classes.isLiked : ''
-            }`}
+            className={clsx(
+              { [classes.currentIsLiked]: currentIsLiked },
+              classes.likes
+            )}
           >
             <img src={heartImage} alt="" />
             <span>{currentLikes}</span>
@@ -96,7 +119,14 @@ const PostFooter = (props: IPostFooter) => {
             </Link>
           )}
 
-          <button className={classes.save} />
+          <button
+            title="сохранить пост"
+            onClick={savePostHandle}
+            className={clsx(
+              { [classes.currentIsSaved]: currentIsSaved },
+              classes.save
+            )}
+          />
           <button
             onClick={copyPath}
             className={`${classes.share} ${linkCopied ? classes.copied : ''}`}

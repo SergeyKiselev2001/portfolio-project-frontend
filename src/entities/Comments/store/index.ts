@@ -52,11 +52,14 @@ class Comments implements ICommentsState {
     await tryRequest(
       async () => {
         await api.post('/comments', comment, getApiHeader())
-        await api.post(
-          `/posts/${comment.post_id}`,
-          { incrementCommentsCounter: true },
-          getApiHeader()
-        )
+
+        // СДЕЛАТЬ ИНКРЕМЕНТ ПОСТОВ
+
+        // await api.post(
+        //   `/posts/${comment.post_id}`,
+        //   { incrementCommentsCounter: true },
+        //   getApiHeader()
+        // )
         this.amountOfComments = +this.amountOfComments + 1
         toast.success('Комментарий добавлен')
       },

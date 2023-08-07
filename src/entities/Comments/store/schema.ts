@@ -6,7 +6,6 @@ export interface IComment {
   id: number
   post_id: number
   text: string
-  likes: number
   timestamp: number
   author: {
     name: string

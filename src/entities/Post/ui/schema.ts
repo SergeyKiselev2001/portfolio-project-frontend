@@ -1,4 +1,5 @@
 import { i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
+import { IPostContent } from '../store/schema'
 
 export interface IPost {
   id: number
@@ -19,13 +20,11 @@ export enum ContentType {
   QUOTE = 'QUOTE',
 }
 
-export interface INewPost {
+export interface INewPost extends IPostContent {
   isPostPage?: boolean
   isProfilePage?: boolean
   isLast: boolean
   getNextPosts: VoidFunction
-  id: number
-  title: string
   timestamp: number
   author: {
     name: string
@@ -35,26 +34,6 @@ export interface INewPost {
       alt: string
     }
   }
-  likesAmount: number
-  isLiked: false
-  commentsAmount: number
-  views: number
-  content: {
-    type: ContentType
-    text: string
-    image?: {
-      src: string
-      alt: string
-    }
-  }[]
-  poll?: {
-    id: number
-    name: string
-    options: {
-      id: number
-      text: string
-      numberOfVotes: number
-    }[]
-  }
+
   tags: i18Tags[]
 }

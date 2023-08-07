@@ -58,7 +58,6 @@ const PostPage = observer(() => {
     const myNewComment = {
       text: myComment,
       post_id: +params.id,
-      likes: 0,
       timestamp: +new Date(),
       author: { name: login, id, avatar },
     } as Omit<IComment, 'id'>
@@ -77,7 +76,6 @@ const PostPage = observer(() => {
   useEffect(() => {
     comments.getComments([[QueryParams.POST_ID, params.id]])
     posts.getPostById(params.id)
-    posts.addViewCounter(params.id)
   }, [])
 
   const closeModal = () => {
@@ -88,6 +86,7 @@ const PostPage = observer(() => {
     blockSideInfo.toggleLoginModal()
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'auto'
+    location.reload()
   }
 
   const showAllComments = async () => {
@@ -139,8 +138,6 @@ const PostPage = observer(() => {
             <Login onLogin={onLogin} />
           </Modal>
         )}
-        {/* <h1>Comments section</h1>
-        <h1>Send comment</h1> */}
       </div>
     </div>
   )

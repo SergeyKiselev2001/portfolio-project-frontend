@@ -42,14 +42,14 @@
       }
     }
 
-    .isLiked {
+    .currentIsLiked {
       background-color: #aa1313;
       color: white;
     }
 
-    .isLiked img {
+    .currentIsLiked img {
       filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
-          saturate(7500%) hue-rotate(146deg) brightness(121%) contrast(121%);
+        saturate(7500%) hue-rotate(146deg) brightness(121%) contrast(121%);
     }
 
     .comments {
@@ -60,14 +60,12 @@
 
       @media (max-width: 500px) {
         font-size: 0px;
-        
+
         margin: 0px;
         height: auto;
       }
 
-  
       &::before {
-
         @media (max-width: 500px) {
           margin: 0 auto;
           transform: translate(2px, 3px) scale(-1, 1);
@@ -102,6 +100,14 @@
         filter: var(--filter-post-footer-image);
         background-image: url('./images/save.png');
         background-size: 18px;
+      }
+    }
+
+    .currentIsSaved {
+      background-color: #00526b;
+      &::after {
+        filter: brightness(0) saturate(100%) invert(100%) sepia(0%)
+          saturate(7500%) hue-rotate(146deg) brightness(121%) contrast(121%);
       }
     }
 
@@ -178,5 +184,3 @@
     background-repeat: no-repeat;
   }
 }
-
-

@@ -16,28 +16,31 @@ import { DEFAULT_NS } from '@shared/constants'
 import { Modal } from '@widgets/Modal'
 import { HeaderColor } from '@entities/HeaderColor'
 import { StorageKeys } from '@entities/clientStorage'
+import { clsx } from '@shared/utils'
 
 interface IProfileInfo {
   user: IUserState
+  isSubscribed: boolean
 }
 
-const ProfileInfo = observer(({ user }: IProfileInfo) => {
+const ProfileInfo = observer(({ user, isSubscribed }: IProfileInfo) => {
   const { login, status, avatar, systemRole, headerTheme } = user
 
   const isMe = me.login == login
 
-  const [subscribed, setSubscribed] = useState(false)
+  const [subscribed, setSubscribed] = useState(isSubscribed)
   const [showHeaderModal, setShowHeaderModal] = useState(false)
   const [newStatus, setNewStatus] = useState(status || '')
   const { t } = useTranslation(i18Chunks.PROFILE)
 
-  useEffect(() => {
-    setSubscribed(!!me.subscriptions.users.find((user) => user == login))
-  }, [me.subscriptions.users])
-
   const toggleSubscribe = () => {
-    currentProfile.subscribeOnUser(me.id)
-    setSubscribed((prev) => !prev)
+    if (subscribed) {
+      currentProfile.unsubscribeFromUser()
+      setSubscribed(false)
+    } else {
+      currentProfile.subscribeOnUser()
+      setSubscribed(true)
+    }
   }
 
   const newStatusHandle = (e: InputChange) => {
@@ -81,7 +84,7 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
         {!isMe && me.login && (
           <div className={classes.subscribe}>
             <button
-              className={subscribed ? classes.active : ''}
+              className={clsx({ [classes.active]: subscribed })}
               onClick={toggleSubscribe}
             >
               {subscribed

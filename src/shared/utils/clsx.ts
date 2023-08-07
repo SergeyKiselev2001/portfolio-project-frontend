@@ -16,7 +16,7 @@ export const clsx = (
     if (key != 'undefined') {
       result = `${result} ${key}`
     } else {
-      toast.error('Вы не описали класс в файле стилей')
+      toast.error('Вы не описали класс  в файле стилей')
     }
   })
 

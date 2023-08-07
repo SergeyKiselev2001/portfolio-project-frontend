@@ -5,7 +5,7 @@ export const getApiHeader = () => {
 
   return {
     headers: {
-      Authorization: `Bearer ${token.token}`,
+      Authorization: `Bearer ${token?.token}`,
     },
   }
 }

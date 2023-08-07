@@ -47,7 +47,9 @@ const BlockSideInfo = observer(() => {
           <div className={classes.mainInfo}>{me.login}</div>
           <div className={classes.subscribers}>10 Подписчиков</div>
           <div className={classes.links}>ссылки</div>
-          <Link to={RouterPaths.CREATE_POST}>Добавить пост</Link>
+          <div className={classes.createPost}>
+            <Link to={RouterPaths.CREATE_POST}>Добавить пост</Link>
+          </div>
         </>
       )}
       {isAuthorized == AsideStatus.NOT_AUTHORIZED && (

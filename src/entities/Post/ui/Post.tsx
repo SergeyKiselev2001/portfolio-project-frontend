@@ -6,6 +6,7 @@ import PostHeader from './PostHeader'
 import { INewPost } from './schema'
 import { useIntersection } from '@shared/hooks'
 import { clsx } from '@shared/utils'
+import { me } from '@entities/me'
 
 const Post = (props: INewPost) => {
   const {
@@ -22,8 +23,8 @@ const Post = (props: INewPost) => {
     tags,
     timestamp,
     views,
-    poll,
     isLiked,
+    isSaved,
   } = props
 
   const ref = useRef() as MutableRefObject<HTMLDivElement>
@@ -39,24 +40,23 @@ const Post = (props: INewPost) => {
     <div
       ref={ref}
       className={clsx(
-        {
-          [classes.isProfilePage]: !!isProfilePage,
-        },
+        { [classes.isProfilePage]: !!isProfilePage },
         classes.Post
       )}
       id={`post-${id}`}
     >
       <PostHeader {...{ author, isPostPage, id, timestamp }} />
-      <PostContent {...{ content, id, poll, title }} />
+      <PostContent {...{ content, id, title }} />
       <PostFooter
         {...{
           id,
-          isLiked,
           commentsAmount,
           isPostPage,
           likesAmount,
           tags,
           views,
+          isLiked,
+          isSaved,
         }}
       />
     </div>

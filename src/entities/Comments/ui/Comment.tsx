@@ -3,7 +3,7 @@ import { IComment } from '../store/schema'
 import classes from './Comments.module.scss'
 
 const Comment = (props: IComment) => {
-  const { text, id, author, timestamp, likes } = props
+  const { text, author, timestamp } = props
 
   return (
     <div className={classes.comment}>
