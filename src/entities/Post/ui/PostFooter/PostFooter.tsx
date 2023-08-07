@@ -10,6 +10,7 @@ import { blockSideInfo } from '@widgets/BlockSideInfo'
 import { me } from '@entities/me'
 import { clsx } from '@shared/utils'
 import { posts } from '@entities/Post'
+import { useDebounce } from '@shared/hooks'
 
 interface IPostFooter {
   isPostPage?: boolean
@@ -62,37 +63,48 @@ const PostFooter = (props: IPostFooter) => {
     toast.success('Ссылка скопирована')
   }
 
-  const likePost = () => {
-    if (!me.login) {
-      blockSideInfo.toggleLoginModal()
-      return
-    }
+  const likePostHandle = (e: React.MouseEvent) => {
+    // if (!e) return
 
-    if (currentIsLiked) {
-      posts.removeLike(id)
-      setCurrentIsLiked(false)
-      setCurrentLikes(currentLikes - 1)
-    } else {
-      posts.likePost(id)
-      setCurrentIsLiked(true)
-      setCurrentLikes(currentLikes + 1)
-    }
+    // console.log(e)
+
+    // if (!me.login) {
+    //   blockSideInfo.toggleLoginModal()
+    //   return
+    // }
+
+    // if (currentIsLiked) {
+    //   posts.removeLike(id)
+    //   setCurrentIsLiked(false)
+    //   setCurrentLikes(currentLikes - 1)
+    // } else {
+    //  posts.likePost(id)
+    //   setCurrentIsLiked(true)
+    //   setCurrentLikes(currentLikes + 1)
+    // }
   }
 
-  const savePostHandle = () => {
+  const savePostHandle = (e: React.MouseEvent) => {
+    if (!e) return
+
+    console.log(e)
+
     if (!me.login) {
       blockSideInfo.toggleLoginModal()
       return
     }
 
     if (currentIsSaved) {
-      me.removeFromSaved(id)
+      posts.removeFromSaved(id)
       setCurrentIsSaved(false)
     } else {
-      me.savePost(id)
+      posts.savePost(id)
       setCurrentIsSaved(true)
     }
   }
+
+  // const likePost = useDebounce(likePostHandle, 1000)
+  // const savePost = useDebounce(savePostHandle, 1000)
 
   return (
     <div className={classes.PostFooter}>
@@ -100,7 +112,7 @@ const PostFooter = (props: IPostFooter) => {
       <div className={classes.controls}>
         <div className={classes.leftBlock}>
           <button
-            onClick={likePost}
+            onClick={likePostHandle}
             className={clsx(
               { [classes.currentIsLiked]: currentIsLiked },
               classes.likes

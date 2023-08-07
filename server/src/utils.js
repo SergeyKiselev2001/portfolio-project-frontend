@@ -6,9 +6,7 @@ const { jwtPairs } = require('./jwtPairs')
 module.exports = {
   checkAuth: (req) => {
     const token = module.exports.clearToken(req)
-    const result = jwtPairs.find(
-      (el) => el.tokens.token.slice(0, 10) == token.slice(0, 10)
-    )
+    const result = jwtPairs.find((el) => el.tokens.token == token)
 
     return Boolean(result)
   },

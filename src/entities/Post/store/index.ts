@@ -65,7 +65,7 @@ class Post implements IPosts {
     this.posts = []
   }
 
-  async getNextPosts(query: QueryParamsObj[]){
+  async getNextPosts(query: QueryParamsObj[]) {
     if (this.currentPage >= this.amountOfPages) {
       return
     }
@@ -148,15 +148,31 @@ class Post implements IPosts {
   }
 
   async likePost(postId: number) {
-    await tryRequest(async () => {
-      await api.post(`/posts/${postId}/like`, {}, getApiHeader())
-    })
+    alert('da 2')
+    // await tryRequest(async () => {
+    //   await api.post(`/posts/${postId}/like`, {}, getApiHeader())
+    // })
   }
 
   async removeLike(postId: number) {
-    await tryRequest(async () => {
-      await api.delete(`/posts/${postId}/dislike`, getApiHeader())
-    })
+    alert('da')
+    // await tryRequest(async () => {
+    //   await api.post(`/posts/${postId}/dislike`, {}, getApiHeader())
+    // })
+  }
+
+  savePost = async (postId: number) => {
+    alert('da4')
+    // await tryRequest(async () => {
+    //   await api.post(`/posts/${postId}/save`, {}, getApiHeader())
+    // })
+  }
+
+  removeFromSaved = async (postId: number) => {
+    alert('d5')
+    // await tryRequest(async () => {
+    //   await api.post(`/posts/${postId}/unsave`, {}, getApiHeader())
+    // })
   }
 }
 

@@ -95,7 +95,9 @@ module.exports = {
 
     return r200(res, result)
   },
+
   likePost: async (req, res) => {
+    console.log('DAAAA LIKE')
     if (!checkAuth(req)) return r401(res)
 
     const userID = getUserIdByHeaderJWT(req)
@@ -117,7 +119,9 @@ module.exports = {
       return r500(res, 'fetch error')
     }
   },
+
   dislikePost: async (req, res) => {
+    console.log('DAAAA')
     if (!checkAuth(req)) return r401(res)
 
     const { likes = [] } = getDB()
@@ -136,6 +140,7 @@ module.exports = {
       await fetch(`http://localhost:5432/likes/${relationId}`, {
         method: 'DELETE',
       })
+      return r200(res)
     } catch {
       return r500(res, 'delete fetch error')
     }
@@ -221,6 +226,54 @@ module.exports = {
       })
     } else {
       r404(res)
+    }
+  },
+
+  savePost: async (req, res) => {
+    if (!checkAuth(req)) return r401(res)
+
+    const userID = getUserIdByHeaderJWT(req)
+
+    try {
+      await fetch('http://localhost:5432/saves/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          post_id: +req.params.id,
+          user_id: +userID,
+        }),
+      })
+
+      return r200(res)
+    } catch (e) {
+      return r500(res, 'fetch error')
+    }
+  },
+
+  unsavePost: async (req, res) => {
+    console.log('DAAAA 222')
+    if (!checkAuth(req)) return r401(res)
+
+    const { saves = [] } = getDB()
+    const userID = getUserIdByHeaderJWT(req)
+
+    const relationId = saves.find((save) => {
+      return save.post_id == req.params.id && save.user_id == userID
+    })?.id
+
+    if (!relationId) {
+      return r500(res, 'relation not found')
+    }
+
+    try {
+      await fetch(`http://localhost:5432/saves/${relationId}`, {
+        method: 'DELETE',
+      })
+      return r200(res)
+    } catch {
+      return r500(res, 'delete fetch error')
     }
   },
 }

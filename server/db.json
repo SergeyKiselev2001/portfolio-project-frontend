@@ -386,63 +386,7 @@
       "timestamp": 1646868365913
     }
   ],
-  "likes": [
-    {
-      "post_id": 12,
-      "user_id": 99,
-      "id": 1
-    },
-    {
-      "post_id": 1679,
-      "user_id": 99,
-      "id": 2
-    },
-    {
-      "post_id": 180,
-      "user_id": 99,
-      "id": 3
-    },
-    {
-      "post_id": 1685,
-      "user_id": 1,
-      "id": 4
-    },
-    {
-      "post_id": 12,
-      "user_id": 1,
-      "id": 5
-    },
-    {
-      "post_id": 14,
-      "user_id": 1,
-      "id": 6
-    },
-    {
-      "post_id": 16,
-      "user_id": 1,
-      "id": 7
-    },
-    {
-      "post_id": 1685,
-      "user_id": 99,
-      "id": 8
-    },
-    {
-      "post_id": 14,
-      "user_id": 99,
-      "id": 9
-    },
-    {
-      "post_id": 12,
-      "user_id": 23,
-      "id": 10
-    },
-    {
-      "post_id": 14,
-      "user_id": 23,
-      "id": 11
-    }
-  ],
+  "likes": [],
   "usersSubscriptions": [
     {
       "id": 0,
@@ -455,5 +399,16 @@
       "subscribed_on": 99
     }
   ],
-  "saves": []
+  "saves": [
+    {
+      "post_id": 1562,
+      "user_id": 23,
+      "id": 4
+    },
+    {
+      "post_id": 16,
+      "user_id": 23,
+      "id": 6
+    }
+  ]
 }

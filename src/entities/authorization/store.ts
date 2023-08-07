@@ -16,10 +16,7 @@ class Authorization implements IAuthorizationState {
     try {
       const { data } = await api.post(
         '/login',
-        {
-          login,
-          password,
-        },
+        { login, password },
         {
           headers: {
             'Content-Type': 'application/json',

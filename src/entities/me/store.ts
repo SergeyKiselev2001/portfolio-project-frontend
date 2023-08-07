@@ -3,7 +3,7 @@ import { IMeState } from './schema'
 import { getApiHeader, tryRequest } from '@shared/utils'
 import { api } from '@app/api'
 import { HeaderTheme, SystemRoles, user } from '@entities/user'
-import { StorageKeys } from '@entities/clientStorage'
+import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 
 class Me implements IMeState {
   id = 0
@@ -29,10 +29,7 @@ class Me implements IMeState {
 
   getUserInfoByJWT = async () => {
     await tryRequest(async () => {
-      if (
-        localStorage.getItem(StorageKeys.AUTH) ||
-        sessionStorage.getItem(StorageKeys.AUTH)
-      ) {
+      if (getStorageItem(StorageKeys.AUTH)) {
         const data = await api.get('/users/me', getApiHeader())
 
         this.setUserInfo(data.data)
@@ -59,22 +56,6 @@ class Me implements IMeState {
     await tryRequest(async () => {
       await api.post(`/users/${this.id}`, { headerTheme }, getApiHeader())
       user.setUserInfo({ headerTheme })
-    })
-  }
-
-  savePost = async (postId: number) => {
-    await tryRequest(async () => {
-      await api.post(`/users/${this.id}`, { savePost: postId }, getApiHeader())
-    })
-  }
-
-  removeFromSaved = async (postId: number) => {
-    await tryRequest(async () => {
-      await api.post(
-        `/users/${this.id}`,
-        { removeFromSaved: postId },
-        getApiHeader()
-      )
     })
   }
 }
