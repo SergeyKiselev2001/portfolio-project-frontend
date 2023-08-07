@@ -3,8 +3,8 @@ import classes from './Post.module.scss'
 import { ContentType } from './schema'
 import { IPostContent } from '../store/schema'
 
-const PostContent = (props: IPostContent) => {
-  const { content, title, id } = props
+const PostContent = (props: Partial<IPostContent>) => {
+  const { content, title, id } = props as IPostContent
 
   return (
     <div className={classes.PostContent}>

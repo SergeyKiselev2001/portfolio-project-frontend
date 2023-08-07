@@ -62,6 +62,7 @@ const ProfilePage = observer(() => {
     blockSideInfo.toggleLoginModal()
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'auto'
+    location.reload()
   }
 
   return (
@@ -70,7 +71,12 @@ const ProfilePage = observer(() => {
       {!spinner && user.login && (
         <>
           <div className={classes.profileInfoWrapper}>
-            <ProfileInfo user={user} />
+            <ProfileInfo
+              isSubscribed={Boolean(
+                me.subscriptions.users.find((el) => el == user.login)
+              )}
+              user={user}
+            />
           </div>
           <div className={classes.filters}>
             <button

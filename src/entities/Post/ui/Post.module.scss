@@ -137,6 +137,7 @@
     transform: translateX(-70%);
     border-radius: 5px;
     overflow: hidden;
+    z-index: $z-index-post-options;
 
     span {
       padding: 10px;
@@ -145,6 +146,7 @@
       font-size: 14px;
       display: block;
       cursor: pointer;
+    
 
       &:hover {
         background-color: #a7a7a7;

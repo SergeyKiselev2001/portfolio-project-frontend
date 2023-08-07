@@ -8,6 +8,7 @@ import { getApiHeader, tryRequest, urlConverter } from '@shared/utils'
 import { toast } from 'react-toastify'
 import { QueryParams } from '@app/config/router'
 import { CreatePostDto } from '@widgets/PostEditor'
+import { comments } from '@entities/Comments'
 
 class Post implements IPosts {
   posts = [] as INewPost[]
@@ -41,7 +42,10 @@ class Post implements IPosts {
         query.push([QueryParams.ID_NE, `${id}`])
       })
 
-      const result = (await api.get(urlConverter('/posts', query))) as {
+      const result = (await api.get(
+        urlConverter('/posts', query),
+        getApiHeader()
+      )) as {
         data: INewPost[]
         headers: {
           'x-total-count': number
@@ -58,6 +62,7 @@ class Post implements IPosts {
 
   resetCurrentPage = () => {
     this.currentPage = 1
+    this.posts = []
   }
 
   async getNextPosts(query: QueryParamsObj[]) {
@@ -81,7 +86,10 @@ class Post implements IPosts {
         query.push([QueryParams.ID_NE, `${id}`])
       })
 
-      const { data } = (await api.get(urlConverter('/posts', query))) as {
+      const { data } = (await api.get(
+        urlConverter('/posts', query),
+        getApiHeader()
+      )) as {
         data: INewPost[]
       }
 
@@ -119,6 +127,15 @@ class Post implements IPosts {
     this.hidePost(postId)
   }
 
+  async deletePost(postId: number) {
+    await tryRequest(async () => {
+      await api.delete(`/posts/${postId}`, getApiHeader())
+      toast.success('Пост удалён!')
+    })
+
+    this.hidePost(postId)
+  }
+
   async publishPost(post: CreatePostDto, onCreate: (arg: string) => void) {
     await tryRequest(async () => {
       const { data } = await api.post(
@@ -128,27 +145,21 @@ class Post implements IPosts {
       )
 
       this.posts = []
+      comments.comments = []
+      comments.amountOfComments = 0
       onCreate(data.id)
     })
   }
 
-  async addViewCounter(postId: string) {
+  async likePost(postId: number) {
     await tryRequest(async () => {
-      await api.post(`/posts/${postId}`, {
-        addViewCounter: true,
-      })
+      await api.post(`/posts/${postId}/like`, {}, getApiHeader())
     })
   }
 
-  async likePost(postId: number, likesAmount: number) {
+  async removeLike(postId: number) {
     await tryRequest(async () => {
-      await api.patch(`/posts/${postId}`, { isLiked: true, likesAmount })
-    })
-  }
-
-  async removeLike(postId: number, likesAmount: number) {
-    await tryRequest(async () => {
-      await api.patch(`/posts/${postId}`, { isLiked: false, likesAmount })
+      await api.delete(`/posts/${postId}/dislike`, getApiHeader())
     })
   }
 }

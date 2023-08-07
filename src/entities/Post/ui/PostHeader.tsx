@@ -4,6 +4,7 @@ import dots from './images/dots.png'
 import { posts } from '..'
 import { TimeFormat, timeConverter } from '@shared/utils'
 import { Link } from 'react-router-dom'
+import { me } from '@entities/me'
 
 interface IPostHeader {
   isPostPage?: boolean
@@ -46,6 +47,10 @@ const PostHeader = (props: IPostHeader) => {
     posts.sendReport(id)
   }
 
+  const deletePost = () => {
+    posts.deletePost(id)
+  }
+
   return (
     <div className={classes.PostHeader}>
       <div className={classes.leftHeader}>
@@ -72,6 +77,9 @@ const PostHeader = (props: IPostHeader) => {
             <div className={classes.options}>
               <span onClick={hidePost}>Скрыть</span>
               <span onClick={reportPost}>Пожаловаться</span>
+              {me.login == author.name && (
+                <span onClick={deletePost}>Удалить</span>
+              )}
             </div>
           )}
         </div>

@@ -2,6 +2,23 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fs = require('fs')
 const jsonServer = require('json-server')
+
+const { jwtPairs } = require('./src/jwtPairs')
+const {
+  checkAuth,
+  clearToken,
+  getDB,
+  getUserNameByHeaderJWT,
+} = require('./src/utils')
+
+const { userInfo_GET } = require('./src/userInfo')
+const { comments_POST } = require('./src/comments')
+const {
+  posts_GET,
+  post_like_POST,
+  post_dislike_DELETE,
+} = require('./src/posts')
+
 const path = require('path')
 
 const server = jsonServer.create()
@@ -11,47 +28,6 @@ const router = jsonServer.router(path.resolve(__dirname, 'db.json'))
 server.use(jsonServer.defaults({}))
 server.use(jsonServer.bodyParser)
 
-// Имитация выданных сервером токенов
-const jwtPairs = [
-  {
-    user: 'Sergey',
-    tokens: {
-      token:
-        'eyJpdiI6InJUY2hXX050TDIzQm0tczUiLCJ0YWciOiJ5OVVfZUgxY1NnSjh3BJR0w4b0lRIiwidHlwIjoiSldUIiwiY3R5IjoiSldUIiwiYWxnIjoiQTI1NkdDTUtXIiwiZW5jIjoiQTI1NkdDTSIsImlzcyI6Imh0dHBzOi8vc3RhZ2UuYXBpLm15aXRjYXJlZXIuaW8vIiwiYXVkIjoiTXlJVGNhcmVlciIsImNyaXQiOlsiaXNzIiwiYXVkIiwiYWxnIiwiZW5jIl0sImtpZCI6IkNQTmlRZkZ5dC1YcWthTkVkeWZiOTVYYkNRaVFnTTVneEY1bldOTzdNOUkifQ.NkmQQq1P2JjcHcpumvGHzflejpOkaSpIXy6tWYpdEhg.SpFvK7A2sw50dAPv.FhHoAeeWxTejTkIONLQSjLSuQp1vMCljZJidyW68fdeOJCrVr3is1Gq66rQ28PSuZEJuMg401Lp8RWbHf_VMcSK2oWLeh2_b2-hFHgnv4ltfPGq5rbz4uYBFcIJu25uVprDYaoAV6gL60uCP_x7KgSV7v6ECKrcbpE6YT4rlxnJ2sNKFIT1F6tRTwymfZMaFp3Xy7TNSmFyVbQP_eGPmm4BJRDEqUV4VmUHujfDn_9AOb5UxM3RC-YGqFBV2FxiaXB5ydx7bqGlKQJf8H-Dxl6rcFU-KNKnWsrG_RokqS73NcKrOUhTrs165LJ1UOkIa_nw1Ilbg6xFmw-yeydhVtNI9qI9ozoyXRDjqtD3GCu97nUEH5l83sHamqAj0Kn6rk8uKQDKbYBnASektwwkZEQoie3ZNieEZtVdy9NatGkbdVvVDoAba04TG-CHBpq1oqDbTvcSD2KbG8fk15cuh724jcO7nGB91G1zhqIRjpAW7zYgOoUpxiKNXK0xQPFvY3HvD4yDCPC7aU-FhaHHs_qaocMdmkCyNSJEUTnz2gDBlqpXYHIvJ0jVtAffjAcXmzmKmk3weCUH2VrGoPgHWAIS0wHtqbYPbqOKbg8Uf_oEmmcgM4hoV4elM0sYZwl2T65-2bg_wT7oSBJYW06R-0TtNcImhZWXo3ZafNO4UCy9LuEep6vKTTxZwDzICjOGoje0T6STSWMg72xA-b_QB7KK1uBVOxj0LW8x7i0ATU4BmTWhLI5_9lOPE6nfs66J8_axtrgot.kQblgfZ18ikKBqdBUuSG1g',
-      refresh_token:
-        '64d36e03203eb93116a8cf6ea671eaa4fb35ca7b8f45fb55de1cdf989edec821fe5e36347957e7b711a7543495cb549f6d9a5bc396a0987be299cfb0a33ec5',
-    },
-  },
-  {
-    user: 'Vera_xxx',
-    tokens: {
-      token:
-        'py1JpdiI6InJUY2hXX050TDIzQm0tczUiLCJ0YWciOiJ5OVVfZUgxY1NnSjh3BJR0w4b0lRIiwidHlwIjoiSldUIiwiY3R5IjoiSldUIiwiYWxnIjoiQTI1NkdDTUtXIiwiZW5jIjoiQTI1NkdDTSIsImlzcyI6Imh0dHBzOi8vc3RhZ2UuYXBpLm15aXRjYXJlZXIuaW8vIiwiYXVkIjoiTXlJVGNhcmVlciIsImNyaXQiOlsiaXNzIiwiYXVkIiwiYWxnIiwiZW5jIl0sImtpZCI6IkNQTmlRZkZ5dC1YcWthTkVkeWZiOTVYYkNRaVFnTTVneEY1bldOTzdNOUkifQ.NkmQQq1P2JjcHcpumvGHzflejpOkaSpIXy6tWYpdEhg.SpFvK7A2sw50dAPv.FhHoAeeWxTejTkIONLQSjLSuQp1vMCljZJidyW68fdeOJCrVr3is1Gq66rQ28PSuZEJuMg401Lp8RWbHf_VMcSK2oWLeh2_b2-hFHgnv4ltfPGq5rbz4uYBFcIJu25uVprDYaoAV6gL60uCP_x7KgSV7v6ECKrcbpE6YT4rlxnJ2sNKFIT1F6tRTwymfZMaFp3Xy7TNSmFyVbQP_eGPmm4BJRDEqUV4VmUHujfDn_9AOb5UxM3RC-YGqFBV2FxiaXB5ydx7bqGlKQJf8H-Dxl6rcFU-KNKnWsrG_RokqS73NcKrOUhTrs165LJ1UOkIa_nw1Ilbg6xFmw-yeydhVtNI9qI9ozoyXRDjqtD3GCu97nUEH5l83sHamqAj0Kn6rk8uKQDKbYBnASektwwkZEQoie3ZNieEZtVdy9NatGkbdVvVDoAba04TG-CHBpq1oqDbTvcSD2KbG8fk15cuh724jcO7nGB91G1zhqIRjpAW7zYgOoUpxiKNXK0xQPFvY3HvD4yDCPC7aU-FhaHHs_qaocMdmkCyNSJEUTnz2gDBlqpXYHIvJ0jVtAffjAcXmzmKmk3weCUH2VrGoPgHWAIS0wHtqbYPbqOKbg8Uf_oEmmcgM4hoV4elM0sYZwl2T65-2bg_wT7oSBJYW06R-0TtNcImhZWXo3ZafNO4UCy9LuEep6vKTTxZwDzICjOGoje0T6STSWMg72xA-b_QB7KK1uBVOxj0LW8x7i0ATU4BmTWhLI5_9lOPE6nfs66J8_axtrgot.kQblgfZ18ikKBqdBUuSG1g',
-      refresh_token:
-        '542d36e03203eb93116a8cf6ea671eaa4fb35ca7b8f45fb55de1cdf989edec821fe5e36347957e7b711a7543495cb549f6d9a5bc396a0987be299cfb0a33ec5',
-    },
-  },
-  {
-    user: 'Volibear',
-    tokens: {
-      token:
-        'x91JpdiI6InJUY2hXX050TDIzQm0tczUiLCJ0YWciOiJ5OVVfZUgxY1NnSjh3BJR0w4b0lRIiwidHlwIjoiSldUIiwiY3R5IjoiSldUIiwiYWxnIjoiQTI1NkdDTUtXIiwiZW5jIjoiQTI1NkdDTSIsImlzcyI6Imh0dHBzOi8vc3RhZ2UuYXBpLm15aXRjYXJlZXIuaW8vIiwiYXVkIjoiTXlJVGNhcmVlciIsImNyaXQiOlsiaXNzIiwiYXVkIiwiYWxnIiwiZW5jIl0sImtpZCI6IkNQTmlRZkZ5dC1YcWthTkVkeWZiOTVYYkNRaVFnTTVneEY1bldOTzdNOUkifQ.NkmQQq1P2JjcHcpumvGHzflejpOkaSpIXy6tWYpdEhg.SpFvK7A2sw50dAPv.FhHoAeeWxTejTkIONLQSjLSuQp1vMCljZJidyW68fdeOJCrVr3is1Gq66rQ28PSuZEJuMg401Lp8RWbHf_VMcSK2oWLeh2_b2-hFHgnv4ltfPGq5rbz4uYBFcIJu25uVprDYaoAV6gL60uCP_x7KgSV7v6ECKrcbpE6YT4rlxnJ2sNKFIT1F6tRTwymfZMaFp3Xy7TNSmFyVbQP_eGPmm4BJRDEqUV4VmUHujfDn_9AOb5UxM3RC-YGqFBV2FxiaXB5ydx7bqGlKQJf8H-Dxl6rcFU-KNKnWsrG_RokqS73NcKrOUhTrs165LJ1UOkIa_nw1Ilbg6xFmw-yeydhVtNI9qI9ozoyXRDjqtD3GCu97nUEH5l83sHamqAj0Kn6rk8uKQDKbYBnASektwwkZEQoie3ZNieEZtVdy9NatGkbdVvVDoAba04TG-CHBpq1oqDbTvcSD2KbG8fk15cuh724jcO7nGB91G1zhqIRjpAW7zYgOoUpxiKNXK0xQPFvY3HvD4yDCPC7aU-FhaHHs_qaocMdmkCyNSJEUTnz2gDBlqpXYHIvJ0jVtAffjAcXmzmKmk3weCUH2VrGoPgHWAIS0wHtqbYPbqOKbg8Uf_oEmmcgM4hoV4elM0sYZwl2T65-2bg_wT7oSBJYW06R-0TtNcImhZWXo3ZafNO4UCy9LuEep6vKTTxZwDzICjOGoje0T6STSWMg72xA-b_QB7KK1uBVOxj0LW8x7i0ATU4BmTWhLI5_9lOPE6nfs66J8_axtrgot.kQblgfZ18ikKBqdBUuSG1g',
-      refresh_token:
-        'ps2d36e03203eb93116a8cf6ea671eaa4fb35ca7b8f45fb55de1cdf989edec821fe5e36347957e7b711a7543495cb549f6d9a5bc396a0987be299cfb0a33ec5',
-    },
-  },
-]
-
-const checkAuth = (req, res) => {
-  if (!req.headers.authorization) {
-    return res.status(403).json({ message: 'AUTH ERROR' })
-  }
-}
-
-const clearToken = (req) => {
-  return req.headers.authorization.replace('Bearer ', '')
-}
-
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 server.use(async (req, res, next) => {
   await new Promise((res) => {
@@ -60,60 +36,36 @@ server.use(async (req, res, next) => {
   next()
 })
 
-const getDB = () => {
-  const db = JSON.parse(
-    fs.readFileSync(path.resolve(__dirname, 'db.json'), 'UTF-8')
-  )
-
-  return db
-}
-
-const getUserNameByHeaderJWT = (req) => {
-  const token = clearToken(req)
-  return jwtPairs.find((el) => el.tokens.token == token).user
-}
-
-server.get('/userInfo', (req, res) => {
-  checkAuth(req, res)
-  const token = clearToken(req)
-
-  const userName = jwtPairs.find(({ tokens }) => tokens.token == token).user
-
-  if (userName) {
-    const { users = [] } = getDB()
-
-    const userFromBd = users.find((user) => user.login === userName)
-    const { password, ...rest } = userFromBd
-    return res.json({ ...rest })
-  } else {
-    return res.status(401).json({ message: 'INVALID JWT' })
-  }
-})
+server.get('/userInfo', userInfo_GET)
+server.post('/comments', comments_POST)
+server.get('/posts', posts_GET)
+server.post('/posts/:id/like', post_like_POST)
+server.delete('/posts/:id/dislike', post_dislike_DELETE)
 
 // ADD COMMENTS COUNTER
-server.post('/posts/:id', function (req, res, next) {
-  if (!req.body['incrementCommentsCounter']) {
-    next()
-    return
-  }
+// server.post('/posts/:id', function (req, res, next) {
+//   if (!req.body['incrementCommentsCounter']) {
+//     next()
+//     return
+//   }
 
-  const { posts = [] } = getDB()
-  const postFromBd = posts.find((post) => post.id == req.params.id)
+//   const { posts = [] } = getDB()
+//   const postFromBd = posts.find((post) => post.id == req.params.id)
 
-  if (!postFromBd) {
-    next()
-    return
-  }
+//   if (!postFromBd) {
+//     next()
+//     return
+//   }
 
-  req.method = 'PUT'
+//   req.method = 'PUT'
 
-  req.body = {
-    ...postFromBd,
-    commentsAmount: postFromBd.commentsAmount + 1,
-  }
+//   req.body = {
+//     ...postFromBd,
+//     commentsAmount: postFromBd.commentsAmount + 1,
+//   }
 
-  next()
-})
+//   next()
+// })
 
 // PUBPLISH POST
 server.post('/posts', function (req, res, next) {
@@ -151,7 +103,7 @@ server.post('/posts', function (req, res, next) {
 // PROFILE SUBSCRIPTION
 server.post('/users/:id', function (req, res, next) {
   checkAuth(req, res)
-  if (!req.body['subscribeOn']) {
+  if (!req.body['subscribeOnUser']) {
     next()
     return
   }
@@ -164,7 +116,33 @@ server.post('/users/:id', function (req, res, next) {
     ...userFromBd,
     subscriptions: {
       ...userFromBd.subscriptions,
-      users: [...userFromBd.subscriptions.users, req.body.subscribeOn],
+      users: [...userFromBd.subscriptions.users, req.body.subscribeOnUser],
+    },
+  }
+
+  req.method = 'PUT'
+  next()
+})
+
+// PROFILE UNSUBSCRIPTION
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body['unsubscribeFromUser']) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+
+  const userFromBd = users.find((user) => user.id == req.params.id)
+
+  req.body = {
+    ...userFromBd,
+    subscriptions: {
+      ...userFromBd.subscriptions,
+      users: userFromBd.subscriptions.users.filter(
+        (user) => user != req.body.unsubscribeFromUser
+      ),
     },
   }
 
@@ -245,6 +223,38 @@ server.post('/users/:id', function (req, res, next) {
     ...userFromBd,
     headerTheme: req.body.headerTheme,
   }
+
+  next()
+})
+
+// TODO
+// DELETE POST AND COMMENTS
+server.delete('/posts/:postId', function (req, res, next) {
+  checkAuth(req, res)
+  // if (!req.body['deleteCommentsByPostID']) {
+  //   next()
+  //   return
+  // }
+
+  const { comments = [] } = getDB()
+
+  const commentsToDelete = comments
+    .filter((comment) => comment.post_id == req.params.postId)
+    .map((comment) => comment.id)
+
+  console.log(commentsToDelete, 'HERE')
+
+  commentsToDelete.forEach((id) => {
+    fetch('http://localhost:5432/comments/' + id, {
+      method: 'DELETE',
+    })
+  })
+
+  //   fetch('https://example.com/delete-item/' + id, {
+  //   method: 'DELETE',
+  // })
+
+  //req.body = newComments
 
   next()
 })
@@ -338,6 +348,142 @@ server.post('/users/:id', function (req, res, next) {
       req.body = newBody
     }
   }
+  next()
+})
+
+// SAVE POST
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body.savePost) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+
+  const userFromBd = users.find(
+    (user) => user.login == getUserNameByHeaderJWT(req)
+  )
+
+  if (!userFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  const newSaved = [...userFromBd.savedPosts, req.body.savePost]
+  const uniqSaved = [...new Set(newSaved)]
+
+  const newBody = {
+    ...userFromBd,
+    savedPosts: uniqSaved,
+  }
+
+  req.body = newBody
+  next()
+})
+
+// UNSAVE POST
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body.removeFromSaved) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+
+  const userFromBd = users.find(
+    (user) => user.login == getUserNameByHeaderJWT(req)
+  )
+
+  if (!userFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  const newSaved = userFromBd.savedPosts.filter(
+    (el) => el != req.body.removeFromSaved
+  )
+
+  const newBody = {
+    ...userFromBd,
+    savedPosts: newSaved,
+  }
+
+  req.body = newBody
+  next()
+})
+
+// LIKE POST NEEEEEEEEEW
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body.likePost) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+
+  const userFromBd = users.find(
+    (user) => user.login == getUserNameByHeaderJWT(req)
+  )
+
+  if (!userFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  const newLiked = [...userFromBd.likedPosts, req.body.likePost]
+  const uniqLiked = [...new Set(newLiked)]
+
+  const newBody = {
+    ...userFromBd,
+    likedPosts: uniqLiked,
+  }
+
+  req.body = newBody
+  next()
+})
+
+// UNLIKE POST NEEEEEEEEEW
+server.post('/users/:id', function (req, res, next) {
+  checkAuth(req, res)
+  if (!req.body.removeLikeFromPost) {
+    next()
+    return
+  }
+
+  const { users = [] } = getDB()
+
+  const userFromBd = users.find(
+    (user) => user.login == getUserNameByHeaderJWT(req)
+  )
+
+  if (!userFromBd) {
+    next()
+    return
+  }
+
+  req.method = 'PUT'
+
+  const newLiked = userFromBd.likedPosts.filter(
+    (el) => el != req.body.removeLikeFromPost
+  )
+
+  const uniqLiked = [...new Set(newLiked)]
+
+  const newBody = {
+    ...userFromBd,
+    likedPosts: uniqLiked,
+  }
+
+  req.body = newBody
   next()
 })
 

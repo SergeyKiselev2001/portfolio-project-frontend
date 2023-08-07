@@ -26,6 +26,7 @@ const CreatePostPage = observer(() => {
   const onLogin = () => {
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'auto'
+    location.reload()
   }
 
   const publishPost = (post: CreatePostDto) => {

@@ -37,6 +37,7 @@ const MainPage = observer(() => {
     blockSideInfo.toggleLoginModal()
     const body = document.getElementsByTagName('body')[0]
     body.style.overflow = 'auto'
+    location.reload()
   }
 
   const getNextPosts = () => {
@@ -53,7 +54,6 @@ const MainPage = observer(() => {
   return (
     <div className={classes.MainPage}>
       <Controller />
-
       <div className={classes.content_wrapper}>
         <div className={classes.posts}>
           {spinner && (

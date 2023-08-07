@@ -22,6 +22,8 @@ class Me implements IMeState {
     src: '',
     alt: '',
   }
+  savedPosts = []
+  likedPosts = []
 
   constructor() {
     makeAutoObservable(this)
@@ -56,6 +58,38 @@ class Me implements IMeState {
       user.setUserInfo({ headerTheme })
     })
   }
+
+  savePost = async (postId: number) => {
+    await tryRequest(async () => {
+      await api.post(`/users/${this.id}`, { savePost: postId }, getApiHeader())
+    })
+  }
+
+  removeFromSaved = async (postId: number) => {
+    await tryRequest(async () => {
+      await api.post(
+        `/users/${this.id}`,
+        { removeFromSaved: postId },
+        getApiHeader()
+      )
+    })
+  }
+
+  // likePost = async (postId: number) => {
+  //   await tryRequest(async () => {
+  //     await api.post(`/users/${this.id}`, { likePost: postId }, getApiHeader())
+  //   })
+  // }
+
+  // removeLikeFromPost = async (postId: number) => {
+  //   await tryRequest(async () => {
+  //     await api.post(
+  //       `/users/${this.id}`,
+  //       { removeLikeFromPost: postId },
+  //       getApiHeader()
+  //     )
+  //   })
+  // }
 }
 
 export default new Me()
