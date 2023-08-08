@@ -16,6 +16,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-prettier": "^4.2.1",
     "i18n": "^0.15.1",
+    "i18next": "^23.4.3",
     "i18next-browser-languagedetector": "^7.0.1",
     "i18next-http-backend": "^2.2.0",
     "json-server": "^0.17.3",

@@ -409,11 +409,6 @@
       "id": 5
     },
     {
-      "post_id": 1686,
-      "user_id": 99,
-      "id": 7
-    },
-    {
       "post_id": 180,
       "user_id": 99,
       "id": 8
@@ -424,14 +419,9 @@
       "id": 10
     },
     {
-      "post_id": 12,
-      "user_id": 99,
-      "id": 11
-    },
-    {
       "post_id": 1590,
       "user_id": 99,
-      "id": 12
+      "id": 11
     }
   ],
   "usersSubscriptions": [
@@ -476,6 +466,16 @@
       "post_id": 1590,
       "user_id": 99,
       "id": 12
+    },
+    {
+      "post_id": 1679,
+      "user_id": 99,
+      "id": 13
+    },
+    {
+      "post_id": 1686,
+      "user_id": 99,
+      "id": 14
     }
   ]
 }
