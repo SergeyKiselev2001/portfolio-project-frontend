@@ -148,31 +148,27 @@ class Post implements IPosts {
   }
 
   async likePost(postId: number) {
-    alert('da 2')
-    // await tryRequest(async () => {
-    //   await api.post(`/posts/${postId}/like`, {}, getApiHeader())
-    // })
+    await tryRequest(async () => {
+      await api.post(`/posts/${postId}/like`, {}, getApiHeader())
+    })
   }
 
   async removeLike(postId: number) {
-    alert('da')
-    // await tryRequest(async () => {
-    //   await api.post(`/posts/${postId}/dislike`, {}, getApiHeader())
-    // })
+    await tryRequest(async () => {
+      await api.delete(`/posts/${postId}/dislike`, getApiHeader())
+    })
   }
 
   savePost = async (postId: number) => {
-    alert('da4')
-    // await tryRequest(async () => {
-    //   await api.post(`/posts/${postId}/save`, {}, getApiHeader())
-    // })
+    await tryRequest(async () => {
+      await api.post(`/posts/${postId}/save`, {}, getApiHeader())
+    })
   }
 
   removeFromSaved = async (postId: number) => {
-    alert('d5')
-    // await tryRequest(async () => {
-    //   await api.post(`/posts/${postId}/unsave`, {}, getApiHeader())
-    // })
+    await tryRequest(async () => {
+      await api.delete(`/posts/${postId}/unsave`, getApiHeader())
+    })
   }
 }
 

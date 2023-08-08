@@ -1,17 +1,21 @@
-import { useState, useEffect } from 'react'
-
-export const useDebounce = <T>(value: T, delay: number) => {
-  const [debouncedValue, setDebouncedValue] = useState(value)
+import { useEffect, useRef, MutableRefObject } from 'react'
+export const useDebounce = (delay: number) => {
+  const timerRef = useRef() as MutableRefObject<VoidFunction | number>
 
   useEffect(() => {
-    const handler = setTimeout(() => {
-      setDebouncedValue(value)
+    const newCallback = timerRef.current
+    clearTimeout(timerRef.current as number)
+
+    const newTimer = setTimeout(() => {
+      typeof newCallback == 'function' && newCallback()
     }, delay)
 
     return () => {
-      clearTimeout(handler)
+      clearTimeout(newTimer)
     }
-  }, [value])
+  }, [timerRef.current])
 
-  return debouncedValue as unknown as VoidFunction
+  return (callback: VoidFunction) => {
+    timerRef.current = callback
+  }
 }

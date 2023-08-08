@@ -20,6 +20,7 @@ export enum QueryParams {
   LOGIN = 'author',
   START = 'start',
   END = 'end',
+  SAVED = 'saved',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }

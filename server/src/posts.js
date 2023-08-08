@@ -7,17 +7,22 @@ const {
   r401,
   r200,
   r404,
+  postsUtils,
 } = require('./utils')
+
+const {
+  filterPostsByAuthor,
+  filterPostsByTag,
+  getCommentsAmount,
+  getIsLiked,
+  getIsSaved,
+  getLikesAmount,
+  getUserSavedPosts,
+} = postsUtils
 
 module.exports = {
   getPosts: (req, res) => {
-    const {
-      posts = [],
-      likes = [],
-      saves = [],
-      comments = [],
-      users = [],
-    } = getDB()
+    const { posts = [], users = [] } = getDB()
 
     const userID = getUserIdByHeaderJWT(req)
     let result = [...posts]
@@ -26,17 +31,11 @@ module.exports = {
     const limit = +req.query['limit'] || 0
     const tag = req.query['tag'] || ''
     const authorName = req.query['author']
+    const savedByUser = req.query['saved']
 
-    if (authorName) {
-      result = result.filter(
-        (el) =>
-          el.author_id == users.find((user) => user.login == authorName).id
-      )
-    }
-
-    if (tag) {
-      result = result.filter((el) => el.tags.find((postTag) => postTag == tag))
-    }
+    if (authorName) result = filterPostsByAuthor(authorName, result)
+    if (tag) result = filterPostsByTag(tag, result)
+    if (userID && savedByUser) result = getUserSavedPosts(userID, result)
 
     res.setHeader('X-Total-Count', result.length)
 
@@ -51,33 +50,10 @@ module.exports = {
       const author = users.find((el2) => el2.id == author_id)
       const { avatar, login } = author
 
-      let likesAmount = 0
-      likes.forEach((like) => {
-        if (like.post_id == id) {
-          likesAmount = likesAmount + 1
-        }
-      })
-
-      let commentsAmount = 0
-      comments.forEach((comment) => {
-        if (comment.post_id == id) {
-          commentsAmount = commentsAmount + 1
-        }
-      })
-
-      const isSaved = Boolean(
-        userID &&
-          saves
-            .filter((save) => save.post_id == id)
-            .find((el) => el.user_id == userID)
-      )
-
-      const isLiked = Boolean(
-        userID &&
-          likes
-            .filter((like) => like.post_id == id)
-            .find((el) => el.user_id == userID)
-      )
+      let likesAmount = getLikesAmount(id)
+      let commentsAmount = getCommentsAmount(id)
+      const isSaved = getIsSaved(userID, id)
+      const isLiked = getIsLiked(userID, id)
 
       return {
         ...el,
@@ -97,10 +73,18 @@ module.exports = {
   },
 
   likePost: async (req, res) => {
-    console.log('DAAAA LIKE')
     if (!checkAuth(req)) return r401(res)
 
+    const { likes = [] } = getDB()
     const userID = getUserIdByHeaderJWT(req)
+
+    if (
+      likes.find((like) => {
+        return Boolean(like.post_id == +req.params.id && like.user_id == userID)
+      })
+    ) {
+      return r200(res)
+    }
 
     try {
       await fetch('http://localhost:5432/likes/', {
@@ -121,7 +105,6 @@ module.exports = {
   },
 
   dislikePost: async (req, res) => {
-    console.log('DAAAA')
     if (!checkAuth(req)) return r401(res)
 
     const { likes = [] } = getDB()
@@ -133,7 +116,7 @@ module.exports = {
     })?.id
 
     if (!relationId) {
-      return r500(res, 'relation not found')
+      return r200(res)
     }
 
     try {
@@ -174,13 +157,7 @@ module.exports = {
   },
 
   getPostById: async (req, res) => {
-    const {
-      posts = [],
-      users = [],
-      likes = [],
-      comments = [],
-      saves = [],
-    } = getDB()
+    const { posts = [], users = [] } = getDB()
 
     const { author_id, ...post } = posts.find((el) => el.id == req.params.id)
     const userID = getUserIdByHeaderJWT(req)
@@ -188,33 +165,10 @@ module.exports = {
     if (post) {
       const { login, id, avatar } = users.find((user) => user.id == author_id)
 
-      let likesAmount = 0
-      likes.forEach((like) => {
-        if (like.post_id == req.params.id) {
-          likesAmount = likesAmount + 1
-        }
-      })
-
-      let commentsAmount = 0
-      comments.forEach((comment) => {
-        if (comment.post_id == req.params.id) {
-          commentsAmount = commentsAmount + 1
-        }
-      })
-
-      const isSaved = Boolean(
-        userID &&
-          saves
-            .filter((save) => save.post_id == req.params.id)
-            .find((el) => el.user_id == userID)
-      )
-
-      const isLiked = Boolean(
-        userID &&
-          likes
-            .filter((like) => like.post_id == req.params.id)
-            .find((el) => el.user_id == userID)
-      )
+      let likesAmount = getLikesAmount(req.params.id)
+      let commentsAmount = getCommentsAmount(req.params.id)
+      const isSaved = getIsSaved(userID, req.params.id)
+      const isLiked = getIsLiked(userID, req.params.id)
 
       return r200(res, {
         ...post,
@@ -232,7 +186,16 @@ module.exports = {
   savePost: async (req, res) => {
     if (!checkAuth(req)) return r401(res)
 
+    const { saves = [] } = getDB()
     const userID = getUserIdByHeaderJWT(req)
+
+    if (
+      saves.find((save) => {
+        return Boolean(save.post_id == +req.params.id && save.user_id == userID)
+      })
+    ) {
+      return r200(res)
+    }
 
     try {
       await fetch('http://localhost:5432/saves/', {
@@ -253,7 +216,6 @@ module.exports = {
   },
 
   unsavePost: async (req, res) => {
-    console.log('DAAAA 222')
     if (!checkAuth(req)) return r401(res)
 
     const { saves = [] } = getDB()

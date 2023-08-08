@@ -41,6 +41,12 @@ const PostFooter = (props: IPostFooter) => {
   const [currentViews, setCurrentViews] = useState('')
   const [currentIsSaved, setCurrentIsSaved] = useState(Boolean(isSaved))
 
+  const [isLikedOnServer, setIsLikedOnServer] = useState(Boolean(isLiked))
+  const [isSavedOnServer, setIsSavedOnServer] = useState(Boolean(isSaved))
+
+  const setCallbackForLikes = useDebounce(500)
+  const setCallbackForSaves = useDebounce(500)
+
   const viewsConverter = (number: number) => {
     const newViews = `${number}`.substring(0, `${number}`.length - 2)
 
@@ -63,48 +69,59 @@ const PostFooter = (props: IPostFooter) => {
     toast.success('Ссылка скопирована')
   }
 
-  const likePostHandle = (e: React.MouseEvent) => {
-    // if (!e) return
+  const likePostHandle = () => {
+    if (!me.login) {
+      blockSideInfo.toggleLoginModal()
+      return
+    }
 
-    // console.log(e)
+    if (currentIsLiked) {
+      setCallbackForLikes(() => {
+        if (isLikedOnServer) {
+          posts.removeLike(id)
+          setIsLikedOnServer(false)
+        }
+      })
 
-    // if (!me.login) {
-    //   blockSideInfo.toggleLoginModal()
-    //   return
-    // }
+      setCurrentIsLiked(false)
+      setCurrentLikes(currentLikes - 1)
+    } else {
+      setCallbackForLikes(() => {
+        if (!isLikedOnServer) {
+          posts.likePost(id)
+          setIsLikedOnServer(true)
+        }
+      })
 
-    // if (currentIsLiked) {
-    //   posts.removeLike(id)
-    //   setCurrentIsLiked(false)
-    //   setCurrentLikes(currentLikes - 1)
-    // } else {
-    //  posts.likePost(id)
-    //   setCurrentIsLiked(true)
-    //   setCurrentLikes(currentLikes + 1)
-    // }
+      setCurrentIsLiked(true)
+      setCurrentLikes(currentLikes + 1)
+    }
   }
 
-  const savePostHandle = (e: React.MouseEvent) => {
-    if (!e) return
-
-    console.log(e)
-
+  const savePostHandle = () => {
     if (!me.login) {
       blockSideInfo.toggleLoginModal()
       return
     }
 
     if (currentIsSaved) {
-      posts.removeFromSaved(id)
+      setCallbackForSaves(() => {
+        if (isSavedOnServer) {
+          posts.removeFromSaved(id)
+          setIsSavedOnServer(false)
+        }
+      })
       setCurrentIsSaved(false)
     } else {
-      posts.savePost(id)
+      setCallbackForSaves(() => {
+        if (!isSavedOnServer) {
+          posts.savePost(id)
+          setIsSavedOnServer(true)
+        }
+      })
       setCurrentIsSaved(true)
     }
   }
-
-  // const likePost = useDebounce(likePostHandle, 1000)
-  // const savePost = useDebounce(savePostHandle, 1000)
 
   return (
     <div className={classes.PostFooter}>

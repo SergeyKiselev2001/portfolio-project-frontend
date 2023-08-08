@@ -1,14 +1,8 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-var-requires */
-const fs = require('fs')
 const jsonServer = require('json-server')
 const { jwtPairs } = require('./src/jwtPairs')
-const {
-  checkAuth,
-  clearToken,
-  getDB,
-  getUserNameByHeaderJWT,
-} = require('./src/utils')
+const { getDB } = require('./src/utils')
 const Comments = require('./src/comments')
 const Posts = require('./src/posts')
 const Users = require('./src/users')
@@ -24,21 +18,21 @@ server.use(jsonServer.bodyParser)
 // Нужно для небольшой задержки, чтобы запрос проходил не мгновенно, имитация реального апи
 server.use(async (req, res, next) => {
   await new Promise((res) => {
-    setTimeout(res, 1000)
+    setTimeout(res, 500)
   })
   next()
 })
 
-// server.get('/users/me', Users.getMyPersonalInfo)
-// server.get('/users/:name', Users.getUserInfoByName)
-// //server.post('/comments', Comments.createComment)
-// server.get('/posts', Posts.getPosts)
-// server.get('/posts/:id', Posts.getPostById)
-// server.post('/posts/create', Posts.createPost)
-// server.post('/posts/:id/like', Posts.likePost)
-// server.post('/posts/:id/save', Posts.savePost)
-// server.post('/posts/:id/dislike', Posts.dislikePost)
-// server.post('/posts/:id/unsave', Posts.unsavePost)
+server.get('/users/me', Users.getMyPersonalInfo)
+server.get('/users/:name', Users.getUserInfoByName)
+//server.post('/comments', Comments.createComment)
+server.get('/posts', Posts.getPosts)
+server.get('/posts/:id', Posts.getPostById)
+server.post('/posts/create', Posts.createPost)
+server.post('/posts/:id/like', Posts.likePost)
+server.post('/posts/:id/save', Posts.savePost)
+server.delete('/posts/:id/dislike', Posts.dislikePost)
+server.delete('/posts/:id/unsave', Posts.unsavePost)
 
 // // PROFILE SUBSCRIPTION
 // server.post('/users/:id', function (req, res, next) {

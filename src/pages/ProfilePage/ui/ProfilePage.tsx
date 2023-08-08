@@ -38,6 +38,10 @@ const ProfilePage = observer(() => {
   const isMe = me.login == user.login
 
   useEffect(() => {
+    if (params?.user[0] != '@') {
+      return
+    }
+
     setSpinner(true)
     HeaderPage.currentPage = params?.user
     ;(async () => {
