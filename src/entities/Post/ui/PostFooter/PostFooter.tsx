@@ -10,6 +10,7 @@ import { blockSideInfo } from '@widgets/BlockSideInfo'
 import { me } from '@entities/me'
 import { clsx } from '@shared/utils'
 import { posts } from '@entities/Post'
+import { useDebounce } from '@shared/hooks'
 
 interface IPostFooter {
   isPostPage?: boolean
@@ -40,6 +41,12 @@ const PostFooter = (props: IPostFooter) => {
   const [currentViews, setCurrentViews] = useState('')
   const [currentIsSaved, setCurrentIsSaved] = useState(Boolean(isSaved))
 
+  const [isLikedOnServer, setIsLikedOnServer] = useState(Boolean(isLiked))
+  const [isSavedOnServer, setIsSavedOnServer] = useState(Boolean(isSaved))
+
+  const setCallbackForLikes = useDebounce(500)
+  const setCallbackForSaves = useDebounce(500)
+
   const viewsConverter = (number: number) => {
     const newViews = `${number}`.substring(0, `${number}`.length - 2)
 
@@ -62,18 +69,30 @@ const PostFooter = (props: IPostFooter) => {
     toast.success('Ссылка скопирована')
   }
 
-  const likePost = () => {
+  const likePostHandle = () => {
     if (!me.login) {
       blockSideInfo.toggleLoginModal()
       return
     }
 
     if (currentIsLiked) {
-      posts.removeLike(id)
+      setCallbackForLikes(() => {
+        if (isLikedOnServer) {
+          posts.removeLike(id)
+          setIsLikedOnServer(false)
+        }
+      })
+
       setCurrentIsLiked(false)
       setCurrentLikes(currentLikes - 1)
     } else {
-      posts.likePost(id)
+      setCallbackForLikes(() => {
+        if (!isLikedOnServer) {
+          posts.likePost(id)
+          setIsLikedOnServer(true)
+        }
+      })
+
       setCurrentIsLiked(true)
       setCurrentLikes(currentLikes + 1)
     }
@@ -86,10 +105,20 @@ const PostFooter = (props: IPostFooter) => {
     }
 
     if (currentIsSaved) {
-      me.removeFromSaved(id)
+      setCallbackForSaves(() => {
+        if (isSavedOnServer) {
+          posts.removeFromSaved(id)
+          setIsSavedOnServer(false)
+        }
+      })
       setCurrentIsSaved(false)
     } else {
-      me.savePost(id)
+      setCallbackForSaves(() => {
+        if (!isSavedOnServer) {
+          posts.savePost(id)
+          setIsSavedOnServer(true)
+        }
+      })
       setCurrentIsSaved(true)
     }
   }
@@ -100,7 +129,7 @@ const PostFooter = (props: IPostFooter) => {
       <div className={classes.controls}>
         <div className={classes.leftBlock}>
           <button
-            onClick={likePost}
+            onClick={likePostHandle}
             className={clsx(
               { [classes.currentIsLiked]: currentIsLiked },
               classes.likes

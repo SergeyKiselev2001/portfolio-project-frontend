@@ -6,9 +6,7 @@ const { jwtPairs } = require('./jwtPairs')
 module.exports = {
   checkAuth: (req) => {
     const token = module.exports.clearToken(req)
-    const result = jwtPairs.find(
-      (el) => el.tokens.token.slice(0, 10) == token.slice(0, 10)
-    )
+    const result = jwtPairs.find((el) => el.tokens.token == token)
 
     return Boolean(result)
   },
@@ -63,5 +61,85 @@ module.exports = {
       .status(200)
       .setHeader('Access-Control-Expose-Headers', '*')
       .json(result || { message: 'Ok' })
+  },
+
+  postsUtils: {
+    filterPostsByAuthor: (name, posts) => {
+      const { users = [] } = module.exports.getDB()
+
+      return posts.filter(
+        (post) => post.author_id == users.find((user) => user.login == name).id
+      )
+    },
+
+    filterPostsByTag: (tag, posts) => {
+      return posts.filter((post) => post.tags.find((postTag) => postTag == tag))
+    },
+
+    getUserSavedPosts: (userID, posts) => {
+      const { saves = [] } = module.exports.getDB()
+
+      const userSaves = saves
+        .filter((save) => save.user_id == userID)
+        .map((save) => save.post_id)
+
+      const filterBySaved = (post) => {
+        if (userSaves.find((save) => save == post.id)) {
+          return true
+        } else {
+          return false
+        }
+      }
+
+      return posts.filter(filterBySaved)
+    },
+
+    getLikesAmount: (postId) => {
+      const { likes = [] } = module.exports.getDB()
+
+      let likesAmount = 0
+      likes.forEach((like) => {
+        if (like.post_id == postId) {
+          likesAmount = likesAmount + 1
+        }
+      })
+
+      return likesAmount
+    },
+
+    getCommentsAmount: (postId) => {
+      const { comments = [] } = module.exports.getDB()
+
+      let commentsAmount = 0
+      comments.forEach((comment) => {
+        if (comment.post_id == postId) {
+          commentsAmount = commentsAmount + 1
+        }
+      })
+
+      return commentsAmount
+    },
+
+    getIsSaved: (userID, postId) => {
+      const { saves = [] } = module.exports.getDB()
+
+      return Boolean(
+        userID &&
+          saves
+            .filter((save) => save.post_id == postId)
+            .find((el) => el.user_id == userID)
+      )
+    },
+
+    getIsLiked: (userID, postId) => {
+      const { likes = [] } = module.exports.getDB()
+
+      return Boolean(
+        userID &&
+          likes
+            .filter((like) => like.post_id == postId)
+            .find((el) => el.user_id == userID)
+      )
+    },
   },
 }

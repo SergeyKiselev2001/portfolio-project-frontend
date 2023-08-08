@@ -65,7 +65,7 @@ class Post implements IPosts {
     this.posts = []
   }
 
-  async getNextPosts(query: QueryParamsObj[]){
+  async getNextPosts(query: QueryParamsObj[]) {
     if (this.currentPage >= this.amountOfPages) {
       return
     }
@@ -156,6 +156,18 @@ class Post implements IPosts {
   async removeLike(postId: number) {
     await tryRequest(async () => {
       await api.delete(`/posts/${postId}/dislike`, getApiHeader())
+    })
+  }
+
+  savePost = async (postId: number) => {
+    await tryRequest(async () => {
+      await api.post(`/posts/${postId}/save`, {}, getApiHeader())
+    })
+  }
+
+  removeFromSaved = async (postId: number) => {
+    await tryRequest(async () => {
+      await api.delete(`/posts/${postId}/unsave`, getApiHeader())
     })
   }
 }

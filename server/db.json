@@ -27,8 +27,6 @@
       "password": "1234",
       "status": "Хаха",
       "headerTheme": "Default",
-      "savedPosts": [],
-      "likedPosts": [],
       "ignoreList": {
         "tags": [
           "TECHNOLOGIES",
@@ -48,8 +46,6 @@
       "password": "hello",
       "status": "Хаха",
       "headerTheme": "Orange",
-      "savedPosts": [],
-      "likedPosts": [],
       "ignoreList": {
         "tags": []
       },
@@ -66,8 +62,6 @@
       "status": "Опаньки",
       "password": "qwerty12312",
       "headerTheme": "Gold",
-      "savedPosts": [],
-      "likedPosts": [],
       "ignoreList": {
         "tags": [
           "HUMOR"
@@ -86,8 +80,6 @@
       "status": "Новый статус",
       "password": "qwerty12312",
       "headerTheme": "Aqua",
-      "savedPosts": [],
-      "likedPosts": [],
       "ignoreList": {
         "tags": []
       },
@@ -375,6 +367,20 @@
       "timestamp": 1691424542623,
       "views": 0,
       "id": 1685
+    },
+    {
+      "title": "HELLO WORLD!",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "hehehehhehe"
+        }
+      ],
+      "tags": [],
+      "author_id": 99,
+      "timestamp": 1691501861691,
+      "views": 0,
+      "id": 1686
     }
   ],
   "comments": [
@@ -388,58 +394,33 @@
   ],
   "likes": [
     {
-      "post_id": 12,
-      "user_id": 99,
-      "id": 1
+      "post_id": 16,
+      "user_id": 23,
+      "id": 2
     },
     {
-      "post_id": 1679,
+      "post_id": 12,
+      "user_id": 23,
+      "id": 3
+    },
+    {
+      "post_id": 1684,
       "user_id": 99,
-      "id": 2
+      "id": 5
     },
     {
       "post_id": 180,
       "user_id": 99,
-      "id": 3
-    },
-    {
-      "post_id": 1685,
-      "user_id": 1,
-      "id": 4
-    },
-    {
-      "post_id": 12,
-      "user_id": 1,
-      "id": 5
-    },
-    {
-      "post_id": 14,
-      "user_id": 1,
-      "id": 6
-    },
-    {
-      "post_id": 16,
-      "user_id": 1,
-      "id": 7
-    },
-    {
-      "post_id": 1685,
-      "user_id": 99,
       "id": 8
     },
     {
-      "post_id": 14,
+      "post_id": 1672,
       "user_id": 99,
-      "id": 9
-    },
-    {
-      "post_id": 12,
-      "user_id": 23,
       "id": 10
     },
     {
-      "post_id": 14,
-      "user_id": 23,
+      "post_id": 1590,
+      "user_id": 99,
       "id": 11
     }
   ],
@@ -455,5 +436,46 @@
       "subscribed_on": 99
     }
   ],
-  "saves": []
+  "saves": [
+    {
+      "post_id": 1683,
+      "user_id": 23,
+      "id": 1
+    },
+    {
+      "post_id": 1684,
+      "user_id": 23,
+      "id": 2
+    },
+    {
+      "post_id": 12,
+      "user_id": 23,
+      "id": 3
+    },
+    {
+      "post_id": 14,
+      "user_id": 99,
+      "id": 10
+    },
+    {
+      "post_id": 12,
+      "user_id": 99,
+      "id": 11
+    },
+    {
+      "post_id": 1590,
+      "user_id": 99,
+      "id": 12
+    },
+    {
+      "post_id": 1679,
+      "user_id": 99,
+      "id": 13
+    },
+    {
+      "post_id": 1686,
+      "user_id": 99,
+      "id": 14
+    }
+  ]
 }
