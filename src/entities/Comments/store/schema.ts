@@ -4,7 +4,6 @@ export interface ICommentsState {
 
 export interface IComment {
   id: number
-  post_id: number
   text: string
   timestamp: number
   author: {
@@ -15,4 +14,10 @@ export interface IComment {
       alt: string
     }
   }
+}
+
+export interface ICreateCommentDto {
+  post_id: number
+  text: string
+  user_id: number
 }

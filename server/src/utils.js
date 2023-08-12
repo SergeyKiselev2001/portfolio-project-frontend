@@ -63,6 +63,12 @@ module.exports = {
       .json(result || { message: 'Ok' })
   },
 
+  commentsUtils: {
+    filterCommentsByPostID: (postID, comments) => {
+      return comments.filter(comment => comment.post_id == postID)
+    }
+  },
+
   postsUtils: {
     filterPostsByAuthor: (name, posts) => {
       const { users = [] } = module.exports.getDB()

@@ -30,8 +30,8 @@ module.exports = {
     const page = +req.query['page'] ? +req.query['page'] - 1 : 0
     const limit = +req.query['limit'] || 0
     const tag = req.query['tag'] || ''
-    const authorName = req.query['author']
-    const savedByUser = req.query['saved']
+    const authorName = req.query['author'] || ''
+    const savedByUser = req.query['saved'] || ''
 
     if (authorName) result = filterPostsByAuthor(authorName, result)
     if (tag) result = filterPostsByTag(tag, result)
