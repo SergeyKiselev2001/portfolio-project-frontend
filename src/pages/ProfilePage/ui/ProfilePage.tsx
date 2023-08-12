@@ -112,7 +112,11 @@ const ProfilePage = observer(() => {
           </div>
           <div
             className={clsx(
-              { [classes.hide_bgc]: activePage == ActivePage.POSTS },
+              {
+                [classes.hide_bgc]:
+                  activePage == ActivePage.POSTS ||
+                  activePage == ActivePage.SAVED,
+              },
               classes.posts
             )}
           >

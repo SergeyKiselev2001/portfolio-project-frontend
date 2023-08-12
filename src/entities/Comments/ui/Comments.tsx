@@ -2,7 +2,7 @@ import { ICommentsState } from '../store/schema'
 import Comment from './Comment'
 import classes from './Comments.module.scss'
 
-const Comments = (props: Omit<ICommentsState, 'post_id'>) => {
+const Comments = (props: ICommentsState) => {
   const { comments } = props
 
   return (

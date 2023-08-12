@@ -1,5 +1,5 @@
 import { makeAutoObservable } from 'mobx'
-import { IComment, ICommentsState } from './schema'
+import { IComment, ICommentsState, ICreateCommentDto } from './schema'
 import { getApiHeader, tryRequest, urlConverter } from '@shared/utils'
 import { api } from '@app/api'
 import { QueryParamsObj } from '@entities/Post'
@@ -48,25 +48,21 @@ class Comments implements ICommentsState {
     })
   }
 
-  sendComment = async (comment: Omit<IComment, 'id'>) => {
-    await tryRequest(
-      async () => {
-        await api.post('/comments', comment, getApiHeader())
+  sendComment = async (
+    comment: ICreateCommentDto,
+    onCreate: (arg: IComment) => void
+  ) => {
+    tryRequest(async () => {
+      const { data } = await api.post(
+        '/comments/create',
+        comment,
+        getApiHeader()
+      )
+      this.amountOfComments = +this.amountOfComments + 1
+      toast.success('Комментарий добавлен')
 
-        // СДЕЛАТЬ ИНКРЕМЕНТ ПОСТОВ
-
-        // await api.post(
-        //   `/posts/${comment.post_id}`,
-        //   { incrementCommentsCounter: true },
-        //   getApiHeader()
-        // )
-        this.amountOfComments = +this.amountOfComments + 1
-        toast.success('Комментарий добавлен')
-      },
-      () => {
-        toast.error('Произошла ошибка на сервере, попробуйте еще раз')
-      }
-    )
+      onCreate(data)
+    })
   }
 }
 

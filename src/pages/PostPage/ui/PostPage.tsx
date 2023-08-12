@@ -10,7 +10,7 @@ import { PostSkeleton } from '@entities/PostSkeleton'
 import { BlockSideInfo, blockSideInfo } from '@widgets/BlockSideInfo'
 import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
-import { IComment } from '@entities/Comments/store/schema'
+import { IComment, ICreateCommentDto } from '@entities/Comments/store/schema'
 import { me } from '@entities/me'
 import { clsx } from '@shared/utils'
 import { toast } from 'react-toastify'
@@ -23,6 +23,7 @@ const PostPage = observer(() => {
   const [currentComments, setCurrentComments] = useState([] as IComment[])
   const [showAllButton, setShowAllButton] = useState(false)
   const [isCommentPending, setIsCommentPending] = useState(false)
+  const [isGettingRestComments, setIsGettingRestComments] = useState(false)
   const showRestRef = useRef(true)
 
   useEffect(() => {
@@ -53,28 +54,23 @@ const PostPage = observer(() => {
 
     setIsCommentPending(true)
 
-    const { avatar, id, login } = me
-
     const myNewComment = {
       text: myComment,
       post_id: +params.id,
-      timestamp: +new Date(),
-      author: { name: login, id, avatar },
-    } as Omit<IComment, 'id'>
+      user_id: me.id,
+    } as ICreateCommentDto
 
-    await comments.sendComment(myNewComment)
+    const onCreate = (createdComment: IComment) => {
+      setCurrentComments([...currentComments, { ...createdComment }])
+      setMyComment('')
+      setIsCommentPending(false)
+    }
 
-    setCurrentComments([
-      ...currentComments,
-      { ...myNewComment, id: Math.random() },
-    ])
-
-    setMyComment('')
-    setIsCommentPending(false)
+    comments.sendComment(myNewComment, onCreate)
   }
 
   useEffect(() => {
-    // comments.getComments([[QueryParams.POST_ID, params.id]])
+    comments.getComments([[QueryParams.POST_ID, params.id]])
     posts.getPostById(params.id)
   }, [])
 
@@ -90,7 +86,9 @@ const PostPage = observer(() => {
   }
 
   const showAllComments = async () => {
+    setIsGettingRestComments(true)
     await comments.getRestComments([[QueryParams.POST_ID, params.id]])
+    setIsGettingRestComments(false)
     setShowAllButton(false)
   }
 
@@ -107,7 +105,11 @@ const PostPage = observer(() => {
             <Comments comments={currentComments} />
           )}
           {showAllButton && (
-            <button onClick={showAllComments} className={classes.show_all}>
+            <button
+              disabled={isGettingRestComments}
+              onClick={showAllComments}
+              className={classes.show_all}
+            >
               {`Показать оставшиеся комментарии (${
                 comments.amountOfComments - comments.limit
               })`}

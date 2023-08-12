@@ -25,7 +25,8 @@ server.use(async (req, res, next) => {
 
 server.get('/users/me', Users.getMyPersonalInfo)
 server.get('/users/:name', Users.getUserInfoByName)
-//server.post('/comments', Comments.createComment)
+server.get('/comments', Comments.getComments)
+server.post('/comments/create', Comments.createComment)
 server.get('/posts', Posts.getPosts)
 server.get('/posts/:id', Posts.getPostById)
 server.post('/posts/create', Posts.createPost)
