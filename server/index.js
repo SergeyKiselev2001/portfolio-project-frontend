@@ -6,6 +6,7 @@ const { getDB } = require('./src/utils')
 const Comments = require('./src/comments')
 const Posts = require('./src/posts')
 const Users = require('./src/users')
+const Tags = require('./src/tags')
 
 const path = require('path')
 
@@ -25,8 +26,11 @@ server.use(async (req, res, next) => {
 
 server.get('/users/me', Users.getMyPersonalInfo)
 server.get('/users/:name', Users.getUserInfoByName)
+server.get('/users/:login/unsubscribe', Users.unsubscribeFromUser)
+server.get('/users/:login/subscribe', Users.subscribeOnUser)
 server.get('/comments', Comments.getComments)
 server.post('/comments/create', Comments.createComment)
+server.get('/tags', Tags.getTagsInfo)
 server.get('/posts', Posts.getPosts)
 server.get('/posts/:id', Posts.getPostById)
 server.post('/posts/create', Posts.createPost)

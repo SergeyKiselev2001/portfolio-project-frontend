@@ -8,14 +8,17 @@
   ],
   "tags": [
     {
+      "id": 1,
       "type": "ANIMALS",
       "amount": 62
     },
     {
+      "id": 2,
       "type": "TECHNOLOGIES",
       "amount": 22
     },
     {
+      "id": 3,
       "type": "HUMOR",
       "amount": 101
     }
@@ -28,10 +31,7 @@
       "status": "Хаха",
       "headerTheme": "Default",
       "ignoreList": {
-        "tags": [
-          "TECHNOLOGIES",
-          "ANIMALS"
-        ]
+        "tags": ["TECHNOLOGIES", "ANIMALS"]
       },
       "systemRole": "ADMIN",
       "newNotifications": true,
@@ -63,9 +63,7 @@
       "password": "qwerty12312",
       "headerTheme": "Gold",
       "ignoreList": {
-        "tags": [
-          "HUMOR"
-        ]
+        "tags": ["HUMOR"]
       },
       "systemRole": "USER",
       "newNotifications": true,
@@ -119,10 +117,7 @@
           }
         }
       ],
-      "tags": [
-        "HUMOR",
-        "ANIMALS"
-      ]
+      "tags": ["HUMOR", "ANIMALS"]
     },
     {
       "id": 14,
@@ -147,10 +142,7 @@
           "text": "О нет это же еще обычный текст"
         }
       ],
-      "tags": [
-        "TECHNOLOGIES",
-        "ANIMALS"
-      ]
+      "tags": ["TECHNOLOGIES", "ANIMALS"]
     },
     {
       "id": 16,
@@ -167,10 +159,7 @@
           }
         }
       ],
-      "tags": [
-        "TECHNOLOGIES",
-        "HUMOR"
-      ]
+      "tags": ["TECHNOLOGIES", "HUMOR"]
     },
     {
       "id": 1562,
@@ -187,9 +176,7 @@
           }
         }
       ],
-      "tags": [
-        "TECHNOLOGIES"
-      ]
+      "tags": ["TECHNOLOGIES"]
     },
     {
       "id": 1672,
@@ -224,9 +211,7 @@
           "text": "Любая достаточно развитая технология неотличима от магии."
         }
       ],
-      "tags": [
-        "TECHNOLOGIES"
-      ]
+      "tags": ["TECHNOLOGIES"]
     },
     {
       "id": 1590,
@@ -247,9 +232,7 @@
           }
         }
       ],
-      "tags": [
-        "ANIMALS"
-      ]
+      "tags": ["ANIMALS"]
     },
     {
       "id": 180,
@@ -266,9 +249,7 @@
           }
         }
       ],
-      "tags": [
-        "ANIMALS"
-      ]
+      "tags": ["ANIMALS"]
     },
     {
       "title": "Жесть как она есть",
@@ -605,6 +586,13 @@
       "id": 1,
       "subscribed_by": 123,
       "subscribed_on": 99
+    }
+  ],
+  "tagsSubscriptions": [
+    {
+      "id": 1,
+      "subscribed_by": 123,
+      "subscribed_on": 1
     }
   ],
   "saves": [

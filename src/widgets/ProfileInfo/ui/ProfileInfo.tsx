@@ -17,6 +17,7 @@ import { Modal } from '@widgets/Modal'
 import { HeaderColor } from '@entities/HeaderColor'
 import { StorageKeys } from '@entities/clientStorage'
 import { clsx } from '@shared/utils'
+import { useDebounce } from '@shared/hooks'
 
 interface IProfileInfo {
   user: IUserState
@@ -33,12 +34,26 @@ const ProfileInfo = observer(({ user, isSubscribed }: IProfileInfo) => {
   const [newStatus, setNewStatus] = useState(status || '')
   const { t } = useTranslation(i18Chunks.PROFILE)
 
+  const [isSubscribedOnServer, setIsSubscribedOnServer] = useState(isSubscribed)
+  const setCallbackForSubscription = useDebounce(500)
+
   const toggleSubscribe = () => {
     if (subscribed) {
-      currentProfile.unsubscribeFromUser()
+      setCallbackForSubscription(() => {
+        if (isSubscribedOnServer) {
+          currentProfile.unsubscribeFromUser()
+          setIsSubscribedOnServer(false)
+        }
+      })
+
       setSubscribed(false)
     } else {
-      currentProfile.subscribeOnUser()
+      setCallbackForSubscription(() => {
+        if (!isSubscribedOnServer) {
+          currentProfile.subscribeOnUser()
+          setIsSubscribedOnServer(true)
+        }
+      })
       setSubscribed(true)
     }
   }

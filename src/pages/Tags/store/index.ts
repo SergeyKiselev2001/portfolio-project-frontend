@@ -68,8 +68,7 @@ class TagsPage implements ITagsPage {
       const token = getStorageItem(StorageKeys.AUTH)
 
       const promiseTag = await (await api.get('/tags')).data
-      const promiseUserInfo =
-        token && (await api.get('/userInfo', getApiHeader()))
+      const promiseUserInfo = token && (await api.get('/users/me', getApiHeader()))
 
       await Promise.all([promiseTag, promiseUserInfo]).then(([tags, data]) => {
         tags.map((tag: TagInfo) => {
