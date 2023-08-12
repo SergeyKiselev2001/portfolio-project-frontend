@@ -41,22 +41,14 @@ export class User implements IUserState {
 
   unsubscribeFromUser = async () => {
     await tryRequest(async () => {
-      await api.post(
-        `/users/${me.id}`,
-        { unsubscribeFromUser: this.login },
-        getApiHeader()
-      )
+      await api.get(`/users/${this.login}/unsubscribe`, getApiHeader())
       this.subscribed = false
     })
   }
 
   subscribeOnUser = async () => {
     await tryRequest(async () => {
-      await api.post(
-        `/users/${me.id}`,
-        { subscribeOnUser: this.login },
-        getApiHeader()
-      )
+      await api.get(`/users/${this.login}/subscribe`, getApiHeader())
       this.subscribed = true
     })
   }

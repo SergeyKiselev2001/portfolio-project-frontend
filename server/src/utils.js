@@ -63,10 +63,36 @@ module.exports = {
       .json(result || { message: 'Ok' })
   },
 
+  usersUtils: {
+    getUsersSubscriptionsIDs: (id) => {
+      const { usersSubscriptions = [] } = module.exports.getDB()
+
+      return usersSubscriptions
+        .filter((el) => el.subscribed_by == id)
+        .map((el) => el.subscribed_on)
+    },
+
+    getUsersSubscriptionsNames: (usersSubscriptionsIDs) => {
+      const { users = [] } = module.exports.getDB()
+
+      return users
+        .filter((user) => usersSubscriptionsIDs.find((el) => el == user.id))
+        .map((user) => user.login)
+    },
+
+    getFollowersAmount: (userID) => {
+      const { usersSubscriptions = [] } = module.exports.getDB()
+
+      return usersSubscriptions.reduce((count, current) => {
+        return current.subscribed_on == userID ? count + 1 : count
+      }, 0)
+    }
+  },
+
   commentsUtils: {
     filterCommentsByPostID: (postID, comments) => {
-      return comments.filter(comment => comment.post_id == postID)
-    }
+      return comments.filter((comment) => comment.post_id == postID)
+    },
   },
 
   postsUtils: {
