@@ -37,8 +37,6 @@ const ProfileInfo = observer(({ user, isSubscribed }: IProfileInfo) => {
   const [isSubscribedOnServer, setIsSubscribedOnServer] = useState(isSubscribed)
   const setCallbackForSubscription = useDebounce(500)
 
-
-  //
   const toggleSubscribe = () => {
     if (subscribed) {
       setCallbackForSubscription(() => {
