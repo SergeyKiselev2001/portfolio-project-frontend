@@ -30,9 +30,6 @@
       "password": "1234",
       "status": "Хаха",
       "headerTheme": "Default",
-      "ignoreList": {
-        "tags": ["TECHNOLOGIES", "ANIMALS"]
-      },
       "systemRole": "ADMIN",
       "newNotifications": true,
       "avatar": {
@@ -46,9 +43,6 @@
       "password": "hello",
       "status": "Хаха",
       "headerTheme": "Orange",
-      "ignoreList": {
-        "tags": []
-      },
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -62,9 +56,6 @@
       "status": "Опаньки",
       "password": "qwerty12312",
       "headerTheme": "Gold",
-      "ignoreList": {
-        "tags": ["HUMOR"]
-      },
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -78,9 +69,6 @@
       "status": "Новый статус",
       "password": "qwerty12312",
       "headerTheme": "Aqua",
-      "ignoreList": {
-        "tags": []
-      },
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -117,7 +105,10 @@
           }
         }
       ],
-      "tags": ["HUMOR", "ANIMALS"]
+      "tags": [
+        "HUMOR",
+        "ANIMALS"
+      ]
     },
     {
       "id": 14,
@@ -142,7 +133,10 @@
           "text": "О нет это же еще обычный текст"
         }
       ],
-      "tags": ["TECHNOLOGIES", "ANIMALS"]
+      "tags": [
+        "TECHNOLOGIES",
+        "ANIMALS"
+      ]
     },
     {
       "id": 16,
@@ -159,7 +153,10 @@
           }
         }
       ],
-      "tags": ["TECHNOLOGIES", "HUMOR"]
+      "tags": [
+        "TECHNOLOGIES",
+        "HUMOR"
+      ]
     },
     {
       "id": 1562,
@@ -176,7 +173,9 @@
           }
         }
       ],
-      "tags": ["TECHNOLOGIES"]
+      "tags": [
+        "TECHNOLOGIES"
+      ]
     },
     {
       "id": 1672,
@@ -211,7 +210,9 @@
           "text": "Любая достаточно развитая технология неотличима от магии."
         }
       ],
-      "tags": ["TECHNOLOGIES"]
+      "tags": [
+        "TECHNOLOGIES"
+      ]
     },
     {
       "id": 1590,
@@ -232,7 +233,9 @@
           }
         }
       ],
-      "tags": ["ANIMALS"]
+      "tags": [
+        "ANIMALS"
+      ]
     },
     {
       "id": 180,
@@ -249,7 +252,9 @@
           }
         }
       ],
-      "tags": ["ANIMALS"]
+      "tags": [
+        "ANIMALS"
+      ]
     },
     {
       "title": "Жесть как она есть",
@@ -532,6 +537,20 @@
       "user_id": 23,
       "timestamp": 1691880663191,
       "id": 23
+    },
+    {
+      "text": "мда треш...",
+      "post_id": 14,
+      "user_id": 1,
+      "timestamp": 1691941748846,
+      "id": 24
+    },
+    {
+      "text": "хахаххаха тестовый комментарий",
+      "post_id": 1685,
+      "user_id": 1,
+      "timestamp": 1691941799001,
+      "id": 25
     }
   ],
   "likes": [
@@ -574,6 +593,26 @@
       "post_id": 1684,
       "user_id": 23,
       "id": 14
+    },
+    {
+      "post_id": 12,
+      "user_id": 1,
+      "id": 15
+    },
+    {
+      "post_id": 1685,
+      "user_id": 1,
+      "id": 16
+    },
+    {
+      "post_id": 1684,
+      "user_id": 1,
+      "id": 17
+    },
+    {
+      "post_id": 1685,
+      "user_id": 23,
+      "id": 18
     }
   ],
   "usersSubscriptions": [
@@ -590,9 +629,21 @@
   ],
   "tagsSubscriptions": [
     {
+      "subscribed_by": 23,
+      "subscribed_on": 3,
+      "id": 2
+    }
+  ],
+  "tagsBlocks": [
+    {
       "id": 1,
-      "subscribed_by": 123,
-      "subscribed_on": 1
+      "blocked_by": 123,
+      "blocked_tag_id": 1
+    },
+    {
+      "blocked_by": 23,
+      "blocked_tag_id": 2,
+      "id": 2
     }
   ],
   "saves": [
@@ -630,6 +681,26 @@
       "post_id": 1562,
       "user_id": 23,
       "id": 15
+    },
+    {
+      "post_id": 14,
+      "user_id": 1,
+      "id": 16
+    },
+    {
+      "post_id": 1685,
+      "user_id": 1,
+      "id": 17
+    },
+    {
+      "post_id": 1684,
+      "user_id": 1,
+      "id": 18
+    },
+    {
+      "post_id": 1685,
+      "user_id": 23,
+      "id": 19
     }
   ]
 }
