@@ -88,7 +88,7 @@ module.exports = {
     }
 
     try {
-      fetch('http://localhost:5432/likes', {
+      await fetch('http://localhost:5432/likes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
