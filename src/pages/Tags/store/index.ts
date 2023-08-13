@@ -13,53 +13,91 @@ class TagsPage implements ITagsPage {
     makeAutoObservable(this)
   }
 
-  async toggleSubscription(type: i18Tags) {
+  async unsubscribeFromTag(type: i18Tags) {
     const currentTags = [...this.tags]
 
-    const newValue = !currentTags.find((tag) => tag.type == type)?.status
-      .isSubscribed
-
-    currentTags.map((tag) => {
+    this.tags = currentTags.map((tag) => {
       if (tag.type == type) {
-        tag.status.isSubscribed = newValue
+        return {
+          ...tag,
+          status: {
+            ...tag.status,
+            isSubscribed: false,
+          },
+        }
       }
 
       return tag
     })
 
-    this.tags = currentTags
-
     await tryRequest(async () => {
-      await api.post(
-        `/users/${me.id}`,
-        { tagSubscription: { type, newValue } },
-        getApiHeader()
-      )
+      await api.post(`/tags/unsubscribe`, { type }, getApiHeader())
     })
   }
 
-  async toggleBlock(type: i18Tags) {
+  async subscribeOnTag(type: i18Tags) {
     const currentTags = [...this.tags]
 
-    const newValue = !currentTags.find((tag) => tag.type == type)?.status
-      .isBlocked
-
-    currentTags.map((tag) => {
+    this.tags = currentTags.map((tag) => {
       if (tag.type == type) {
-        tag.status.isBlocked = newValue
+        return {
+          ...tag,
+          status: {
+            isBlocked: false,
+            isSubscribed: true,
+          },
+        }
       }
 
       return tag
     })
 
-    this.tags = currentTags
+    await tryRequest(async () => {
+      await api.post(`/tags/subscribe`, { type }, getApiHeader())
+    })
+  }
+
+  async blockTag(type: i18Tags) {
+    const currentTags = [...this.tags]
+
+    this.tags = currentTags.map((tag) => {
+      if (tag.type == type) {
+        return {
+          ...tag,
+          status: {
+            isBlocked: true,
+            isSubscribed: false,
+          },
+        }
+      }
+
+      return tag
+    })
 
     await tryRequest(async () => {
-      await api.post(
-        `/users/${me.id}`,
-        { tagBlocks: { type, newValue } },
-        getApiHeader()
-      )
+      await api.post(`/tags/block`, { type }, getApiHeader())
+    })
+  }
+
+  async unblockTag(type: i18Tags) {
+    const currentTags = [...this.tags]
+
+    this.tags = currentTags.map((tag) => {
+      if (tag.type == type) {
+        return {
+          ...tag,
+          status: {
+            ...tag.status,
+            isBlocked: false,
+          },
+        }
+      }
+
+      return tag
+    })
+
+    await tryRequest(async () => {
+      await api.post(`/tags/unblock`, { type }, getApiHeader())
     })
   }
 
@@ -68,7 +106,8 @@ class TagsPage implements ITagsPage {
       const token = getStorageItem(StorageKeys.AUTH)
 
       const promiseTag = await (await api.get('/tags')).data
-      const promiseUserInfo = token && (await api.get('/users/me', getApiHeader()))
+      const promiseUserInfo =
+        token && (await api.get('/users/me', getApiHeader()))
 
       await Promise.all([promiseTag, promiseUserInfo]).then(([tags, data]) => {
         tags.map((tag: TagInfo) => {

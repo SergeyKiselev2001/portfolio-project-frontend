@@ -64,6 +64,34 @@ module.exports = {
   },
 
   usersUtils: {
+    getBlockedTagsNames: (userID) => {
+      const { tagsBlocks = [], tags = [] } = module.exports.getDB()
+
+      const tagsIDs = tagsBlocks
+        .filter((block) => block.blocked_by == userID)
+        .map((block) => block.blocked_tag_id)
+
+      const tagsNames = tagsIDs.map((tagID) => {
+        return tags.find((el) => el.id == tagID).type
+      })
+
+      return tagsNames
+    },
+
+    getTagsSubscriptionsNames: (userID) => {
+      const { tagsSubscriptions = [], tags = [] } = module.exports.getDB()
+
+      const tagsIDs = tagsSubscriptions
+        .filter((subscription) => subscription.subscribed_by == userID)
+        .map((subscription) => subscription.subscribed_on)
+
+      const tagsNames = tagsIDs.map((tagID) => {
+        return tags.find((el) => el.id == tagID).type
+      })
+
+      return tagsNames
+    },
+
     getUsersSubscriptionsIDs: (id) => {
       const { usersSubscriptions = [] } = module.exports.getDB()
 
@@ -86,7 +114,7 @@ module.exports = {
       return usersSubscriptions.reduce((count, current) => {
         return current.subscribed_on == userID ? count + 1 : count
       }, 0)
-    }
+    },
   },
 
   commentsUtils: {

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const fetch = require('node-fetch')
 const {
   getDB,
   getUserIdByHeaderJWT,
@@ -14,20 +15,21 @@ const {
   getUsersSubscriptionsIDs,
   getUsersSubscriptionsNames,
   getFollowersAmount,
+  getTagsSubscriptionsNames,
+  getBlockedTagsNames,
 } = usersUtils
 
 module.exports = {
   getMyPersonalInfo: async (req, res) => {
     if (!checkAuth(req)) return r401(res)
 
-    const { users = [], tagsSubscriptions = [] } = getDB()
+    const { users = [] } = getDB()
     const userID = getUserIdByHeaderJWT(req)
 
     const userFromDB = users.find((user) => user.id == userID)
 
     if (userFromDB) {
-      const { id, login, headerTheme, ignoreList, systemRole, avatar } =
-        userFromDB
+      const { id, login, headerTheme, systemRole, avatar } = userFromDB
 
       const usersSubscriptionsIDs = getUsersSubscriptionsIDs(id)
 
@@ -35,9 +37,9 @@ module.exports = {
         usersSubscriptionsIDs
       )
 
-      const tagsSubscriptionsNames = () => {
-        ///
-      }
+      const tagsSubscriptionsNames = getTagsSubscriptionsNames(userID)
+
+      const blockedTagsNames = getBlockedTagsNames(userID)
 
       const followersAmount = getFollowersAmount(userID)
 
@@ -45,13 +47,15 @@ module.exports = {
         id,
         login,
         headerTheme,
-        ignoreList,
         systemRole,
         avatar,
         followersAmount,
+        ignoreList: {
+          tags: [...blockedTagsNames],
+        },
         subscriptions: {
           users: [...usersSubscriptionsNames],
-          tags: [],
+          tags: [...tagsSubscriptionsNames],
         },
       })
     } else {
@@ -75,6 +79,8 @@ module.exports = {
         usersSubscriptionsIDs
       )
 
+      const tagsSubscriptionsNames = getTagsSubscriptionsNames(id)
+
       return r200(res, {
         login,
         headerTheme,
@@ -83,7 +89,7 @@ module.exports = {
         status,
         subscriptions: {
           users: [...usersSubscriptionsNames],
-          tags: [],
+          tags: [...tagsSubscriptionsNames],
         },
       })
     } else {

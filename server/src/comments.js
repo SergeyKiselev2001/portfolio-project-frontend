@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const fetch = require('node-fetch')
 const { checkAuth, getDB, commentsUtils, r200, r500, r401 } = require('./utils')
 const { filterCommentsByPostID } = commentsUtils
 

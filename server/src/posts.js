@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+const fetch = require('node-fetch')
 const {
   getDB,
   getUserIdByHeaderJWT,
@@ -87,7 +88,7 @@ module.exports = {
     }
 
     try {
-      await fetch('http://localhost:5432/likes/', {
+      fetch('http://localhost:5432/likes', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

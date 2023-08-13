@@ -31,6 +31,12 @@ server.get('/users/:login/subscribe', Users.subscribeOnUser)
 server.get('/comments', Comments.getComments)
 server.post('/comments/create', Comments.createComment)
 server.get('/tags', Tags.getTagsInfo)
+
+server.post('/tags/subscribe', Tags.subscribeOnTag)
+server.post('/tags/unsubscribe', Tags.unsubscribeFromTag)
+server.post('/tags/block', Tags.blockTag)
+server.post('/tags/unblock', Tags.unblockTag)
+
 server.get('/posts', Posts.getPosts)
 server.get('/posts/:id', Posts.getPostById)
 server.post('/posts/create', Posts.createPost)
