@@ -42,6 +42,8 @@ const ProfilePage = observer(() => {
       return
     }
 
+    setActivePage(ActivePage.POSTS)
+
     setSpinner(true)
     HeaderPage.currentPage = params?.user
     ;(async () => {
