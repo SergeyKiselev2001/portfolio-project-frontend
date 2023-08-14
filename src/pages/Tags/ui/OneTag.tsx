@@ -94,7 +94,7 @@ const OneTag = observer((props: IOneTag) => {
               : t(i18Keys.POSTS, DEFAULT_NS)}
           </span>
         </div>
-        <a rel="noreferrer" target="_blank" href={`${CLIENT}?tag=${type}`}>
+        <a href={`${CLIENT}?tag=${type}`}>
           <img src={linkImg} alt="link" />
         </a>
       </div>

@@ -9,6 +9,8 @@ const {
   r200,
   r404,
   postsUtils,
+  usersUtils,
+  getUserNameByHeaderJWT,
 } = require('./utils')
 
 const {
@@ -21,11 +23,14 @@ const {
   getUserSavedPosts,
 } = postsUtils
 
+const { getBlockedTagsNames } = usersUtils
+
 module.exports = {
   getPosts: (req, res) => {
     const { posts = [], users = [] } = getDB()
 
     const userID = getUserIdByHeaderJWT(req)
+    const authorNameFromJWT = getUserNameByHeaderJWT(req)
     let result = [...posts]
 
     const page = +req.query['page'] ? +req.query['page'] - 1 : 0
@@ -37,6 +42,17 @@ module.exports = {
     if (authorName) result = filterPostsByAuthor(authorName, result)
     if (tag) result = filterPostsByTag(tag, result)
     if (userID && savedByUser) result = getUserSavedPosts(userID, result)
+    if (userID && !savedByUser && authorNameFromJWT != authorName) {
+      const blockedTagsNames = getBlockedTagsNames(userID)
+
+      result = result.filter((post) => {
+        const intersections = blockedTagsNames.filter((value) =>
+          post.tags.includes(value)
+        )
+
+        return !intersections.length
+      })
+    }
 
     res.setHeader('X-Total-Count', result.length)
 

@@ -12,11 +12,16 @@ import { useSearchParams } from 'react-router-dom'
 import { Controller } from '@widgets/Controller'
 import { PostSkeleton } from '@entities/PostSkeleton'
 import { BlockSideInfo, blockSideInfo } from '@widgets/BlockSideInfo'
+import { useTranslation } from 'react-i18next'
+import { i18Chunks } from '@widgets/LangSwitcher/types/i18Keys'
+import { clsx } from '@shared/utils'
+import tagClasses from '@entities/Tag/ui/Tag.module.scss'
 
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
   const [searchParams] = useSearchParams()
   const [showNewSkeletons, setShowNewSkeletons] = useState(false)
+  const { t } = useTranslation(i18Chunks.TAGS)
 
   useEffect(() => {
     posts.resetCurrentPage()
@@ -56,6 +61,19 @@ const MainPage = observer(() => {
       <Controller />
       <div className={classes.content_wrapper}>
         <div className={classes.posts}>
+          {searchParams.get(QueryParams.TAG) && (
+            <h3 className={classes.filter_block}>
+              Поиск по тегу:{' '}
+              <span
+                className={clsx({}, [
+                  tagClasses[searchParams.get(QueryParams.TAG) as string],
+                  classes.tag,
+                ])}
+              >
+                {t(searchParams.get(QueryParams.TAG) as string)}
+              </span>
+            </h3>
+          )}
           {spinner && (
             <>
               <PostSkeleton />

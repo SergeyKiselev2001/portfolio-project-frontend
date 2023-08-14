@@ -6,9 +6,11 @@ interface IConditionCLasses {
 
 export const clsx = (
   conditionCLasses: IConditionCLasses,
-  commonClasses?: string
+  commonClasses?: string[] | string
 ) => {
-  let result = commonClasses || ''
+  let result = Array.isArray(commonClasses)
+    ? commonClasses.join(' ')
+    : commonClasses || ''
 
   Object.entries(conditionCLasses).forEach(([key, value]) => {
     if (!value) return
