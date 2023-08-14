@@ -10,6 +10,7 @@ class Comments implements ICommentsState {
   limit = 5
   amountOfComments = 0
   comments = [] as IComment[]
+  isCommentsReceived = false
 
   constructor() {
     makeAutoObservable(this)
@@ -27,7 +28,7 @@ class Comments implements ICommentsState {
       }
 
       this.amountOfComments = result.headers['x-total-count']
-
+      this.isCommentsReceived = true
       this.comments = result.data
     })
   }

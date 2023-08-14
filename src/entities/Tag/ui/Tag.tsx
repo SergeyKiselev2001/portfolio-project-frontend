@@ -11,12 +11,7 @@ const Tag = ({ tagName }: ITag) => {
   const { t } = useTranslation(i18Chunks.TAGS)
   return (
     <div className={classes.Tag}>
-      <a
-        href={`/?${QueryParams.TAG}=${tagName}`}
-        target="_blank"
-        rel="noreferrer"
-        className={classes[tagName]}
-      >
+      <a href={`/?${QueryParams.TAG}=${tagName}`} className={classes[tagName]}>
         {t(tagName)}
       </a>
     </div>
