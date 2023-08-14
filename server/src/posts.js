@@ -11,6 +11,7 @@ const {
   postsUtils,
   usersUtils,
   getUserNameByHeaderJWT,
+  throttle,
 } = require('./utils')
 
 const {
@@ -187,12 +188,25 @@ module.exports = {
       const isSaved = getIsSaved(userID, req.params.id)
       const isLiked = getIsLiked(userID, req.params.id)
 
+      throttle(() => {
+        fetch(`http://localhost:5432/posts/${req.params.id}`, {
+          headers: { 'Content-Type': 'application/json' },
+          method: 'PUT',
+          body: JSON.stringify({
+            ...post,
+            author_id,
+            views: post.views + 1,
+          }),
+        })
+      }, 100)()
+
       return r200(res, {
         ...post,
         likesAmount,
         commentsAmount,
         isLiked,
         isSaved,
+        views: post.views + 1,
         author: { id, login, avatar },
       })
     } else {

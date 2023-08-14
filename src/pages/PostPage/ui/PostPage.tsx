@@ -16,7 +16,7 @@ import { clsx } from '@shared/utils'
 import { toast } from 'react-toastify'
 
 const PostPage = observer(() => {
-  const params = useParams() as unknown as {
+  const params = useParams() as {
     id: string
   }
 
@@ -25,6 +25,7 @@ const PostPage = observer(() => {
   const [isCommentPending, setIsCommentPending] = useState(false)
   const [isGettingRestComments, setIsGettingRestComments] = useState(false)
   const showRestRef = useRef(true)
+  const addCommentRef = useRef() as React.MutableRefObject<HTMLFormElement>
 
   useEffect(() => {
     setCurrentComments(comments.comments)
@@ -68,6 +69,22 @@ const PostPage = observer(() => {
 
     comments.sendComment(myNewComment, onCreate)
   }
+
+  useEffect(() => {
+    if (!comments.isCommentsReceived) {
+      return
+    }
+
+    if (window.location.hash == '#comments') {
+      setTimeout(() => {
+        window.scrollTo({
+          top:
+            addCommentRef.current.getBoundingClientRect().top + window.scrollY,
+          behavior: 'smooth',
+        })
+      }, 100)
+    }
+  }, [posts.posts, comments])
 
   useEffect(() => {
     comments.getComments([[QueryParams.POST_ID, params.id]])
@@ -116,7 +133,7 @@ const PostPage = observer(() => {
             </button>
           )}
 
-          <form className={classes.sendComment}>
+          <form ref={addCommentRef} className={classes.sendComment}>
             <textarea
               placeholder="Введите текст комментария..."
               className={classes.textarea}
