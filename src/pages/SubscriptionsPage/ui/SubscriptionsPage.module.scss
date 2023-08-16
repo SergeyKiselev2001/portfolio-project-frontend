@@ -1,5 +1,19 @@
 .SubscriptionsPage {
-  height: $content-height;
+  min-height: $content-height;
   background-color: var(--bgc-main);
+  min-width: 340px;
   color: var(--fc);
+  position: relative;
+  z-index: $z-index-content;
+}
+
+.content_wrapper {
+  padding: 10px 40px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+
+  .posts {
+    width: 650px;
+  }
 }

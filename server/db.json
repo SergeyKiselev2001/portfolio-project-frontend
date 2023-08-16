@@ -82,8 +82,7 @@
       "id": 12,
       "title": "Тестовый пост сложный",
       "timestamp": 1686062966913,
-      "author_id": 123,
-      "views": 465,
+      "views": 468,
       "content": [
         {
           "type": "TEXT",
@@ -108,14 +107,14 @@
       "tags": [
         "HUMOR",
         "ANIMALS"
-      ]
+      ],
+      "author_id": 123
     },
     {
       "id": 14,
       "title": "Еще блин один пост",
       "timestamp": 1686062666913,
-      "author_id": 23,
-      "views": 94,
+      "views": 99,
       "content": [
         {
           "type": "TEXT",
@@ -136,14 +135,14 @@
       "tags": [
         "TECHNOLOGIES",
         "ANIMALS"
-      ]
+      ],
+      "author_id": 23
     },
     {
       "id": 16,
       "title": "Смешной пост про айти",
       "timestamp": 1689062966913,
-      "author_id": 23,
-      "views": 700,
+      "views": 709,
       "content": [
         {
           "type": "IMAGE",
@@ -156,7 +155,8 @@
       "tags": [
         "TECHNOLOGIES",
         "HUMOR"
-      ]
+      ],
+      "author_id": 23
     },
     {
       "id": 1562,
@@ -181,8 +181,7 @@
       "id": 1672,
       "title": "При помощи нейросети от Photoshop, дорисовал популярные картины⁠",
       "timestamp": 1646868365913,
-      "author_id": 123,
-      "views": 28939,
+      "views": 28940,
       "content": [
         {
           "type": "IMAGE",
@@ -212,7 +211,8 @@
       ],
       "tags": [
         "TECHNOLOGIES"
-      ]
+      ],
+      "author_id": 123
     },
     {
       "id": 1590,
@@ -279,10 +279,10 @@
         }
       ],
       "tags": [],
-      "author_id": 23,
       "timestamp": 1691410046804,
-      "views": 0,
-      "id": 1680
+      "views": 8,
+      "id": 1680,
+      "author_id": 23
     },
     {
       "title": "ggggggggg",
@@ -558,6 +558,13 @@
       "user_id": 23,
       "timestamp": 1691960847171,
       "id": 26
+    },
+    {
+      "text": "еххехехе",
+      "post_id": 14,
+      "user_id": 99,
+      "timestamp": 1692193632767,
+      "id": 27
     }
   ],
   "likes": [
@@ -628,11 +635,6 @@
     },
     {
       "post_id": 1680,
-      "user_id": 23,
-      "id": 20
-    },
-    {
-      "post_id": 1680,
       "user_id": 1,
       "id": 21
     },
@@ -640,6 +642,36 @@
       "post_id": 1679,
       "user_id": 1,
       "id": 22
+    },
+    {
+      "post_id": 14,
+      "user_id": 99,
+      "id": 23
+    },
+    {
+      "post_id": 1686,
+      "user_id": 99,
+      "id": 24
+    },
+    {
+      "post_id": 1679,
+      "user_id": 99,
+      "id": 25
+    },
+    {
+      "post_id": 1672,
+      "user_id": 23,
+      "id": 26
+    },
+    {
+      "post_id": 1679,
+      "user_id": 23,
+      "id": 27
+    },
+    {
+      "post_id": 1686,
+      "user_id": 23,
+      "id": 28
     }
   ],
   "usersSubscriptions": [
@@ -654,17 +686,38 @@
       "subscribed_on": 99
     },
     {
-      "subscribed_by": 23,
-      "subscribed_on": 123,
-      "id": 2
-    },
-    {
       "subscribed_by": 1,
       "subscribed_on": 23,
       "id": 3
+    },
+    {
+      "subscribed_by": 23,
+      "subscribed_on": 123,
+      "id": 4
     }
   ],
-  "tagsSubscriptions": [],
+  "tagsSubscriptions": [
+    {
+      "subscribed_by": 99,
+      "subscribed_on": 2,
+      "id": 1
+    },
+    {
+      "subscribed_by": 23,
+      "subscribed_on": 1,
+      "id": 2
+    },
+    {
+      "subscribed_by": 23,
+      "subscribed_on": 3,
+      "id": 3
+    },
+    {
+      "subscribed_by": 23,
+      "subscribed_on": 2,
+      "id": 4
+    }
+  ],
   "tagsBlocks": [
     {
       "id": 1,
@@ -685,6 +738,11 @@
       "blocked_by": 1,
       "blocked_tag_id": 2,
       "id": 4
+    },
+    {
+      "blocked_by": 99,
+      "blocked_tag_id": 3,
+      "id": 6
     }
   ],
   "saves": [
@@ -697,11 +755,6 @@
       "post_id": 1684,
       "user_id": 23,
       "id": 2
-    },
-    {
-      "post_id": 12,
-      "user_id": 23,
-      "id": 3
     },
     {
       "post_id": 1590,
@@ -717,11 +770,6 @@
       "post_id": 1686,
       "user_id": 99,
       "id": 14
-    },
-    {
-      "post_id": 1562,
-      "user_id": 23,
-      "id": 15
     },
     {
       "post_id": 14,
@@ -744,16 +792,6 @@
       "id": 19
     },
     {
-      "post_id": 14,
-      "user_id": 23,
-      "id": 20
-    },
-    {
-      "post_id": 1680,
-      "user_id": 23,
-      "id": 21
-    },
-    {
       "post_id": 1679,
       "user_id": 1,
       "id": 22
@@ -767,6 +805,36 @@
       "post_id": 1681,
       "user_id": 1,
       "id": 24
+    },
+    {
+      "post_id": 14,
+      "user_id": 99,
+      "id": 25
+    },
+    {
+      "post_id": 1680,
+      "user_id": 23,
+      "id": 26
+    },
+    {
+      "post_id": 1679,
+      "user_id": 23,
+      "id": 28
+    },
+    {
+      "post_id": 1686,
+      "user_id": 23,
+      "id": 29
+    },
+    {
+      "post_id": 14,
+      "user_id": 23,
+      "id": 30
+    },
+    {
+      "post_id": 16,
+      "user_id": 23,
+      "id": 31
     }
   ]
 }

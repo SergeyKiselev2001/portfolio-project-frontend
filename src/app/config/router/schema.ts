@@ -21,6 +21,7 @@ export enum QueryParams {
   START = 'start',
   END = 'end',
   SAVED = 'saved',
+  SUBSCRIPTIONS = 'subscriptions',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }
