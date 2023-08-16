@@ -25,9 +25,11 @@ server.use(async (req, res, next) => {
 })
 
 server.get('/users/me', Users.getMyPersonalInfo)
-server.get('/users/:name', Users.getUserInfoByName)
+server.get('/users/:login', Users.getUserInfoByName)
 server.get('/users/:login/unsubscribe', Users.unsubscribeFromUser)
 server.get('/users/:login/subscribe', Users.subscribeOnUser)
+server.post('/users/:login/setStatus', Users.setStatus)
+server.post('/users/:login/setTheme', Users.setHeaderTheme)
 server.get('/comments', Comments.getComments)
 server.post('/comments/create', Comments.createComment)
 server.get('/tags', Tags.getTagsInfo)

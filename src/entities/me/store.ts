@@ -45,17 +45,25 @@ class Me implements IMeState {
 
   updateStatus = async (newStatus: string) => {
     await tryRequest(async () => {
-      await api.post(`/users/${this.id}`, { newStatus }, getApiHeader())
+      await api.post(
+        `/users/${this.login}/setStatus`,
+        { newStatus },
+        getApiHeader()
+      )
       user.setUserInfo({
         status: newStatus,
       })
     })
   }
 
-  updateTheme = async (headerTheme: HeaderTheme) => {
+  updateTheme = async (newTheme: HeaderTheme) => {
     await tryRequest(async () => {
-      await api.post(`/users/${this.id}`, { headerTheme }, getApiHeader())
-      user.setUserInfo({ headerTheme })
+      await api.post(
+        `/users/${this.login}/setTheme`,
+        { newTheme },
+        getApiHeader()
+      )
+      user.setUserInfo({ headerTheme: newTheme })
     })
   }
 }

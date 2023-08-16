@@ -67,7 +67,7 @@ module.exports = {
     const { users = [] } = getDB()
 
     const userFromDB = users.find((user) => {
-      return user.login === req.params.name
+      return user.login === req.params.login
     })
 
     if (userFromDB) {
@@ -145,6 +145,66 @@ module.exports = {
       return r200(res)
     } catch {
       return r500(res, 'delete fetch error')
+    }
+  },
+
+  setStatus: async (req, res) => {
+    if (!checkAuth(req)) return r401(res)
+
+    const { users = [] } = getDB()
+
+    const userID = getUserIdByHeaderJWT(req)
+
+    const newStatus = req.body['newStatus']
+
+    const user = users.find((el) => el.id == userID)
+
+    if (!user) {
+      return r404(res, 'Пользователь не найден!')
+    }
+
+    try {
+      await fetch(`http://localhost:5432/users/${userID}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...user,
+          status: newStatus,
+        }),
+      })
+      return r200(res)
+    } catch {
+      return r500(res, 'update status error')
+    }
+  },
+
+  setHeaderTheme: async (req, res) => {
+    if (!checkAuth(req)) return r401(res)
+
+    const { users = [] } = getDB()
+
+    const userID = getUserIdByHeaderJWT(req)
+
+    const newTheme = req.body['newTheme']
+
+    const user = users.find((el) => el.id == userID)
+
+    if (!user) {
+      return r404(res, 'Пользователь не найден!')
+    }
+
+    try {
+      await fetch(`http://localhost:5432/users/${userID}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...user,
+          headerTheme: newTheme,
+        }),
+      })
+      return r200(res)
+    } catch {
+      return r500(res, 'update theme error')
     }
   },
 }
