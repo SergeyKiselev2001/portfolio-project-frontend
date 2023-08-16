@@ -1,6 +1,5 @@
 export enum StorageKeys {
   AUTH = 'AUTH',
-  HIDDEN_POSTS = 'HIDDEN_POSTS',
   THEME = 'THEME',
 }
 

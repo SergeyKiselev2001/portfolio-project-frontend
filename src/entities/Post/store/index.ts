@@ -2,9 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { IPosts, QueryParamsObj } from './schema'
 import { api } from '@app/api'
 import { INewPost } from '../ui/schema'
-import classes from './../ui/Post.module.scss'
-import { StorageKeys, getStorageItem } from '@entities/clientStorage'
-import { getApiHeader, tryRequest, urlConverter } from '@shared/utils'
+import { getApiHeader, sleep, tryRequest, urlConverter } from '@shared/utils'
 import { toast } from 'react-toastify'
 import { QueryParams } from '@app/config/router'
 import { CreatePostDto } from '@widgets/PostEditor'
@@ -32,15 +30,8 @@ class Post implements IPosts {
 
   async getPosts(query: QueryParamsObj[]) {
     await tryRequest(async () => {
-      const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
-        id: number
-      }[]
-
       query = [...query, [QueryParams.LIMIT, `${this.limit}`]]
-
-      hiddenPosts?.forEach(({ id }) => {
-        query.push([QueryParams.ID_NE, `${id}`])
-      })
+      await sleep(500)
 
       const result = (await api.get(
         urlConverter('/posts', query),
@@ -72,19 +63,11 @@ class Post implements IPosts {
 
     this.currentPage += 1
     await tryRequest(async () => {
-      const hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS) as {
-        id: number
-      }[]
-
       query = [
         ...query,
         [QueryParams.LIMIT, `${this.limit}`],
         [QueryParams.PAGE, `${this.currentPage}`],
       ]
-
-      hiddenPosts?.forEach(({ id }) => {
-        query.push([QueryParams.ID_NE, `${id}`])
-      })
 
       const { data } = (await api.get(
         urlConverter('/posts', query),
@@ -93,29 +76,18 @@ class Post implements IPosts {
         data: INewPost[]
       }
 
-      const newPosts = data.filter(
-        (post) => !hiddenPosts?.find((el) => el.id == post.id)
-      )
-
-      this.posts = [...this.posts, ...newPosts]
+      this.posts = [...this.posts, ...data]
     })
   }
 
   hidePost(hideId: number) {
-    const post = document.getElementById(`post-${hideId}`)
-    ;(post as HTMLElement).classList.add(classes.slow_disappearing)
-    let hiddenPosts = getStorageItem(StorageKeys.HIDDEN_POSTS)
-
-    if (hiddenPosts) {
-      hiddenPosts.push({ id: hideId })
-    } else {
-      hiddenPosts = [{ id: hideId }]
-    }
-
-    localStorage.setItem(StorageKeys.HIDDEN_POSTS, JSON.stringify(hiddenPosts))
-    setTimeout(() => {
-      this.posts = this.posts.filter(({ id }) => hideId != id)
-    }, 500)
+    // const post = document.getElementById(`post-${hideId}`)
+    // ;(post as HTMLElement).classList.add(classes.slow_disappearing)
+    //   hiddenPosts = [{ id: hideId }]
+    // localStorage.setItem(StorageKeys.HIDDEN_POSTS, JSON.stringify(hiddenPosts))
+    // setTimeout(() => {
+    //   this.posts = this.posts.filter(({ id }) => hideId != id)
+    // }, 500)
   }
 
   async sendReport(postId: number) {

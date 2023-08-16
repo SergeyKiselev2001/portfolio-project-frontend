@@ -24,7 +24,11 @@ const {
   getUserSavedPosts,
 } = postsUtils
 
-const { getBlockedTagsNames } = usersUtils
+const {
+  getBlockedTagsNames,
+  getUsersSubscriptionsIDs,
+  getTagsSubscriptionsNames,
+} = usersUtils
 
 module.exports = {
   getPosts: (req, res) => {
@@ -39,6 +43,7 @@ module.exports = {
     const tag = req.query['tag'] || ''
     const authorName = req.query['author'] || ''
     const savedByUser = req.query['saved'] || ''
+    const subscriptions = req.query['subscriptions'] || ''
 
     if (authorName) result = filterPostsByAuthor(authorName, result)
     if (tag) result = filterPostsByTag(tag, result)
@@ -52,6 +57,18 @@ module.exports = {
         )
 
         return !intersections.length
+      })
+    }
+
+    if (subscriptions && userID) {
+      const tagsSubscriptions = getTagsSubscriptionsNames(userID)
+      const userSubscriptionsIDs = getUsersSubscriptionsIDs(userID)
+
+      result = result.filter((post) => {
+        return Boolean(
+          tagsSubscriptions.filter((value) => post.tags.includes(value))
+            .length || userSubscriptionsIDs.includes(post.author_id)
+        )
       })
     }
 

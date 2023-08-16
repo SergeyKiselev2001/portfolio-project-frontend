@@ -1,4 +1,7 @@
-import { i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
+import { i18Chunks, i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
+import { useTranslation } from 'react-i18next'
+import tagClasses from '@entities/Tag/ui/Tag.module.scss'
+import classes from './ProfilePage.module.scss'
 
 interface IUserSubscriptions {
   subscriptions: {
@@ -9,13 +12,26 @@ interface IUserSubscriptions {
 
 export const UserSubscriptions = (props: IUserSubscriptions) => {
   const { subscriptions } = props
+  const { t } = useTranslation(i18Chunks.TAGS)
+
   return (
-    <div>
+    <div className={classes.UserSubscriptions}>
+      {!subscriptions.tags.length && !subscriptions.users.length && (
+        <span className={classes.not_found}>Нет подписок</span>
+      )}
       {subscriptions.tags.map((tag) => (
-        <h1 key={tag}>{tag}</h1>
+        <a
+          href={`/?tag=${tag}`}
+          className={`${tagClasses[tag]} ${classes.tag}`}
+          key={tag}
+        >
+          {t(tag)}
+        </a>
       ))}
       {subscriptions.users.map((user) => (
-        <h1 key={user}>{user}</h1>
+        <a href={`/@${user}`} className={classes.user} key={user}>
+          {user}
+        </a>
       ))}
     </div>
   )
