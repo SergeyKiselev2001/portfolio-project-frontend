@@ -41,8 +41,8 @@
       "id": 99,
       "login": "Volibear",
       "password": "hello",
-      "status": "Хаха",
-      "headerTheme": "Orange",
+      "status": "Я тоже статус сменил!",
+      "headerTheme": "Aqua",
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -66,9 +66,9 @@
     {
       "id": 23,
       "login": "Vera_xxx",
-      "status": "Новый статус",
+      "status": "adsada",
       "password": "qwerty12312",
-      "headerTheme": "Aqua",
+      "headerTheme": "Green",
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -82,7 +82,7 @@
       "id": 12,
       "title": "Тестовый пост сложный",
       "timestamp": 1686062966913,
-      "views": 468,
+      "views": 472,
       "content": [
         {
           "type": "TEXT",
@@ -266,9 +266,9 @@
       ],
       "tags": [],
       "timestamp": 1691183042535,
-      "author_id": 99,
-      "views": 37,
-      "id": 1679
+      "views": 44,
+      "id": 1679,
+      "author_id": 99
     },
     {
       "title": "ujhknn,",
@@ -280,7 +280,7 @@
       ],
       "tags": [],
       "timestamp": 1691410046804,
-      "views": 8,
+      "views": 11,
       "id": 1680,
       "author_id": 23
     },
@@ -335,10 +335,10 @@
         }
       ],
       "tags": [],
-      "author_id": 23,
       "timestamp": 1691410953206,
-      "views": 0,
-      "id": 1684
+      "views": 3,
+      "id": 1684,
+      "author_id": 23
     },
     {
       "title": "POST BY ADMIN",
@@ -349,10 +349,10 @@
         }
       ],
       "tags": [],
-      "author_id": 1,
       "timestamp": 1691424542623,
-      "views": 0,
-      "id": 1685
+      "views": 1,
+      "id": 1685,
+      "author_id": 1
     },
     {
       "title": "HELLO WORLD!",
@@ -565,6 +565,34 @@
       "user_id": 99,
       "timestamp": 1692193632767,
       "id": 27
+    },
+    {
+      "text": "чсмчсамвы авы",
+      "post_id": 1679,
+      "user_id": 99,
+      "timestamp": 1692223382318,
+      "id": 28
+    },
+    {
+      "text": "авы фавфы авфыа",
+      "post_id": 1679,
+      "user_id": 99,
+      "timestamp": 1692223386049,
+      "id": 29
+    },
+    {
+      "text": "ва фы авфы а",
+      "post_id": 1679,
+      "user_id": 99,
+      "timestamp": 1692223388321,
+      "id": 30
+    },
+    {
+      "text": "аеп вапрва ",
+      "post_id": 12,
+      "user_id": 99,
+      "timestamp": 1692223435373,
+      "id": 31
     }
   ],
   "likes": [
@@ -672,6 +700,11 @@
       "post_id": 1686,
       "user_id": 23,
       "id": 28
+    },
+    {
+      "post_id": 1680,
+      "user_id": 99,
+      "id": 29
     }
   ],
   "usersSubscriptions": [
@@ -694,14 +727,14 @@
       "subscribed_by": 23,
       "subscribed_on": 123,
       "id": 4
+    },
+    {
+      "subscribed_by": 99,
+      "subscribed_on": 23,
+      "id": 5
     }
   ],
   "tagsSubscriptions": [
-    {
-      "subscribed_by": 99,
-      "subscribed_on": 2,
-      "id": 1
-    },
     {
       "subscribed_by": 23,
       "subscribed_on": 1,
@@ -738,11 +771,6 @@
       "blocked_by": 1,
       "blocked_tag_id": 2,
       "id": 4
-    },
-    {
-      "blocked_by": 99,
-      "blocked_tag_id": 3,
-      "id": 6
     }
   ],
   "saves": [
@@ -807,11 +835,6 @@
       "id": 24
     },
     {
-      "post_id": 14,
-      "user_id": 99,
-      "id": 25
-    },
-    {
       "post_id": 1680,
       "user_id": 23,
       "id": 26
@@ -835,6 +858,16 @@
       "post_id": 16,
       "user_id": 23,
       "id": 31
+    },
+    {
+      "post_id": 1681,
+      "user_id": 99,
+      "id": 32
+    },
+    {
+      "post_id": 1680,
+      "user_id": 99,
+      "id": 33
     }
   ]
 }
