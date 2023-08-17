@@ -2,7 +2,6 @@
   min-height: $content-height;
   background-color: var(--bgc-main);
   min-width: 340px;
-
   position: relative;
   z-index: $z-index-content;
 }
@@ -14,7 +13,9 @@
 
   .editor {
     margin-right: 10px;
+    padding-top: 40px;
     width: 650px;
+    margin-bottom: 100px;
 
     .log_in {
       margin-top: 10px;

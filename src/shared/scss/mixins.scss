@@ -3,3 +3,11 @@
     margin-bottom: $value;
   }
 }
+
+@mixin shadow() {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+@mixin shadow-inset($opacity) {
+  box-shadow: inset 0px 0px 10px rgba(0, 0, 0, $opacity);
+}
