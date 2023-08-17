@@ -7,6 +7,7 @@ import { Post, posts } from '@entities/Post'
 import { BlockSideInfo, blockSideInfo } from '@widgets/BlockSideInfo'
 import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
+import { ScrollUp } from '@widgets/ScrollUp'
 
 const SubscriptionsPage = () => {
   const [spinner, setSpinner] = useState(true)
@@ -42,6 +43,7 @@ const SubscriptionsPage = () => {
 
   return (
     <div className={classes.SubscriptionsPage}>
+      <ScrollUp />
       <div className={classes.content_wrapper}>
         <div className={classes.posts}>
           {spinner && (

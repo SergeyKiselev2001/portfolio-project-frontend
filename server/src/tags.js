@@ -11,7 +11,23 @@ const fetch = require('node-fetch')
 
 module.exports = {
   getTagsInfo: async (req, res, next) => {
-    next()
+    const { tags = [], posts = [] } = getDB()
+
+    const tagsInfo = tags.map((tag) => {
+      let amount = 0
+      posts.forEach((post) => {
+        if (post.tags.includes(tag.type)) {
+          amount = amount + 1
+        }
+      })
+
+      return {
+        ...tag,
+        amount,
+      }
+    })
+
+    return r200(res, tagsInfo)
   },
 
   subscribeOnTag: async (req, res) => {
