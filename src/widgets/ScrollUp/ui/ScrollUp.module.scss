@@ -1,0 +1,15 @@
+.ScrollUp {
+  height: 100vh;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+  background-color: transparent;
+  outline: none;
+  width: 40px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.225);
+  }
+}

@@ -9,18 +9,15 @@
   "tags": [
     {
       "id": 1,
-      "type": "ANIMALS",
-      "amount": 62
+      "type": "ANIMALS"
     },
     {
       "id": 2,
-      "type": "TECHNOLOGIES",
-      "amount": 22
+      "type": "TECHNOLOGIES"
     },
     {
       "id": 3,
-      "type": "HUMOR",
-      "amount": 101
+      "type": "HUMOR"
     }
   ],
   "users": [
@@ -114,7 +111,7 @@
       "id": 14,
       "title": "Еще блин один пост",
       "timestamp": 1686062666913,
-      "views": 99,
+      "views": 101,
       "content": [
         {
           "type": "TEXT",
@@ -771,6 +768,11 @@
       "blocked_by": 1,
       "blocked_tag_id": 2,
       "id": 4
+    },
+    {
+      "blocked_by": 99,
+      "blocked_tag_id": 3,
+      "id": 5
     }
   ],
   "saves": [

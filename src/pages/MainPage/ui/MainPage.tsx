@@ -16,6 +16,7 @@ import { useTranslation } from 'react-i18next'
 import { i18Chunks } from '@widgets/LangSwitcher/types/i18Keys'
 import { clsx } from '@shared/utils'
 import tagClasses from '@entities/Tag/ui/Tag.module.scss'
+import { ScrollUp } from '@widgets/ScrollUp'
 
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
@@ -59,6 +60,7 @@ const MainPage = observer(() => {
   return (
     <div className={classes.MainPage}>
       <Controller />
+      <ScrollUp />
       <div className={classes.content_wrapper}>
         <div className={classes.posts}>
           {searchParams.get(QueryParams.TAG) && (

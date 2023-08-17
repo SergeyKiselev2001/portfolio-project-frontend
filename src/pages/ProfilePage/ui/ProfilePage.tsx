@@ -17,6 +17,7 @@ import { blockSideInfo } from '@widgets/BlockSideInfo'
 import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
 import { observer } from 'mobx-react-lite'
+import { ScrollUp } from '@widgets/ScrollUp'
 
 const ProfilePage = observer(() => {
   const params = useParams() as {
@@ -30,10 +31,8 @@ const ProfilePage = observer(() => {
   }
 
   const [activePage, setActivePage] = useState(ActivePage.POSTS)
-
-  const { t } = useTranslation()
-
   const [spinner, setSpinner] = useState(true)
+  const { t } = useTranslation()
 
   const isMe = me.login == user.login
 
@@ -73,6 +72,7 @@ const ProfilePage = observer(() => {
 
   return (
     <div className={classes.ProfilePage}>
+      <ScrollUp />
       {spinner && <Spinner />}
       {!spinner && user.login && (
         <>
