@@ -174,15 +174,15 @@ const PostEditor = (props: IPostEditor) => {
 
         <button
           onClick={addTextEditorHandle}
-          className={clsx({}, [classes.contentButton, classes.buttonText])}
+          className={clsx([classes.contentButton, classes.buttonText])}
         />
         <button
           onClick={addImageEditorHandle}
-          className={clsx({}, [classes.contentButton, classes.buttonImage])}
+          className={clsx([classes.contentButton, classes.buttonImage])}
         />
         <button
           onClick={addQuotesEditorHandle}
-          className={clsx({}, [classes.contentButton, classes.buttonQuotes])}
+          className={clsx([classes.contentButton, classes.buttonQuotes])}
         />
       </div>
 

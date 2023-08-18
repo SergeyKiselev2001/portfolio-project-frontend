@@ -63,7 +63,7 @@
     {
       "id": 23,
       "login": "Vera_xxx",
-      "status": "adsada",
+      "status": "adsadadfr tgdf gdf43",
       "password": "qwerty12312",
       "headerTheme": "Green",
       "systemRole": "USER",
@@ -111,7 +111,7 @@
       "id": 14,
       "title": "Еще блин один пост",
       "timestamp": 1686062666913,
-      "views": 102,
+      "views": 103,
       "content": [
         {
           "type": "TEXT",
@@ -139,7 +139,7 @@
       "id": 16,
       "title": "Смешной пост про айти",
       "timestamp": 1689062966913,
-      "views": 709,
+      "views": 710,
       "content": [
         {
           "type": "IMAGE",
@@ -534,7 +534,7 @@
       ],
       "tags": [],
       "timestamp": 1692280174330,
-      "views": 2,
+      "views": 3,
       "id": 1689,
       "author_id": 99
     },
@@ -552,7 +552,7 @@
       ],
       "tags": [],
       "timestamp": 1692280407350,
-      "views": 7,
+      "views": 8,
       "id": 1690,
       "author_id": 99
     },
@@ -610,7 +610,7 @@
       ],
       "tags": [],
       "timestamp": 1692289439359,
-      "views": 2,
+      "views": 5,
       "id": 1693,
       "author_id": 99
     },
@@ -1029,6 +1029,13 @@
       "user_id": 23,
       "timestamp": 1692294016026,
       "id": 45
+    },
+    {
+      "text": "fdgdsgd",
+      "post_id": 14,
+      "user_id": 23,
+      "timestamp": 1692359651525,
+      "id": 46
     }
   ],
   "likes": [
@@ -1156,6 +1163,16 @@
       "post_id": 1697,
       "user_id": 23,
       "id": 32
+    },
+    {
+      "post_id": 1690,
+      "user_id": 23,
+      "id": 33
+    },
+    {
+      "post_id": 180,
+      "user_id": 23,
+      "id": 34
     }
   ],
   "usersSubscriptions": [
@@ -1175,11 +1192,6 @@
       "id": 3
     },
     {
-      "subscribed_by": 23,
-      "subscribed_on": 123,
-      "id": 4
-    },
-    {
       "subscribed_by": 99,
       "subscribed_on": 23,
       "id": 5
@@ -1190,7 +1202,13 @@
       "id": 6
     }
   ],
-  "tagsSubscriptions": [],
+  "tagsSubscriptions": [
+    {
+      "subscribed_by": 23,
+      "subscribed_on": 3,
+      "id": 3
+    }
+  ],
   "tagsBlocks": [
     {
       "id": 1,
@@ -1226,21 +1244,6 @@
       "blocked_by": 99,
       "blocked_tag_id": 2,
       "id": 7
-    },
-    {
-      "blocked_by": 23,
-      "blocked_tag_id": 1,
-      "id": 8
-    },
-    {
-      "blocked_by": 23,
-      "blocked_tag_id": 3,
-      "id": 9
-    },
-    {
-      "blocked_by": 23,
-      "blocked_tag_id": 2,
-      "id": 10
     }
   ],
   "saves": [
@@ -1348,6 +1351,103 @@
       "post_id": 1697,
       "user_id": 23,
       "id": 35
+    },
+    {
+      "post_id": 1562,
+      "user_id": 23,
+      "id": 36
+    },
+    {
+      "post_id": 1690,
+      "user_id": 23,
+      "id": 37
+    },
+    {
+      "post_id": 180,
+      "user_id": 23,
+      "id": 38
+    }
+  ],
+  "reports": [
+    {
+      "id": 0,
+      "post_id": 1690,
+      "user_id": 23
+    },
+    {
+      "post_id": 1672,
+      "user_id": 23,
+      "id": 1
+    },
+    {
+      "post_id": 16,
+      "user_id": 23,
+      "id": 2
+    },
+    {
+      "post_id": 1562,
+      "user_id": 23,
+      "id": 3
+    },
+    {
+      "post_id": 1679,
+      "user_id": 23,
+      "id": 4
+    },
+    {
+      "post_id": 1680,
+      "user_id": 23,
+      "id": 5
+    },
+    {
+      "post_id": 1682,
+      "user_id": 23,
+      "id": 6
+    },
+    {
+      "post_id": 1684,
+      "user_id": 23,
+      "id": 7
+    },
+    {
+      "post_id": 1681,
+      "user_id": 23,
+      "id": 8
+    },
+    {
+      "post_id": 1686,
+      "user_id": 23,
+      "id": 9
+    },
+    {
+      "post_id": 1687,
+      "user_id": 23,
+      "id": 10
+    },
+    {
+      "post_id": 1688,
+      "user_id": 23,
+      "id": 11
+    },
+    {
+      "post_id": 1691,
+      "user_id": 23,
+      "id": 12
+    },
+    {
+      "post_id": 1693,
+      "user_id": 23,
+      "id": 13
+    },
+    {
+      "post_id": 12,
+      "user_id": 23,
+      "id": 14
+    },
+    {
+      "post_id": 14,
+      "user_id": 23,
+      "id": 15
     }
   ]
 }

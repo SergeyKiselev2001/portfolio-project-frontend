@@ -17,6 +17,10 @@ export const tryRequest = async <T>(
       toast.error('Bad request')
     }
 
+    if ((e as AxiosError).response?.status == 422) {
+      toast.warn(`${(e as any).response?.data.message}`)
+    }
+
     if ((e as AxiosError).response?.status == 500) {
       toast.error(`${(e as any).response?.data.message}`)
     }

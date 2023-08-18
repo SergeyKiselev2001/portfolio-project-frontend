@@ -7,6 +7,7 @@ import { toast } from 'react-toastify'
 import { QueryParams } from '@app/config/router'
 import { CreatePostDto } from '@widgets/PostEditor'
 import { comments } from '@entities/Comments'
+import classes from '../ui/Post.module.scss'
 
 class Post implements IPosts {
   posts = [] as INewPost[]
@@ -81,22 +82,18 @@ class Post implements IPosts {
   }
 
   hidePost(hideId: number) {
-    // const post = document.getElementById(`post-${hideId}`)
-    // ;(post as HTMLElement).classList.add(classes.slow_disappearing)
-    //   hiddenPosts = [{ id: hideId }]
-    // localStorage.setItem(StorageKeys.HIDDEN_POSTS, JSON.stringify(hiddenPosts))
-    // setTimeout(() => {
-    //   this.posts = this.posts.filter(({ id }) => hideId != id)
-    // }, 500)
+    const post = document.getElementById(`post-${hideId}`)
+    ;(post as HTMLElement).classList.add(classes.slow_disappearing)
+    setTimeout(() => {
+      this.posts = this.posts.filter(({ id }) => hideId != id)
+    }, 500)
   }
 
-  async sendReport(postId: number) {
+  async sendReport(post_id: number) {
     await tryRequest(async () => {
-      const { data } = await api.post('/report', { postId })
-      toast.success(data.message)
+      await api.post('/reports', { post_id }, getApiHeader())
+      toast.success('Пост отправлен на модерацию')
     })
-
-    this.hidePost(postId)
   }
 
   async deletePost(postId: number) {

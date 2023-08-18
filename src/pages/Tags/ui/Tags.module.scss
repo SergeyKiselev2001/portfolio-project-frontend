@@ -2,6 +2,7 @@
   min-width: 340px;
   min-height: $content-height;
   background-color: var(--bgc-main);
+  height: 100%;
 }
 
 .tags_content {
@@ -9,6 +10,7 @@
   padding-top: 40px;
   margin: 0 auto;
   max-width: 650px;
+  padding-bottom: 100px;
 }
 
 .title {
@@ -20,7 +22,7 @@
 }
 
 .search {
-  background-color: #d9d9d9;
+  background-color: #cccccc;
   border-radius: 10px;
   padding: 15px;
   font-family: $roboto;
@@ -67,6 +69,7 @@
       outline: none;
       flex-grow: 1;
       position: relative;
+      min-width: 10px;
     }
 
     button {
@@ -78,8 +81,10 @@
   }
 
   .buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
     button {
-      margin-right: 5px;
       padding: 5px 10px;
       background-color: #464646;
       color: white;
@@ -91,12 +96,28 @@
   display: grid;
   grid-gap: 20px;
   grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .OneTag {
   border-radius: 5px;
   overflow: hidden;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  @media (max-width: 700px) {
+    .bottom {
+      gap: 10px;
+      flex-wrap: wrap;
+
+      button {
+        flex-grow: 1;
+        margin: 0 !important;
+      }
+    }
+  }
 
   .ANIMALS {
     background: linear-gradient(98.13deg, #2e7a5a 20.2%, #63c418 101.49%);
@@ -174,7 +195,7 @@
       cursor: pointer;
       background-color: #fff;
       border-radius: 5px;
-      font-weight: 600;
+      font-weight: 500;
 
       &:nth-child(1) {
         margin-right: 15px;
@@ -216,7 +237,6 @@
     left: 700px;
   }
 }
-
 
 .notFound {
   color: var(--fc);
