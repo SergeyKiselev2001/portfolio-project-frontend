@@ -21,7 +21,6 @@ module.exports = {
     if (reports.find((el) => el.post_id == post_id && user_id == user_id)) {
       return r422(res, 'Вы уже отправляли жалобу на этот пост')
     } else {
-      console.log('FETCH')
       next()
     }
   },

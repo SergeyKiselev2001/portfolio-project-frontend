@@ -57,8 +57,6 @@ const MainPage = observer(() => {
     })()
   }
 
-  console.log(tagClasses['ANIMALS'], 'da')
-
   return (
     <div className={classes.MainPage}>
       <Controller />
