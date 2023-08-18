@@ -40,7 +40,7 @@
     "start": "concurrently \"npm run dev\" \"npm run server\"",
     "dev": "craco start",
     "build": "craco build",
-    "test": "craco test --watchAll",
+    "test": "craco test --watchAll --detectOpenHandles --forceExit",
     "eject": "react-scripts eject",
     "server": "node server/index.js"
   },

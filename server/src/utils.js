@@ -53,6 +53,9 @@ module.exports = {
   r404: (res, message) => {
     return res.status(401).json({ message: message || 'Not found' })
   },
+  r422: (res, message) => {
+    return res.status(422).json({ message: message || 'Logical error' })
+  },
   r500: (res, message) => {
     return res.status(500).json({ message: message || 'Server error' })
   },

@@ -1,6 +1,6 @@
 import { i18Chunks, i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
 import { useTranslation } from 'react-i18next'
-import tagClasses from '@entities/Tag/ui/Tag.module.scss'
+import { tagClasses } from '@entities/Tag'
 import classes from './ProfilePage.module.scss'
 
 interface IUserSubscriptions {

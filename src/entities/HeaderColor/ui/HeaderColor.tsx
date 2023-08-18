@@ -15,7 +15,7 @@ const HeaderColor = (props: IHeaderColor) => {
   }
 
   return (
-    <div
+    <button
       onClick={changeColor}
       className={`${classes.HeaderColor} ${classes[color]}`}
     />

@@ -9,6 +9,7 @@ const Users = require('./src/users')
 const Tags = require('./src/tags')
 
 const path = require('path')
+const Reports = require('./src/reports')
 
 const server = jsonServer.create()
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'))
@@ -38,6 +39,8 @@ server.post('/tags/subscribe', Tags.subscribeOnTag)
 server.post('/tags/unsubscribe', Tags.unsubscribeFromTag)
 server.post('/tags/block', Tags.blockTag)
 server.post('/tags/unblock', Tags.unblockTag)
+
+server.post('/reports', Reports.sendReport)
 
 server.get('/posts', Posts.getPosts)
 server.get('/posts/:id', Posts.getPostById)
@@ -108,19 +111,6 @@ server.post('/login', (req, res) => {
     return res.status(403).json({ message: 'User not found' })
   } catch (e) {
     console.log(e)
-    return res.status(500).json({ message: e.message })
-  }
-})
-
-// Эндпоинт для логина
-server.post('/report', (req, res) => {
-  try {
-    const { postId } = req.body
-
-    return res.json({
-      message: `Пост с id=${postId} отправлен на модерацию`,
-    })
-  } catch (e) {
     return res.status(500).json({ message: e.message })
   }
 })

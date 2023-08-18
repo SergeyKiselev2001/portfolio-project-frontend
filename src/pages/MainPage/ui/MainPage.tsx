@@ -15,8 +15,8 @@ import { BlockSideInfo, blockSideInfo } from '@widgets/BlockSideInfo'
 import { useTranslation } from 'react-i18next'
 import { i18Chunks } from '@widgets/LangSwitcher/types/i18Keys'
 import { clsx } from '@shared/utils'
-import tagClasses from '@entities/Tag/ui/Tag.module.scss'
 import { ScrollUp } from '@widgets/ScrollUp'
+import { tagClasses } from '@entities/Tag'
 
 const MainPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
@@ -57,6 +57,8 @@ const MainPage = observer(() => {
     })()
   }
 
+  console.log(tagClasses['ANIMALS'], 'da')
+
   return (
     <div className={classes.MainPage}>
       <Controller />
@@ -67,7 +69,7 @@ const MainPage = observer(() => {
             <h3 className={classes.filter_block}>
               Поиск по тегу:{' '}
               <span
-                className={clsx({}, [
+                className={clsx([
                   tagClasses[searchParams.get(QueryParams.TAG) as string],
                   classes.tag,
                 ])}

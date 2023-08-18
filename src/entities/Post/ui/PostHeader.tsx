@@ -65,25 +65,24 @@ const PostHeader = (props: IPostHeader) => {
           </time>
         </div>
       </div>
-      {!isPostPage && (
-        <div className={classes.rightHeader}>
-          <img
-            onClick={toggleOptions}
-            className={classes.dots}
-            src={dots}
-            alt="dots"
-          />
-          {showOptions && (
-            <div className={classes.options}>
-              <span onClick={hidePost}>Скрыть</span>
-              <span onClick={reportPost}>Пожаловаться</span>
-              {me.login == author.login && (
-                <span onClick={deletePost}>Удалить</span>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+
+      <div className={classes.rightHeader}>
+        <img
+          onClick={toggleOptions}
+          className={classes.dots}
+          src={dots}
+          alt="dots"
+        />
+        {showOptions && (
+          <div className={classes.options}>
+            {!isPostPage && <span onClick={hidePost}>Скрыть</span>}
+            <span onClick={reportPost}>Пожаловаться</span>
+            {me.login == author.login && (
+              <span onClick={deletePost}>Удалить</span>
+            )}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
