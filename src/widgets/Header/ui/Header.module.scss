@@ -18,6 +18,40 @@
   }
 }
 
+.pending {
+  background-color: var(--bgc-skeletons);
+  overflow: hidden;
+}
+
+.light {
+  top: 0px;
+  height: 100%;
+  width: 300px;
+  position: absolute;
+  animation-name: light;
+  animation-duration: .8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in;
+  background: var(--bgc-skeletons-ray);
+}
+
+@keyframes light {
+  0% {
+    left: -300px;
+  }
+
+  100% {
+    left: 1400px;
+  }
+}
+
+
+
+
+.display_none {
+  display: none !important;
+}
+
 .links {
   margin: 0 auto;
   display: flex;

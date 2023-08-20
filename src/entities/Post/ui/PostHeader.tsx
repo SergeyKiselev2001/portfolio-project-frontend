@@ -5,6 +5,7 @@ import { posts } from '..'
 import { TimeFormat, timeConverter } from '@shared/utils'
 import { Link } from 'react-router-dom'
 import { me } from '@entities/me'
+import { SystemRoles } from '@entities/user'
 
 interface IPostHeader {
   isPostPage?: boolean
@@ -77,7 +78,8 @@ const PostHeader = (props: IPostHeader) => {
           <div className={classes.options}>
             {!isPostPage && <span onClick={hidePost}>Скрыть</span>}
             <span onClick={reportPost}>Пожаловаться</span>
-            {me.login == author.login && (
+            {(me.login == author.login ||
+              me.systemRole == SystemRoles.ADMIN) && (
               <span onClick={deletePost}>Удалить</span>
             )}
           </div>

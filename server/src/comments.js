@@ -1,6 +1,14 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const fetch = require('node-fetch')
-const { checkAuth, getDB, commentsUtils, r200, r500, r401 } = require('./utils')
+const {
+  checkAuth,
+  getDB,
+  commentsUtils,
+  r200,
+  r500,
+  r401,
+  r403,
+} = require('./utils')
 const { filterCommentsByPostID } = commentsUtils
 
 module.exports = {
@@ -70,5 +78,11 @@ module.exports = {
     } catch {
       return r500(res, 'Ошибка добавления комментария')
     }
+  },
+
+  deleteComment: (req, res, next) => {
+    if (req.headers['cascade-delete']) {
+      next()
+    } else return r403(res)
   },
 }

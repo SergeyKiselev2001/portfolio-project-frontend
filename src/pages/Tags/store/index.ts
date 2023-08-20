@@ -109,6 +109,8 @@ class TagsPage implements ITagsPage {
       const promiseUserInfo =
         token && (await api.get('/users/me', getApiHeader()))
 
+      me.setIsDataLoaded(true)
+
       await Promise.all([promiseTag, promiseUserInfo]).then(([tags, data]) => {
         tags.map((tag: TagInfo) => {
           tag.status = {

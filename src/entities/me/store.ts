@@ -6,6 +6,7 @@ import { HeaderTheme, SystemRoles, user } from '@entities/user'
 import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 
 class Me implements IMeState {
+  isDataLoaded = false
   id = 0
   login = ''
   headerTheme = HeaderTheme.DEFAULT
@@ -17,7 +18,7 @@ class Me implements IMeState {
   ignoreList = {
     tags: [],
   }
-  systemRole = SystemRoles.USER
+  systemRole = SystemRoles.GUEST
   avatar = {
     src: '',
     alt: '',
@@ -27,11 +28,15 @@ class Me implements IMeState {
     makeAutoObservable(this)
   }
 
+  setIsDataLoaded = (value: boolean) => {
+    this.isDataLoaded = value
+  }
+
   getUserInfoByJWT = async () => {
     await tryRequest(async () => {
       if (getStorageItem(StorageKeys.AUTH)) {
         const data = await api.get('/users/me', getApiHeader())
-
+        this.setIsDataLoaded(true)
         this.setUserInfo(data.data)
       }
     })

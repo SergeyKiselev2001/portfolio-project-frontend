@@ -9,20 +9,19 @@ export const tryRequest = async <T>(
   try {
     await callback()
   } catch (e) {
-    if ((e as AxiosError).response?.status == 401) {
-      toast.error('Auth error')
-    }
-
-    if ((e as AxiosError).response?.status == 400) {
-      toast.error('Bad request')
-    }
-
-    if ((e as AxiosError).response?.status == 422) {
-      toast.warn(`${(e as any).response?.data.message}`)
-    }
-
-    if ((e as AxiosError).response?.status == 500) {
-      toast.error(`${(e as any).response?.data.message}`)
+    switch ((e as AxiosError).response?.status) {
+      case 400:
+        toast.error('Bad request')
+        return
+      case 401:
+        toast.error('Auth error')
+        return
+      case 422:
+        toast.warn(`${(e as any).response?.data.message}`)
+        return
+      case 500:
+        toast.error(`${(e as any).response?.data.message}`)
+        return
     }
 
     errorCallback && errorCallback()

@@ -28,4 +28,5 @@ export enum HeaderTheme {
 export enum SystemRoles {
   ADMIN = 'ADMIN',
   USER = 'USER',
+  GUEST = 'GUEST',
 }
