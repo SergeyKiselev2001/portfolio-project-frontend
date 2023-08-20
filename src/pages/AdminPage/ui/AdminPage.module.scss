@@ -1,3 +1,135 @@
 .AdminPage {
-    
+  min-height: $content-height;
+  background-color: var(--bgc-main);
+  min-width: 340px;
+  position: relative;
+  z-index: $z-index-content;
+  display: flex;
+
+  .sidebar {
+    width: 200px;
+    background-color: #3b3b3b;
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    padding: 10px;
+
+    button {
+      padding: 20px;
+      cursor: pointer;
+      background-color: transparent;
+      border: 1px solid rgb(255, 255, 255);
+      color: #ffffff;
+      font-family: $roboto;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .active {
+      background-color: #ffffff;
+      color: black;
+    }
+  }
+}
+
+.pending {
+  display: none;
+}
+
+.content {
+  padding: 20px;
+  width: 100%;
+}
+
+.UsersTab {
+  background-color: var(--bgc-secondary);
+  @include shadow;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: $roboto;
+  font-weight: 400;
+  font-size: 16px;
+  max-width: 500px;
+
+  .ADMIN {
+    background-color: #ffbf36;
+  }
+  .USER {
+    background-color: #e0e4a7;
+  }
+
+  .user {
+    border-radius: 10px;
+    padding: 5px 10px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      text-align: center;
+    }
+
+    span {
+      text-align: center;
+    }
+
+    .image {
+      margin: 0 auto;
+      img {
+        height: 70px;
+        width: 70px;
+        align-self: center;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.ReportsTab {
+  background-color: var(--bgc-secondary);
+  @include shadow;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-family: $roboto;
+  font-weight: 400;
+  font-size: 16px;
+  max-width: 700px;
+  overflow: hidden;
+
+
+  .report {
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: grid;
+    grid-template-columns:  1fr 1fr 2fr 4fr;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      text-align: center;
+    }
+
+    span {
+      text-align: center;
+    }
+
+    .title {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: start;
+        white-space: nowrap
+    }
+  }
 }

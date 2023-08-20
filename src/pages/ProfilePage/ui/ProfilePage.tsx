@@ -13,8 +13,13 @@ import { clsx } from '@shared/utils'
 import { UserPosts } from './UserPosts'
 import { UserSaved } from './UserSaved'
 import { UserSubscriptions } from './UserSubscriptions'
+import { blockSideInfo } from '@widgets/BlockSideInfo'
+import { Modal } from '@widgets/Modal'
+import { Login } from '@widgets/Login'
+import { observer } from 'mobx-react-lite'
+import { ScrollUp } from '@widgets/ScrollUp'
 
-const ProfilePage = () => {
+const ProfilePage = observer(() => {
   const params = useParams() as {
     user: string
   }
@@ -26,14 +31,18 @@ const ProfilePage = () => {
   }
 
   const [activePage, setActivePage] = useState(ActivePage.POSTS)
-
-  const { t } = useTranslation()
-
   const [spinner, setSpinner] = useState(true)
+  const { t } = useTranslation()
 
   const isMe = me.login == user.login
 
   useEffect(() => {
+    if (params?.user[0] != '@') {
+      return
+    }
+
+    setActivePage(ActivePage.POSTS)
+
     setSpinner(true)
     HeaderPage.currentPage = params?.user
     ;(async () => {
@@ -50,13 +59,30 @@ const ProfilePage = () => {
     setActivePage(page)
   }
 
+  const closeModal = () => {
+    blockSideInfo.toggleLoginModal()
+  }
+
+  const onLogin = () => {
+    blockSideInfo.toggleLoginModal()
+    const body = document.getElementsByTagName('body')[0]
+    body.style.overflow = 'auto'
+    location.reload()
+  }
+
   return (
     <div className={classes.ProfilePage}>
+      <ScrollUp />
       {spinner && <Spinner />}
       {!spinner && user.login && (
         <>
           <div className={classes.profileInfoWrapper}>
-            <ProfileInfo user={user} />
+            <ProfileInfo
+              isSubscribed={Boolean(
+                me.subscriptions.users.find((el) => el == user.login)
+              )}
+              user={user}
+            />
           </div>
           <div className={classes.filters}>
             <button
@@ -88,7 +114,11 @@ const ProfilePage = () => {
           </div>
           <div
             className={clsx(
-              { [classes.hide_bgc]: activePage == ActivePage.POSTS },
+              {
+                [classes.hide_bgc]:
+                  activePage == ActivePage.POSTS ||
+                  activePage == ActivePage.SAVED,
+              },
               classes.posts
             )}
           >
@@ -106,8 +136,14 @@ const ProfilePage = () => {
       {!spinner && !user.login && (
         <ErrorPage message={`${t(i18Keys.USER_NOT_FOUND)}`} />
       )}
+
+      {blockSideInfo.showLoginModal && (
+        <Modal onclose={closeModal}>
+          <Login onLogin={onLogin} />
+        </Modal>
+      )}
     </div>
   )
-}
+})
 
 export default withHeader(ProfilePage)

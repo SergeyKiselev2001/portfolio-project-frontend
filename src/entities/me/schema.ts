@@ -6,5 +6,6 @@ export interface IMeState extends IUserState {
   ignoreList?: {
     tags: i18Tags[]
   }
+  followersAmount?: number
   newNotifications?: boolean
 }

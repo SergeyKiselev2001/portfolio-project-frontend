@@ -3,7 +3,7 @@ import classes from './ProfileInfo.module.scss'
 import { me } from '@entities/me'
 import { LangSwitcher } from '@widgets/LangSwitcher'
 import { ThemeSwitcher } from '@widgets/ThemeSwitcher'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { observer } from 'mobx-react-lite'
 import { user as currentProfile } from '@entities/user'
 import { useTranslation } from 'react-i18next'
@@ -15,36 +15,48 @@ import {
 import { DEFAULT_NS } from '@shared/constants'
 import { Modal } from '@widgets/Modal'
 import { HeaderColor } from '@entities/HeaderColor'
+import { StorageKeys } from '@entities/clientStorage'
+import { clsx } from '@shared/utils'
+import { useDebounce } from '@shared/hooks'
 
 interface IProfileInfo {
   user: IUserState
+  isSubscribed: boolean
 }
 
-const ProfileInfo = observer(({ user }: IProfileInfo) => {
+const ProfileInfo = observer(({ user, isSubscribed }: IProfileInfo) => {
   const { login, status, avatar, systemRole, headerTheme } = user
 
   const isMe = me.login == login
 
-  console.log(headerTheme)
-
-  const [subscribed, setSubscribed] = useState(false)
-  //const [showStatusModal, setShowStatusModal] = useState(false)
+  const [subscribed, setSubscribed] = useState(isSubscribed)
   const [showHeaderModal, setShowHeaderModal] = useState(false)
   const [newStatus, setNewStatus] = useState(status || '')
   const { t } = useTranslation(i18Chunks.PROFILE)
 
-  useEffect(() => {
-    setSubscribed(!!me.subscriptions.users.find((user) => user == login))
-  }, [me.subscriptions.users])
+  const [isSubscribedOnServer, setIsSubscribedOnServer] = useState(isSubscribed)
+  const setCallbackForSubscription = useDebounce(500)
 
   const toggleSubscribe = () => {
-    currentProfile.subscribeOnUser(me.id)
-    setSubscribed((prev) => !prev)
-  }
+    if (subscribed) {
+      setCallbackForSubscription(() => {
+        if (isSubscribedOnServer) {
+          currentProfile.unsubscribeFromUser()
+          setIsSubscribedOnServer(false)
+        }
+      })
 
-  // const toggleStatusModalHandle = () => {
-  //   setShowStatusModal((prev) => !prev)
-  // }
+      setSubscribed(false)
+    } else {
+      setCallbackForSubscription(() => {
+        if (!isSubscribedOnServer) {
+          currentProfile.subscribeOnUser()
+          setIsSubscribedOnServer(true)
+        }
+      })
+      setSubscribed(true)
+    }
+  }
 
   const newStatusHandle = (e: InputChange) => {
     setNewStatus(e.target.value)
@@ -64,6 +76,12 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
     toggleHeaderModalHandle()
   }
 
+  const logoutHandle = () => {
+    localStorage.removeItem(StorageKeys.AUTH)
+    sessionStorage.removeItem(StorageKeys.AUTH)
+    location.reload()
+  }
+
   return (
     <div className={classes.ProfileInfo}>
       <div className={`${classes.header} ${classes[`${headerTheme}`]}`}>
@@ -81,7 +99,7 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
         {!isMe && me.login && (
           <div className={classes.subscribe}>
             <button
-              className={subscribed ? classes.active : ''}
+              className={clsx({ [classes.active]: subscribed })}
               onClick={toggleSubscribe}
             >
               {subscribed
@@ -105,21 +123,13 @@ const ProfileInfo = observer(({ user }: IProfileInfo) => {
               <LangSwitcher />
               <ThemeSwitcher />
             </div>
-            {/* <div className={classes.changes}>
-              <button onClick={toggleStatusModalHandle}>Сменить статус</button>
-              <button>Сменить шапку профиля</button>
-            </div> */}
+
+            <button onClick={logoutHandle} className={classes.logout}>
+              Выйти из профиля
+            </button>
           </div>
         )}
       </div>
-      {/* {showStatusModal && (
-        <Modal onclose={toggleStatusModalHandle}>
-          <div>
-            <input type="text" value={newStatus} onChange={newStatusHandle} />
-            <button onClick={updateStatus}>Save</button>
-          </div>
-        </Modal>
-      )} */}
       {showHeaderModal && (
         <Modal onclose={toggleHeaderModalHandle}>
           <div className={classes.modal_wrapper}>

@@ -9,6 +9,7 @@ import { ProfilePage } from '@pages/ProfilePage'
 import { AdminPage } from '@pages/AdminPage'
 import { SubscriptionsPage } from '@pages/SubscriptionsPage'
 import { CreatePostPage } from '@pages/CreatePostPage'
+import { PostPage } from '@pages/PostPage'
 
 export const listOfRoutes: Route[] = [
   {
@@ -46,6 +47,10 @@ export const listOfRoutes: Route[] = [
   {
     path: RouterPaths.CREATE_POST,
     element: <CreatePostPage />,
+  },
+  {
+    path: RouterPaths.POST,
+    element: <PostPage />,
   },
 ]
 

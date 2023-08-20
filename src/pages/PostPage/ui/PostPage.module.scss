@@ -1,0 +1,72 @@
+.PostPage {
+  min-height: $content-height;
+  background-color: var(--bgc-main);
+  min-width: 340px;
+
+  position: relative;
+  z-index: $z-index-content;
+}
+
+.content_wrapper {
+  padding: 10px 40px;
+  display: flex;
+  justify-content: center;
+
+  .content {
+    margin-right: 10px;
+    width: 650px;
+  }
+}
+
+.sendComment {
+  background-color: var(--bgc-secondary);
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 100px;
+  display: flex;
+  font-family: $roboto;
+  flex-direction: column;
+  gap: 10px;
+
+  .textarea {
+    min-height: 4em;
+    resize: none;
+    font-family: $roboto;
+    color: var(--post-fc);
+    outline: none;
+    border: none;
+    background-color: #F4F4F4;
+    padding: 8px 10px;
+    border-radius: 5px;
+  }
+
+  button {
+    cursor: pointer;
+    font-family: $roboto;
+    padding: 10px 30px;
+    width: fit-content;
+    border: none;
+    background-color: #6BBE5E;
+    color: white;
+    border-radius: 5px;
+  }
+
+  .pending {
+    background-color: #cfcfcf;
+    cursor: not-allowed;
+  }
+}
+
+.show_all {
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  padding: 10px;
+  cursor: pointer;
+  font-family: $roboto;
+  border-radius: 5px;
+  border: none;
+  background-color: #C5C5C5;
+  font-weight: 500;
+}
+

@@ -1,14 +1,15 @@
 export enum StorageKeys {
   AUTH = 'AUTH',
-  HIDDEN_POSTS = 'HIDDEN_POSTS',
   THEME = 'THEME',
+  POST_CONTENT = 'POST_CONTENT',
+  POST_TITLE = 'POST_TITLE',
 }
 
 export const getStorageItem = (key: StorageKeys) => {
   const session = JSON.parse(`${sessionStorage.getItem(key)}`)
   const local = JSON.parse(`${localStorage.getItem(key)}`)
 
-  return session || local
+  return session || local || ''
 }
 
 export const setStorageItem = (

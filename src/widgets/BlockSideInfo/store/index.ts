@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx'
-import { IMainPage } from './schema'
+import { IBlockSideInfo } from './schema'
 
-class MainPage implements IMainPage {
+class BlockSideInfo implements IBlockSideInfo {
   showLoginModal = false
 
   constructor() {
@@ -13,4 +13,4 @@ class MainPage implements IMainPage {
   }
 }
 
-export default new MainPage()
+export default new BlockSideInfo()

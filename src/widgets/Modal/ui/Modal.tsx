@@ -1,16 +1,17 @@
 import { createPortal } from 'react-dom'
 import classes from './Modal.module.scss'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { i18Keys } from '@widgets/LangSwitcher'
 
 interface IModal {
   children: JSX.Element
   onclose?: VoidFunction
+  showCloseButton?: boolean
 }
 
 const Modal = (props: IModal) => {
-  const { children, onclose } = props
+  const { children, onclose, showCloseButton } = props
 
   const [active, setActive] = useState(true)
   const { t } = useTranslation()
@@ -27,9 +28,11 @@ const Modal = (props: IModal) => {
         className={classes.content_wrapper}
       >
         {children}
-        <button className={classes.close_button} onClick={closeModal}>
-          {t(i18Keys.CLOSE)}
-        </button>
+        {showCloseButton && (
+          <button className={classes.close_button} onClick={closeModal}>
+            {t(i18Keys.CLOSE)}
+          </button>
+        )}
       </div>
     </div>
   )

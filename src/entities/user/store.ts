@@ -2,11 +2,12 @@ import { makeAutoObservable } from 'mobx'
 import { HeaderTheme, IUserState, SystemRoles } from './schema'
 import { getApiHeader, tryRequest } from '@shared/utils'
 import { api } from '@app/api'
+import { me } from '@entities/me'
 
 export class User implements IUserState {
+  id = 0
   login = ''
   status = ''
-  followersAmount = 0
   headerTheme = HeaderTheme.DEFAULT
   subscribed = false
   subscriptions = {
@@ -25,9 +26,9 @@ export class User implements IUserState {
 
   getUserInfo = async (name: string) => {
     await tryRequest(async () => {
-      const data = await api.get(`/user/${name}`)
+      const data = await api.get(`/users/${name}`)
 
-      this.setUserInfo(data.data.userInfo)
+      this.setUserInfo(data.data)
       this.login = name
     })
   }
@@ -38,13 +39,16 @@ export class User implements IUserState {
     }
   }
 
-  subscribeOnUser = async (myId: number) => {
+  unsubscribeFromUser = async () => {
     await tryRequest(async () => {
-      await api.post(
-        `/users/${myId}`,
-        { subscribeOn: this.login },
-        getApiHeader()
-      )
+      await api.get(`/users/${this.login}/unsubscribe`, getApiHeader())
+      this.subscribed = false
+    })
+  }
+
+  subscribeOnUser = async () => {
+    await tryRequest(async () => {
+      await api.get(`/users/${this.login}/subscribe`, getApiHeader())
       this.subscribed = true
     })
   }

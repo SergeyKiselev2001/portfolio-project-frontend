@@ -5,11 +5,11 @@ import { BlockSideSkeleton } from './BlockSideSkeleton'
 import { AsideStatus } from '../types/schema'
 import { observer } from 'mobx-react-lite'
 import { me } from '@entities/me'
-import { mainPage } from '@pages/MainPage'
 import { useTranslation } from 'react-i18next'
 import { i18Chunks, i18Keys } from '@widgets/LangSwitcher/types/i18Keys'
 import { Link } from 'react-router-dom'
 import { RouterPaths } from '@app/config/router'
+import { blockSideInfo } from '..'
 
 const BlockSideInfo = observer(() => {
   const [isAuthorized, setIsAuthorized] = useState(AsideStatus.LOADING)
@@ -31,7 +31,7 @@ const BlockSideInfo = observer(() => {
   }, [])
 
   const openModal = () => {
-    mainPage.toggleLoginModal()
+    blockSideInfo.toggleLoginModal()
   }
 
   return (
@@ -45,9 +45,13 @@ const BlockSideInfo = observer(() => {
       {isAuthorized == AsideStatus.AUTHORIZED && (
         <>
           <div className={classes.mainInfo}>{me.login}</div>
-          <div className={classes.subscribers}>10 Подписчиков</div>
+          <div className={classes.subscribers}>
+            {me.followersAmount} Подписчиков
+          </div>
           <div className={classes.links}>ссылки</div>
-          <Link to={RouterPaths.CREATE_POST}>Добавить пост</Link>
+          <div className={classes.createPost}>
+            <Link to={RouterPaths.CREATE_POST}>Добавить пост</Link>
+          </div>
         </>
       )}
       {isAuthorized == AsideStatus.NOT_AUTHORIZED && (

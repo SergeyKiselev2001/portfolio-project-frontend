@@ -9,6 +9,7 @@ import { clsx } from '@shared/utils'
 
 const Post = (props: INewPost) => {
   const {
+    isPostPage,
     isProfilePage,
     isLast,
     getNextPosts,
@@ -21,8 +22,8 @@ const Post = (props: INewPost) => {
     tags,
     timestamp,
     views,
-    poll,
     isLiked,
+    isSaved,
   } = props
 
   const ref = useRef() as MutableRefObject<HTMLDivElement>
@@ -38,17 +39,24 @@ const Post = (props: INewPost) => {
     <div
       ref={ref}
       className={clsx(
-        {
-          [classes.isProfilePage]: !!isProfilePage,
-        },
+        { [classes.isProfilePage]: !!isProfilePage },
         classes.Post
       )}
       id={`post-${id}`}
     >
-      <PostHeader {...{ author, id, timestamp }} />
-      <PostContent {...{ content, id, poll, title }} />
+      <PostHeader {...{ author, isPostPage, id, timestamp }} />
+      <PostContent {...{ content, id, title }} />
       <PostFooter
-        {...{ id, isLiked, commentsAmount, likesAmount, tags, views }}
+        {...{
+          id,
+          commentsAmount,
+          isPostPage,
+          likesAmount,
+          tags,
+          views,
+          isLiked,
+          isSaved,
+        }}
       />
     </div>
   )

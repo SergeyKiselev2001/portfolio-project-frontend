@@ -1,3 +1,6 @@
 export { useScroll } from './useScroll'
 export { useIntersection } from './useIntersection'
 export { useMediaQuery } from './useMediaQuery'
+export { useDebounce } from './useDebounce'
+export { useToggleScroll } from './useToggleScroll'
+export { useThrottle } from './useThrottle'

@@ -12,6 +12,7 @@ import { wordForm } from '@shared/utils'
 import { me } from '@entities/me'
 import tagsPage from './../store/index'
 import { observer } from 'mobx-react-lite'
+import { useDebounce } from '@shared/hooks'
 
 interface IOneTag {
   postsAmount: number
@@ -27,25 +28,57 @@ const OneTag = observer((props: IOneTag) => {
   const [isSubscribed, setIsSubscribed] = useState(props.isSubscribed)
   const [isBlocked, setIsBlocked] = useState(props.isBlocked)
 
+  const setCallbackForSubscription = useDebounce(500)
+  const [isSubscribedOnServer, setIsSubscribedOnServer] = useState(
+    props.isSubscribed
+  )
+
+  const setCallbackForBlock = useDebounce(500)
+  const [isBlockedOnServer, setIsBlockedOnServer] = useState(props.isBlocked)
+
   const toggleSubscription = async () => {
-    setIsSubscribed((prev) => !prev)
-    if (isBlocked && !isSubscribed) {
-      setIsBlocked(false)
-      await tagsPage.toggleBlock(type)
-      await tagsPage.toggleSubscription(type)
+    if (isSubscribed) {
+      setCallbackForSubscription(() => {
+        if (isSubscribedOnServer) {
+          tagsPage.unsubscribeFromTag(type)
+          setIsSubscribedOnServer(false)
+        }
+      })
+
+      setIsSubscribed(false)
     } else {
-      tagsPage.toggleSubscription(type)
+      setCallbackForSubscription(() => {
+        if (!isSubscribedOnServer) {
+          tagsPage.subscribeOnTag(type)
+          setIsSubscribedOnServer(true)
+        }
+      })
+
+      setIsBlocked(false)
+      setIsSubscribed(true)
     }
   }
 
   const toggleBlock = async () => {
-    setIsBlocked((prev) => !prev)
-    if (isSubscribed && !isBlocked) {
-      setIsSubscribed(false)
-      await tagsPage.toggleSubscription(type)
-      await tagsPage.toggleBlock(type)
+    if (isBlocked) {
+      setCallbackForBlock(() => {
+        if (isBlockedOnServer) {
+          tagsPage.unblockTag(type)
+          setIsBlockedOnServer(false)
+        }
+      })
+
+      setIsBlocked(false)
     } else {
-      tagsPage.toggleBlock(type)
+      setCallbackForBlock(() => {
+        if (!isBlockedOnServer) {
+          tagsPage.blockTag(type)
+          setIsBlockedOnServer(true)
+        }
+      })
+
+      setIsBlocked(true)
+      setIsSubscribed(false)
     }
   }
 
@@ -61,11 +94,7 @@ const OneTag = observer((props: IOneTag) => {
               : t(i18Keys.POSTS, DEFAULT_NS)}
           </span>
         </div>
-        <a
-          rel="noreferrer"
-          target="_blank"
-          href={`${CLIENT}?tags_like=${type}`}
-        >
+        <a href={`${CLIENT}?tag=${type}`}>
           <img src={linkImg} alt="link" />
         </a>
       </div>

@@ -4,12 +4,15 @@ import dots from './images/dots.png'
 import { posts } from '..'
 import { TimeFormat, timeConverter } from '@shared/utils'
 import { Link } from 'react-router-dom'
+import { me } from '@entities/me'
+import { SystemRoles } from '@entities/user'
 
 interface IPostHeader {
+  isPostPage?: boolean
   id: number
   timestamp: number
   author: {
-    name: string
+    login: string
     id: number
     avatar: {
       src: string
@@ -19,8 +22,8 @@ interface IPostHeader {
 }
 
 const PostHeader = (props: IPostHeader) => {
-  const { timestamp, author, id } = props
-  const { avatar, name } = author
+  const { timestamp, author, id, isPostPage } = props
+  const { avatar, login } = author
 
   const body = document.getElementsByTagName('body')[0]
 
@@ -45,20 +48,25 @@ const PostHeader = (props: IPostHeader) => {
     posts.sendReport(id)
   }
 
+  const deletePost = () => {
+    posts.deletePost(id)
+  }
+
   return (
     <div className={classes.PostHeader}>
       <div className={classes.leftHeader}>
-        <Link to={`@${name}`}>
+        <Link to={`/@${login}`}>
           <img className={classes.avatar} {...avatar} />
         </Link>
 
         <div className={classes.info}>
-          <Link to={`/@${name}`}>{name}</Link>
+          <Link to={`/@${login}`}>{login}</Link>
           <time dateTime="<дата и время>">
             {timeConverter(timestamp, TimeFormat.FORMAT_1)}
           </time>
         </div>
       </div>
+
       <div className={classes.rightHeader}>
         <img
           onClick={toggleOptions}
@@ -68,8 +76,12 @@ const PostHeader = (props: IPostHeader) => {
         />
         {showOptions && (
           <div className={classes.options}>
-            <span onClick={hidePost}>Скрыть</span>
+            {!isPostPage && <span onClick={hidePost}>Скрыть</span>}
             <span onClick={reportPost}>Пожаловаться</span>
+            {(me.login == author.login ||
+              me.systemRole == SystemRoles.ADMIN) && (
+              <span onClick={deletePost}>Удалить</span>
+            )}
           </div>
         )}
       </div>

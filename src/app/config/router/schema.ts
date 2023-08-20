@@ -8,14 +8,20 @@ export enum RouterPaths {
   USER = ':user',
   SUBSCRIPTIONS = '/subscriptions',
   CREATE_POST = '/create_post',
+  POST = '/post/:id',
 }
 
 export enum QueryParams {
-  TAGS = 'tags_like',
-  LIMIT = '_limit',
-  PAGE = '_page',
+  TAG = 'tag',
+  POST_ID = 'post_id',
+  LIMIT = 'limit',
+  PAGE = 'page',
   ID_NE = 'id_ne',
-  LOGIN = 'q',
+  LOGIN = 'author',
+  START = 'start',
+  END = 'end',
+  SAVED = 'saved',
+  SUBSCRIPTIONS = 'subscriptions',
 }
 
 export type Route = { path: RouterPaths; element: JSX.Element }

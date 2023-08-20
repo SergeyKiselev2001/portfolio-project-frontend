@@ -5,27 +5,47 @@ import classes from './PostFooter.module.scss'
 import { CLIENT } from '@shared/constants'
 import { toast } from 'react-toastify'
 import { useState, useEffect } from 'react'
-import { StorageKeys, getStorageItem } from '@entities/clientStorage'
-import { posts } from '@entities/Post'
-import { mainPage } from '@pages/MainPage'
 import { Link } from 'react-router-dom'
+import { blockSideInfo } from '@widgets/BlockSideInfo'
+import { me } from '@entities/me'
+import { clsx } from '@shared/utils'
+import { posts } from '@entities/Post'
+import { useDebounce } from '@shared/hooks'
 
 interface IPostFooter {
+  isPostPage?: boolean
   id: number
   likesAmount: number
   commentsAmount: number
   views: number
   tags: i18Tags[]
-  isLiked: boolean
+  isLiked?: boolean
+  isSaved?: boolean
 }
 
 const PostFooter = (props: IPostFooter) => {
-  const { likesAmount, commentsAmount, tags, views, id, isLiked } = props
+  const {
+    likesAmount,
+    commentsAmount,
+    isPostPage,
+    tags,
+    views,
+    id,
+    isLiked,
+    isSaved,
+  } = props
 
   const [linkCopied, setLinkCopied] = useState(false)
   const [currentLikes, setCurrentLikes] = useState(likesAmount)
-  const [currentIsLiked, setCurrentIsLiked] = useState(isLiked)
+  const [currentIsLiked, setCurrentIsLiked] = useState(Boolean(isLiked))
   const [currentViews, setCurrentViews] = useState('')
+  const [currentIsSaved, setCurrentIsSaved] = useState(Boolean(isSaved))
+
+  const [isLikedOnServer, setIsLikedOnServer] = useState(Boolean(isLiked))
+  const [isSavedOnServer, setIsSavedOnServer] = useState(Boolean(isSaved))
+
+  const setCallbackForLikes = useDebounce(500)
+  const setCallbackForSaves = useDebounce(500)
 
   const viewsConverter = (number: number) => {
     const newViews = `${number}`.substring(0, `${number}`.length - 2)
@@ -44,28 +64,62 @@ const PostFooter = (props: IPostFooter) => {
   }, [])
 
   const copyPath = () => {
-    navigator.clipboard.writeText(`${CLIENT}media/${id}`)
+    navigator.clipboard.writeText(`${CLIENT}post/${id}`)
     setLinkCopied(true)
     toast.success('Ссылка скопирована')
   }
 
-  const toggleLikes = () => {
+  const likePostHandle = () => {
+    if (!me.login) {
+      blockSideInfo.toggleLoginModal()
+      return
+    }
+
     if (currentIsLiked) {
-      setCurrentLikes((likes) => likes - 1)
+      setCallbackForLikes(() => {
+        if (isLikedOnServer) {
+          posts.removeLike(id)
+          setIsLikedOnServer(false)
+        }
+      })
+
       setCurrentIsLiked(false)
-      posts.removeLike(id, currentLikes - 1)
+      setCurrentLikes(currentLikes - 1)
     } else {
-      setCurrentLikes((likes) => likes + 1)
+      setCallbackForLikes(() => {
+        if (!isLikedOnServer) {
+          posts.likePost(id)
+          setIsLikedOnServer(true)
+        }
+      })
+
       setCurrentIsLiked(true)
-      posts.likePost(id, currentLikes + 1)
+      setCurrentLikes(currentLikes + 1)
     }
   }
 
-  const likePost = () => {
-    if (!getStorageItem(StorageKeys.AUTH)) {
-      mainPage.toggleLoginModal()
+  const savePostHandle = () => {
+    if (!me.login) {
+      blockSideInfo.toggleLoginModal()
+      return
+    }
+
+    if (currentIsSaved) {
+      setCallbackForSaves(() => {
+        if (isSavedOnServer) {
+          posts.removeFromSaved(id)
+          setIsSavedOnServer(false)
+        }
+      })
+      setCurrentIsSaved(false)
     } else {
-      toggleLikes()
+      setCallbackForSaves(() => {
+        if (!isSavedOnServer) {
+          posts.savePost(id)
+          setIsSavedOnServer(true)
+        }
+      })
+      setCurrentIsSaved(true)
     }
   }
 
@@ -75,20 +129,33 @@ const PostFooter = (props: IPostFooter) => {
       <div className={classes.controls}>
         <div className={classes.leftBlock}>
           <button
-            onClick={likePost}
-            className={`${classes.likes} ${
-              currentIsLiked && getStorageItem(StorageKeys.AUTH)
-                ? classes.isLiked
-                : ''
-            }`}
+            onClick={likePostHandle}
+            className={clsx(
+              { [classes.currentIsLiked]: currentIsLiked },
+              classes.likes
+            )}
           >
             <img src={heartImage} alt="" />
             <span>{currentLikes}</span>
           </button>
-          <Link to={`/media/${id}#comments`} className={classes.comments}>
-            {commentsAmount}
-          </Link>
-          <button className={classes.save} />
+          {!isPostPage && (
+            <Link
+              target="_blank"
+              to={`/post/${id}#comments`}
+              className={classes.comments}
+            >
+              {commentsAmount}
+            </Link>
+          )}
+
+          <button
+            title="сохранить пост"
+            onClick={savePostHandle}
+            className={clsx(
+              { [classes.currentIsSaved]: currentIsSaved },
+              classes.save
+            )}
+          />
           <button
             onClick={copyPath}
             className={`${classes.share} ${linkCopied ? classes.copied : ''}`}

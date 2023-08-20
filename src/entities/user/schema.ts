@@ -4,7 +4,6 @@ export interface IUserState {
   subscribed?: boolean
   login?: string
   status?: string
-  followersAmount?: number
   subscriptions?: {
     users: string[]
     tags: i18Tags[]
@@ -29,4 +28,5 @@ export enum HeaderTheme {
 export enum SystemRoles {
   ADMIN = 'ADMIN',
   USER = 'USER',
+  GUEST = 'GUEST',
 }

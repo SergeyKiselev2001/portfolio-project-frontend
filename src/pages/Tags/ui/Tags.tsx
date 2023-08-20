@@ -10,10 +10,15 @@ import { TagInfo } from '../store/schema'
 import OneTagSkeleton from './OneTagSkeleton'
 import { DEFAULT_NS } from '@shared/constants'
 import { me } from '@entities/me'
+import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 
 const Tags = () => {
   useEffect(() => {
     HeaderPage.setCurrentPage(RouterPaths.TAGS)
+    if (!getStorageItem(StorageKeys.AUTH)) {
+      me.setIsDataLoaded(true)
+    }
+
     ;(async () => {
       await tagsPage.loadTags()
       setCurrentTags(tagsPage.tags)

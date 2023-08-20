@@ -1,0 +1,56 @@
+.Comments {
+  margin-bottom: 10px;
+  padding: 16px;
+  border-radius: 5px;
+  background-color: var(--bgc-secondary);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment {
+  background-color: #F9F9F9;
+  padding: 10px;
+  border-radius: 5px;
+  @include not-last-mb(10px);
+
+  font-family: $roboto;
+  color: var(--fc);
+
+  border: 1px solid rgba(128, 128, 128, 0.301);
+
+
+  .avatar {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+  }
+
+
+  .top_part {
+    display: flex;
+    gap: 5px;
+  }
+
+  .top_part__info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
+
+    time {
+      background-color: #D9D9D9;
+      font-size: 12px;
+      padding: 2px 5px;
+      border-radius: 10px;
+    }
+  }
+
+  .bottom_part {
+    padding: 5px 10px;
+    line-height: 1.2em;
+    font-weight: 300;
+  }
+}

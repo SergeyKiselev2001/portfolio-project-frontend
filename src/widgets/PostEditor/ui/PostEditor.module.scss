@@ -1,0 +1,185 @@
+.PostEditor {
+  background-color: var(--bgc-secondary);
+  padding: 20px;
+  position: relative;
+  border-radius: 5px;
+
+  @include shadow;
+
+  .postBuilder {
+    font-family: $montserrat;
+    font-weight: 400;
+    top: -31px;
+    position: absolute;
+    background-color: #6bbe5e;
+    color: white;
+    padding: 8px 20px 7px 20px;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .postTitleBlock {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    gap: 5px;
+
+    .label {
+      font-family: $montserrat;
+      font-weight: 400;
+    }
+
+    .titleInput {
+      font-family: $montserrat;
+      font-weight: 400;
+      padding: 5px;
+      box-sizing: border-box;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.addContentBlock {
+  margin-bottom: 20px;
+  background-color: #5c5c5c;
+  color: white;
+  padding: 8px 10px 8px 15px;
+  width: fit-content;
+  border-radius: 5px 25px 25px 5px;
+
+  font-family: $montserrat;
+  font-weight: 400;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  .addContentTitle {
+    margin-right: 20px;
+  }
+
+  .contentButton {
+    padding: 20px;
+    border-radius: 50%;
+    border: none;
+
+    object-fit: cover;
+
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+
+    &:hover {
+      @include shadow-inset(0.5);
+    }
+  }
+
+  .buttonText {
+    background-image: url('./../images/text.png');
+    background-size: 50%;
+  }
+
+  .buttonImage {
+    background-image: url('./../images/image.png');
+    background-size: 60%;
+  }
+
+  .buttonQuotes {
+    background-image: url('./../images/quote.png');
+    background-size: 50%;
+  }
+}
+
+.TextEditor {
+  .paragraph {
+    font-family: $montserrat;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 10px;
+    box-sizing: border-box;
+    max-height: 15em;
+    min-height: 5em;
+  }
+}
+
+.QuotesEditor {
+  .quote {
+    font-family: $montserrat;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .input {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: $montserrat;
+    font-weight: 400;
+  }
+}
+
+.block {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.removeBlock {
+  padding: 10px;
+  background-color: #790a0a;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.ImageEditor {
+  .link {
+    font-family: $montserrat;
+    font-weight: 400;
+    font-size: 14px;
+  }
+
+  .input {
+    font-family: $montserrat;
+    font-weight: 400;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+  }
+
+  .imageExample {
+    object-fit: contain;
+    padding: 10px;
+    max-width: calc(100% - 20px);
+    border-radius: 10px;
+    @include shadow;
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+    }
+  }
+}
+
+.imageNotFound {
+  font-family: $montserrat;
+  font-weight: 400;
+  background-color: #ff98ae;
+  color: white;
+}
+
+.imagePending {
+  font-family: $montserrat;
+  font-weight: 400;
+  background-color: #98ffbf;
+  color: white;
+}

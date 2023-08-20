@@ -11,6 +11,11 @@ export interface IPosts {
 export type QueryParamsObj = [QueryParams, string | null]
 
 export interface IPostContent {
+  isSaved: boolean
+  isLiked: boolean
+  likesAmount: number
+  commentsAmount: number
+  views: number
   title: string
   id: number
   content: {
@@ -21,13 +26,4 @@ export interface IPostContent {
       alt: string
     }
   }[]
-  poll?: {
-    id: number
-    name: string
-    options: {
-      id: number
-      text: string
-      numberOfVotes: number
-    }[]
-  }
 }

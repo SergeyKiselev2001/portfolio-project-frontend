@@ -3,21 +3,22 @@ import { IMeState } from './schema'
 import { getApiHeader, tryRequest } from '@shared/utils'
 import { api } from '@app/api'
 import { HeaderTheme, SystemRoles, user } from '@entities/user'
+import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 
 class Me implements IMeState {
+  isDataLoaded = false
   id = 0
   login = ''
-  followersAmount = 0
   headerTheme = HeaderTheme.DEFAULT
   subscriptions = {
     users: [],
     tags: [],
   }
+  followersAmount = 0
   ignoreList = {
     tags: [],
   }
-  systemRole = SystemRoles.USER
-  newNotifications = false
+  systemRole = SystemRoles.GUEST
   avatar = {
     src: '',
     alt: '',
@@ -27,11 +28,17 @@ class Me implements IMeState {
     makeAutoObservable(this)
   }
 
+  setIsDataLoaded = (value: boolean) => {
+    this.isDataLoaded = value
+  }
+
   getUserInfoByJWT = async () => {
     await tryRequest(async () => {
-      const data = await api.get('/userInfo', getApiHeader())
-
-      this.setUserInfo(data.data)
+      if (getStorageItem(StorageKeys.AUTH)) {
+        const data = await api.get('/users/me', getApiHeader())
+        this.setIsDataLoaded(true)
+        this.setUserInfo(data.data)
+      }
     })
   }
 
@@ -43,17 +50,25 @@ class Me implements IMeState {
 
   updateStatus = async (newStatus: string) => {
     await tryRequest(async () => {
-      await api.post(`/users/${this.id}`, { newStatus }, getApiHeader())
+      await api.post(
+        `/users/${this.login}/setStatus`,
+        { newStatus },
+        getApiHeader()
+      )
       user.setUserInfo({
         status: newStatus,
       })
     })
   }
 
-  updateTheme = async (headerTheme: HeaderTheme) => {
+  updateTheme = async (newTheme: HeaderTheme) => {
     await tryRequest(async () => {
-      await api.post(`/users/${this.id}`, { headerTheme }, getApiHeader())
-      user.setUserInfo({ headerTheme })
+      await api.post(
+        `/users/${this.login}/setTheme`,
+        { newTheme },
+        getApiHeader()
+      )
+      user.setUserInfo({ headerTheme: newTheme })
     })
   }
 }
