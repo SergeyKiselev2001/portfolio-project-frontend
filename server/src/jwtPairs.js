@@ -2,7 +2,7 @@ module.exports = {
   // Имитация выданных сервером токенов
   jwtPairs: [
     {
-      user: 'Sergey',
+      user: 'Admin',
       id: 1,
       tokens: {
         token:

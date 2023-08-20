@@ -8,7 +8,9 @@ const {
   r401,
   usersUtils,
   checkAuth,
+  checkAdmin,
   r500,
+  r403,
 } = require('./utils')
 
 const {
@@ -20,6 +22,20 @@ const {
 } = usersUtils
 
 module.exports = {
+  getAllUsers: async (req, res) => {
+    if (!checkAdmin(req)) return r403(res)
+    const { users = [] } = getDB()
+
+    const result = users.map(({ id, login, systemRole, avatar }) => ({
+      id,
+      login,
+      systemRole,
+      avatar,
+    }))
+
+    return r200(res, result)
+  },
+
   getMyPersonalInfo: async (req, res) => {
     if (!checkAuth(req)) return r401(res)
 

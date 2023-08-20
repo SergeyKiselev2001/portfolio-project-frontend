@@ -23,7 +23,7 @@
   "users": [
     {
       "id": 1,
-      "login": "Sergey",
+      "login": "Admin",
       "password": "1234",
       "status": "Хаха",
       "headerTheme": "Default",
@@ -65,7 +65,7 @@
       "login": "Vera_xxx",
       "status": "adsadadfr tgdf gdf43",
       "password": "qwerty12312",
-      "headerTheme": "Green",
+      "headerTheme": "Aqua",
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -79,7 +79,7 @@
       "id": 12,
       "title": "Тестовый пост сложный",
       "timestamp": 1686062966913,
-      "views": 472,
+      "views": 491,
       "content": [
         {
           "type": "TEXT",
@@ -111,7 +111,7 @@
       "id": 14,
       "title": "Еще блин один пост",
       "timestamp": 1686062666913,
-      "views": 103,
+      "views": 105,
       "content": [
         {
           "type": "TEXT",
@@ -178,7 +178,7 @@
       "id": 1672,
       "title": "При помощи нейросети от Photoshop, дорисовал популярные картины⁠",
       "timestamp": 1646868365913,
-      "views": 28940,
+      "views": 28941,
       "content": [
         {
           "type": "IMAGE",
@@ -254,48 +254,6 @@
       ]
     },
     {
-      "title": "Жесть как она есть",
-      "content": [
-        {
-          "type": "TEXT",
-          "text": "hehehehhehe"
-        }
-      ],
-      "tags": [],
-      "timestamp": 1691183042535,
-      "views": 44,
-      "id": 1679,
-      "author_id": 99
-    },
-    {
-      "title": "ujhknn,",
-      "content": [
-        {
-          "type": "TEXT",
-          "text": "hehehehhehe"
-        }
-      ],
-      "tags": [],
-      "timestamp": 1691410046804,
-      "views": 11,
-      "id": 1680,
-      "author_id": 23
-    },
-    {
-      "title": "ggggggggg",
-      "content": [
-        {
-          "type": "TEXT",
-          "text": "hehehehhehe"
-        }
-      ],
-      "tags": [],
-      "author_id": 23,
-      "timestamp": 1691410093952,
-      "views": 0,
-      "id": 1681
-    },
-    {
       "title": "fffffffffff",
       "content": [
         {
@@ -324,20 +282,6 @@
       "id": 1683
     },
     {
-      "title": "dada",
-      "content": [
-        {
-          "type": "TEXT",
-          "text": "hehehehhehe"
-        }
-      ],
-      "tags": [],
-      "timestamp": 1691410953206,
-      "views": 3,
-      "id": 1684,
-      "author_id": 23
-    },
-    {
       "title": "POST BY ADMIN",
       "content": [
         {
@@ -361,7 +305,7 @@
       ],
       "tags": [],
       "timestamp": 1691501861691,
-      "views": 40,
+      "views": 41,
       "id": 1686,
       "author_id": 99
     },
@@ -539,24 +483,6 @@
       "author_id": 99
     },
     {
-      "title": "aSDA DAS DA",
-      "content": [
-        {
-          "type": "TEXT",
-          "text": "QQQQQQQQQ"
-        },
-        {
-          "type": "QUOTE",
-          "text": "DasdASDAsdas"
-        }
-      ],
-      "tags": [],
-      "timestamp": 1692280407350,
-      "views": 8,
-      "id": 1690,
-      "author_id": 99
-    },
-    {
       "title": "хехехехеххекхехеехеххе",
       "content": [
         {
@@ -610,7 +536,7 @@
       ],
       "tags": [],
       "timestamp": 1692289439359,
-      "views": 5,
+      "views": 6,
       "id": 1693,
       "author_id": 99
     },
@@ -891,13 +817,6 @@
       "id": 25
     },
     {
-      "text": "бла бла бла....",
-      "post_id": 1680,
-      "user_id": 23,
-      "timestamp": 1691960847171,
-      "id": 26
-    },
-    {
       "text": "еххехехе",
       "post_id": 14,
       "user_id": 99,
@@ -905,53 +824,11 @@
       "id": 27
     },
     {
-      "text": "чсмчсамвы авы",
-      "post_id": 1679,
-      "user_id": 99,
-      "timestamp": 1692223382318,
-      "id": 28
-    },
-    {
-      "text": "авы фавфы авфыа",
-      "post_id": 1679,
-      "user_id": 99,
-      "timestamp": 1692223386049,
-      "id": 29
-    },
-    {
-      "text": "ва фы авфы а",
-      "post_id": 1679,
-      "user_id": 99,
-      "timestamp": 1692223388321,
-      "id": 30
-    },
-    {
       "text": "аеп вапрва ",
       "post_id": 12,
       "user_id": 99,
       "timestamp": 1692223435373,
       "id": 31
-    },
-    {
-      "text": "G DFGDSFG",
-      "post_id": 1690,
-      "user_id": 99,
-      "timestamp": 1692280428929,
-      "id": 32
-    },
-    {
-      "text": "DSFG DFGDSF ",
-      "post_id": 1690,
-      "user_id": 99,
-      "timestamp": 1692280431388,
-      "id": 33
-    },
-    {
-      "text": "TREWTWRETREW",
-      "post_id": 1690,
-      "user_id": 99,
-      "timestamp": 1692280434658,
-      "id": 34
     },
     {
       "text": "ва вы фа",
@@ -1105,16 +982,6 @@
       "id": 19
     },
     {
-      "post_id": 1680,
-      "user_id": 1,
-      "id": 21
-    },
-    {
-      "post_id": 1679,
-      "user_id": 1,
-      "id": 22
-    },
-    {
       "post_id": 14,
       "user_id": 99,
       "id": 23
@@ -1125,29 +992,14 @@
       "id": 24
     },
     {
-      "post_id": 1679,
-      "user_id": 99,
-      "id": 25
-    },
-    {
       "post_id": 1672,
       "user_id": 23,
       "id": 26
     },
     {
-      "post_id": 1679,
-      "user_id": 23,
-      "id": 27
-    },
-    {
       "post_id": 1686,
       "user_id": 23,
       "id": 28
-    },
-    {
-      "post_id": 1680,
-      "user_id": 99,
-      "id": 29
     },
     {
       "post_id": 1687,
@@ -1165,14 +1017,19 @@
       "id": 32
     },
     {
-      "post_id": 1690,
-      "user_id": 23,
-      "id": 33
-    },
-    {
       "post_id": 180,
       "user_id": 23,
       "id": 34
+    },
+    {
+      "post_id": 1698,
+      "user_id": 1,
+      "id": 35
+    },
+    {
+      "post_id": 1688,
+      "user_id": 1,
+      "id": 36
     }
   ],
   "usersSubscriptions": [
@@ -1216,21 +1073,6 @@
       "blocked_tag_id": 1
     },
     {
-      "blocked_by": 1,
-      "blocked_tag_id": 1,
-      "id": 2
-    },
-    {
-      "blocked_by": 1,
-      "blocked_tag_id": 3,
-      "id": 3
-    },
-    {
-      "blocked_by": 1,
-      "blocked_tag_id": 2,
-      "id": 4
-    },
-    {
       "blocked_by": 99,
       "blocked_tag_id": 3,
       "id": 5
@@ -1263,11 +1105,6 @@
       "id": 12
     },
     {
-      "post_id": 1679,
-      "user_id": 99,
-      "id": 13
-    },
-    {
       "post_id": 1686,
       "user_id": 99,
       "id": 14
@@ -1293,31 +1130,6 @@
       "id": 19
     },
     {
-      "post_id": 1679,
-      "user_id": 1,
-      "id": 22
-    },
-    {
-      "post_id": 1680,
-      "user_id": 1,
-      "id": 23
-    },
-    {
-      "post_id": 1681,
-      "user_id": 1,
-      "id": 24
-    },
-    {
-      "post_id": 1680,
-      "user_id": 23,
-      "id": 26
-    },
-    {
-      "post_id": 1679,
-      "user_id": 23,
-      "id": 28
-    },
-    {
       "post_id": 1686,
       "user_id": 23,
       "id": 29
@@ -1331,16 +1143,6 @@
       "post_id": 16,
       "user_id": 23,
       "id": 31
-    },
-    {
-      "post_id": 1681,
-      "user_id": 99,
-      "id": 32
-    },
-    {
-      "post_id": 1680,
-      "user_id": 99,
-      "id": 33
     },
     {
       "post_id": 1696,
@@ -1358,96 +1160,36 @@
       "id": 36
     },
     {
-      "post_id": 1690,
-      "user_id": 23,
-      "id": 37
-    },
-    {
       "post_id": 180,
       "user_id": 23,
       "id": 38
+    },
+    {
+      "post_id": 12,
+      "user_id": 1,
+      "id": 39
     }
   ],
   "reports": [
     {
-      "id": 0,
-      "post_id": 1690,
-      "user_id": 23
-    },
-    {
-      "post_id": 1672,
-      "user_id": 23,
-      "id": 1
-    },
-    {
-      "post_id": 16,
-      "user_id": 23,
+      "post_id": 1682,
+      "user_id": 99,
       "id": 2
     },
     {
-      "post_id": 1562,
-      "user_id": 23,
+      "post_id": 1687,
+      "user_id": 99,
       "id": 3
     },
     {
-      "post_id": 1679,
-      "user_id": 23,
+      "post_id": 1686,
+      "user_id": 1,
       "id": 4
     },
     {
-      "post_id": 1680,
-      "user_id": 23,
+      "post_id": 1689,
+      "user_id": 1,
       "id": 5
-    },
-    {
-      "post_id": 1682,
-      "user_id": 23,
-      "id": 6
-    },
-    {
-      "post_id": 1684,
-      "user_id": 23,
-      "id": 7
-    },
-    {
-      "post_id": 1681,
-      "user_id": 23,
-      "id": 8
-    },
-    {
-      "post_id": 1686,
-      "user_id": 23,
-      "id": 9
-    },
-    {
-      "post_id": 1687,
-      "user_id": 23,
-      "id": 10
-    },
-    {
-      "post_id": 1688,
-      "user_id": 23,
-      "id": 11
-    },
-    {
-      "post_id": 1691,
-      "user_id": 23,
-      "id": 12
-    },
-    {
-      "post_id": 1693,
-      "user_id": 23,
-      "id": 13
-    },
-    {
-      "post_id": 12,
-      "user_id": 23,
-      "id": 14
-    },
-    {
-      "post_id": 14,
-      "user_id": 23,
-      "id": 15
     }
   ]
 }

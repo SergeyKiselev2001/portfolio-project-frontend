@@ -10,12 +10,16 @@ import { CreatePostDto, PostEditor } from '@widgets/PostEditor'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { posts } from '@entities/Post'
+import { StorageKeys, getStorageItem } from '@entities/clientStorage'
 
 const CreatePostPage = observer(() => {
   const [spinner, setSpinner] = useState(true)
   const navigate = useNavigate()
 
   useEffect(() => {
+    if (!getStorageItem(StorageKeys.AUTH)) {
+      me.setIsDataLoaded(true)
+    }
     HeaderPage.setCurrentPage(RouterPaths.CREATE_POST)
     ;(async () => {
       await me.getUserInfoByJWT()

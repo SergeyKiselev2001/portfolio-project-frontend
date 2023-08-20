@@ -12,6 +12,8 @@ const {
   usersUtils,
   getUserNameByHeaderJWT,
   throttle,
+  checkAdmin,
+  r403,
 } = require('./utils')
 
 const {
@@ -22,6 +24,10 @@ const {
   getIsSaved,
   getLikesAmount,
   getUserSavedPosts,
+  cascadeDeletingReports,
+  cascadeDeletingComments,
+  cascadeDeletingLikes,
+  cascadeDeletingSaves,
 } = postsUtils
 
 const {
@@ -140,7 +146,7 @@ module.exports = {
   },
 
   dislikePost: async (req, res) => {
-    if (!checkAuth(req)) return r401(res)
+    if (!checkAuth(req) && !req.headers['cascade-delete']) return r401(res)
 
     const { likes = [] } = getDB()
 
@@ -194,40 +200,44 @@ module.exports = {
   getPostById: async (req, res) => {
     const { posts = [], users = [] } = getDB()
 
-    const { author_id, ...post } = posts.find((el) => el.id == req.params.id)
-    const userID = getUserIdByHeaderJWT(req)
+    try {
+      const { author_id, ...post } = posts.find((el) => el.id == req.params.id)
+      const userID = getUserIdByHeaderJWT(req)
 
-    if (post) {
-      const { login, id, avatar } = users.find((user) => user.id == author_id)
+      if (post) {
+        const { login, id, avatar } = users.find((user) => user.id == author_id)
 
-      let likesAmount = getLikesAmount(req.params.id)
-      let commentsAmount = getCommentsAmount(req.params.id)
-      const isSaved = getIsSaved(userID, req.params.id)
-      const isLiked = getIsLiked(userID, req.params.id)
+        let likesAmount = getLikesAmount(req.params.id)
+        let commentsAmount = getCommentsAmount(req.params.id)
+        const isSaved = getIsSaved(userID, req.params.id)
+        const isLiked = getIsLiked(userID, req.params.id)
 
-      throttle(() => {
-        fetch(`http://localhost:5432/posts/${req.params.id}`, {
-          headers: { 'Content-Type': 'application/json' },
-          method: 'PUT',
-          body: JSON.stringify({
-            ...post,
-            author_id,
-            views: post.views + 1,
-          }),
+        throttle(() => {
+          fetch(`http://localhost:5432/posts/${req.params.id}`, {
+            headers: { 'Content-Type': 'application/json' },
+            method: 'PUT',
+            body: JSON.stringify({
+              ...post,
+              author_id,
+              views: post.views + 1,
+            }),
+          })
+        }, 100)()
+
+        return r200(res, {
+          ...post,
+          likesAmount,
+          commentsAmount,
+          isLiked,
+          isSaved,
+          views: post.views + 1,
+          author: { id, login, avatar },
         })
-      }, 100)()
-
-      return r200(res, {
-        ...post,
-        likesAmount,
-        commentsAmount,
-        isLiked,
-        isSaved,
-        views: post.views + 1,
-        author: { id, login, avatar },
-      })
-    } else {
-      r404(res)
+      } else {
+        r404(res)
+      }
+    } catch (e) {
+      return r500(res)
     }
   },
 
@@ -264,7 +274,7 @@ module.exports = {
   },
 
   unsavePost: async (req, res) => {
-    if (!checkAuth(req)) return r401(res)
+    if (!checkAuth(req) && !req.headers['cascade-delete']) return r401(res)
 
     const { saves = [] } = getDB()
     const userID = getUserIdByHeaderJWT(req)
@@ -284,6 +294,34 @@ module.exports = {
       return r200(res)
     } catch {
       return r500(res, 'delete fetch error')
+    }
+  },
+
+  deletePost: async (req, res, next) => {
+    console.log('START')
+    if (!checkAuth(req)) return r401(res)
+
+    const { posts = [] } = getDB()
+    const userID = getUserIdByHeaderJWT(req)
+
+    const author_id = posts.find((post) => post.id == req.params.id)?.author_id
+
+    if (author_id == userID || checkAdmin(req)) {
+      // удалить жалобы
+      await cascadeDeletingReports(req.params.id)
+
+      // удалить комментарии
+      await cascadeDeletingComments(req.params.id)
+
+      //удалить лайки
+      await cascadeDeletingLikes(req.params.id)
+
+      //удалить сохранения
+      await cascadeDeletingSaves(req.params.id)
+
+      next()
+    } else {
+      return r403(res)
     }
   },
 }

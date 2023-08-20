@@ -11,7 +11,16 @@ module.exports = {
     return Boolean(result)
   },
 
+  checkAdmin: (req) => {
+    const token = module.exports.clearToken(req)
+    const result =
+      jwtPairs.find((el) => el.tokens.token == token)?.user == 'Admin'
+
+    return Boolean(result)
+  },
+
   clearToken: (req) => {
+    console.log('START 2')
     const token = `${req.headers.authorization}`
     return token.replace('Bearer ', '') || ''
   },
@@ -49,6 +58,9 @@ module.exports = {
 
   r401: (res) => {
     return res.status(401).json({ message: 'Unauthorized Error' })
+  },
+  r403: (res) => {
+    return res.status(403).json({ message: 'Forbidden' })
   },
   r404: (res, message) => {
     return res.status(401).json({ message: message || 'Not found' })
@@ -203,6 +215,76 @@ module.exports = {
             .filter((like) => like.post_id == postId)
             .find((el) => el.user_id == userID)
       )
+    },
+
+    cascadeDeletingReports: async (post_id) => {
+      // удалить жалобы
+      const { reports = [] } = module.exports.getDB()
+
+      const target_reports_ids = reports
+        ?.filter((report) => report.post_id == post_id)
+        ?.map((el) => el.id)
+
+      for (let relation_id of target_reports_ids) {
+        await fetch(`http://localhost:5432/reports/${relation_id}`, {
+          method: 'DELETE',
+          headers: {
+            'cascade-delete': '*',
+          },
+        })
+      }
+    },
+
+    cascadeDeletingComments: async (post_id) => {
+      // удалить комментарии
+      const { comments = [] } = module.exports.getDB()
+
+      const target_comments_ids = comments
+        ?.filter((comment) => comment.post_id == post_id)
+        ?.map((el) => el.id)
+
+      for (let relation_id of target_comments_ids) {
+        await fetch(`http://localhost:5432/comments/${relation_id}`, {
+          method: 'DELETE',
+          headers: {
+            'cascade-delete': '*',
+          },
+        })
+      }
+    },
+
+    cascadeDeletingLikes: async (post_id) => {
+      const { likes = [] } = module.exports.getDB()
+
+      const target_likes_ids = likes
+        ?.filter((like) => like.post_id == post_id)
+        ?.map((el) => el.id)
+
+      for (let relation_id of target_likes_ids) {
+        await fetch(`http://localhost:5432/likes/${relation_id}`, {
+          method: 'DELETE',
+          headers: {
+            'cascade-delete': '*',
+          },
+        })
+      }
+    },
+
+    cascadeDeletingSaves: async (post_id) => {
+      const { saves = [] } = module.exports.getDB()
+
+      const target_saves_ids = saves
+        ?.filter((save) => save.post_id == post_id)
+        ?.map((el) => el.id)
+
+      for (let relation_id of target_saves_ids) {
+        await fetch(`http://localhost:5432/saves/${relation_id}`, {
+          method: 'DELETE',
+          headers: {
+            'cascade-delete': '*',
+          },
+        })
+      }
     },
   },
 }

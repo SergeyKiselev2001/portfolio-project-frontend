@@ -11,15 +11,22 @@ import { useMediaQuery } from '@shared/hooks'
 import { SystemRoles } from '@entities/user'
 import { i18Chunks } from '@widgets/LangSwitcher/types/i18Keys'
 import { useLocation } from 'react-router'
+import { clsx } from '@shared/utils'
 
 const Header = observer(() => {
   const { t } = useTranslation(i18Chunks.HEADER)
   const location = useLocation()
+  const [pending, setIsPending] = useState(me.systemRole == SystemRoles.GUEST)
   const currentPage = HeaderPage.currentPage
 
   const [showMenu, setShowMenu] = useState(false)
 
   const isMediaQuery = useMediaQuery(960)
+
+  const loadUserInfo = async () => {
+    await me.getUserInfoByJWT()
+    setIsPending(false)
+  }
 
   useEffect(() => {
     if (location.pathname == RouterPaths.TAGS) {
@@ -29,9 +36,14 @@ const Header = observer(() => {
     if (location.pathname == RouterPaths.CREATE_POST) {
       return
     }
-
-    me.getUserInfoByJWT()
+    loadUserInfo()
   }, [])
+
+  useEffect(() => {
+    if (me.isDataLoaded) {
+      setIsPending(false)
+    }
+  }, [me.isDataLoaded])
 
   useEffect(() => {
     if (!isMediaQuery) {
@@ -42,7 +54,8 @@ const Header = observer(() => {
   const toggleMenu = () => setShowMenu((prev) => !prev)
 
   return (
-    <header className={classes.Header}>
+    <header className={clsx(classes.Header, { [classes.pending]: pending })}>
+      {pending && <div className={classes.light} />}
       <div
         className={`${classes.showLinks} ${
           showMenu ? classes.buttonActive : ''
@@ -58,9 +71,10 @@ const Header = observer(() => {
         </button>
       </div>
       <div
-        className={`${classes.links} ${
-          showMenu ? classes.menuActiveMobile : ''
-        }`}
+        className={clsx(classes.links, {
+          [classes.menuActiveMobile]: showMenu,
+          [classes.display_none]: pending,
+        })}
       >
         <OneLink
           reloadDocument={currentPage == RouterPaths.MAIN}
