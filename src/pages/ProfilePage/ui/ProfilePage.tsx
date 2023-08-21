@@ -72,10 +72,14 @@ const ProfilePage = observer(() => {
 
   return (
     <div className={classes.ProfilePage}>
-      <ScrollUp />
+      {!spinner && !user.login && (
+        <ErrorPage message={`${t(i18Keys.USER_NOT_FOUND)}`} />
+      )}
+
       {spinner && <Spinner />}
       {!spinner && user.login && (
         <>
+          <ScrollUp />
           <div className={classes.profileInfoWrapper}>
             <ProfileInfo
               isSubscribed={Boolean(
@@ -131,10 +135,6 @@ const ProfilePage = observer(() => {
             {activePage == ActivePage.SAVED && <UserSaved />}
           </div>
         </>
-      )}
-
-      {!spinner && !user.login && (
-        <ErrorPage message={`${t(i18Keys.USER_NOT_FOUND)}`} />
       )}
 
       {blockSideInfo.showLoginModal && (

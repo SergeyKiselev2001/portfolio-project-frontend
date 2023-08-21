@@ -298,7 +298,6 @@ module.exports = {
   },
 
   deletePost: async (req, res, next) => {
-    console.log('START')
     if (!checkAuth(req)) return r401(res)
 
     const { posts = [] } = getDB()

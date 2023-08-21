@@ -8,9 +8,9 @@ interface ILogin {
 }
 
 const Login = observer(({ onLogin }: ILogin) => {
-  const [login, setLogin] = useState('')
-  const [password, setPassword] = useState('')
-  const [rememberMe, setRememberMe] = useState(false)
+  const [login, setLogin] = useState('Admin')
+  const [password, setPassword] = useState('1234')
+  const [rememberMe, setRememberMe] = useState(true)
 
   const submit = async (e: FormSubmit) => {
     e.preventDefault()
@@ -36,11 +36,11 @@ const Login = observer(({ onLogin }: ILogin) => {
     <div className={classes.Login}>
       <form>
         <div className={classes.authorization_field}>
-          <label htmlFor="name">Логин</label>
+          <label className={classes.input_label} htmlFor="name">Логин</label>
           <input type="text" id="name" value={login} onChange={loginHandler} />
         </div>
         <div className={classes.authorization_field}>
-          <label htmlFor="email">Пароль</label>
+          <label className={classes.input_label} htmlFor="email">Пароль</label>
           <input
             type="password"
             id="email"
@@ -49,7 +49,7 @@ const Login = observer(({ onLogin }: ILogin) => {
           />
         </div>
         <div className={classes.authorization_field}>
-          <label>Запомнить</label>
+          <label style={{ display: 'inline-block' }}>Запомнить</label>
           <input
             type="checkbox"
             checked={rememberMe}

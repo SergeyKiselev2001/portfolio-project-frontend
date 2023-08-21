@@ -1,13 +1,46 @@
 .Login {
-    background-color: #444444;
-    padding: 20px;
-    border-radius: 5px;
+  background-color: var(--bgc-secondary);
+  padding: 20px;
+  border-radius: 5px;
+  color: var(--fc);
+  max-width: 450px;
+  width: auto;
+  @include shadow;
+  font-family: $roboto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .authorization_field {
+  flex-grow: 1;
+  label {
+    display: block;
+  }
 
+  .input_label {
+    margin-bottom: 2px;
+  }
+
+  input[type='text'], input[type='password'] {
+    width: -webkit-fill-available;
+    padding: 5px;
+    display: block;
+    font-family: $roboto;
+    border: 1px solid black;
+    outline: none;
+  }
+
+  input[type='checkbox'] {
+    cursor: pointer;
+  }
 }
 
 .submit_button {
-
+    font-family: $roboto;
+    cursor: pointer;
+    padding: 10px;
 }

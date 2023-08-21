@@ -18,7 +18,11 @@ const LoginPage = () => {
 
   return (
     <div className={classes.LoginPage}>
-      <Login onLogin={onLogin} />
+      <div className={classes.content_wrapper}>
+        <div className={classes.content}>
+          <Login onLogin={onLogin} />
+        </div>
+      </div>
     </div>
   )
 }
