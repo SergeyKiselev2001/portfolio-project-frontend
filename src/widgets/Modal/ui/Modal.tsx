@@ -8,10 +8,14 @@ interface IModal {
   children: JSX.Element
   onclose?: VoidFunction
   showCloseButton?: boolean
+  styles?: {
+    width: string
+    maxWidth: string
+  }
 }
 
 const Modal = (props: IModal) => {
-  const { children, onclose, showCloseButton } = props
+  const { children, onclose, showCloseButton, styles } = props
 
   const [active, setActive] = useState(true)
   const { t } = useTranslation()
@@ -26,6 +30,10 @@ const Modal = (props: IModal) => {
       <div
         onClick={(e) => e.stopPropagation()}
         className={classes.content_wrapper}
+        style={{
+          ...(styles?.width && { width: styles.width }),
+          ...(styles?.maxWidth && { maxWidth: styles.maxWidth }),
+        }}
       >
         {children}
         {showCloseButton && (

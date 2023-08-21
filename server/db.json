@@ -26,7 +26,7 @@
       "login": "Admin",
       "password": "1234",
       "status": "Хаха",
-      "headerTheme": "Default",
+      "headerTheme": "Dark_blue",
       "systemRole": "ADMIN",
       "newNotifications": true,
       "avatar": {
@@ -39,7 +39,7 @@
       "login": "Volibear",
       "password": "hello",
       "status": "Я тоже статус сменил!",
-      "headerTheme": "Aqua",
+      "headerTheme": "Green",
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -79,7 +79,7 @@
       "id": 12,
       "title": "Тестовый пост сложный",
       "timestamp": 1686062966913,
-      "views": 491,
+      "views": 495,
       "content": [
         {
           "type": "TEXT",
@@ -178,7 +178,7 @@
       "id": 1672,
       "title": "При помощи нейросети от Photoshop, дорисовал популярные картины⁠",
       "timestamp": 1646868365913,
-      "views": 28941,
+      "views": 28946,
       "content": [
         {
           "type": "IMAGE",
@@ -238,8 +238,7 @@
       "id": 180,
       "title": "Правила делового общения⁠⁠⁠⁠",
       "timestamp": 1686862365913,
-      "author_id": 123,
-      "views": 26735,
+      "views": 26736,
       "content": [
         {
           "type": "IMAGE",
@@ -251,7 +250,8 @@
       ],
       "tags": [
         "ANIMALS"
-      ]
+      ],
+      "author_id": 123
     },
     {
       "title": "fffffffffff",
@@ -291,7 +291,7 @@
       ],
       "tags": [],
       "timestamp": 1691424542623,
-      "views": 1,
+      "views": 9,
       "id": 1685,
       "author_id": 1
     },
@@ -458,28 +458,6 @@
       "timestamp": 1692280159984,
       "views": 1,
       "id": 1688,
-      "author_id": 99
-    },
-    {
-      "title": "ывавфыавфыа",
-      "content": [
-        {
-          "type": "TEXT",
-          "text": "2"
-        },
-        {
-          "type": "TEXT",
-          "text": "2312"
-        },
-        {
-          "type": "TEXT",
-          "text": "435454353"
-        }
-      ],
-      "tags": [],
-      "timestamp": 1692280174330,
-      "views": 3,
-      "id": 1689,
       "author_id": 99
     },
     {
@@ -913,6 +891,62 @@
       "user_id": 23,
       "timestamp": 1692359651525,
       "id": 46
+    },
+    {
+      "text": "dfgdfgdsf",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572985407,
+      "id": 47
+    },
+    {
+      "text": "fhdgfhdf",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572987043,
+      "id": 48
+    },
+    {
+      "text": "dfgdfs",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572988652,
+      "id": 49
+    },
+    {
+      "text": "hdf",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572990044,
+      "id": 50
+    },
+    {
+      "text": "dfh",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572991566,
+      "id": 51
+    },
+    {
+      "text": "reterte",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572992932,
+      "id": 52
+    },
+    {
+      "text": "435435",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572995363,
+      "id": 53
+    },
+    {
+      "text": "643643",
+      "post_id": 1672,
+      "user_id": 1,
+      "timestamp": 1692572997055,
+      "id": 54
     }
   ],
   "likes": [
@@ -1022,14 +1056,19 @@
       "id": 34
     },
     {
-      "post_id": 1698,
-      "user_id": 1,
-      "id": 35
-    },
-    {
       "post_id": 1688,
       "user_id": 1,
       "id": 36
+    },
+    {
+      "post_id": 180,
+      "user_id": 1,
+      "id": 37
+    },
+    {
+      "post_id": 1672,
+      "user_id": 1,
+      "id": 38
     }
   ],
   "usersSubscriptions": [
@@ -1168,6 +1207,16 @@
       "post_id": 12,
       "user_id": 1,
       "id": 39
+    },
+    {
+      "post_id": 180,
+      "user_id": 1,
+      "id": 40
+    },
+    {
+      "post_id": 1672,
+      "user_id": 1,
+      "id": 41
     }
   ],
   "reports": [
@@ -1185,11 +1234,6 @@
       "post_id": 1686,
       "user_id": 1,
       "id": 4
-    },
-    {
-      "post_id": 1689,
-      "user_id": 1,
-      "id": 5
     }
   ]
 }

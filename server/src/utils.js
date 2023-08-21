@@ -20,7 +20,6 @@ module.exports = {
   },
 
   clearToken: (req) => {
-    console.log('START 2')
     const token = `${req.headers.authorization}`
     return token.replace('Bearer ', '') || ''
   },
@@ -63,7 +62,7 @@ module.exports = {
     return res.status(403).json({ message: 'Forbidden' })
   },
   r404: (res, message) => {
-    return res.status(401).json({ message: message || 'Not found' })
+    return res.status(404).json({ message: message || 'Not found' })
   },
   r422: (res, message) => {
     return res.status(422).json({ message: message || 'Logical error' })

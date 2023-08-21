@@ -14,6 +14,7 @@ import { IComment, ICreateCommentDto } from '@entities/Comments/store/schema'
 import { me } from '@entities/me'
 import { clsx } from '@shared/utils'
 import { toast } from 'react-toastify'
+import { ScrollUp } from '@widgets/ScrollUp'
 
 const PostPage = observer(() => {
   const params = useParams() as {
@@ -111,6 +112,7 @@ const PostPage = observer(() => {
 
   return (
     <div className={classes.PostPage}>
+      <ScrollUp />
       <div className={classes.content_wrapper}>
         <div className={classes.content}>
           {posts.posts.length > 0 ? (
