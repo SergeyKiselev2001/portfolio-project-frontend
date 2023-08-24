@@ -65,6 +65,14 @@ class Comments implements ICommentsState {
       onCreate(data)
     })
   }
+
+  deleteComment = async (id: number) => {
+    tryRequest(async () => {
+      await api.delete(`/comments/${id}`, getApiHeader())
+      this.amountOfComments = this.amountOfComments - 1
+      toast.success('Комментарий удалён')
+    })
+  }
 }
 
 export default new Comments()

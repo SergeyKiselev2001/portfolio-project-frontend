@@ -18,6 +18,7 @@ import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
 import { observer } from 'mobx-react-lite'
 import { ScrollUp } from '@widgets/ScrollUp'
+import { UserSubscribers } from './UserSubscribers'
 
 const ProfilePage = observer(() => {
   const params = useParams() as {
@@ -26,6 +27,7 @@ const ProfilePage = observer(() => {
 
   enum ActivePage {
     POSTS,
+    SUBSCRIBERS,
     SUBSCRIPTIONS,
     SAVED,
   }
@@ -105,6 +107,14 @@ const ProfilePage = observer(() => {
             >
               Список подписок
             </button>
+            <button
+              onClick={() => setActive(ActivePage.SUBSCRIBERS)}
+              className={clsx({
+                [classes.active_btn]: activePage == ActivePage.SUBSCRIBERS,
+              })}
+            >
+              Подписчики
+            </button>
             {isMe && (
               <button
                 onClick={() => setActive(ActivePage.SAVED)}
@@ -131,6 +141,9 @@ const ProfilePage = observer(() => {
             )}
             {activePage == ActivePage.SUBSCRIPTIONS && (
               <UserSubscriptions subscriptions={user.subscriptions} />
+            )}
+            {activePage == ActivePage.SUBSCRIBERS && (
+              <UserSubscribers />
             )}
             {activePage == ActivePage.SAVED && <UserSaved />}
           </div>

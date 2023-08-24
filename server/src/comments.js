@@ -8,6 +8,8 @@ const {
   r500,
   r401,
   r403,
+  checkAdmin,
+  getUserIdByHeaderJWT,
 } = require('./utils')
 const { filterCommentsByPostID } = commentsUtils
 
@@ -50,10 +52,13 @@ module.exports = {
   createComment: async (req, res) => {
     if (!checkAuth(req)) return r401(res)
 
-    const { users = [] } = getDB()
+    const { users = [], comments = [] } = getDB()
     const newComment = { ...req.body, timestamp: +Date.now() }
 
     const userFromDB = users.find((user) => user.id == req.body.user_id)
+    const biggestID = comments.sort((first, second) =>
+      first.id > second.id ? -1 : 1
+    )[0].id
 
     try {
       await fetch('http://localhost:5432/comments', {
@@ -66,7 +71,7 @@ module.exports = {
 
       const result = {
         ...rest,
-        id: +Math.random(),
+        id: biggestID + 1,
         author: {
           name: userFromDB.login,
           id: userFromDB.id,
@@ -81,7 +86,16 @@ module.exports = {
   },
 
   deleteComment: (req, res, next) => {
-    if (req.headers['cascade-delete']) {
+    const { comments = [] } = getDB()
+    const commentAuthorID = comments.find(
+      (comment) => comment.id == req.params.id
+    ).user_id
+
+    if (
+      req.headers['cascade-delete'] ||
+      checkAdmin(req) ||
+      commentAuthorID == getUserIdByHeaderJWT(req)
+    ) {
       next()
     } else return r403(res)
   },

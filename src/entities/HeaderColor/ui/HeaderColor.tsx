@@ -8,7 +8,7 @@ interface IHeaderColor {
 }
 
 const HeaderColor = (props: IHeaderColor) => {
-  const { color, isChecked, onChange } = props
+  const { color, onChange } = props
 
   const changeColor = () => {
     onChange(color)
