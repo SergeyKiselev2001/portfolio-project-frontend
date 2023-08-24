@@ -39,7 +39,6 @@ export class User implements IUserState {
   }
 
   setUserInfo = (userInfo: IUserState) => {
-    console.log(userInfo)
     for (const key in userInfo) {
       this[key as keyof User] = userInfo[key as keyof IUserState] as never
     }
