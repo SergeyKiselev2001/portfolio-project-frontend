@@ -25,8 +25,8 @@
       "id": 1,
       "login": "Admin",
       "password": "1234",
-      "status": "Хаха",
-      "headerTheme": "Dark_blue",
+      "status": "FFFSFFFFFFFFFF",
+      "headerTheme": "Aqua",
       "systemRole": "ADMIN",
       "newNotifications": true,
       "avatar": {
@@ -79,7 +79,7 @@
       "id": 12,
       "title": "Тестовый пост сложный",
       "timestamp": 1686062966913,
-      "views": 495,
+      "views": 534,
       "content": [
         {
           "type": "TEXT",
@@ -111,7 +111,7 @@
       "id": 14,
       "title": "Еще блин один пост",
       "timestamp": 1686062666913,
-      "views": 105,
+      "views": 124,
       "content": [
         {
           "type": "TEXT",
@@ -139,7 +139,7 @@
       "id": 16,
       "title": "Смешной пост про айти",
       "timestamp": 1689062966913,
-      "views": 710,
+      "views": 711,
       "content": [
         {
           "type": "IMAGE",
@@ -291,7 +291,7 @@
       ],
       "tags": [],
       "timestamp": 1691424542623,
-      "views": 9,
+      "views": 15,
       "id": 1685,
       "author_id": 1
     },
@@ -307,143 +307,6 @@
       "timestamp": 1691501861691,
       "views": 41,
       "id": 1686,
-      "author_id": 99
-    },
-    {
-      "title": "dfds fdsfdsfds",
-      "content": [
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        },
-        {
-          "type": "TEXT",
-          "text": ""
-        },
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        }
-      ],
-      "tags": [],
-      "timestamp": 1692279691297,
-      "views": 2,
-      "id": 1687,
       "author_id": 99
     },
     {
@@ -613,88 +476,11 @@
   ],
   "comments": [
     {
-      "id": 0,
-      "post_id": 12,
-      "user_id": 23,
-      "text": "О нет это же еще обычный текст",
-      "timestamp": 1646868365913
-    },
-    {
-      "text": "333",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691878639292,
-      "id": 1
-    },
-    {
-      "text": "да это я",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691879106988,
-      "id": 2
-    },
-    {
-      "text": "dasdas",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691879187038,
-      "id": 3
-    },
-    {
-      "text": "777",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691879217929,
-      "id": 4
-    },
-    {
-      "text": "46666",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691879308218,
-      "id": 5
-    },
-    {
-      "text": "8888",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691879341029,
-      "id": 6
-    },
-    {
-      "text": "7777777",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691879398159,
-      "id": 7
-    },
-    {
-      "text": "555",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1691879534419,
-      "id": 8
-    },
-    {
-      "text": "6786",
-      "post_id": 14,
-      "user_id": 99,
-      "timestamp": 1691879886061,
-      "id": 9
-    },
-    {
       "text": "4645",
       "post_id": 14,
       "user_id": 99,
       "timestamp": 1691879888703,
       "id": 10
-    },
-    {
-      "text": "7564764576457",
-      "post_id": 14,
-      "user_id": 99,
-      "timestamp": 1691879891860,
-      "id": 11
     },
     {
       "text": "jhgjhgjhg",
@@ -718,39 +504,11 @@
       "id": 14
     },
     {
-      "text": "hjg kjhg khjg kh",
-      "post_id": 14,
-      "user_id": 99,
-      "timestamp": 1691879905938,
-      "id": 15
-    },
-    {
       "text": "[t[t[t[t\n",
       "post_id": 14,
       "user_id": 99,
       "timestamp": 1691880061557,
       "id": 16
-    },
-    {
-      "text": "[t[t[t[",
-      "post_id": 12,
-      "user_id": 23,
-      "timestamp": 1691880111452,
-      "id": 17
-    },
-    {
-      "text": "fgdf gdf",
-      "post_id": 12,
-      "user_id": 23,
-      "timestamp": 1691880204503,
-      "id": 18
-    },
-    {
-      "text": "t7654645",
-      "post_id": 12,
-      "user_id": 23,
-      "timestamp": 1691880525759,
-      "id": 19
     },
     {
       "text": "fdsfdsf",
@@ -800,13 +558,6 @@
       "user_id": 99,
       "timestamp": 1692193632767,
       "id": 27
-    },
-    {
-      "text": "аеп вапрва ",
-      "post_id": 12,
-      "user_id": 99,
-      "timestamp": 1692223435373,
-      "id": 31
     },
     {
       "text": "ва вы фа",
@@ -947,6 +698,20 @@
       "user_id": 1,
       "timestamp": 1692572997055,
       "id": 54
+    },
+    {
+      "text": "df gdfg dfs gdf",
+      "post_id": 1685,
+      "user_id": 23,
+      "timestamp": 1692913684371,
+      "id": 55
+    },
+    {
+      "text": "fhgfdhd",
+      "post_id": 14,
+      "user_id": 23,
+      "timestamp": 1692913995724,
+      "id": 56
     }
   ],
   "likes": [
@@ -1036,11 +801,6 @@
       "id": 28
     },
     {
-      "post_id": 1687,
-      "user_id": 99,
-      "id": 30
-    },
-    {
       "post_id": 1696,
       "user_id": 99,
       "id": 31
@@ -1069,6 +829,11 @@
       "post_id": 1672,
       "user_id": 1,
       "id": 38
+    },
+    {
+      "post_id": 1686,
+      "user_id": 1,
+      "id": 39
     }
   ],
   "usersSubscriptions": [
@@ -1083,11 +848,6 @@
       "subscribed_on": 99
     },
     {
-      "subscribed_by": 1,
-      "subscribed_on": 23,
-      "id": 3
-    },
-    {
       "subscribed_by": 99,
       "subscribed_on": 23,
       "id": 5
@@ -1096,6 +856,21 @@
       "subscribed_by": 23,
       "subscribed_on": 99,
       "id": 6
+    },
+    {
+      "subscribed_by": 1,
+      "subscribed_on": 123,
+      "id": 15
+    },
+    {
+      "subscribed_by": 1,
+      "subscribed_on": 23,
+      "id": 16
+    },
+    {
+      "subscribed_by": 1,
+      "subscribed_on": 99,
+      "id": 17
     }
   ],
   "tagsSubscriptions": [
@@ -1103,6 +878,11 @@
       "subscribed_by": 23,
       "subscribed_on": 3,
       "id": 3
+    },
+    {
+      "subscribed_by": 1,
+      "subscribed_on": 1,
+      "id": 4
     }
   ],
   "tagsBlocks": [
@@ -1217,6 +997,11 @@
       "post_id": 1672,
       "user_id": 1,
       "id": 41
+    },
+    {
+      "post_id": 1686,
+      "user_id": 1,
+      "id": 42
     }
   ],
   "reports": [
@@ -1224,11 +1009,6 @@
       "post_id": 1682,
       "user_id": 99,
       "id": 2
-    },
-    {
-      "post_id": 1687,
-      "user_id": 99,
-      "id": 3
     },
     {
       "post_id": 1686,

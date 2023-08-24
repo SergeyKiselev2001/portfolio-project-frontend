@@ -3,7 +3,7 @@ import classes from './ProfileInfo.module.scss'
 import { me } from '@entities/me'
 import { LangSwitcher } from '@widgets/LangSwitcher'
 import { ThemeSwitcher } from '@widgets/ThemeSwitcher'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { observer } from 'mobx-react-lite'
 import { user as currentProfile } from '@entities/user'
 import { useTranslation } from 'react-i18next'
@@ -18,6 +18,8 @@ import { HeaderColor } from '@entities/HeaderColor'
 import { StorageKeys } from '@entities/clientStorage'
 import { clsx } from '@shared/utils'
 import { useDebounce } from '@shared/hooks'
+import { toast } from 'react-toastify'
+import { user as userStore } from '@entities/user'
 
 interface IProfileInfo {
   user: IUserState
@@ -36,6 +38,10 @@ const ProfileInfo = observer(({ user, isSubscribed }: IProfileInfo) => {
 
   const [isSubscribedOnServer, setIsSubscribedOnServer] = useState(isSubscribed)
   const setCallbackForSubscription = useDebounce(500)
+
+  useEffect(() => {
+    userStore.updateSubscribers(subscribed)
+  }, [subscribed])
 
   const toggleSubscribe = () => {
     if (subscribed) {
@@ -63,7 +69,11 @@ const ProfileInfo = observer(({ user, isSubscribed }: IProfileInfo) => {
   }
 
   const updateStatus = async () => {
-    await me.updateStatus(newStatus)
+    if (newStatus.length > 50) {
+      toast.warn(`Слишком много символов: ${newStatus.length} из 50`)
+      return
+    }
+    await me.updateStatus(newStatus.trim())
     toggleHeaderModalHandle()
   }
 

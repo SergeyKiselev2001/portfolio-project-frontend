@@ -122,6 +122,18 @@ module.exports = {
         .map((user) => user.login)
     },
 
+    getUsersSubscribersNames: (userID) => {
+      const { usersSubscriptions = [], users = [] } = module.exports.getDB()
+
+      const userSubscribersIDs = usersSubscriptions
+        .filter((user) => user.subscribed_on == userID)
+        .map((user) => user.subscribed_by)
+
+      return users
+        .filter((user) => userSubscribersIDs.find((el) => el == user.id))
+        .map((el) => el.login)
+    },
+
     getFollowersAmount: (userID) => {
       const { usersSubscriptions = [] } = module.exports.getDB()
 
