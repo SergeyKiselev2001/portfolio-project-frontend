@@ -4,6 +4,7 @@ export interface IUserState {
   subscribed?: boolean
   login?: string
   status?: string
+  subscribers?: string[]
   subscriptions?: {
     users: string[]
     tags: i18Tags[]

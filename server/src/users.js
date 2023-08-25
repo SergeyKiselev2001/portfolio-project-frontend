@@ -19,6 +19,7 @@ const {
   getFollowersAmount,
   getTagsSubscriptionsNames,
   getBlockedTagsNames,
+  getUsersSubscribersNames,
 } = usersUtils
 
 module.exports = {
@@ -57,6 +58,8 @@ module.exports = {
 
       const blockedTagsNames = getBlockedTagsNames(userID)
 
+      const usersSubscribersNames = getUsersSubscribersNames(id)
+
       const followersAmount = getFollowersAmount(userID)
 
       return r200(res, {
@@ -69,6 +72,7 @@ module.exports = {
         ignoreList: {
           tags: [...blockedTagsNames],
         },
+        subscribers: [...usersSubscribersNames],
         subscriptions: {
           users: [...usersSubscriptionsNames],
           tags: [...tagsSubscriptionsNames],
@@ -95,6 +99,8 @@ module.exports = {
         usersSubscriptionsIDs
       )
 
+      const usersSubscribersNames = getUsersSubscribersNames(id)
+
       const tagsSubscriptionsNames = getTagsSubscriptionsNames(id)
 
       return r200(res, {
@@ -103,6 +109,7 @@ module.exports = {
         systemRole,
         avatar,
         status,
+        subscribers: [...usersSubscribersNames],
         subscriptions: {
           users: [...usersSubscriptionsNames],
           tags: [...tagsSubscriptionsNames],

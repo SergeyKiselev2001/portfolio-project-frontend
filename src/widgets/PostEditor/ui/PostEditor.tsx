@@ -39,6 +39,15 @@ const PostEditor = (props: IPostEditor) => {
       return false
     }
 
+    for (const el of content) {
+      if (el.type == ContentType.TEXT) {
+        if ((el.text as string)?.length < 10) {
+          toast.error('Слишком короткий блок текста')
+          return false
+        }
+      }
+    }
+
     return true
   }
 

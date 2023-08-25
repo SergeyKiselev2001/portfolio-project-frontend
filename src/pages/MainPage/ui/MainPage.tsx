@@ -59,7 +59,7 @@ const MainPage = observer(() => {
 
   return (
     <div className={classes.MainPage}>
-      <Controller />
+      {/* <Controller /> */}
       <ScrollUp />
       <div className={classes.content_wrapper}>
         <div className={classes.posts}>

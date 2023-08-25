@@ -18,6 +18,12 @@ import { Modal } from '@widgets/Modal'
 import { Login } from '@widgets/Login'
 import { observer } from 'mobx-react-lite'
 import { ScrollUp } from '@widgets/ScrollUp'
+import { UserSubscribers } from './UserSubscribers'
+import {
+  i18Chunks,
+  i18KeysHeader,
+  i18KeysProfile,
+} from '@widgets/LangSwitcher/types/i18Keys'
 
 const ProfilePage = observer(() => {
   const params = useParams() as {
@@ -26,6 +32,7 @@ const ProfilePage = observer(() => {
 
   enum ActivePage {
     POSTS,
+    SUBSCRIBERS,
     SUBSCRIPTIONS,
     SAVED,
   }
@@ -72,10 +79,14 @@ const ProfilePage = observer(() => {
 
   return (
     <div className={classes.ProfilePage}>
-      <ScrollUp />
+      {!spinner && !user.login && (
+        <ErrorPage message={`${t(i18Keys.USER_NOT_FOUND)}`} />
+      )}
+
       {spinner && <Spinner />}
       {!spinner && user.login && (
         <>
+          <ScrollUp />
           <div className={classes.profileInfoWrapper}>
             <ProfileInfo
               isSubscribed={Boolean(
@@ -91,7 +102,7 @@ const ProfilePage = observer(() => {
                 [classes.active_btn]: activePage == ActivePage.POSTS,
               })}
             >
-              Посты пользователя
+              {t(i18KeysProfile.USER_POSTS, { ns: i18Chunks.PROFILE })}
             </button>
             <button
               onClick={() => setActive(ActivePage.SUBSCRIPTIONS)}
@@ -99,7 +110,15 @@ const ProfilePage = observer(() => {
                 [classes.active_btn]: activePage == ActivePage.SUBSCRIPTIONS,
               })}
             >
-              Список подписок
+              {t(i18Keys.MY_SUBSCRIPTIONS)}
+            </button>
+            <button
+              onClick={() => setActive(ActivePage.SUBSCRIBERS)}
+              className={clsx({
+                [classes.active_btn]: activePage == ActivePage.SUBSCRIBERS,
+              })}
+            >
+              {t(i18Keys.SUBSCRIBERS)}
             </button>
             {isMe && (
               <button
@@ -108,7 +127,7 @@ const ProfilePage = observer(() => {
                   [classes.active_btn]: activePage == ActivePage.SAVED,
                 })}
               >
-                Сохраненные
+                {t(i18KeysProfile.SAVED, { ns: i18Chunks.PROFILE })}
               </button>
             )}
           </div>
@@ -128,13 +147,10 @@ const ProfilePage = observer(() => {
             {activePage == ActivePage.SUBSCRIPTIONS && (
               <UserSubscriptions subscriptions={user.subscriptions} />
             )}
+            {activePage == ActivePage.SUBSCRIBERS && <UserSubscribers />}
             {activePage == ActivePage.SAVED && <UserSaved />}
           </div>
         </>
-      )}
-
-      {!spinner && !user.login && (
-        <ErrorPage message={`${t(i18Keys.USER_NOT_FOUND)}`} />
       )}
 
       {blockSideInfo.showLoginModal && (

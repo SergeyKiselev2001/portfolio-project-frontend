@@ -4,23 +4,31 @@ import { toast } from 'react-toastify'
 
 export const tryRequest = async <T>(
   callback: () => Promise<T>,
-  errorCallback?: VoidFunction
+  errorCallback?: VoidFunction,
+  options?: {
+    hideToast: boolean
+  }
 ) => {
+  const showToast = !options?.hideToast
+
   try {
     await callback()
   } catch (e) {
     switch ((e as AxiosError).response?.status) {
       case 400:
-        toast.error('Bad request')
+        showToast && toast.error('Bad request')
         return
       case 401:
-        toast.error('Auth error')
+        showToast && toast.error('Auth error')
+        return
+      case 404:
+        showToast && toast.error(`${(e as any).response?.data.message}`)
         return
       case 422:
-        toast.warn(`${(e as any).response?.data.message}`)
+        showToast && toast.warn(`${(e as any).response?.data.message}`)
         return
       case 500:
-        toast.error(`${(e as any).response?.data.message}`)
+        showToast && toast.error(`${(e as any).response?.data.message}`)
         return
     }
 

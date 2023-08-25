@@ -28,6 +28,7 @@
   .top_part {
     display: flex;
     gap: 5px;
+    position: relative;
   }
 
   .top_part__info {
@@ -52,5 +53,25 @@
     padding: 5px 10px;
     line-height: 1.2em;
     font-weight: 300;
+  }
+}
+
+
+.deleteComment {
+  position: absolute;
+  right: 0px;
+  height: 30px;
+  width: 30px;
+  background-color: #d8d8d8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-image: url('../ui/images/trash.png');
+  background-position: center;
+  background-size: 70%;
+  background-repeat: no-repeat;
+
+  &:hover {
+    background-color: #ff6d6d;
   }
 }

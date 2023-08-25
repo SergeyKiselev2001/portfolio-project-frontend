@@ -8,18 +8,21 @@
   "WAIT": "Wait",
   "SUBSCRIBE": "Subscribe",
   "UNSUBSCRIBE": "Unsubscribe",
-
   "TAGS": "Tags",
   "SEARCH": "Search",
   "FIND": "Find",
   "MY_SUBSCRIPTIONS": "My subscriptions",
   "BLACK_LIST": "Black list",
   "ALL": "All",
-
   "BLOCK": "Block",
   "UNBLOCK": "Unblock",
   "POSTS": "Posts",
-
   "LOG_IN": "Log in",
-  "NOT_FOUND": "Not found"
+  "NOT_FOUND": "Not found",
+  "SUBSCRIBERS": "Subscribers",
+  "CREATE_POST": "Create post",
+  "LOG_OUT": "Log out",
+  "HIDE": "Hide post",
+  "SEND_REPORT": "Send report",
+  "DELETE": "Delete"
 }

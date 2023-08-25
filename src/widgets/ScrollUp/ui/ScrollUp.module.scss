@@ -3,13 +3,43 @@
   top: 0px;
   left: 0px;
   position: fixed;
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.035);;
   outline: none;
-  width: 40px;
+  width: 70px;
   border: none;
   cursor: pointer;
 
   &:hover {
     background-color: rgba(0, 0, 0, 0.225);
+  }
+
+  @media (max-width: calc($screen-lg + 50px)) {
+    display: none;
+  }
+
+  &::before {
+    transition: .1s;
+    display: block;
+    position: absolute;
+    content: '';
+    bottom: 50px;
+    left: 26px;
+    height: 12px;
+    width: 12px;
+
+    border-top: 3px solid rgb(146, 146, 146);
+    border-right: 3px solid rgb(146, 146, 146);
+  }
+}
+
+.arrow_down {
+  &::before {
+    transform: rotateZ(135deg);
+  }
+}
+
+.arrow_up {
+  &::before {
+    transform: rotateZ(-45deg);
   }
 }

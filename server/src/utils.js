@@ -20,7 +20,6 @@ module.exports = {
   },
 
   clearToken: (req) => {
-    console.log('START 2')
     const token = `${req.headers.authorization}`
     return token.replace('Bearer ', '') || ''
   },
@@ -63,7 +62,7 @@ module.exports = {
     return res.status(403).json({ message: 'Forbidden' })
   },
   r404: (res, message) => {
-    return res.status(401).json({ message: message || 'Not found' })
+    return res.status(404).json({ message: message || 'Not found' })
   },
   r422: (res, message) => {
     return res.status(422).json({ message: message || 'Logical error' })
@@ -121,6 +120,18 @@ module.exports = {
       return users
         .filter((user) => usersSubscriptionsIDs.find((el) => el == user.id))
         .map((user) => user.login)
+    },
+
+    getUsersSubscribersNames: (userID) => {
+      const { usersSubscriptions = [], users = [] } = module.exports.getDB()
+
+      const userSubscribersIDs = usersSubscriptions
+        .filter((user) => user.subscribed_on == userID)
+        .map((user) => user.subscribed_by)
+
+      return users
+        .filter((user) => userSubscribersIDs.find((el) => el == user.id))
+        .map((el) => el.login)
     },
 
     getFollowersAmount: (userID) => {

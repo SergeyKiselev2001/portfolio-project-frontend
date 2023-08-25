@@ -14,6 +14,7 @@ export class User implements IUserState {
     users: [],
     tags: [],
   }
+  subscribers = []
   systemRole = SystemRoles.USER
   avatar = {
     src: '',
@@ -25,12 +26,16 @@ export class User implements IUserState {
   }
 
   getUserInfo = async (name: string) => {
-    await tryRequest(async () => {
-      const data = await api.get(`/users/${name}`)
+    await tryRequest(
+      async () => {
+        const data = await api.get(`/users/${name}`)
 
-      this.setUserInfo(data.data)
-      this.login = name
-    })
+        this.setUserInfo(data.data)
+        this.login = name
+      },
+      undefined,
+      { hideToast: true }
+    )
   }
 
   setUserInfo = (userInfo: IUserState) => {
@@ -51,6 +56,14 @@ export class User implements IUserState {
       await api.get(`/users/${this.login}/subscribe`, getApiHeader())
       this.subscribed = true
     })
+  }
+
+  updateSubscribers = (value: boolean) => {
+    if (value) {
+      this.subscribers.push(me.login as unknown as never)
+    } else {
+      this.subscribers = [...this.subscribers.filter((el) => el != me.login)]
+    }
   }
 }
 

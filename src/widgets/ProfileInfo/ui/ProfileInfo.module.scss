@@ -55,6 +55,12 @@
 .Orange {
   background: $profile-header-orange;
 }
+.modal_wrapper {
+  padding: 20px;
+  @include shadow;
+  background-color: #555555;
+  border-radius: 3px;
+}
 
 .themes {
   display: grid;
@@ -186,5 +192,33 @@
   .active {
     background-color: rgb(255, 255, 255);
     color: #220202;
+  }
+}
+
+.newStatus {
+  display: flex;
+  gap: 10px;
+
+  input {
+    padding: 6px 10px;
+    flex-grow: 1;
+    font-family: $roboto;
+  }
+
+  button {
+    font-family: $roboto;
+    padding: 6px 20px;
+    cursor: pointer;
+    background-color: #353535;
+    color: white;
+    border: 1px solid black;
+
+    &:hover {
+      background-color: #616161;
+    }
+
+    &:active {
+      background-color: #bdbdbd;
+    }
   }
 }
