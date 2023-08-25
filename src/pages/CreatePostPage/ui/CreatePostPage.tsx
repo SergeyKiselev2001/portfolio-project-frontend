@@ -33,8 +33,8 @@ const CreatePostPage = observer(() => {
     location.reload()
   }
 
-  const publishPost = (post: CreatePostDto) => {
-    posts.publishPost(post, (id) => {
+  const publishPost = async (post: CreatePostDto) => {
+    await posts.publishPost(post, (id) => {
       toast.success('Пост опубликован!')
       navigate(`/post/${id}`)
     })

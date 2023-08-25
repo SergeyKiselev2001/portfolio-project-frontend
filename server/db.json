@@ -9,15 +9,23 @@
   "tags": [
     {
       "id": 1,
-      "type": "ANIMALS"
-    },
-    {
-      "id": 2,
       "type": "TECHNOLOGIES"
     },
     {
-      "id": 3,
+      "id": 2,
       "type": "HUMOR"
+    },
+    {
+      "id": 3,
+      "type": "MOVIES"
+    },
+    {
+      "id": 4,
+      "type": "SPORT"
+    },
+    {
+      "id": 5,
+      "type": "ANIMALS"
     }
   ],
   "users": [
@@ -26,7 +34,7 @@
       "login": "Admin",
       "password": "1234",
       "status": "FFFSFFFFFFFFFF",
-      "headerTheme": "Aqua",
+      "headerTheme": "Green",
       "systemRole": "ADMIN",
       "newNotifications": true,
       "avatar": {
@@ -79,7 +87,7 @@
       "id": 12,
       "title": "Тестовый пост сложный",
       "timestamp": 1686062966913,
-      "views": 546,
+      "views": 551,
       "content": [
         {
           "type": "TEXT",
@@ -111,7 +119,7 @@
       "id": 14,
       "title": "Еще блин один пост",
       "timestamp": 1686062666913,
-      "views": 126,
+      "views": 127,
       "content": [
         {
           "type": "TEXT",
@@ -305,7 +313,7 @@
       ],
       "tags": [],
       "timestamp": 1691501861691,
-      "views": 41,
+      "views": 42,
       "id": 1686,
       "author_id": 99
     },
@@ -360,23 +368,6 @@
       "author_id": 99
     },
     {
-      "title": "Нисса",
-      "content": [
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": "https://www.tvmovie.de/assets/2020/09/11/78679-mtg-nissa-zendikar.jpg"
-          }
-        }
-      ],
-      "tags": [],
-      "timestamp": 1692291056114,
-      "views": 1,
-      "id": 1695,
-      "author_id": 99
-    },
-    {
       "title": "чемпион из лолки",
       "content": [
         {
@@ -402,50 +393,175 @@
       "author_id": 99
     },
     {
-      "title": "ВЛААААААААААААААААД",
+      "title": "Потемнело / The Blackening/ 2022",
       "content": [
         {
           "type": "TEXT",
-          "text": "ffffffffffffffffffffffffffffffffgbdsgdfgds44"
+          "text": "Чёрная комедия во всех смыслах этого слова от режиссёра фантастической четверки. А черное в ней всё: каст актеров, набор стереотипных шуток, пару смертей в юморной манере и убийца с блэкфейс, а единственный белый персонаж - шериф с фамилией Уайт, который, когда вызывает подмогу по рации, говорит \"База - это белый\"."
         },
         {
           "type": "TEXT",
-          "text": "dfs"
-        },
-        {
-          "type": "QUOTE",
-          "text": "fsdf"
+          "text": "Друзья по колледжу афроамериканцы собираются  в загородном доме для встречи одногруппников.\nВ доме они находят игровую комнату, а в ней странную настольную игру под названием \"Потемнело\", где пешки сделаны под каждого из присутствующих, а в середине красуется блэкфейс.\nПоставив фигурки на карту, позади них включается телевизор, в экране сидит их подруга, которая привязана к стулу, позади нее стоит мужчина в черной маске, предлагающий играть в игру, ответив на 9 вопросов правильно их подруга выживет, одна ошибка, и она умирает, откажутся играть - умрут все, так и начинается игра."
         },
         {
           "type": "TEXT",
-          "text": "fff"
+          "text": "Фильм сам по себе одна большая рофляночка над черными. В игре вопросы все про черных, по типу:\n-Сколько сезонов темнокожая тётя Виф роль тети, прежде чем ее заменила светлокожая тетя Виф.\n- 2 куплет гимна чёрных (Все помнят только первый)\n- 5 черных актеров или актрис снимающихся в сериале \"Друзья\". (Юмор в том, что Друзья самый белый сериал и рил черные его не смотрят)\nИ т.д.\nТак же будут задания по типу, выберете из вас самого черного, чтобы я убил его, иначе убью всех и там тоже начинается балаган.\nВ общем, это какая то мега самоирония, которая выглядит действительно забавно."
+        },
+        {
+          "type": "TEXT",
+          "text": "Фильм отсылается к детективам Агаты Кристи, и напрямую отсылается к настольной игре \"Улика\", по которой был сделан детективный фильм в 1985, если кто помнит. Взглянув на постер вы даже увидите почти те же оружия, что были и у персонажей Улики.\nФильм ещё напомнил мне \"Очень страшное кино\" по юмору и почему-то очень сильно локальную киношку \"Попали\"(как- нибудь расскажу про неё)."
+        },
+        {
+          "type": "TEXT",
+          "text": "Получилась хорошая комедия с качественным стёбом и интересными персонажами, смотрел в переводе от Яроцкого, если будете смотреть, то лучше в его озвучке."
         },
         {
           "type": "IMAGE",
           "image": {
             "alt": "",
-            "src": "https://sun9-27.userapi.com/impf/c627719/v627719132/11483/t64_x1_gH_w.jpg?size=1280x960&quality=96&sign=ba1ac823759e492b01bed116e6f9f3c0&type=album"
+            "src": "https://cs13.pikabu.ru/post_img/2023/08/23/10/1692806708162410124.jpg"
           }
         }
       ],
       "tags": [],
-      "timestamp": 1692293929106,
+      "timestamp": 1692962806219,
       "views": 3,
-      "id": 1697,
-      "author_id": 99
+      "id": 1706,
+      "author_id": 1
     },
     {
-      "title": "ВЛААААААААААААААААД",
+      "title": "Потемнело / The Blackening/ 2022",
       "content": [
         {
           "type": "TEXT",
-          "text": ""
+          "text": "dsadasdasdasd asdas"
+        }
+      ],
+      "tags": [
+        "ANIMALS"
+      ],
+      "timestamp": 1692966667430,
+      "views": 1,
+      "id": 1707,
+      "author_id": 1
+    },
+    {
+      "title": "Потемнело / The Blackening/ 2022",
+      "content": [
+        {
+          "type": "QUOTE",
+          "text": "бла бла бла бла....."
+        }
+      ],
+      "tags": [
+        "MOVIES",
+        "SPORT"
+      ],
+      "timestamp": 1692966685837,
+      "views": 2,
+      "id": 1708,
+      "author_id": 1
+    },
+    {
+      "title": "Test post #124",
+      "content": [
+        {
+          "type": "IMAGE",
+          "image": {
+            "alt": "",
+            "src": "https://tse2.mm.bing.net/th?id=OIP.SAQc9VHfs7xxY4omlwslxQHaD-&pid=15.1"
+          }
+        }
+      ],
+      "tags": [
+        "TECHNOLOGIES"
+      ],
+      "timestamp": 1692966734357,
+      "views": 2,
+      "id": 1709,
+      "author_id": 1
+    },
+    {
+      "title": "Test post #125",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "dasDASDFDS AF"
+        },
+        {
+          "type": "TEXT",
+          "text": "FASDFASDF ASF"
+        },
+        {
+          "type": "TEXT",
+          "text": "FSADFSAF DASF DAS"
+        }
+      ],
+      "tags": [
+        "ANIMALS",
+        "TECHNOLOGIES",
+        "MOVIES",
+        "HUMOR",
+        "SPORT"
+      ],
+      "timestamp": 1692966803309,
+      "views": 3,
+      "id": 1710,
+      "author_id": 1
+    },
+    {
+      "title": "Test post #125",
+      "content": [
+        {
+          "type": "IMAGE",
+          "image": {
+            "alt": "",
+            "src": "https://fotorelax.ru/wp-content/uploads/2016/01/Funny-animals-with-muzzles-Agape-01.jpg"
+          }
+        }
+      ],
+      "tags": [
+        "HUMOR",
+        "ANIMALS"
+      ],
+      "timestamp": 1692966924964,
+      "views": 2,
+      "id": 1711,
+      "author_id": 1
+    },
+    {
+      "title": "Test post #125",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": "р па рвпа рвпа рвпа"
+        },
+        {
+          "type": "TEXT",
+          "text": "вар ва рвап рвпа рвапр"
+        }
+      ],
+      "tags": [
+        "ANIMALS",
+        "MOVIES"
+      ],
+      "timestamp": 1692967309725,
+      "views": 1,
+      "id": 1712,
+      "author_id": 1
+    },
+    {
+      "title": "Test post #125",
+      "content": [
+        {
+          "type": "QUOTE",
+          "text": "выфывфы вафыа вфы аы"
         }
       ],
       "tags": [],
-      "timestamp": 1692926526839,
-      "views": 1,
-      "id": 1698,
+      "timestamp": 1692967630094,
+      "views": 11,
+      "id": 1713,
       "author_id": 1
     }
   ],
@@ -556,55 +672,6 @@
       "id": 38
     },
     {
-      "text": "фыв авфыавфы авфы",
-      "post_id": 1697,
-      "user_id": 23,
-      "timestamp": 1692294001286,
-      "id": 39
-    },
-    {
-      "text": "вавы а",
-      "post_id": 1697,
-      "user_id": 23,
-      "timestamp": 1692294004170,
-      "id": 40
-    },
-    {
-      "text": "ваыа",
-      "post_id": 1697,
-      "user_id": 23,
-      "timestamp": 1692294006575,
-      "id": 41
-    },
-    {
-      "text": "авыа",
-      "post_id": 1697,
-      "user_id": 23,
-      "timestamp": 1692294008679,
-      "id": 42
-    },
-    {
-      "text": "ваыаы",
-      "post_id": 1697,
-      "user_id": 23,
-      "timestamp": 1692294010966,
-      "id": 43
-    },
-    {
-      "text": "пвапваы",
-      "post_id": 1697,
-      "user_id": 23,
-      "timestamp": 1692294013775,
-      "id": 44
-    },
-    {
-      "text": "ваыпвыа",
-      "post_id": 1697,
-      "user_id": 23,
-      "timestamp": 1692294016026,
-      "id": 45
-    },
-    {
       "text": "fdgdsgd",
       "post_id": 14,
       "user_id": 23,
@@ -694,6 +761,83 @@
       "user_id": 1,
       "timestamp": 1692926325593,
       "id": 58
+    },
+    {
+      "text": "dasfasf",
+      "post_id": 12,
+      "user_id": 1,
+      "timestamp": 1692961127094,
+      "id": 60
+    },
+    {
+      "text": "fdsfds",
+      "post_id": 12,
+      "user_id": 1,
+      "timestamp": 1692961431625,
+      "id": 61
+    },
+    {
+      "text": "32dsfa",
+      "post_id": 14,
+      "user_id": 1,
+      "timestamp": 1692961746762,
+      "id": 62
+    },
+    {
+      "text": "dsadasda",
+      "post_id": 1706,
+      "user_id": 1,
+      "timestamp": 1692962906409,
+      "id": 63
+    },
+    {
+      "text": "выа вфы",
+      "post_id": 1713,
+      "user_id": 1,
+      "timestamp": 1692967652887,
+      "id": 64
+    },
+    {
+      "text": "ывфа вфы",
+      "post_id": 1713,
+      "user_id": 1,
+      "timestamp": 1692967654034,
+      "id": 65
+    },
+    {
+      "text": "вы ффафы афы",
+      "post_id": 1713,
+      "user_id": 1,
+      "timestamp": 1692967655114,
+      "id": 66
+    },
+    {
+      "text": "выа вфы",
+      "post_id": 1713,
+      "user_id": 1,
+      "timestamp": 1692967662903,
+      "id": 67
+    },
+    {
+      "text": "а вфы",
+      "post_id": 1713,
+      "user_id": 1,
+      "timestamp": 1692967663723,
+      "id": 68
+    },
+    {
+      "text": "ав фы",
+      "post_id": 1713,
+      "user_id": 1,
+      "timestamp": 1692967665011,
+      "id": 69
+    },
+    {
+      "text": " вафыа",
+      "post_id": 1713,
+      "user_id": 1,
+      "timestamp": 1692967666563,
+      "id": 70
     }
   ],
   "likes": [
@@ -788,11 +932,6 @@
       "id": 31
     },
     {
-      "post_id": 1697,
-      "user_id": 23,
-      "id": 32
-    },
-    {
       "post_id": 180,
       "user_id": 23,
       "id": 34
@@ -816,6 +955,21 @@
       "post_id": 1686,
       "user_id": 1,
       "id": 39
+    },
+    {
+      "post_id": 1706,
+      "user_id": 1,
+      "id": 41
+    },
+    {
+      "post_id": 1709,
+      "user_id": 1,
+      "id": 42
+    },
+    {
+      "post_id": 1713,
+      "user_id": 1,
+      "id": 43
     }
   ],
   "usersSubscriptions": [
@@ -841,11 +995,6 @@
     },
     {
       "subscribed_by": 1,
-      "subscribed_on": 123,
-      "id": 15
-    },
-    {
-      "subscribed_by": 1,
       "subscribed_on": 23,
       "id": 16
     },
@@ -860,6 +1009,16 @@
       "subscribed_by": 23,
       "subscribed_on": 3,
       "id": 3
+    },
+    {
+      "subscribed_by": 1,
+      "subscribed_on": 3,
+      "id": 4
+    },
+    {
+      "subscribed_by": 1,
+      "subscribed_on": 4,
+      "id": 5
     }
   ],
   "tagsBlocks": [
@@ -946,11 +1105,6 @@
       "id": 34
     },
     {
-      "post_id": 1697,
-      "user_id": 23,
-      "id": 35
-    },
-    {
       "post_id": 1562,
       "user_id": 23,
       "id": 36
@@ -979,6 +1133,16 @@
       "post_id": 1686,
       "user_id": 1,
       "id": 42
+    },
+    {
+      "post_id": 1706,
+      "user_id": 1,
+      "id": 43
+    },
+    {
+      "post_id": 1713,
+      "user_id": 1,
+      "id": 44
     }
   ],
   "reports": [
@@ -996,6 +1160,11 @@
       "post_id": 14,
       "user_id": 1,
       "id": 5
+    },
+    {
+      "post_id": 1711,
+      "user_id": 1,
+      "id": 6
     }
   ]
 }

@@ -36,6 +36,7 @@
 .leftHeader {
   display: flex;
   flex-direction: row;
+  gap: 5px;
   .avatar {
     height: 40px;
     width: 40px;
@@ -45,19 +46,24 @@
   .info {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    gap: 5px;
   }
 
   a {
     color: var(--fc);
     font-size: 14px;
+    margin-bottom: 0px;
   }
 
   time {
+    font-family: $roboto;
     color: #070202;
     background-color: #dddddd;
     width: fit-content;
-    padding: 2px;
+    padding: 2px 4px;
     border-radius: 5px;
+    font-size: 12px;
   }
 }
 

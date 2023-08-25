@@ -20,7 +20,7 @@ const TextEditor = (props: ITextEditor) => {
 
   return (
     <div className={classes.TextEditor}>
-      <span className={classes.paragraph}>Абзац</span>
+      <span className={classes.paragraph}>Блок текста</span>
       <div className={classes.block}>
         <textarea
           className={classes.textarea}

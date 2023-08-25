@@ -44,6 +44,10 @@ module.exports = {
     const authorNameFromJWT = getUserNameByHeaderJWT(req)
     let result = [...posts]
 
+    result.sort(function (a, b) {
+      return parseFloat(b.timestamp) - parseFloat(a.timestamp)
+    })
+
     const page = +req.query['page'] ? +req.query['page'] - 1 : 0
     const limit = +req.query['limit'] || 0
     const tag = req.query['tag'] || ''

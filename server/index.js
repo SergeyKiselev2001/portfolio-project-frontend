@@ -1,8 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable @typescript-eslint/no-var-requires */
 const jsonServer = require('json-server')
-const { jwtPairs } = require('./src/jwtPairs')
-const { getDB } = require('./src/utils')
 const Comments = require('./src/comments')
 const Posts = require('./src/posts')
 const Users = require('./src/users')
@@ -12,6 +10,7 @@ const path = require('path')
 const Reports = require('./src/reports')
 const Saves = require('./src/saves')
 const Likes = require('./src/likes')
+const Login = require('./src/login')
 
 const server = jsonServer.create()
 const router = jsonServer.router(path.resolve(__dirname, 'db.json'))
@@ -53,70 +52,7 @@ server.delete('/posts/:id/unsave', Posts.unsavePost)
 server.delete('/saves/:id', Saves.deleteSave)
 server.delete('/likes/:id', Likes.deleteLike)
 
-// // PROFILE SUBSCRIPTION
-// server.post('/users/:id', function (req, res, next) {
-//   //
-// })
-
-// // PROFILE UNSUBSCRIPTION
-// server.post('/users/:id', function (req, res, next) {
-//   //
-// })
-
-// // UPDATE STATUS
-// server.post('/users/:id', function (req, res, next) {
-//   //
-// })
-
-// // UPDATE HEADER THEME
-// server.post('/users/:id', function (req, res, next) {
-//   //
-// })
-
-// // TODO
-// // DELETE POST AND COMMENTS
-// server.delete('/posts/:postId', function (req, res, next) {
-//   //
-// })
-
-// // TAGS
-// server.post('/users/:id', function (req, res, next) {
-//   //
-// })
-
-// server.post('/user/:name/subscribe', (req, res) => {
-//   //
-// })
-
-// Эндпоинт для логина
-server.post('/login', (req, res) => {
-  try {
-    const { login, password } = req.body
-    const { users = [] } = getDB()
-    const userFromDB = users.find(
-      (user) => user.login === login && user.password === password
-    )
-
-    const { systemRole, avatar, newNotifications, headerTheme } = userFromDB
-
-    if (userFromDB) {
-      return res.json({
-        ...jwtPairs.find(({ user }) => user == login).tokens,
-        userInfo: {
-          systemRole,
-          headerTheme,
-          avatar,
-          newNotifications,
-        },
-      })
-    }
-
-    return res.status(403).json({ message: 'User not found' })
-  } catch (e) {
-    console.log(e)
-    return res.status(500).json({ message: e.message })
-  }
-})
+server.post('/login', Login.login)
 
 server.use(router)
 
