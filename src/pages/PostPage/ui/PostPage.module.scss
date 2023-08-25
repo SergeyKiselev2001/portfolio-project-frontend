@@ -70,3 +70,14 @@
   font-weight: 500;
 }
 
+.postWasDeleted {
+  font-family: $roboto;
+  color: #f34646;
+  font-size: 24px;
+  text-align: center;
+  display: block;
+  padding: 10px;
+  background-color: var(--bgc-secondary);
+  @include shadow;
+  border-radius: 5px;
+}

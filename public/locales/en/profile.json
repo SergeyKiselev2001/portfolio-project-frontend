@@ -1,4 +1,7 @@
 {
   "REGISTRATION_DATE": "Registration date",
-  "ROLE": "Role"
+  "ROLE": "Role",
+  "USER_POSTS": "User posts",
+  "SAVED": "Saved",
+  "SAVE": "Save"
 }

@@ -8,19 +8,21 @@
   "WAIT": "Подождите",
   "SUBSCRIBE": "Подписаться",
   "UNSUBSCRIBE": "Отписаться",
-
   "TAGS": "Теги",
   "SEARCH": "Поиск",
   "FIND": "Найти",
   "MY_SUBSCRIPTIONS": "Мои подписки",
   "BLACK_LIST": "Черный список",
   "ALL": "Все",
-
   "BLOCK": "Заблокировать",
   "UNBLOCK": "Разблокировать",
-
   "POSTS": "Постов",
-
   "LOG_IN": "Войти",
-  "NOT_FOUND": "Не найдено"
+  "NOT_FOUND": "Не найдено",
+  "SUBSCRIBERS": "Подписчики",
+  "CREATE_POST": "Добавить пост",
+  "LOG_OUT": "Выйти",
+  "HIDE": "Скрыть",
+  "SEND_REPORT": "Пожаловаться",
+  "DELETE": "Удалить"
 }

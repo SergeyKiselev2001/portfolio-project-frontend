@@ -64,6 +64,7 @@
 .PostContent {
   font-family: $roboto;
   font-size: 14px;
+  word-break: break-word;
 
   * {
     margin-bottom: 10px;
@@ -146,7 +147,7 @@
       font-size: 14px;
       display: block;
       cursor: pointer;
-    
+      white-space: nowrap;
 
       &:hover {
         background-color: #a7a7a7;
@@ -182,7 +183,6 @@
     border: none;
   }
 }
-
 
 .isProfilePage {
   max-width: 680px;
