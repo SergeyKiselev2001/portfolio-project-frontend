@@ -6,6 +6,8 @@ import { TimeFormat, timeConverter } from '@shared/utils'
 import { Link } from 'react-router-dom'
 import { me } from '@entities/me'
 import { SystemRoles } from '@entities/user'
+import { useTranslation } from 'react-i18next'
+import { i18Chunks, i18Keys } from '@widgets/LangSwitcher/types/i18Keys'
 
 interface IPostHeader {
   isPostPage?: boolean
@@ -24,6 +26,7 @@ interface IPostHeader {
 const PostHeader = (props: IPostHeader) => {
   const { timestamp, author, id, isPostPage } = props
   const { avatar, login } = author
+  const { t } = useTranslation(i18Chunks.TRANSLATION)
 
   const body = document.getElementsByTagName('body')[0]
 
@@ -76,11 +79,11 @@ const PostHeader = (props: IPostHeader) => {
         />
         {showOptions && (
           <div className={classes.options}>
-            {!isPostPage && <span onClick={hidePost}>Скрыть</span>}
-            <span onClick={reportPost}>Пожаловаться</span>
+            {!isPostPage && <span onClick={hidePost}>{t(i18Keys.HIDE)}</span>}
+            <span onClick={reportPost}>{t(i18Keys.SEND_REPORT)}</span>
             {(me.login == author.login ||
               me.systemRole == SystemRoles.ADMIN) && (
-              <span onClick={deletePost}>Удалить</span>
+              <span onClick={deletePost}>{t(i18Keys.DELETE)}</span>
             )}
           </div>
         )}

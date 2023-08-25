@@ -135,7 +135,9 @@ const ProfileInfo = observer(({ user, isSubscribed }: IProfileInfo) => {
             </div>
 
             <button onClick={logoutHandle} className={classes.logout}>
-              Выйти из профиля
+              {t(i18Keys.LOG_OUT, {
+                ns: i18Chunks.TRANSLATION,
+              })}
             </button>
           </div>
         )}

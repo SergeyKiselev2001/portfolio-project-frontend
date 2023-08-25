@@ -10,10 +10,11 @@ import { i18Chunks, i18Keys } from '@widgets/LangSwitcher/types/i18Keys'
 import { Link } from 'react-router-dom'
 import { RouterPaths } from '@app/config/router'
 import { blockSideInfo } from '..'
+import { wordForm } from '@shared/utils'
 
 const BlockSideInfo = observer(() => {
   const [isAuthorized, setIsAuthorized] = useState(AsideStatus.LOADING)
-  const { t } = useTranslation(i18Chunks.TRANSLATION)
+  const { t, i18n } = useTranslation(i18Chunks.TRANSLATION)
 
   useEffect(() => {
     me.login && setIsAuthorized(AsideStatus.AUTHORIZED)
@@ -34,6 +35,12 @@ const BlockSideInfo = observer(() => {
     blockSideInfo.toggleLoginModal()
   }
 
+  const logOutHandle = () => {
+    localStorage.removeItem(StorageKeys.AUTH)
+    sessionStorage.removeItem(StorageKeys.AUTH)
+    location.reload()
+  }
+
   return (
     <div
       className={classes.BlockSideInfo}
@@ -46,11 +53,21 @@ const BlockSideInfo = observer(() => {
         <>
           <div className={classes.mainInfo}>{me.login}</div>
           <div className={classes.subscribers}>
-            {me.followersAmount} Подписчиков
+            {me.followersAmount}{' '}
+            {i18n.language == 'en'
+              ? t(i18Keys.SUBSCRIBERS)
+              : wordForm(
+                  'подписчик',
+                  'подписчика',
+                  'подписчиков',
+                  me.followersAmount
+                )}
           </div>
-          <div className={classes.links}>ссылки</div>
           <div className={classes.createPost}>
-            <Link to={RouterPaths.CREATE_POST}>Добавить пост</Link>
+            <Link to={RouterPaths.CREATE_POST}>{t(i18Keys.CREATE_POST)}</Link>
+          </div>
+          <div className={classes.logOut}>
+            <button onClick={logOutHandle}>{t(i18Keys.LOG_OUT)}</button>
           </div>
         </>
       )}

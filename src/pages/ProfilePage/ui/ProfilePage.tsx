@@ -19,6 +19,11 @@ import { Login } from '@widgets/Login'
 import { observer } from 'mobx-react-lite'
 import { ScrollUp } from '@widgets/ScrollUp'
 import { UserSubscribers } from './UserSubscribers'
+import {
+  i18Chunks,
+  i18KeysHeader,
+  i18KeysProfile,
+} from '@widgets/LangSwitcher/types/i18Keys'
 
 const ProfilePage = observer(() => {
   const params = useParams() as {
@@ -97,7 +102,7 @@ const ProfilePage = observer(() => {
                 [classes.active_btn]: activePage == ActivePage.POSTS,
               })}
             >
-              Посты пользователя
+              {t(i18KeysProfile.USER_POSTS, { ns: i18Chunks.PROFILE })}
             </button>
             <button
               onClick={() => setActive(ActivePage.SUBSCRIPTIONS)}
@@ -105,7 +110,7 @@ const ProfilePage = observer(() => {
                 [classes.active_btn]: activePage == ActivePage.SUBSCRIPTIONS,
               })}
             >
-              Список подписок
+              {t(i18Keys.MY_SUBSCRIPTIONS)}
             </button>
             <button
               onClick={() => setActive(ActivePage.SUBSCRIBERS)}
@@ -113,7 +118,7 @@ const ProfilePage = observer(() => {
                 [classes.active_btn]: activePage == ActivePage.SUBSCRIBERS,
               })}
             >
-              Подписчики
+              {t(i18Keys.SUBSCRIBERS)}
             </button>
             {isMe && (
               <button
@@ -122,7 +127,7 @@ const ProfilePage = observer(() => {
                   [classes.active_btn]: activePage == ActivePage.SAVED,
                 })}
               >
-                Сохраненные
+                {t(i18KeysProfile.SAVED, { ns: i18Chunks.PROFILE })}
               </button>
             )}
           </div>
@@ -142,9 +147,7 @@ const ProfilePage = observer(() => {
             {activePage == ActivePage.SUBSCRIPTIONS && (
               <UserSubscriptions subscriptions={user.subscriptions} />
             )}
-            {activePage == ActivePage.SUBSCRIBERS && (
-              <UserSubscribers />
-            )}
+            {activePage == ActivePage.SUBSCRIBERS && <UserSubscribers />}
             {activePage == ActivePage.SAVED && <UserSaved />}
           </div>
         </>

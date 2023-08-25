@@ -134,10 +134,23 @@
 }
 
 .removeBlock {
-  padding: 10px;
   background-color: #790a0a;
-  height: fit-content;
   cursor: pointer;
+
+  height: 30px;
+  width: 30px;
+  background-color: #d8d8d8;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-image: url('../images/trash.png');
+  background-position: center;
+  background-size: 70%;
+  background-repeat: no-repeat;
+
+  &:hover {
+    background-color: #ff6d6d;
+  }
 }
 
 .ImageEditor {

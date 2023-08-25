@@ -14,11 +14,10 @@
   }
 
   .createPost {
-    padding: 10px;
-    display: block;
+    padding: 10px 20px;
 
     a {
-      margin: 0 auto;
+      text-align: center;
       display: block;
       color: white;
       border-radius: 5px;
@@ -28,7 +27,6 @@
       font-family: $roboto;
       font-weight: 300;
       padding: 10px 20px;
-      width: fit-content;
       border: none;
     }
   }
@@ -38,15 +36,13 @@
   width: 140px;
   border-bottom: 1px solid #e8e8e8;
   padding: 20px;
+  font-family: $roboto;
 }
 
 .subscribers {
   border-bottom: 1px solid #e8e8e8;
   padding: 20px;
-}
-
-.links {
-  padding: 20px;
+  font-family: $roboto;
 }
 
 .BlockSideSkeleton {
@@ -93,5 +89,27 @@
     border: none;
     cursor: pointer;
     border-radius: 5px;
+  }
+}
+
+.logOut {
+  padding: 10px 20px;
+  padding-top: 0px;
+
+  button {
+    width: 100%;
+    margin: 0 auto;
+    display: block;
+    color: white;
+    border-radius: 5px;
+    background-color: #595f58;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: $roboto;
+    font-weight: 300;
+    padding: 10px 20px;
+    line-height: 1em;
+    border: none;
+    font-size: 16px;
   }
 }

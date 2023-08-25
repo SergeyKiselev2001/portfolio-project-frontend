@@ -26,6 +26,12 @@ export enum i18Keys {
   POSTS = 'POSTS',
   LOG_IN = 'LOG_IN',
   NOT_FOUND = 'NOT_FOUND',
+  SUBSCRIBERS = 'SUBSCRIBERS',
+  CREATE_POST = 'CREATE_POST',
+  LOG_OUT = 'LOG_OUT',
+  HIDE = 'HIDE',
+  SEND_REPORT = 'SEND_REPORT',
+  DELETE = 'DELETE',
 }
 
 export enum i18KeysHeader {
@@ -46,4 +52,7 @@ export enum i18Tags {
 export enum i18KeysProfile {
   REGISTRATION_DATE = 'REGISTRATION_DATE',
   ROLE = 'ROLE',
+  USER_POSTS = 'USER_POSTS',
+  SAVED = 'SAVED',
+  SAVE = 'SAVE',
 }

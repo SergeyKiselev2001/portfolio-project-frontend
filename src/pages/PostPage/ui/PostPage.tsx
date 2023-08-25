@@ -27,6 +27,8 @@ const PostPage = observer(() => {
   const [isGettingRestComments, setIsGettingRestComments] = useState(false)
   const showRestRef = useRef(true)
   const addCommentRef = useRef() as React.MutableRefObject<HTMLFormElement>
+  const [postWasLoaded, setPostWasLoaded] = useState(false)
+  const [postWasDeleted, setPostWasDeleted] = useState(false)
 
   useEffect(() => {
     setCurrentComments(comments.comments)
@@ -85,11 +87,23 @@ const PostPage = observer(() => {
         })
       }, 100)
     }
+
+    if (postWasLoaded && !posts.posts[0]?.id) {
+      setPostWasDeleted(true)
+    }
   }, [posts.posts, comments])
 
+  const loadPost = async () => {
+    await comments.getComments([[QueryParams.POST_ID, params.id]])
+    await posts.getPostById(params.id)
+    setPostWasLoaded(true)
+    if (!posts.posts[0]?.id) {
+      setPostWasDeleted(true)
+    }
+  }
+
   useEffect(() => {
-    comments.getComments([[QueryParams.POST_ID, params.id]])
-    posts.getPostById(params.id)
+    loadPost()
   }, [])
 
   const closeModal = () => {
@@ -115,43 +129,54 @@ const PostPage = observer(() => {
       <ScrollUp />
       <div className={classes.content_wrapper}>
         <div className={classes.content}>
-          {posts.posts.length > 0 ? (
-            <Post isPostPage {...posts.posts[0]} isLast={false} />
+          {!postWasDeleted ? (
+            <>
+              {posts.posts.length > 0 ? (
+                <Post isPostPage {...posts.posts[0]} isLast={false} />
+              ) : (
+                <PostSkeleton />
+              )}
+              {currentComments.length > 0 && (
+                <Comments comments={currentComments} />
+              )}
+              {showAllButton && (
+                <button
+                  disabled={isGettingRestComments}
+                  onClick={showAllComments}
+                  className={classes.show_all}
+                >
+                  {`Показать оставшиеся комментарии (${
+                    comments.amountOfComments - comments.limit
+                  })`}
+                </button>
+              )}
+            </>
           ) : (
-            <PostSkeleton />
-          )}
-          {currentComments.length > 0 && (
-            <Comments comments={currentComments} />
-          )}
-          {showAllButton && (
-            <button
-              disabled={isGettingRestComments}
-              onClick={showAllComments}
-              className={classes.show_all}
-            >
-              {`Показать оставшиеся комментарии (${
-                comments.amountOfComments - comments.limit
-              })`}
-            </button>
+            <span className={classes.postWasDeleted}>
+              Пост был удалён или не существует
+            </span>
           )}
 
-          <form ref={addCommentRef} className={classes.sendComment}>
-            <textarea
-              placeholder="Введите текст комментария..."
-              className={classes.textarea}
-              value={myComment}
-              onChange={changeComment}
-            />
-            <button
-              className={clsx({ [classes.pending]: isCommentPending })}
-              type="button"
-              disabled={isCommentPending}
-              onClick={sendComment}
-            >
-              Отправить
-            </button>
-          </form>
+          {posts.posts.find((post) => post.id == +params.id)?.id && (
+            <form ref={addCommentRef} className={classes.sendComment}>
+              <textarea
+                placeholder="Введите текст комментария..."
+                className={classes.textarea}
+                value={myComment}
+                onChange={changeComment}
+              />
+              <button
+                className={clsx({ [classes.pending]: isCommentPending })}
+                type="button"
+                disabled={isCommentPending}
+                onClick={sendComment}
+              >
+                Отправить
+              </button>
+            </form>
+          )}
         </div>
+
         <BlockSideInfo />
 
         {blockSideInfo.showLoginModal && (

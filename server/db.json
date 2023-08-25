@@ -63,9 +63,9 @@
     {
       "id": 23,
       "login": "Vera_xxx",
-      "status": "adsadadfr tgdf gdf43",
+      "status": "ваыа",
       "password": "qwerty12312",
-      "headerTheme": "Aqua",
+      "headerTheme": "Gold",
       "systemRole": "USER",
       "newNotifications": true,
       "avatar": {
@@ -79,7 +79,7 @@
       "id": 12,
       "title": "Тестовый пост сложный",
       "timestamp": 1686062966913,
-      "views": 534,
+      "views": 546,
       "content": [
         {
           "type": "TEXT",
@@ -111,7 +111,7 @@
       "id": 14,
       "title": "Еще блин один пост",
       "timestamp": 1686062666913,
-      "views": 124,
+      "views": 126,
       "content": [
         {
           "type": "TEXT",
@@ -262,10 +262,10 @@
         }
       ],
       "tags": [],
-      "author_id": 23,
       "timestamp": 1691410149023,
-      "views": 0,
-      "id": 1682
+      "views": 36,
+      "id": 1682,
+      "author_id": 23
     },
     {
       "title": "хкхкхккхкх",
@@ -291,7 +291,7 @@
       ],
       "tags": [],
       "timestamp": 1691424542623,
-      "views": 15,
+      "views": 16,
       "id": 1685,
       "author_id": 1
     },
@@ -357,45 +357,6 @@
       "timestamp": 1692289240281,
       "views": 3,
       "id": 1692,
-      "author_id": 99
-    },
-    {
-      "title": "5555555555555555555555555555555555555555555555555555555",
-      "content": [
-        {
-          "type": "TEXT",
-          "text": "xzfdfdsa fdas fdas fdas fdasfas\ndsaf\n das\n f\ndas\nfdas\nf\ndasf\nas\n"
-        },
-        {
-          "type": "TEXT",
-          "text": "fdsaf das fdasfdasfdasfas f"
-        },
-        {
-          "type": "QUOTE",
-          "text": "asdf dsgd hggfhgfh 33333334444444444444444444444444"
-        }
-      ],
-      "tags": [],
-      "timestamp": 1692289439359,
-      "views": 6,
-      "id": 1693,
-      "author_id": 99
-    },
-    {
-      "title": "хахахахах",
-      "content": [
-        {
-          "type": "IMAGE",
-          "image": {
-            "alt": "",
-            "src": ""
-          }
-        }
-      ],
-      "tags": [],
-      "timestamp": 1692290967872,
-      "views": 2,
-      "id": 1694,
       "author_id": 99
     },
     {
@@ -472,16 +433,23 @@
       "views": 3,
       "id": 1697,
       "author_id": 99
+    },
+    {
+      "title": "ВЛААААААААААААААААД",
+      "content": [
+        {
+          "type": "TEXT",
+          "text": ""
+        }
+      ],
+      "tags": [],
+      "timestamp": 1692926526839,
+      "views": 1,
+      "id": 1698,
+      "author_id": 1
     }
   ],
   "comments": [
-    {
-      "text": "4645",
-      "post_id": 14,
-      "user_id": 99,
-      "timestamp": 1691879888703,
-      "id": 10
-    },
     {
       "text": "jhgjhgjhg",
       "post_id": 14,
@@ -712,6 +680,20 @@
       "user_id": 23,
       "timestamp": 1692913995724,
       "id": 56
+    },
+    {
+      "text": "fdfg",
+      "post_id": 1685,
+      "user_id": 1,
+      "timestamp": 1692922750979,
+      "id": 57
+    },
+    {
+      "text": "fhfghf",
+      "post_id": 12,
+      "user_id": 1,
+      "timestamp": 1692926325593,
+      "id": 58
     }
   ],
   "likes": [
@@ -878,11 +860,6 @@
       "subscribed_by": 23,
       "subscribed_on": 3,
       "id": 3
-    },
-    {
-      "subscribed_by": 1,
-      "subscribed_on": 1,
-      "id": 4
     }
   ],
   "tagsBlocks": [
@@ -1014,6 +991,11 @@
       "post_id": 1686,
       "user_id": 1,
       "id": 4
+    },
+    {
+      "post_id": 14,
+      "user_id": 1,
+      "id": 5
     }
   ]
 }
