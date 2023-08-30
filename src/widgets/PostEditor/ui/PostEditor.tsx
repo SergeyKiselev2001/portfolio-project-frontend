@@ -3,7 +3,7 @@ import classes from './PostEditor.module.scss'
 import { CreatePostDto, IContent } from '../shema'
 import { toast } from 'react-toastify'
 import { ContentType } from '@entities/Post/ui/schema'
-import { i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
+import { i18Chunks, i18Tags } from '@widgets/LangSwitcher/types/i18Keys'
 import { clsx } from '@shared/utils'
 import TextEditor from './TextEditor'
 import ImageEditor from './ImageEditor'
@@ -14,6 +14,8 @@ import {
   setStorageItem,
 } from '@entities/clientStorage'
 import { useDebounce } from '@shared/hooks'
+import Select from 'react-select'
+import { useTranslation } from 'react-i18next'
 
 interface IPostEditor {
   publishPost: (arg: CreatePostDto) => void
@@ -46,6 +48,13 @@ const PostEditor = (props: IPostEditor) => {
           return false
         }
       }
+
+      if (el.type == ContentType.QUOTE) {
+        if ((el.text as string)?.length < 10) {
+          toast.error('Слишком короткая цитата')
+          return false
+        }
+      }
     }
 
     return true
@@ -54,6 +63,9 @@ const PostEditor = (props: IPostEditor) => {
   const publishPostHandle = () => {
     if (!isPostValid()) return
     publishPost({ title, content, tags })
+    localStorage.removeItem(StorageKeys.POST_CONTENT)
+    sessionStorage.removeItem(StorageKeys.POST_CONTENT)
+    setContent([])
   }
 
   const updateContent = useDebounce(500)
@@ -63,6 +75,10 @@ const PostEditor = (props: IPostEditor) => {
     updateContent(() => {
       setStorageItem(StorageKeys.POST_CONTENT, newContent)
     })
+  }
+
+  const changeTagsHandle = (newTags: any) => {
+    setTags(newTags.map((tag: { value: string }) => tag.value))
   }
 
   const changeTitle = (e: InputChange) => {
@@ -123,6 +139,15 @@ const PostEditor = (props: IPostEditor) => {
     setContent(newContent)
     updateLocalStorage(newContent)
   }
+
+  const { t } = useTranslation(i18Chunks.TAGS)
+
+  const options = [
+    ...Object.values(i18Tags).map((el) => ({
+      value: el,
+      label: t(el),
+    })),
+  ]
 
   return (
     <div className={classes.PostEditor}>
@@ -194,8 +219,46 @@ const PostEditor = (props: IPostEditor) => {
           className={clsx([classes.contentButton, classes.buttonQuotes])}
         />
       </div>
+      <div className={classes.addTags}>
+        <Select
+          onChange={changeTagsHandle}
+          isMulti
+          placeholder="Выберите теги"
+          options={options}
+          styles={{
+            control: (baseStyles, state) => ({
+              ...baseStyles,
+              fontFamily: 'Roboto',
+            }),
 
-      <button onClick={publishPostHandle}>PUBLISH POST</button>
+            option: (baseStyles, state) => ({
+              ...baseStyles,
+              fontFamily: 'Roboto',
+            }),
+
+            multiValue: (baseStyles, { data }) => {
+              const tagColors = {
+                ANIMALS: '#aef8a2',
+                HUMOR: '#fafc92',
+                TECHNOLOGIES: '#b5f8ff',
+                MOVIES: '#d87bf5',
+                SPORT: '#ff7c7c',
+              }
+
+              return {
+                ...baseStyles,
+                fontFamily: 'Roboto',
+                backgroundColor: (tagColors as { [key: string]: string })[
+                  data.value
+                ],
+              }
+            },
+          }}
+        />
+      </div>
+      <button className={classes.publishPost} onClick={publishPostHandle}>
+        Опубликовать пост
+      </button>
     </div>
   )
 }

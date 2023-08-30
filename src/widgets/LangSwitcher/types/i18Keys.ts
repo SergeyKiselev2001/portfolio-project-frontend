@@ -47,6 +47,8 @@ export enum i18Tags {
   ANIMALS = 'ANIMALS',
   HUMOR = 'HUMOR',
   TECHNOLOGIES = 'TECHNOLOGIES',
+  MOVIES = 'MOVIES',
+  SPORT = 'SPORT',
 }
 
 export enum i18KeysProfile {
