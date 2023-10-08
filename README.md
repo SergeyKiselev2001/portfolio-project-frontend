@@ -12,9 +12,9 @@ to build project:
 https://test-wine-rho.vercel.app/ - DEMO, with read-only database
 ----
 
-Superuser. Login - Admin, password - 1234\
+Superuser. Login - Admin, password - 1234
 
-Common user. Login - TestUser1, password - hello\
+Common user. Login - TestUser1, password - hello
 
 
 keywords: react, sass, jest, webpack, typescript, craco, eslint, react-router, protected routes, axios, mobx, i18n, react-select, lazy-loading, infinite scroll, fsd architectural methodology, dark theme, json-server, jwt imitation, throttle, debounce, number spelling, custom hooks/hocs, css vars, ui skeletons, responsive layout, smooth-scroll
