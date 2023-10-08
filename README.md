@@ -18,6 +18,6 @@ keywords: react, sass, jest, webpack, typescript, craco, eslint, react-router, p
 
 ![2023-10-08_21-07-04](https://github.com/SergeyKiselev2001/portfolio-project-frontend/assets/75578774/23274cab-f6cb-4817-9791-c57ffd520381)
 
-![2023-10-08_21-05-54](https://github.com/SergeyKiselev2001/portfolio-project-frontend/assets/75578774/43f10b3d-1b76-4b27-9807-2c6bc0f584b6)
+![2023-10-08_21-13-41](https://github.com/SergeyKiselev2001/portfolio-project-frontend/assets/75578774/ebbd2477-b7e1-4810-85ea-bc0c0ba768b6)
 
 ![2023-10-08_21-08-40](https://github.com/SergeyKiselev2001/portfolio-project-frontend/assets/75578774/772a78ae-7b4c-4c5b-b6a1-d8c9578c38d8)
